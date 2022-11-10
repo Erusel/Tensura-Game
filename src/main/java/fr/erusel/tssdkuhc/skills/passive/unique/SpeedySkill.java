@@ -12,7 +12,7 @@ public class SpeedySkill extends Skill implements PassiveSkill {
 
 
     public SpeedySkill() {
-        super("Speedy", "Give you speed 1", SkillTier.UNIQUE, 0);
+        super("Speedy", "Give you speed 2", SkillTier.UNIQUE, 0);
     }
 
     @Override

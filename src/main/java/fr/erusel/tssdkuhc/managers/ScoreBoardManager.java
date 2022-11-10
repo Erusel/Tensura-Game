@@ -45,7 +45,7 @@ public class ScoreBoardManager {
     }
 
     public static String getTime(Integer secs) {
-        return String.format("§f%02d§7:§f%02d§7:§f%02d§7:§f%02d", secs / 86400, ((secs / 3600) % 24), (secs % 3600) / 60, secs % 60);
+        return String.format("§7%02d§7:§7%02d§7:§7%02d", ((secs / 3600) % 24), (secs % 3600) / 60, secs % 60);
     }
 
 
