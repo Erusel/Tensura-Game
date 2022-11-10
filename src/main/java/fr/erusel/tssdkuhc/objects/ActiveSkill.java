@@ -4,6 +4,6 @@ import org.bukkit.entity.Player;
 
 public interface ActiveSkill {
 
-    public abstract void onUse(Player player);
+    void onUse(Player player);
 
 }
