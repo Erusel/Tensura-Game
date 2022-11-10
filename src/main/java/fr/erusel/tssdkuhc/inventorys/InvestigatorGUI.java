@@ -31,6 +31,7 @@ public class InvestigatorGUI extends FastInv {
     public void openInventory(Player victim, InventoryClickEvent event, Skill skill){
         Player player = (Player) event.getWhoClicked();
         skill.activateCooldown();
+        
         FastInv inv = new FastInv(54, victim.getName() + " inventory");
         for (int i=9; i<18; i++) {
             inv.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).name(" ").build());
