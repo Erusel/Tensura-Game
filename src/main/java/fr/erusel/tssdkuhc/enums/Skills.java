@@ -12,7 +12,7 @@ public enum Skills {
     // Unique Skills
     GREATSAGE("GreatSage", SkillTier.UNIQUE, GreatSageSkill.class),
     SPEEDY("Speedy", SkillTier.UNIQUE, SpeedySkill.class),
-    GLUTONNY("Glutonny", SkillTier.UNIQUE, SpeedySkill.class),
+    GLUTONNY("Glutonny", SkillTier.UNIQUE, GlutonnySkill.class),
     BERSERKER("Berserker", SkillTier.UNIQUE, BerserkerSkill.class),
     OPPRESSOR("Oppressor", SkillTier.UNIQUE, OppressorSkill.class),
     MERCILESS("Merciless", SkillTier.UNIQUE, MercilessSkill.class),
