@@ -14,7 +14,5 @@ public class InvestigatorSkill extends Skill implements ActiveSkill {
     }
 
     @Override
-    public void onUse(Player player) {
-        new InvestigatorGUI().open(player);
-    }
+    public void onUse(Player player) { new InvestigatorGUI().open(player); }
 }

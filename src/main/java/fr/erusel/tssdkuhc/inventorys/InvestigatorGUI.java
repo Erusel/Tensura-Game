@@ -1,6 +1,7 @@
 package fr.erusel.tssdkuhc.inventorys;
 
 import fr.erusel.tssdkuhc.Main;
+import fr.erusel.tssdkuhc.objects.Skill;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -29,6 +30,7 @@ public class InvestigatorGUI extends FastInv {
 
     public void openInventory(Player victim, InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
+        skill.activateCooldown();
 
         FastInv inv = new FastInv(54, victim.getName() + " inventory");
         for (int i=9; i<18; i++) {
