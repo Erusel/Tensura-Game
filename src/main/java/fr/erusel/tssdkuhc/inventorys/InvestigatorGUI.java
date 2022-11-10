@@ -30,9 +30,29 @@ public class InvestigatorGUI extends FastInv {
     public void openInventory(Player victim, InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
 
-        FastInv inv = new FastInv(45, victim.getName() + " inventory");
+        FastInv inv = new FastInv(54, victim.getName() + " inventory");
+        for (int i=9; i<18; i++) {
+            inv.setItem(i, new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).name(" ").build());
+        }
+        int j=18;
+        int k=0;
         for (ItemStack itemStack : victim.getInventory().getContents()){
-            addItem(itemStack);
+            if (j==59) {
+                j=18;
+                break;
+            }
+
+            if (j>53) {
+                inv.setItem(k,itemStack);
+                k++;
+            }
+
+            else {
+                inv.setItem(j, itemStack);
+            }
+            System.out.println(j + " " + itemStack);
+            j++;
+
         }
         inv.open(player);
     }
