@@ -82,7 +82,7 @@ public class PlayerListener implements Listener {
             damaged.setVelocity(damager.getLocation().getDirection().setY(0).normalize().multiply(2));
         }
         if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getMathematicianDodgeLeft() >=1){
-            event.setDamage(0);
+            event.setCancelled(true);
             Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).setMathematicianDodgeLeft(Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getMathematicianDodgeLeft()-1);
         }
     }
