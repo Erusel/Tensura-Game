@@ -17,6 +17,7 @@ public enum Skills {
     OPPRESSOR("Oppressor", SkillTier.UNIQUE, OppressorSkill.class),
     MERCILESS("Merciless", SkillTier.UNIQUE, MercilessSkill.class),
     MATHEMATICIAN("Mathematician", SkillTier.UNIQUE, MathematicianSkill.class),
+    STOMACH("Stomach", SkillTier.UNIQUE, StomachSkill.class),
     INVESTIGATOR("Investigator",SkillTier.UNIQUE, InvestigatorSkill.class);
 
 
