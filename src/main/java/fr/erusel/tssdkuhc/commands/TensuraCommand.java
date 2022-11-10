@@ -46,7 +46,7 @@ public class TensuraCommand implements CommandExecutor {
                              NoSuchMethodException e) {
                         throw new RuntimeException(e);
                     }
-                    player.sendMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Successfuly gived " + Skills.getSkillWithName(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
+                    player.sendMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Successfully gived " + Skills.getSkillWithName(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
                 }
             }
         }
