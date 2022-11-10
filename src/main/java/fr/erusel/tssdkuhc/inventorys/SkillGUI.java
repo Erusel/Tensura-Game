@@ -38,9 +38,9 @@ public class SkillGUI extends FastInv {
             player.sendMessage("En cooldown : " + skill.getCurrentCooldown() + " seconde.");
             return;
         }
+        player.closeInventory();
         ((ActiveSkill)skill).onUse(player);
         skill.activateCooldown();
-        player.closeInventory();
     }
 
 }

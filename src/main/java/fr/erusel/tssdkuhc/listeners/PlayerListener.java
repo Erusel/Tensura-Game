@@ -66,10 +66,10 @@ public class PlayerListener implements Listener {
             }
         }
         if (gKiller.isGlutonnyActivated()){
-            Integer i = new Random().nextInt(gPlayer.getPlayerSkills().size()-1);
+            int i = new Random().nextInt(gPlayer.getPlayerSkills().size()-1);
             Skill skill = gPlayer.getPlayerSkills().get(i);
-            gPlayer.removeSkill(skill);
             gKiller.addSkill(skill);
+            gPlayer.removeSkill(skill);
         }
     }
 
