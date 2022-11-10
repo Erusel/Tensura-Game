@@ -1,0 +1,11 @@
+name: Tsddkuhc
+version: '${version}'
+main: fr.erusel.tssdkuhc.Main
+api-version: 1.16
+authors: [ Erusel ]
+commands:
+  tensura:
+    description: "Oui oui baguette"
+    permission: tensura.tensura
+  skill:
+    description: "Affiche les skills du joueur"
