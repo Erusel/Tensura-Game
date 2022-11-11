@@ -2,13 +2,11 @@ package fr.erusel.tssdkuhc.listeners;
 
 import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.GState;
-import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.managers.GameManager;
 import fr.erusel.tssdkuhc.managers.ScoreBoardManager;
 import fr.erusel.tssdkuhc.objects.GPlayer;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.passive.resistance.FireResistantSkill;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
@@ -18,7 +16,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -80,9 +77,11 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
-        if (!(event.getDamager() instanceof Player)) return;
-        Player damager = (Player) event.getDamager();
+        Entity damager = event.getDamager();
         Entity damaged = event.getEntity();
+        for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getPlayerSkills()){
+            if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
+        }
         if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).isOppressorActivated()){
             damaged.setVelocity(damager.getLocation().getDirection().setY(0).normalize().multiply(2));
         }
@@ -97,33 +96,10 @@ public class PlayerListener implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
         Player player = (Player) event.getEntity();
         for (Skill skill: Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
-            if (skill.getName().equals(Skills.FIRERESISTANT.getSkillName())) {
-                if (event.getCause().equals(EntityDamageEvent.DamageCause.FIRE) || event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
-                    event.setCancelled(true);
-                }
-            }
-            else if (skill.getName().equals(Skills.LAVARESISTANT.getSkillName())) {
-                if (event.getCause().equals(EntityDamageEvent.DamageCause.LAVA)) {
-                    event.setCancelled(true);
-                }
-            }
-            else if (skill.getName().equals(Skills.FALLRESISTANT.getSkillName())) {
-                if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
-                    event.setCancelled(true);
-                }
-            }
+            if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamage(event);
         }
     }
 
-    @EventHandler
-    public void onProjectileHit(ProjectileHitEvent event) {
-        if  (!(event.getEntity() instanceof Player)) return;
-        Player player = (Player) event.getHitEntity();
-        for (Skill pskill: Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills())
-            if (pskill.getName().equals(Skills.ARROWRESISTANT.getSkillName())) {
-                event.setCancelled(true);
-        }
-    }
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
