@@ -8,7 +8,7 @@ public class DemonSlimeRace extends Race {
 
 
     public DemonSlimeRace() {
-        super("Demon Slime", "DemonSlime description", RaceStages.DEMONLORDSTAGE);
+        super("Demon Slime", "DemonSlime description", RaceStages.DEMONLORDSTAGE, null);
     }
 
     @Override

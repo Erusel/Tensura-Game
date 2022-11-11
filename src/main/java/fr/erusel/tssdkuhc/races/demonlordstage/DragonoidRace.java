@@ -8,7 +8,7 @@ public class DragonoidRace extends Race {
 
 
     public DragonoidRace() {
-        super("Dragonoid", "Dragonoid description", RaceStages.DEMONLORDSTAGE);
+        super("Dragonoid", "Dragonoid description", RaceStages.DEMONLORDSTAGE, null);
     }
 
     @Override

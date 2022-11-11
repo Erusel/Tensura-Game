@@ -1,6 +1,13 @@
 package fr.erusel.tssdkuhc.objects;
 
+import fr.erusel.tssdkuhc.Main;
+import fr.erusel.tssdkuhc.enums.SkillTier;
+import fr.erusel.tssdkuhc.threads.HarvestFestivalRunnable;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.UUID;
 
 public class GPlayer {
@@ -10,6 +17,7 @@ public class GPlayer {
     private Race race;
     private boolean glutonnyActivated;
     private boolean oppressorActivated;
+    private boolean inHarvestFestival;
     private int oppressorTime;
     private int mathematicianDodgeLeft;
     private final ArrayList<Skill> playerSkills = new ArrayList<>();
@@ -56,6 +64,53 @@ public class GPlayer {
         return race;
     }
     public void evolve(){
+    }
+
+    public boolean haveHarvestFestivalPrerequisite(){
+        return true;
+    }
+    public boolean isInHarvestFestival(){
+        return inHarvestFestival;
+    }
+    public void setInHarvestFestival(boolean b){
+        inHarvestFestival = b;
+    }
+
+    public void launchHarvestFestival(){
+        Player player = Bukkit.getPlayer(playerUUID);
+
+        if (!haveHarvestFestivalPrerequisite()){
+            player.sendMessage("§cVous n'avez pas les prérequis");
+            return;
+        }
+
+        Skill skill;
+        Skill sacrificeSkill = null;
+        int i = new Random().nextInt(getPlayerSkills().size());
+        skill = getPlayerSkills().get(i);
+
+        while (!skill.getSkillTier().equals(SkillTier.UNIQUE)){
+            i = new Random().nextInt(getPlayerSkills().size());
+            skill = getPlayerSkills().get(i);
+        }
+
+        if (getPlayerSkills().size() > 1){
+            int u = new Random().nextInt(getPlayerSkills().size());
+            sacrificeSkill = getPlayerSkills().get(u);
+            while (sacrificeSkill.getName().equals(skill.getName())){
+                u = new Random().nextInt(getPlayerSkills().size());
+                sacrificeSkill = getPlayerSkills().get(u);
+            }
+        }
+
+
+
+        new HarvestFestivalRunnable(player, this, skill, sacrificeSkill).runTaskTimer(Main.getInstance(), 0, 20);
+        setInHarvestFestival(true);
+
+
+
+
 
     }
 

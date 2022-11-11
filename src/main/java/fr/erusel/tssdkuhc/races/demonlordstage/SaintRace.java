@@ -8,7 +8,7 @@ public class SaintRace extends Race {
 
 
     public SaintRace() {
-        super("Saint", "Saint description", RaceStages.DEMONLORDSTAGE);
+        super("Saint", "Saint description", RaceStages.DEMONLORDSTAGE, null);
     }
 
     @Override

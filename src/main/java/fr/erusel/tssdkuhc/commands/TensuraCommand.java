@@ -50,6 +50,11 @@ public class TensuraCommand implements CommandExecutor {
                 }
             }
         }
+        if (args[0].equalsIgnoreCase("harvestfestival")){
+            if (Bukkit.getPlayer(args[1]) != null){
+                Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).launchHarvestFestival();
+            }
+        }
 
         return false;
     }

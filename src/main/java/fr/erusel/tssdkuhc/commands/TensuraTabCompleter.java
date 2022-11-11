@@ -21,6 +21,7 @@ public class TensuraTabCompleter implements TabCompleter {
             list.add("start");
             list.add("sethost");
             list.add("giveskill");
+            list.add("harvestfestival");
         }
         if (args.length == 2){
             if (args[0].equalsIgnoreCase("sethost")){
@@ -29,6 +30,10 @@ public class TensuraTabCompleter implements TabCompleter {
             if (args[0].equalsIgnoreCase("giveskill")){
                 for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
             }
+            if (args[0].equalsIgnoreCase("harvestfestival")){
+                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+            }
+
         }
         if (args.length == 3){
             if (args[0].equalsIgnoreCase("giveskill")){

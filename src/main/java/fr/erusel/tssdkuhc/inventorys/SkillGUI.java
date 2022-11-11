@@ -22,8 +22,8 @@ public class SkillGUI extends FastInv {
             if (skill instanceof PassiveSkill){
                 addItem(new ItemBuilder(Material.BLUE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
             } else if (skill instanceof ActiveSkill) {
-                ItemBuilder itemBuilder = new ItemBuilder(Material.RED_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
-                if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconds");
+                ItemBuilder itemBuilder = new ItemBuilder(Material.RED_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Clique gauche pour utiliser");
+                if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconde");
                 addItem(itemBuilder.build(), e -> activeSkillUse(skill));
             }else {
                 addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
@@ -35,11 +35,12 @@ public class SkillGUI extends FastInv {
 
     private void activeSkillUse(Skill skill){
         if (skill.inCooldown()){
-            player.sendMessage("In Cooldown : " + skill.getCurrentCooldown() + " seconds.");
+            player.sendMessage("En cooldown : " + skill.getCurrentCooldown() + " seconde.");
             return;
         }
         player.closeInventory();
         ((ActiveSkill)skill).onUse(player);
+        skill.activateCooldown();
     }
 
 }
