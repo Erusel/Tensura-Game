@@ -12,6 +12,7 @@ import fr.erusel.tssdkuhc.managers.WorldManager;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
+import fr.mrmicky.fastboard.FastBoard;
 import fr.mrmicky.fastinv.FastInvManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -36,6 +37,12 @@ public final class Main extends JavaPlugin {
         getCommand("skill").setExecutor(new SkillCommand());
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+
+        for (Player player : Bukkit.getOnlinePlayers()){
+            FastBoard board = new FastBoard(player);
+            board.updateTitle("§bTensura §3Game");
+            Main.getInstance().getScoreboardManager().scoreboard.put(player.getUniqueId(), board);
+        }
 
         getServer().getScheduler().runTaskTimer(this, () -> {
             if (gameManager.getGameState().equals(GState.WAITING))  scoreBoardManager.refreshWaitingScoreboard();
