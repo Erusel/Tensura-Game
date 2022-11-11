@@ -1,10 +1,7 @@
 package fr.erusel.tssdkuhc.managers;
 
 import fr.erusel.tssdkuhc.Main;
-import fr.erusel.tssdkuhc.enums.GState;
-import fr.erusel.tssdkuhc.enums.RaceStages;
-import fr.erusel.tssdkuhc.enums.Races;
-import fr.erusel.tssdkuhc.enums.Skills;
+import fr.erusel.tssdkuhc.enums.*;
 import fr.erusel.tssdkuhc.objects.Race;
 import fr.erusel.tssdkuhc.objects.Skill;
 import org.bukkit.Bukkit;
@@ -14,6 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 public class GameManager {
@@ -23,10 +21,19 @@ public class GameManager {
     private String hostName = "Aucun";
     public int gameStartTime;
     private final List<UUID> playerList = new ArrayList<>();
+    private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
     public void startGame(){
         if (!gameHasHost()){
             return;
+        }
+        for (Skills skill : Skills.getAllSkillByTier(SkillTier.UNIQUE)){
+            try {
+                uniqueSkillAvailable.add((Skill) skill.getSkillClass().getConstructor().newInstance());
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                     NoSuchMethodException e) {
+                throw new RuntimeException(e);
+            }
         }
         setGameState(GState.STARTING);
         Main.getInstance().getWorldManager().deletePlayingWorld();
@@ -42,11 +49,13 @@ public class GameManager {
             Race race;
             try {
                 race = (Race) Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).getRaceClass().getConstructor().newInstance();
-                Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill((Skill) Skills.GREATSAGE.getSkillClass().getConstructor().newInstance());
-                Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill((Skill) Skills.SPEEDY.getSkillClass().getConstructor().newInstance());
             } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
+            int i = new Random().nextInt(uniqueSkillAvailable.size());
+            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(uniqueSkillAvailable.get(i));
+            uniqueSkillAvailable.remove(uniqueSkillAvailable.get(i));
+
             Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
             Main.getInstance().getWorldManager().teleportPlayerToMap(player);
             Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
