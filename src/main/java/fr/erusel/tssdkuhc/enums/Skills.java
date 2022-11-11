@@ -2,6 +2,9 @@ package fr.erusel.tssdkuhc.enums;
 
 import fr.erusel.tssdkuhc.skills.active.ultimate.*;
 import fr.erusel.tssdkuhc.skills.active.unique.*;
+import fr.erusel.tssdkuhc.skills.passive.resistance.ArrowResistantSkill;
+import fr.erusel.tssdkuhc.skills.passive.resistance.FallResistantSkill;
+import fr.erusel.tssdkuhc.skills.passive.resistance.LavaResistantSkill;
 import fr.erusel.tssdkuhc.skills.passive.ultimate.FlashSkill;
 import fr.erusel.tssdkuhc.skills.passive.ultimate.MogisSkill;
 import fr.erusel.tssdkuhc.skills.passive.unique.BerserkerSkill;
@@ -15,6 +18,9 @@ public enum Skills {
 
     // Resistance Skill
     FIRERESISTANT("Fire-Resistant", SkillTier.RESISTANCE, FireResistantSkill.class),
+    LAVARESISTANT("Lava-Resistant", SkillTier.RESISTANCE, LavaResistantSkill.class),
+    FALLRESISTANT("Fall-Resistant",SkillTier.RESISTANCE, FallResistantSkill.class),
+    ARROWRESISTANT("Arrow-Resistant",SkillTier.RESISTANCE, ArrowResistantSkill.class),
 
     // Unique Skills
     GREATSAGE("GreatSage", SkillTier.UNIQUE, GreatSageSkill.class),

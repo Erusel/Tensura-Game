@@ -4,14 +4,11 @@ import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
 import org.bukkit.entity.Player;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
-public class FireResistantSkill extends Skill implements PassiveSkill {
+public class FallResistantSkill extends Skill implements PassiveSkill {
 
-    public FireResistantSkill() { super("Fire-Resistant", "Cancel Fire Damage", SkillTier.RESISTANCE, 0, null);}
+    public FallResistantSkill() { super("Fall-Resistant", "Cancel Fall Damage", SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {
@@ -25,3 +22,4 @@ public class FireResistantSkill extends Skill implements PassiveSkill {
     public void onKill(Player killer, Player deadPlayer) {
     }
 }
+
