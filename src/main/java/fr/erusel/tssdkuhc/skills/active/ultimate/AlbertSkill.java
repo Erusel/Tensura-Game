@@ -1,18 +1,17 @@
-package fr.erusel.tssdkuhc.skills.active.unique;
+package fr.erusel.tssdkuhc.skills.active.ultimate;
 
 import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.active.ultimate.AlbertSkill;
 import org.bukkit.entity.Player;
 
-public class MathematicianSkill extends Skill implements ActiveSkill {
+public class AlbertSkill extends Skill implements ActiveSkill {
 
     private int DODGE = 3;
 
-    public MathematicianSkill() {
-        super("Mathematician", "Ignore the next 3 damage", SkillTier.UNIQUE, 1000, AlbertSkill.class);
+    public AlbertSkill() {
+        super("Albert, Lord of Algebria", "Ignore the next 3 damage", SkillTier.ULTIMATE, 1000, null);
     }
 
     @Override

@@ -1,8 +1,11 @@
 package fr.erusel.tssdkuhc.enums;
 
+import fr.erusel.tssdkuhc.skills.active.ultimate.*;
 import fr.erusel.tssdkuhc.skills.active.unique.*;
+import fr.erusel.tssdkuhc.skills.passive.ultimate.FlashSkill;
+import fr.erusel.tssdkuhc.skills.passive.ultimate.MogisSkill;
 import fr.erusel.tssdkuhc.skills.passive.unique.BerserkerSkill;
-import fr.erusel.tssdkuhc.skills.passive.unique.FireResistantSkill;
+import fr.erusel.tssdkuhc.skills.passive.resistance.FireResistantSkill;
 import fr.erusel.tssdkuhc.skills.passive.unique.SpeedySkill;
 
 import java.util.ArrayList;
@@ -10,17 +13,31 @@ import java.util.List;
 
 public enum Skills {
 
+    // Resistance Skill
+    FIRERESISTANT("Fire-Resistant", SkillTier.RESISTANCE, FireResistantSkill.class),
+
     // Unique Skills
     GREATSAGE("GreatSage", SkillTier.UNIQUE, GreatSageSkill.class),
     SPEEDY("Speedy", SkillTier.UNIQUE, SpeedySkill.class),
-    FIRERESISTANT("Fire-Resistant", SkillTier.RESISTANCE, FireResistantSkill.class),
     GLUTONNY("Glutonny", SkillTier.UNIQUE, GlutonnySkill.class),
     BERSERKER("Berserker", SkillTier.UNIQUE, BerserkerSkill.class),
     OPPRESSOR("Oppressor", SkillTier.UNIQUE, OppressorSkill.class),
     MERCILESS("Merciless", SkillTier.UNIQUE, MercilessSkill.class),
     MATHEMATICIAN("Mathematician", SkillTier.UNIQUE, MathematicianSkill.class),
     STOMACH("Stomach", SkillTier.UNIQUE, StomachSkill.class),
-    INVESTIGATOR("Investigator",SkillTier.UNIQUE, InvestigatorSkill.class);
+    INVESTIGATOR("Investigator",SkillTier.UNIQUE, InvestigatorSkill.class),
+
+
+    // Ultimate Skills
+    RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
+    FLASH("Flash, Lord of Speed", SkillTier.ULTIMATE, FlashSkill.class),
+    BEELZEBUTH("Beelzebuth, Lord of Gluttony", SkillTier.ULTIMATE, BeelzebuthSkill.class),
+    MOGIS("Mogis, Lord of Berserk", SkillTier.ULTIMATE, MogisSkill.class),
+    JANUS("Janus, Lord of Gravity", SkillTier.ULTIMATE, JanusSkill.class),
+    BEERUS("Beerus, Lord of Death", SkillTier.ULTIMATE, BeerusSkill.class),
+    ALBERT("Albert, Lord of Algebria", SkillTier.ULTIMATE, AlbertSkill.class),
+    PANDORA("Pandora, Lord of Gift", SkillTier.ULTIMATE, PandoraSkill.class),
+    FAUST("Faust, Lord of Investigation", SkillTier.ULTIMATE, FaustSkill.class);
 
 
     private final String name;

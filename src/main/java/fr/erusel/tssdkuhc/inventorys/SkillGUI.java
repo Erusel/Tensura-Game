@@ -1,6 +1,7 @@
 package fr.erusel.tssdkuhc.inventorys;
 
 import fr.erusel.tssdkuhc.Main;
+import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
@@ -20,9 +21,20 @@ public class SkillGUI extends FastInv {
 
         for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()){
             if (skill instanceof PassiveSkill){
-                addItem(new ItemBuilder(Material.BLUE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
+                ItemBuilder itemBuilder;
+                if (skill.getSkillTier().equals(SkillTier.ULTIMATE)) {
+                    addItem(new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
+                }else {
+                    addItem(new ItemBuilder(Material.BLUE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
+                }
             } else if (skill instanceof ActiveSkill) {
-                ItemBuilder itemBuilder = new ItemBuilder(Material.RED_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Clique gauche pour utiliser");
+                ItemBuilder itemBuilder;
+                if (skill.getSkillTier().equals(SkillTier.ULTIMATE)) {
+                    itemBuilder = new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Clique gauche pour utiliser");
+                }else {
+                    itemBuilder = new ItemBuilder(Material.RED_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Clique gauche pour utiliser");
+                }
+
                 if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconde");
                 addItem(itemBuilder.build(), e -> activeSkillUse(skill));
             }else {

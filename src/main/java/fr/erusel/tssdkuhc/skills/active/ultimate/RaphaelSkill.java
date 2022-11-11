@@ -1,16 +1,15 @@
-package fr.erusel.tssdkuhc.skills.active.unique;
+package fr.erusel.tssdkuhc.skills.active.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.active.ultimate.RaphaelSkill;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
-public class GreatSageSkill extends Skill implements ActiveSkill {
+public class RaphaelSkill extends Skill implements ActiveSkill {
 
-    public GreatSageSkill() {
-        super("Great Sage", "Use for display all entities around", SkillTier.UNIQUE, 600, RaphaelSkill.class);
+    public RaphaelSkill() {
+        super("Raphael, Lord of Wisdom", "Use for display all entities around", SkillTier.ULTIMATE, 600, null);
     }
 
     @Override

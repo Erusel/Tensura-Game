@@ -9,12 +9,14 @@ public abstract class Skill {
     private final SkillTier skillTier;
     int COOLDOWN;
     private int currentCooldown = 0;
+    private Class<?> ultimateSkill;
 
-    public Skill(String name, String lore, SkillTier skillTier, int cooldown) {
+    public Skill(String name, String lore, SkillTier skillTier, int cooldown, Class<?> ultimateSkill) {
         this.name = name;
         this.lore = lore;
         this.skillTier = skillTier;
         COOLDOWN = cooldown;
+        this.ultimateSkill = ultimateSkill;
     }
 
     public String getName(){
@@ -37,6 +39,9 @@ public abstract class Skill {
     }
     public boolean inCooldown(){
         return (currentCooldown > 0);
+    }
+    public Class<?> getUltimateSkillClass(){
+        return ultimateSkill;
     }
 
 

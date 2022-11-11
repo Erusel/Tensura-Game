@@ -1,4 +1,4 @@
-package fr.erusel.tssdkuhc.skills.passive.unique;
+package fr.erusel.tssdkuhc.skills.passive.resistance;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
@@ -10,7 +10,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class FireResistantSkill extends Skill implements PassiveSkill {
 
-    public FireResistantSkill () { super("Fire-Resistant", "Give you fire resistance", SkillTier.RESISTANCE, 0);}
+    public FireResistantSkill () { super("Fire-Resistant", "Give you fire resistance", SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {
