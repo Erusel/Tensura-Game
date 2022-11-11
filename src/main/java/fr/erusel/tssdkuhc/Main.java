@@ -25,7 +25,7 @@ public final class Main extends JavaPlugin {
     GameManager gameManager = new GameManager();
     PlayerManager playerManager = new PlayerManager();
 
-    public static final String VOICE_OF_THE_WORLD_PREFIX = "§6§b[§r§6§nVoice of the World§6§b]§r§o§9 ";
+    public static final String VOICE_OF_THE_WORLD_PREFIX = "§6§b[§r§6Voice of the World§6§b]§r§o§3 ";
     @Override
     public void onEnable() {
         main = this;
