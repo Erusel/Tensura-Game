@@ -2,10 +2,12 @@ package fr.erusel.tssdkuhc.objects;
 
 import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.SkillTier;
+import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.threads.HarvestFestivalRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
@@ -41,6 +43,13 @@ public class GPlayer {
     public void removeSkill(Skill skill){
         playerSkills.remove(skill);
     }
+    public boolean haveSkill(Skills skill){
+        try {
+            return getPlayerSkills().contains(skill.getSkillClass().getConstructor().newInstance());
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // Player Kills
     public int getKills(){
@@ -62,8 +71,6 @@ public class GPlayer {
     }
     public Race getRace(){
         return race;
-    }
-    public void evolve(){
     }
 
     public boolean haveHarvestFestivalPrerequisite(){
