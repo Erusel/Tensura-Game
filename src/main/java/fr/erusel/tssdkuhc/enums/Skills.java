@@ -19,6 +19,8 @@ public enum Skills {
     FALLRESISTANT("Fall-Resistant",SkillTier.RESISTANCE, FallResistantSkill.class),
     ARROWRESISTANT("Arrow-Resistant",SkillTier.RESISTANCE, ArrowResistantSkill.class),
     POISONRESISTANT("Poison-Resistant",SkillTier.RESISTANCE, PoisonResistantSkill.class),
+    EXPLOSIONRESISTANT("Explosion-Resistant", SkillTier.RESISTANCE, ExplosionResistantSkill.class),
+    DROWNINGRESISTANT("Drowning Resistant", SkillTier.RESISTANCE, DrowningResistantSkill.class),
 
     // Unique Skills
     GREATSAGE("GreatSage", SkillTier.UNIQUE, GreatSageSkill.class),
