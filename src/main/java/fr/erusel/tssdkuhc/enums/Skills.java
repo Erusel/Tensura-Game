@@ -2,13 +2,10 @@ package fr.erusel.tssdkuhc.enums;
 
 import fr.erusel.tssdkuhc.skills.active.ultimate.*;
 import fr.erusel.tssdkuhc.skills.active.unique.*;
-import fr.erusel.tssdkuhc.skills.passive.resistance.ArrowResistantSkill;
-import fr.erusel.tssdkuhc.skills.passive.resistance.FallResistantSkill;
-import fr.erusel.tssdkuhc.skills.passive.resistance.LavaResistantSkill;
+import fr.erusel.tssdkuhc.skills.passive.resistance.*;
 import fr.erusel.tssdkuhc.skills.passive.ultimate.FlashSkill;
 import fr.erusel.tssdkuhc.skills.passive.ultimate.MogisSkill;
 import fr.erusel.tssdkuhc.skills.passive.unique.BerserkerSkill;
-import fr.erusel.tssdkuhc.skills.passive.resistance.FireResistantSkill;
 import fr.erusel.tssdkuhc.skills.passive.unique.SpeedySkill;
 
 import java.util.ArrayList;
@@ -21,6 +18,7 @@ public enum Skills {
     LAVARESISTANT("Lava-Resistant", SkillTier.RESISTANCE, LavaResistantSkill.class),
     FALLRESISTANT("Fall-Resistant",SkillTier.RESISTANCE, FallResistantSkill.class),
     ARROWRESISTANT("Arrow-Resistant",SkillTier.RESISTANCE, ArrowResistantSkill.class),
+    POISONRESISTANT("Poison-Resistant",SkillTier.RESISTANCE, PoisonResistantSkill.class),
 
     // Unique Skills
     GREATSAGE("GreatSage", SkillTier.UNIQUE, GreatSageSkill.class),
