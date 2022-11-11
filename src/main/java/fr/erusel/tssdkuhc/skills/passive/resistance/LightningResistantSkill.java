@@ -8,9 +8,9 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-public class PoisonResistantSkill extends Skill implements PassiveSkill {
+public class LightningResistantSkill extends Skill implements PassiveSkill {
 
-    public PoisonResistantSkill() { super("Poison Resistant", "Cancel Poison Damage", SkillTier.RESISTANCE, 0, null);}
+    public LightningResistantSkill() { super("Lightning Resistant", "Cancel Lightning Bolt Damage", SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {
@@ -26,13 +26,14 @@ public class PoisonResistantSkill extends Skill implements PassiveSkill {
 
     @Override
     public void onDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.POISON)) {
+        if (event.getCause().equals(EntityDamageEvent.DamageCause.LIGHTNING)) {
             event.setCancelled(true);
         }
     }
 
     @Override
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
+
     }
 
 }

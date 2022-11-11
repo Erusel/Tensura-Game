@@ -23,6 +23,7 @@ public enum Skills {
     POISONRESISTANT("Poison Resistant",SkillTier.RESISTANCE, PoisonResistantSkill.class),
     EXPLOSIONRESISTANT("Explosion Resistant", SkillTier.RESISTANCE, ExplosionResistantSkill.class),
     DROWNINGRESISTANT("Drowning Resistant", SkillTier.RESISTANCE, DrowningResistantSkill.class),
+    LIGHTNINGRESISTANT("Lightning Resistant", SkillTier.RESISTANCE, LightningResistantSkill.class),
 
     // Unique Skills
     GREATSAGE("Great Sage", SkillTier.UNIQUE, GreatSageSkill.class),
