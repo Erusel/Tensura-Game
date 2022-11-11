@@ -13,7 +13,7 @@ import org.bukkit.potion.PotionEffectType;
 
 public class FireResistantSkill extends Skill implements PassiveSkill {
 
-    public FireResistantSkill() { super("Fire-Resistant", "Cancel Fire Damage", SkillTier.RESISTANCE, 0, null);}
+    public FireResistantSkill() { super("Fire Resistant", "Cancel Fire Damage", SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {
