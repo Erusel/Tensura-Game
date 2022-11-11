@@ -2,6 +2,7 @@ package fr.erusel.tssdkuhc.enums;
 
 import fr.erusel.tssdkuhc.skills.active.unique.*;
 import fr.erusel.tssdkuhc.skills.passive.unique.BerserkerSkill;
+import fr.erusel.tssdkuhc.skills.passive.unique.FireResistantSkill;
 import fr.erusel.tssdkuhc.skills.passive.unique.SpeedySkill;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public enum Skills {
     // Unique Skills
     GREATSAGE("GreatSage", SkillTier.UNIQUE, GreatSageSkill.class),
     SPEEDY("Speedy", SkillTier.UNIQUE, SpeedySkill.class),
+    FIRERESISTANT("Fire-Resistant", SkillTier.RESISTANCE, FireResistantSkill.class),
     GLUTONNY("Glutonny", SkillTier.UNIQUE, GlutonnySkill.class),
     BERSERKER("Berserker", SkillTier.UNIQUE, BerserkerSkill.class),
     OPPRESSOR("Oppressor", SkillTier.UNIQUE, OppressorSkill.class),
@@ -55,12 +57,5 @@ public enum Skills {
         for (Skills skills : Skills.values()) if (skills.getSkillTier().equals(skillTier)) list.add(skills);
         return list;
     }
-
-
-
-
-
-
-
 
 }

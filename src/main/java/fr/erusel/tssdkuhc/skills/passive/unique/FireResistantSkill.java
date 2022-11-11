@@ -8,16 +8,13 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class BerserkerSkill extends Skill implements PassiveSkill {
+public class FireResistantSkill extends Skill implements PassiveSkill {
 
-
-    public BerserkerSkill() {
-        super("Berserker", "Each kill give you Strength", SkillTier.UNIQUE, 0);
-    }
+    public FireResistantSkill () { super("Fire-Resistant", "Give you fire resistance", SkillTier.RESISTANCE, 0);}
 
     @Override
     public void eachSecond(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 0));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 40, 0));
     }
 
     @Override
@@ -26,6 +23,5 @@ public class BerserkerSkill extends Skill implements PassiveSkill {
 
     @Override
     public void onKill(Player killer, Player deadPlayer) {
-        killer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 0));
     }
 }
