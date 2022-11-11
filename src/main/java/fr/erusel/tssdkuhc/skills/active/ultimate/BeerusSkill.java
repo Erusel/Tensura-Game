@@ -1,18 +1,17 @@
-package fr.erusel.tssdkuhc.skills.active.unique;
+package fr.erusel.tssdkuhc.skills.active.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.active.ultimate.BeerusSkill;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
-public class MercilessSkill extends Skill implements ActiveSkill {
+public class BeerusSkill extends Skill implements ActiveSkill {
 
 
-    public MercilessSkill() {
-        super("Merciless", "Kill every entity around you in a radius of 30 blocs if they are under 2 heart", SkillTier.UNIQUE, 1000, BeerusSkill.class);
+    public BeerusSkill() {
+        super("Beerus, Lord of Death", "Kill every entity around you in a radius of 30 blocs if they are under 2 heart", SkillTier.ULTIMATE, 1000, null);
     }
 
     @Override

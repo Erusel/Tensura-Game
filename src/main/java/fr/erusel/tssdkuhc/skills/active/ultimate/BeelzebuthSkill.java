@@ -1,17 +1,16 @@
-package fr.erusel.tssdkuhc.skills.active.unique;
+package fr.erusel.tssdkuhc.skills.active.ultimate;
 
 import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.active.ultimate.BeelzebuthSkill;
 import org.bukkit.entity.Player;
 
-public class GlutonnySkill extends Skill implements ActiveSkill {
+public class BeelzebuthSkill extends Skill implements ActiveSkill {
 
 
-    public GlutonnySkill() {
-        super("Glutonny", "", SkillTier.UNIQUE, 1200, BeelzebuthSkill.class);
+    public BeelzebuthSkill() {
+        super("Beelzebuth, Lord of Gluttony", "", SkillTier.ULTIMATE, 1200, null);
     }
 
     @Override

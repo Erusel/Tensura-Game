@@ -18,6 +18,7 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
     GPlayer gPlayer;
     Skill skillEvolve;
     Skill sacrificeSkill;
+    Skill ultimateSkill;
     Race evolvedRace;
 
     public HarvestFestivalRunnable(Player player, GPlayer gPlayer, Skill skillEvolve, Skill sacrificeSkill) {
@@ -30,6 +31,13 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
+        try {
+            ultimateSkill = (Skill) skillEvolve.getUltimateSkillClass().getConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
+                 NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     int second = 0;
@@ -129,10 +137,16 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
             }
         }
         if (second == 57){
-            player.sendMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Unique skill §6" + skillEvolve.getName() + " §3has evolved into Ultimate skill §6§n§ltkt sa vien apres");
+            player.sendMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Unique skill §6" + skillEvolve.getName() + " §3has evolved into Ultimate skill §6§n§l" + ultimateSkill.getName());
         }
 
         if (second == 60){
+            gPlayer.setRace(evolvedRace);
+            gPlayer.removeSkill(sacrificeSkill);
+            gPlayer.removeSkill(skillEvolve);
+            gPlayer.addSkill(ultimateSkill);
+
+
             player.sendMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "The Harvest Festival is now finished");
             gPlayer.setInHarvestFestival(false);
             player.removePotionEffect(PotionEffectType.BLINDNESS);

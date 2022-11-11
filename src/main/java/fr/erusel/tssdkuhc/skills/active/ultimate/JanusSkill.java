@@ -1,18 +1,17 @@
-package fr.erusel.tssdkuhc.skills.active.unique;
+package fr.erusel.tssdkuhc.skills.active.ultimate;
 
 import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.active.ultimate.JanusSkill;
 import fr.erusel.tssdkuhc.threads.OppressorRunnable;
 import org.bukkit.entity.Player;
 
-public class OppressorSkill extends Skill implements ActiveSkill {
+public class JanusSkill extends Skill implements ActiveSkill {
 
 
-    public OppressorSkill() {
-        super("Oppressor", "Increase your knockback for 30s", SkillTier.UNIQUE, 800, JanusSkill.class);
+    public JanusSkill() {
+        super("Janus, Lord of Gravity", "Increase your knockback for 30s", SkillTier.ULTIMATE, 1100, null);
     }
 
     @Override

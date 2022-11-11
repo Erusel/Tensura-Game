@@ -1,17 +1,16 @@
-package fr.erusel.tssdkuhc.skills.active.unique;
+package fr.erusel.tssdkuhc.skills.active.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.inventorys.InvestigatorGUI;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.active.ultimate.FaustSkill;
 import org.bukkit.entity.Player;
 
-public class InvestigatorSkill extends Skill implements ActiveSkill {
+public class FaustSkill extends Skill implements ActiveSkill {
 
 
-    public InvestigatorSkill() {
-        super("Investigator", "See the inventory of a Player", SkillTier.UNIQUE, 600, FaustSkill.class);
+    public FaustSkill() {
+        super("Faust, Lord of Investigation", "See the inventory of a Player", SkillTier.ULTIMATE, 900, null);
     }
 
     @Override

@@ -1,24 +1,23 @@
-package fr.erusel.tssdkuhc.skills.passive.unique;
+package fr.erusel.tssdkuhc.skills.passive.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.passive.ultimate.FlashSkill;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class SpeedySkill extends Skill implements PassiveSkill {
+public class MogisSkill extends Skill implements PassiveSkill {
 
 
-    public SpeedySkill() {
-        super("Speedy", "Give you speed 2", SkillTier.UNIQUE, 0, FlashSkill.class);
+    public MogisSkill() {
+        super("Mogis, Lord of Berserk", "Each kill give you Strength", SkillTier.ULTIMATE, 0, null);
     }
 
     @Override
     public void eachSecond(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 0));
     }
 
     @Override
@@ -27,5 +26,6 @@ public class SpeedySkill extends Skill implements PassiveSkill {
 
     @Override
     public void onKill(Player killer, Player deadPlayer) {
+        killer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 0));
     }
 }

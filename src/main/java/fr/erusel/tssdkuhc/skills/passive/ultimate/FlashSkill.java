@@ -1,19 +1,18 @@
-package fr.erusel.tssdkuhc.skills.passive.unique;
+package fr.erusel.tssdkuhc.skills.passive.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.passive.ultimate.FlashSkill;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class SpeedySkill extends Skill implements PassiveSkill {
+public class FlashSkill extends Skill implements PassiveSkill {
 
 
-    public SpeedySkill() {
-        super("Speedy", "Give you speed 2", SkillTier.UNIQUE, 0, FlashSkill.class);
+    public FlashSkill() {
+        super("Flash, Lord of Speed", "Give you speed 2", SkillTier.ULTIMATE, 0, null);
     }
 
     @Override

@@ -3,6 +3,7 @@ package fr.erusel.tssdkuhc.skills.passive.unique;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
+import fr.erusel.tssdkuhc.skills.passive.ultimate.MogisSkill;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
@@ -12,7 +13,7 @@ public class BerserkerSkill extends Skill implements PassiveSkill {
 
 
     public BerserkerSkill() {
-        super("Berserker", "Each kill give you Strength", SkillTier.UNIQUE, 0);
+        super("Berserker", "Each kill give you Strength", SkillTier.UNIQUE, 0, MogisSkill.class);
     }
 
     @Override
