@@ -13,7 +13,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class ArrowResistantSkill extends Skill implements PassiveSkill {
 
-    public ArrowResistantSkill() { super("Arrow-Resistant", "Cancel Arrow Damage", SkillTier.RESISTANCE, 0, null);}
+    public ArrowResistantSkill() { super("Arrow Resistant", "Cancel Arrow Damage", SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {

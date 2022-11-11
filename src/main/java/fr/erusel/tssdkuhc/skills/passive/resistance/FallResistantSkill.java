@@ -11,7 +11,7 @@ import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class FallResistantSkill extends Skill implements PassiveSkill {
 
-    public FallResistantSkill() { super("Fall-Resistant", "Cancel Fall Damage", SkillTier.RESISTANCE, 0, null);}
+    public FallResistantSkill() { super("Fall Resistant", "Cancel Fall Damage", SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {

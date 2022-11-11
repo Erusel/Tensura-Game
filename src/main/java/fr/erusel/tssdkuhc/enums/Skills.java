@@ -1,5 +1,6 @@
 package fr.erusel.tssdkuhc.enums;
 
+import fr.erusel.tssdkuhc.objects.Skill;
 import fr.erusel.tssdkuhc.skills.active.ultimate.*;
 import fr.erusel.tssdkuhc.skills.active.unique.*;
 import fr.erusel.tssdkuhc.skills.passive.resistance.ArrowResistantSkill;
@@ -17,13 +18,13 @@ import java.util.List;
 public enum Skills {
 
     // Resistance Skill
-    FIRERESISTANT("Fire-Resistant", SkillTier.RESISTANCE, FireResistantSkill.class),
-    LAVARESISTANT("Lava-Resistant", SkillTier.RESISTANCE, LavaResistantSkill.class),
-    FALLRESISTANT("Fall-Resistant",SkillTier.RESISTANCE, FallResistantSkill.class),
-    ARROWRESISTANT("Arrow-Resistant",SkillTier.RESISTANCE, ArrowResistantSkill.class),
+    FIRERESISTANT("Fire Resistant", SkillTier.RESISTANCE, FireResistantSkill.class),
+    LAVARESISTANT("Lava Resistant", SkillTier.RESISTANCE, LavaResistantSkill.class),
+    FALLRESISTANT("Fall Resistant",SkillTier.RESISTANCE, FallResistantSkill.class),
+    ARROWRESISTANT("Arrow Resistant",SkillTier.RESISTANCE, ArrowResistantSkill.class),
 
     // Unique Skills
-    GREATSAGE("GreatSage", SkillTier.UNIQUE, GreatSageSkill.class),
+    GREATSAGE("Great Sage", SkillTier.UNIQUE, GreatSageSkill.class),
     SPEEDY("Speedy", SkillTier.UNIQUE, SpeedySkill.class),
     GLUTONNY("Glutonny", SkillTier.UNIQUE, GlutonnySkill.class),
     BERSERKER("Berserker", SkillTier.UNIQUE, BerserkerSkill.class),
@@ -74,7 +75,6 @@ public enum Skills {
         }
         return null;
     }
-
     public static List<Skills> getAllSkillByTier(SkillTier skillTier){
         List<Skills> list = new ArrayList<>();
         for (Skills skills : Skills.values()) if (skills.getSkillTier().equals(skillTier)) list.add(skills);

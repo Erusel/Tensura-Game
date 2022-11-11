@@ -7,11 +7,10 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
 
 public class LavaResistantSkill extends Skill implements PassiveSkill {
 
-    public LavaResistantSkill() { super("Lava-Resistant", "Cancel Lava Damage", SkillTier.RESISTANCE, 0, null);}
+    public LavaResistantSkill() { super("Lava Resistant", "Cancel Lava Damage", SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {

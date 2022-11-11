@@ -39,16 +39,16 @@ public class TensuraCommand implements CommandExecutor {
         }
         if (args[0].equalsIgnoreCase("giveskill")){
             if (Bukkit.getPlayer(args[1]) != null){
-                if (Skills.getSkillWithName(args[2]) != null){
+                if (Skills.valueOf(args[2]) != null){
                     try {
-                        Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill((Skill) Skills.getSkillWithName(args[2]).getSkillClass().getConstructor().newInstance());
+                        Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill((Skill) Skills.valueOf(args[2]).getSkillClass().getConstructor().newInstance());
                     } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                              NoSuchMethodException e) {
                         throw new RuntimeException(e);
                     }
-                    player.sendMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Successfully gived " + Skills.getSkillWithName(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
-                }
-            }
+                    player.sendMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Successfully gived " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
+                }else player.sendMessage("§cSkill not found");
+            }else player.sendMessage("§cPlayer not found");
         }
         if (args[0].equalsIgnoreCase("harvestfestival")){
             if (Bukkit.getPlayer(args[1]) != null){

@@ -37,7 +37,7 @@ public class TensuraTabCompleter implements TabCompleter {
         }
         if (args.length == 3){
             if (args[0].equalsIgnoreCase("giveskill")){
-                for (Skills skills : Skills.values()) list.add(skills.getSkillName());
+                for (Skills skills : Skills.values()) list.add(skills.name());
             }
 
 
