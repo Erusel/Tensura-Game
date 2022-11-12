@@ -5,6 +5,8 @@ import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.threads.HarvestFestivalRunnable;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
@@ -89,6 +91,9 @@ public class GPlayer {
             player.sendMessage("§cVous n'avez pas les prérequis");
             return;
         }
+
+        Location location = player.getLocation();
+        player.playSound(location, "custom.sound", SoundCategory.MASTER, 1, 1);
 
         Skill skill;
         Skill sacrificeSkill = null;
