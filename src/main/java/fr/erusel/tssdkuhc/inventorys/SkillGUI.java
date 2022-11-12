@@ -30,12 +30,12 @@ public class SkillGUI extends FastInv {
             } else if (skill instanceof ActiveSkill) {
                 ItemBuilder itemBuilder;
                 if (skill.getSkillTier().equals(SkillTier.ULTIMATE)) {
-                    itemBuilder = new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Clique gauche pour utiliser");
+                    itemBuilder = new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
                 }else {
-                    itemBuilder = new ItemBuilder(Material.RED_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Clique gauche pour utiliser");
+                    itemBuilder = new ItemBuilder(Material.RED_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
                 }
 
-                if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconde");
+                if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconds");
                 addItem(itemBuilder.build(), e -> activeSkillUse(skill));
             }else {
                 addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
@@ -47,7 +47,7 @@ public class SkillGUI extends FastInv {
 
     private void activeSkillUse(Skill skill){
         if (skill.inCooldown()){
-            player.sendMessage("En cooldown : " + skill.getCurrentCooldown() + " seconde.");
+            player.sendMessage("In cooldown : " + skill.getCurrentCooldown() + " seconds.");
             return;
         }
         player.closeInventory();

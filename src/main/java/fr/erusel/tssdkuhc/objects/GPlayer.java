@@ -44,11 +44,10 @@ public class GPlayer {
         playerSkills.remove(skill);
     }
     public boolean haveSkill(Skills skill){
-        try {
-            return getPlayerSkills().contains(skill.getSkillClass().getConstructor().newInstance());
-        } catch (InstantiationException | InvocationTargetException | IllegalAccessException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
+        for (Skill skills: getPlayerSkills()) {
+            if (skills.getName().equals(skill.getSkillName())) return true;
         }
+        return false;
     }
 
     // Player Kills

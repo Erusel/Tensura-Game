@@ -1,6 +1,7 @@
 package fr.erusel.tssdkuhc.inventorys;
 
 import fr.erusel.tssdkuhc.Main;
+import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.objects.Skill;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
@@ -20,8 +21,9 @@ public class InvestigatorGUI extends FastInv {
         for (UUID uuid : Main.getInstance().getGameManager().getPlayerList()){
             if (Bukkit.getPlayer(uuid) == null) continue;
             Player p = Bukkit.getPlayer(uuid);
-
-            addItem(new ItemBuilder(Material.PLAYER_HEAD).name("§7" + p.getName()).skullmeta(p.getName()).build(), e -> openInventory(p, e, skill));
+            if (!Main.getInstance().getPlayerManager().getGPlayerByUUID(uuid).haveSkill(Skills.INVESTIGATORRESISTANT)) {
+                addItem(new ItemBuilder(Material.PLAYER_HEAD).name("§7" + p.getName()).skullmeta(p.getName()).build(), e -> openInventory(p, e, skill));
+            }
 
         }
 
