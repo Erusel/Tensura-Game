@@ -4,6 +4,7 @@ import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -33,6 +34,11 @@ public class DrowningResistantSkill extends Skill implements PassiveSkill {
 
     @Override
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
+
+    }
+
+    @Override
+    public void onBlockBreak(BlockBreakEvent event) {
 
     }
 

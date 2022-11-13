@@ -2,6 +2,7 @@ package fr.erusel.tssdkuhc.listeners;
 
 import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.GState;
+import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.managers.GameManager;
 import fr.erusel.tssdkuhc.managers.ScoreBoardManager;
 import fr.erusel.tssdkuhc.objects.GPlayer;
@@ -9,21 +10,30 @@ import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 public class PlayerListener implements Listener {
 
+    Material[] ores = {Material.IRON_ORE, Material.COAL_ORE, Material.LAPIS_ORE, Material.REDSTONE_ORE, Material.EMERALD_ORE, Material.DIAMOND_ORE, Material.GOLD_ORE};
     GameManager gameManager = Main.getInstance().getGameManager();
     ScoreBoardManager scoreBoardManager = Main.getInstance().getScoreboardManager();
 
@@ -100,9 +110,18 @@ public class PlayerListener implements Listener {
         }
     }
 
-
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
         if (Main.getInstance().getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()).isInHarvestFestival()) event.setCancelled(true);
     }
+
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+        if (event.getPlayer() == null) return;
+        for (Skill skill: Main.getInstance().getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()).getPlayerSkills()) {
+            if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onBlockBreak(event);
+        }
+    }
 }
+
+

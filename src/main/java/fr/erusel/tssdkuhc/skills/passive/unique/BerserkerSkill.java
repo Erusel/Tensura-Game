@@ -5,6 +5,7 @@ import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
 import fr.erusel.tssdkuhc.skills.passive.ultimate.MogisSkill;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -41,6 +42,10 @@ public class BerserkerSkill extends Skill implements PassiveSkill {
     @Override
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
 
+    }
+
+    @Override
+    public void onBlockBreak(BlockBreakEvent event) {
     }
 
 }

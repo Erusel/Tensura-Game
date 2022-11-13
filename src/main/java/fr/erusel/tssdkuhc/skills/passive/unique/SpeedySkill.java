@@ -5,6 +5,7 @@ import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
 import fr.erusel.tssdkuhc.skills.passive.ultimate.FlashSkill;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -16,7 +17,7 @@ public class SpeedySkill extends Skill implements PassiveSkill {
 
 
     public SpeedySkill() {
-        super("Speedy", "Give you speed 2", SkillTier.UNIQUE, 0, FlashSkill.class);
+        super("Speedy", "Grant you speed 2", SkillTier.UNIQUE, 0, FlashSkill.class);
     }
 
     @Override
@@ -40,6 +41,10 @@ public class SpeedySkill extends Skill implements PassiveSkill {
     @Override
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
 
+    }
+
+    @Override
+    public void onBlockBreak(BlockBreakEvent event) {
     }
 
 }

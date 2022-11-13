@@ -3,25 +3,27 @@ package fr.erusel.tssdkuhc.skills.passive.ultimate;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
+import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.entity.ProjectileHitEvent;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
+import org.bukkit.inventory.ItemStack;
 
-public class FlashSkill extends Skill implements PassiveSkill {
+import java.util.Arrays;
 
+public class PloutosSkill extends Skill implements PassiveSkill {
 
-    public FlashSkill() {
-        super("Flash, Lord of Speed", "Grant you speed 3", SkillTier.ULTIMATE, 0, null);
+    public PloutosSkill() {
+        super("Ploutos, Lord of Wealth", "Triple mined ores", SkillTier.UNIQUE, 0, null);
     }
+
+    Material[] ores = {Material.IRON_ORE, Material.COAL_ORE, Material.LAPIS_ORE, Material.REDSTONE_ORE, Material.EMERALD_ORE, Material.DIAMOND_ORE, Material.GOLD_ORE};
 
     @Override
     public void eachSecond(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 2));
     }
 
     @Override
@@ -34,16 +36,21 @@ public class FlashSkill extends Skill implements PassiveSkill {
 
     @Override
     public void onDamage(EntityDamageEvent event) {
-
     }
 
     @Override
     public void onDamageByEntity(EntityDamageByEntityEvent event) {
-
     }
 
     @Override
     public void onBlockBreak(BlockBreakEvent event) {
+        if (Arrays.stream(ores).anyMatch(event.getBlock().getType()::equals)) {
+            Block block = event.getBlock();
+            event.setDropItems(false);
+            for (ItemStack item: block.getDrops()) {
+                item.setAmount(item.getAmount()*3);
+                block.getWorld().dropItemNaturally(block.getLocation(), item);
+            }
+        }
     }
-
 }
