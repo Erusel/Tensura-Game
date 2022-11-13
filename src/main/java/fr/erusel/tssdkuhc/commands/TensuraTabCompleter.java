@@ -6,8 +6,10 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
+import org.bukkit.util.StringUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class TensuraTabCompleter implements TabCompleter {
@@ -16,6 +18,8 @@ public class TensuraTabCompleter implements TabCompleter {
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
         List<String> list = new ArrayList<>();
+        List<String> completions = new ArrayList<>();
+        int arg = 0;
 
         if (args.length == 1){
             list.add("start");
@@ -24,6 +28,7 @@ public class TensuraTabCompleter implements TabCompleter {
             list.add("harvestfestival");
         }
         if (args.length == 2){
+            arg = 1;
             if (args[0].equalsIgnoreCase("sethost")){
                 for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
             }
@@ -37,21 +42,14 @@ public class TensuraTabCompleter implements TabCompleter {
         }
         if (args.length == 3){
             if (args[0].equalsIgnoreCase("giveskill")){
+                arg = 2;
                 for (Skills skills : Skills.values()) list.add(skills.name());
             }
-
-
-
         }
 
+        StringUtil.copyPartialMatches(args[arg], list, completions);
+        Collections.sort(completions);
 
-
-
-
-
-
-
-
-        return list;
+        return completions;
     }
 }

@@ -52,7 +52,6 @@ public class SkillGUI extends FastInv {
         }
         player.closeInventory();
         ((ActiveSkill)skill).onUse(player);
-        skill.activateCooldown();
     }
 
 }

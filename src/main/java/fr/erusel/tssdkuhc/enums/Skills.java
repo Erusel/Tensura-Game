@@ -37,6 +37,7 @@ public enum Skills {
     GUARDIAN("Guardian", SkillTier.UNIQUE, GuardianSkill.class),
     HASTY("Hasty", SkillTier.UNIQUE, HastySkill.class),
     FORTUNA("Fortuna", SkillTier.UNIQUE, FortunaSkill.class),
+    TRACKER("Tracker", SkillTier.UNIQUE, TrackerSkill.class),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
@@ -50,6 +51,7 @@ public enum Skills {
     FAUST("Faust, Lord of Investigation", SkillTier.ULTIMATE, FaustSkill.class),
     HECATE("Hecate, Lord of Protection", SkillTier.ULTIMATE, HecateSkill.class),
     HERMES("Hermes, Lord of Haste", SkillTier.ULTIMATE, HermesSkill.class),
+    MALAR("Malar, Lord of Tracking", SkillTier.ULTIMATE, MalarSkill.class),
     PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class);
 
     private final String name;

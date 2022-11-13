@@ -9,22 +9,27 @@ import org.bukkit.Location;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
 public class GPlayer {
 
+    // Main information
     private final UUID playerUUID;
     private int playerKill;
     private Race race;
+    private final ArrayList<Skill> playerSkills = new ArrayList<>();
+
+
+    // Skill information
     private boolean glutonnyActivated;
     private boolean oppressorActivated;
     private boolean inHarvestFestival;
     private int oppressorTime;
     private int mathematicianDodgeLeft;
-    private final ArrayList<Skill> playerSkills = new ArrayList<>();
+    private UUID trackingPlayer;
 
     public GPlayer(UUID playerUUID) {
         this.playerUUID = playerUUID;
@@ -151,6 +156,35 @@ public class GPlayer {
     }
     public int getMathematicianDodgeLeft(){
         return mathematicianDodgeLeft;
+    }
+
+    public void setTrackingPlayer(UUID uuid){
+        trackingPlayer = uuid;
+    }
+    public UUID getTrackingPlayer(){
+        return trackingPlayer;
+    }
+
+    public List<Skill> getPlayerUniqueSkills(){
+        List<Skill> skills = new ArrayList<>();
+        for (Skill skill : getPlayerSkills()){
+            if (skill.getSkillTier().equals(SkillTier.UNIQUE)) skills.add(skill);
+        }
+        return skills;
+    }
+    public List<Skill> getPlayerResistance(){
+        List<Skill> skills = new ArrayList<>();
+        for (Skill skill : getPlayerSkills()){
+            if (skill.getSkillTier().equals(SkillTier.RESISTANCE)) skills.add(skill);
+        }
+        return skills;
+    }
+    public List<Skill> getPlayerUltimateSkills(){
+        List<Skill> skills = new ArrayList<>();
+        for (Skill skill : getPlayerSkills()){
+            if (skill.getSkillTier().equals(SkillTier.ULTIMATE)) skills.add(skill);
+        }
+        return skills;
     }
 
 }

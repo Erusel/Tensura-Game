@@ -16,5 +16,6 @@ public class BeelzebuthSkill extends Skill implements ActiveSkill {
     @Override
     public void onUse(Player player) {
         Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setGlutonny(true);
+        activateCooldown();
     }
 }

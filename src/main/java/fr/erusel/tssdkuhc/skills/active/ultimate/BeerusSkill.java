@@ -24,5 +24,6 @@ public class BeerusSkill extends Skill implements ActiveSkill {
                 }
             }
         }
+        activateCooldown();
     }
 }

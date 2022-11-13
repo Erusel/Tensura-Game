@@ -15,5 +15,6 @@ public class PandoraSkill extends Skill implements ActiveSkill {
     @Override
     public void onUse(Player player) {
         player.openInventory(player.getEnderChest());
+        activateCooldown();
     }
 }

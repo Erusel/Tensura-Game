@@ -8,6 +8,7 @@ import fr.erusel.tssdkuhc.managers.ScoreBoardManager;
 import fr.erusel.tssdkuhc.objects.GPlayer;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
+import fr.erusel.tssdkuhc.skills.active.ultimate.MalarSkill;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -89,6 +90,11 @@ public class PlayerListener implements Listener {
     public void onPlayerDamage(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
         Entity damaged = event.getEntity();
+        if(damaged instanceof Player){
+            if (damager instanceof Player){
+                Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).setTrackingPlayer(damaged.getUniqueId());
+            }
+        }
         for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getPlayerSkills()){
             if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
         }

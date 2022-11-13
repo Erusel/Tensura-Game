@@ -18,5 +18,6 @@ public class MathematicianSkill extends Skill implements ActiveSkill {
     @Override
     public void onUse(Player player) {
         Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setMathematicianDodgeLeft(DODGE);
+        activateCooldown();
     }
 }

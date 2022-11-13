@@ -19,5 +19,6 @@ public class RaphaelSkill extends Skill implements ActiveSkill {
             stringBuilder.append(entity.getName()).append("\n");
         }
         player.sendMessage(stringBuilder.toString());
+        activateCooldown();
     }
 }

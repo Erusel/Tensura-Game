@@ -25,5 +25,6 @@ public class MercilessSkill extends Skill implements ActiveSkill {
                 }
             }
         }
+        activateCooldown();
     }
 }
