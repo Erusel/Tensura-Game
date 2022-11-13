@@ -11,6 +11,7 @@ import fr.erusel.tssdkuhc.objects.Skill;
 import fr.erusel.tssdkuhc.skills.active.ultimate.MalarSkill;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.block.Block;
@@ -26,6 +27,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -71,8 +73,8 @@ public class PlayerListener implements Listener {
         Player killer = event.getEntity().getKiller();
         GPlayer gKiller = Main.getInstance().getPlayerManager().getGPlayerByUUID(killer.getUniqueId());
         GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
-
         gKiller.addKill(1);
+        event.setDeathMessage("Le boloss " + player.getName() + " est mort comme une merde");
         for (Skill skill : gKiller.getPlayerSkills()) {
             if (skill instanceof PassiveSkill) {
                 ((PassiveSkill) skill).onKill(killer, player);
@@ -84,6 +86,13 @@ public class PlayerListener implements Listener {
             gKiller.addSkill(skill);
             gPlayer.removeSkill(skill);
         }
+    }
+
+    @EventHandler
+    public void onPlayerRespawn(PlayerRespawnEvent event){
+        Player player = event.getPlayer();
+        player.setGameMode(GameMode.SPECTATOR);
+        Main.getInstance().getGameManager().addDeadPlayer(player.getUniqueId());
     }
 
     @EventHandler
