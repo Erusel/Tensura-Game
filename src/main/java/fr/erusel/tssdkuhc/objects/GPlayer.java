@@ -8,6 +8,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +31,8 @@ public class GPlayer {
     private int oppressorTime;
     private int mathematicianDodgeLeft;
     private UUID trackingPlayer;
+    private Inventory stomachInventory;
+    private Inventory pandoraInventory;
 
     public GPlayer(UUID playerUUID) {
         this.playerUUID = playerUUID;
@@ -185,6 +188,23 @@ public class GPlayer {
             if (skill.getSkillTier().equals(SkillTier.ULTIMATE)) skills.add(skill);
         }
         return skills;
+    }
+
+    public void createStomachInventory(){
+        if (stomachInventory == null) return;
+        stomachInventory = Bukkit.createInventory(null, 27, "Stomach");
+    }
+    public Inventory getStomachInventory(){
+        return stomachInventory;
+    }
+    public void createPandoraInventory(){
+        if (pandoraInventory != null) return;
+
+        pandoraInventory = Bukkit.createInventory(null, 45, "Pandora");
+        if (stomachInventory != null) pandoraInventory.setContents(stomachInventory.getContents());
+    }
+    public Inventory getPandoraInventory(){
+        return pandoraInventory;
     }
 
 }

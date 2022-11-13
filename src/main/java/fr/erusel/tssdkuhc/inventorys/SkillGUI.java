@@ -21,7 +21,6 @@ public class SkillGUI extends FastInv {
 
         for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()){
             if (skill instanceof PassiveSkill){
-                ItemBuilder itemBuilder;
                 if (skill.getSkillTier().equals(SkillTier.ULTIMATE)) {
                     addItem(new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
                 }else {

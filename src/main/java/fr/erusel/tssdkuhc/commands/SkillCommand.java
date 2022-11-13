@@ -18,7 +18,7 @@ public class SkillCommand implements CommandExecutor {
 
         if (!Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) return true;
         if (Main.getInstance().getGameManager().getDeadPlayers().contains(player.getUniqueId())){
-            player.sendMessage("Vous ne pouvez faire cela, vous êtes mort lol nullos");
+            player.sendMessage("§cYou can't do this, you are dead.");
             return true;
         }
         new SkillGUI(player).open(player);

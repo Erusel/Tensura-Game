@@ -17,10 +17,19 @@ public class TrackerSkill extends Skill implements ActiveSkill {
     @Override
     public void onUse(Player player) {
         GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
-        if (gPlayer.getTrackingPlayer() == null) return;
-        if (Bukkit.getPlayer(gPlayer.getTrackingPlayer()) == null) return;
+        if (gPlayer.getTrackingPlayer() == null) {
+            player.sendMessage("§cYou hit nobody");
+            return;
+        }
+        if (Bukkit.getPlayer(gPlayer.getTrackingPlayer()) == null){
+            player.sendMessage("§cPlayer not found");
+            return;
+        }
         Player trackedPlayer = Bukkit.getPlayer(gPlayer.getTrackingPlayer());
-        player.sendMessage(trackedPlayer.getName() + "'s coordinate is x: " + trackedPlayer.getLocation().getX() + " y: " + trackedPlayer.getLocation().getY() + " z: " + trackedPlayer.getLocation().getZ());
+        long x = Math.round(trackedPlayer.getLocation().getX());
+        long y = Math.round(trackedPlayer.getLocation().getY());
+        long z = Math.round(trackedPlayer.getLocation().getZ());
+        player.sendMessage(trackedPlayer.getName() + "'s coordinate is x: " + x + " y: " + y + " z: " + z);
         activateCooldown();
     }
 }

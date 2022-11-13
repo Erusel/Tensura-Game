@@ -1,5 +1,6 @@
 package fr.erusel.tssdkuhc.skills.active.ultimate;
 
+import fr.erusel.tssdkuhc.enums.Prefixs;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
@@ -14,7 +15,7 @@ public class RaphaelSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        StringBuilder stringBuilder = new StringBuilder("[§bGreat Sage§f] §aHere are the entity around you: \n");
+        StringBuilder stringBuilder = new StringBuilder(Prefixs.RAPAHEL.getText() + "§aHere are the entity around you: \n");
         for (Entity entity : player.getNearbyEntities(25, 25, 25)){
             stringBuilder.append(entity.getName()).append("\n");
         }

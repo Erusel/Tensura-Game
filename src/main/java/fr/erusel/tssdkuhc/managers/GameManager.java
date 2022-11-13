@@ -38,10 +38,10 @@ public class GameManager {
         }
         setGameState(GState.STARTING);
         Main.getInstance().getWorldManager().deletePlayingWorld();
-        Bukkit.broadcastMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Creating world...");
+        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Creating world...");
         Main.getInstance().getWorldManager().createPlayingWorld();
-        Bukkit.broadcastMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Successful");
-        Bukkit.broadcastMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Reincarnation of players");
+        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successful");
+        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Reincarnation of players");
 
         // Player resurrection
         for (Player player : Bukkit.getOnlinePlayers()){
