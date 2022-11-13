@@ -21,6 +21,7 @@ public class GameManager {
     private String hostName = "Aucun";
     public int gameStartTime;
     private final List<UUID> playerList = new ArrayList<>();
+    private final List<UUID> deadPlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
     public void startGame(){
@@ -96,5 +97,16 @@ public class GameManager {
         return hostName;
     }
 
+    public List<UUID> getDeadPlayers(){
+        return deadPlayers;
+    }
+
+    public void addDeadPlayer(UUID uuid){
+        deadPlayers.add(uuid);
+    }
+
+    public void removeDeadPlayers(UUID uuid){
+        deadPlayers.remove(uuid);
+    }
 
 }

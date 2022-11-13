@@ -38,6 +38,7 @@ public enum Skills {
     HASTY("Hasty", SkillTier.UNIQUE, HastySkill.class),
     FORTUNA("Fortuna", SkillTier.UNIQUE, FortunaSkill.class),
     TRACKER("Tracker", SkillTier.UNIQUE, TrackerSkill.class),
+    LUST("Lust", SkillTier.UNIQUE, LustSkill.class),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
