@@ -11,7 +11,7 @@ public class GlutonnySkill extends Skill implements ActiveSkill {
 
 
     public GlutonnySkill() {
-        super("Glutonny", "", SkillTier.UNIQUE, 1200, BeelzebuthSkill.class);
+        super("Glutonny", "Steal 1 skill of your next kill", SkillTier.UNIQUE, 1200, BeelzebuthSkill.class);
     }
 
     @Override

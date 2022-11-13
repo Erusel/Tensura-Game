@@ -1,6 +1,7 @@
 package fr.erusel.tssdkuhc.commands;
 
 import fr.erusel.tssdkuhc.Main;
+import fr.erusel.tssdkuhc.enums.Prefixs;
 import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.objects.Skill;
 import org.bukkit.Bukkit;
@@ -46,7 +47,7 @@ public class TensuraCommand implements CommandExecutor {
                          NoSuchMethodException e) {
                     throw new RuntimeException(e);
                 }
-                player.sendMessage(Main.VOICE_OF_THE_WORLD_PREFIX + "Successfully gived " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
+                player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully gived " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
             }else player.sendMessage("§cPlayer not found");
         }
         if (args[0].equalsIgnoreCase("harvestfestival")){

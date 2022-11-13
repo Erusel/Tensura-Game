@@ -41,16 +41,11 @@ public class InvestigatorGUI extends FastInv {
         int j=18;
         int k=0;
         for (ItemStack itemStack : victim.getInventory().getContents()){
-            if (j==59) {
-                break;
-            }
-
+            if (j==59) break;
             if (j>53) {
                 inv.setItem(k,itemStack);
                 k++;
-            }
-
-            else {
+            } else {
                 inv.setItem(j, itemStack);
             }
             j++;

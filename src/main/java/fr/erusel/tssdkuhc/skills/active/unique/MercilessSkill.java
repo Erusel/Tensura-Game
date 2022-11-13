@@ -12,7 +12,7 @@ public class MercilessSkill extends Skill implements ActiveSkill {
 
 
     public MercilessSkill() {
-        super("Merciless", "Kill every entity around you in a radius of 30 blocs if they are under 2 heart", SkillTier.UNIQUE, 1000, BeerusSkill.class);
+        super("Merciless", "Kill every entity around you in a radius of 30 blocs \nif they are under 2 heart", SkillTier.UNIQUE, 1000, BeerusSkill.class);
     }
 
     @Override
