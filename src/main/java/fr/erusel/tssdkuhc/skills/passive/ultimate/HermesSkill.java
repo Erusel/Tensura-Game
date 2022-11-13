@@ -1,4 +1,4 @@
-package fr.erusel.tssdkuhc.skills.passive.resistance;
+package fr.erusel.tssdkuhc.skills.passive.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
@@ -8,13 +8,19 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
-public class PoisonResistantSkill extends Skill implements PassiveSkill {
+public class HermesSkill extends Skill implements PassiveSkill {
 
-    public PoisonResistantSkill() { super("Poison Resistant", "Cancel Poison Damage", SkillTier.RESISTANCE, 0, null);}
+
+    public HermesSkill() {
+        super("Hermes, Lord of Haste", "Grant you haste 3", SkillTier.ULTIMATE, 0, null);
+    }
 
     @Override
     public void eachSecond(Player player) {
+        player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 40, 2));
     }
 
     @Override
@@ -27,9 +33,6 @@ public class PoisonResistantSkill extends Skill implements PassiveSkill {
 
     @Override
     public void onDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.POISON)) {
-            event.setCancelled(true);
-        }
     }
 
     @Override

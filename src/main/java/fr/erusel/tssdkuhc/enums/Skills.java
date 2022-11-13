@@ -4,10 +4,8 @@ import fr.erusel.tssdkuhc.objects.Skill;
 import fr.erusel.tssdkuhc.skills.active.ultimate.*;
 import fr.erusel.tssdkuhc.skills.active.unique.*;
 import fr.erusel.tssdkuhc.skills.passive.resistance.*;
-import fr.erusel.tssdkuhc.skills.passive.ultimate.FlashSkill;
-import fr.erusel.tssdkuhc.skills.passive.ultimate.MogisSkill;
-import fr.erusel.tssdkuhc.skills.passive.unique.BerserkerSkill;
-import fr.erusel.tssdkuhc.skills.passive.unique.SpeedySkill;
+import fr.erusel.tssdkuhc.skills.passive.ultimate.*;
+import fr.erusel.tssdkuhc.skills.passive.unique.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +34,9 @@ public enum Skills {
     MATHEMATICIAN("Mathematician", SkillTier.UNIQUE, MathematicianSkill.class),
     STOMACH("Stomach", SkillTier.UNIQUE, StomachSkill.class),
     INVESTIGATOR("Investigator",SkillTier.UNIQUE, InvestigatorSkill.class),
-
+    GUARDIAN("Guardian", SkillTier.UNIQUE, GuardianSkill.class),
+    HASTY("Hasty", SkillTier.UNIQUE, HastySkill.class),
+    FORTUNA("Fortuna", SkillTier.UNIQUE, FortunaSkill.class),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
@@ -47,8 +47,10 @@ public enum Skills {
     BEERUS("Beerus, Lord of Death", SkillTier.ULTIMATE, BeerusSkill.class),
     ALBERT("Albert, Lord of Algebria", SkillTier.ULTIMATE, AlbertSkill.class),
     PANDORA("Pandora, Lord of Gift", SkillTier.ULTIMATE, PandoraSkill.class),
-    FAUST("Faust, Lord of Investigation", SkillTier.ULTIMATE, FaustSkill.class);
-
+    FAUST("Faust, Lord of Investigation", SkillTier.ULTIMATE, FaustSkill.class),
+    HECATE("Hecate, Lord of Protection", SkillTier.ULTIMATE, HecateSkill.class),
+    HERMES("Hermes, Lord of Haste", SkillTier.ULTIMATE, HermesSkill.class),
+    PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class);
 
     private final String name;
     private final SkillTier skillTier;

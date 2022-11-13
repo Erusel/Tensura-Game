@@ -6,6 +6,7 @@ import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Player;
+import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -37,6 +38,10 @@ public class ArrowResistantSkill extends Skill implements PassiveSkill {
         if (event.getDamager() instanceof Arrow){
             event.setCancelled(true);
         }
+    }
+
+    @Override
+    public void onBlockBreak(BlockBreakEvent event) {
     }
 
 }
