@@ -106,6 +106,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (!(event.getEntity() instanceof Player)) return;
+        if (!(Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING))) return;
         Player player = (Player) event.getEntity();
         for (Skill skill: Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
             if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamage(event);
@@ -114,7 +115,9 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event){
-        if (Main.getInstance().getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()).isInHarvestFestival()) event.setCancelled(true);
+        if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)){
+            if (Main.getInstance().getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()).isInHarvestFestival()) event.setCancelled(true);
+        }
     }
 
     @EventHandler
