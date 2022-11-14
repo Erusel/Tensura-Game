@@ -132,6 +132,19 @@ public class PlayerListener implements Listener {
     public void onChat(AsyncPlayerChatEvent event){
         event.setMessage("§8" + event.getPlayer().getName() + " §6> §7" + event.getMessage());
     }
+
+    @EventHandler
+    public void onAdvancement(PlayerAdvancementDoneEvent event){
+        if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)){
+            Player player = event.getPlayer();
+            if (Main.getInstance().getGameManager().getPlayerList().contains(player.getUniqueId())){
+                int i = new Random().nextInt(100);
+                if (i < 6){
+                    player.sendMessage("§3You gain an skill");
+                }
+            }
+        }
+    }
 }
 
 

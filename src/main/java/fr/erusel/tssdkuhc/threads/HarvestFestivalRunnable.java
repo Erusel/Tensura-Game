@@ -1,8 +1,6 @@
 package fr.erusel.tssdkuhc.threads;
 
-import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.Prefixs;
-import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.objects.GPlayer;
 import fr.erusel.tssdkuhc.objects.Race;
 import fr.erusel.tssdkuhc.objects.Skill;
