@@ -4,7 +4,6 @@ import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.inventorys.LustGUI;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.active.ultimate.BeerusSkill;
 import org.bukkit.entity.Player;
 
 public class LustSkill extends Skill implements ActiveSkill {

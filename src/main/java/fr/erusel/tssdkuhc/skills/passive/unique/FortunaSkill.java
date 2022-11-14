@@ -1,11 +1,8 @@
 package fr.erusel.tssdkuhc.skills.passive.unique;
 
-import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.SkillTier;
-import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.passive.ultimate.HecateSkill;
 import fr.erusel.tssdkuhc.skills.passive.ultimate.PloutosSkill;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -15,8 +12,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 

@@ -100,12 +100,15 @@ public class PlayerListener implements Listener {
         Entity damager = event.getDamager();
         Entity damaged = event.getEntity();
         if(damaged instanceof Player){
+            for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getPlayerSkills()){
+                if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
+            }
             if (damager instanceof Player){
                 Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).setTrackingPlayer(damaged.getUniqueId());
             }
         }
-        for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getPlayerSkills()){
-            if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
+        if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).isImperceptibleActivated()) {
+            event.setCancelled(true);
         }
         if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).isOppressorActivated()){
             damaged.setVelocity(damager.getLocation().getDirection().setY(0).normalize().multiply(2));
