@@ -1,6 +1,5 @@
 package fr.erusel.tssdkuhc.enums;
 
-import fr.erusel.tssdkuhc.objects.Skill;
 import fr.erusel.tssdkuhc.skills.active.ultimate.*;
 import fr.erusel.tssdkuhc.skills.active.unique.*;
 import fr.erusel.tssdkuhc.skills.passive.resistance.*;
@@ -23,6 +22,7 @@ public enum Skills {
     DROWNINGRESISTANT("Drowning Resistant", SkillTier.RESISTANCE, DrowningResistantSkill.class),
     LIGHTNINGRESISTANT("Lightning Resistant", SkillTier.RESISTANCE, LightningResistantSkill.class),
     INVESTIGATORRESISTANT("Investigator Resistant", SkillTier.RESISTANCE, InvestigatorResistantSkill.class),
+    WITHERRESISTANT("Wither Resistant", SkillTier.RESISTANCE, WitherResistantSkill.class),
 
     // Unique Skills
     GREATSAGE("Great Sage", SkillTier.UNIQUE, GreatSageSkill.class),
@@ -39,6 +39,7 @@ public enum Skills {
     FORTUNA("Fortuna", SkillTier.UNIQUE, FortunaSkill.class),
     TRACKER("Tracker", SkillTier.UNIQUE, TrackerSkill.class),
     LUST("Lust", SkillTier.UNIQUE, LustSkill.class),
+    IMPERCEPTIBLE("Imperceptible", SkillTier.UNIQUE, ImperceptibleSkill.class),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
@@ -53,7 +54,8 @@ public enum Skills {
     HECATE("Hecate, Lord of Protection", SkillTier.ULTIMATE, HecateSkill.class),
     HERMES("Hermes, Lord of Haste", SkillTier.ULTIMATE, HermesSkill.class),
     MALAR("Malar, Lord of Tracking", SkillTier.ULTIMATE, MalarSkill.class),
-    PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class);
+    PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class),
+    HADES("Hades, Lord of Invisibility", SkillTier.ULTIMATE, HadesSkill.class);
 
     private final String name;
     private final SkillTier skillTier;

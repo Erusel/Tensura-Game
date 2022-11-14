@@ -1,8 +1,6 @@
 package fr.erusel.tssdkuhc.skills.passive.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
-import fr.erusel.tssdkuhc.inventorys.InvestigatorGUI;
-import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
 import org.bukkit.entity.Player;

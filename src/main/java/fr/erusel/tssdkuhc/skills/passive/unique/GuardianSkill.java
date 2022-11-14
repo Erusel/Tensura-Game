@@ -3,7 +3,6 @@ package fr.erusel.tssdkuhc.skills.passive.unique;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.objects.PassiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.passive.ultimate.FlashSkill;
 import fr.erusel.tssdkuhc.skills.passive.ultimate.HecateSkill;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;

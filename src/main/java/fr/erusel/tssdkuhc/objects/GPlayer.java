@@ -32,8 +32,10 @@ public class GPlayer {
     // Skill information
     private boolean glutonnyActivated;
     private boolean oppressorActivated;
+    private boolean imperceptibleActivated;
     private boolean inHarvestFestival;
     private int oppressorTime;
+    private int imperceptibleTime;
     private int mathematicianDodgeLeft;
     private UUID trackingPlayer;
     private Inventory stomachInventory;
@@ -160,16 +162,21 @@ public class GPlayer {
     public void setOppressor(boolean b){
         oppressorActivated = b;
     }
+    public void setImperceptible(boolean b) { imperceptibleActivated = b;}
     public void setOppressorTime(int i){
         oppressorTime = i;
+    }
+    public void setImperceptibleTime(int i){
+        imperceptibleTime = i;
     }
     public int getOppressorTime(){
         return oppressorTime;
     }
+    public int getImperceptibleTime() { return imperceptibleTime;}
     public boolean isOppressorActivated(){
         return oppressorActivated;
     }
-
+    public boolean isImperceptibleActivated() { return imperceptibleActivated;}
     public void setMathematicianDodgeLeft(int i){
         mathematicianDodgeLeft = i;
     }
