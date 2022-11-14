@@ -1,5 +1,6 @@
 package fr.erusel.tssdkuhc;
 
+import fr.erusel.tssdkuhc.commands.ItemCommand;
 import fr.erusel.tssdkuhc.commands.SkillCommand;
 import fr.erusel.tssdkuhc.commands.TensuraCommand;
 import fr.erusel.tssdkuhc.commands.TensuraTabCompleter;
@@ -34,6 +35,7 @@ public final class Main extends JavaPlugin {
         getCommand("tensura").setExecutor(new TensuraCommand());
         getCommand("tensura").setTabCompleter(new TensuraTabCompleter());
         getCommand("skill").setExecutor(new SkillCommand());
+        getCommand("item").setExecutor(new ItemCommand());
 
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
 

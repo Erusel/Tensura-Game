@@ -1,5 +1,6 @@
 package fr.erusel.tssdkuhc.commands;
 
+import fr.erusel.tssdkuhc.enums.Items;
 import fr.erusel.tssdkuhc.enums.Skills;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -45,7 +46,12 @@ public class TensuraTabCompleter implements TabCompleter {
                 arg = 2;
                 for (Skills skills : Skills.values()) list.add(skills.name());
             }
+            if (args[0].equalsIgnoreCase("giveitem")){
+                arg = 2;
+                for (Items items : Items.values()) list.add(items.name());
+            }
         }
+
 
         StringUtil.copyPartialMatches(args[arg], list, completions);
         Collections.sort(completions);

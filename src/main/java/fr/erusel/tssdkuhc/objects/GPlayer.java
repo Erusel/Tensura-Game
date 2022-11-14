@@ -1,6 +1,10 @@
+/**
+ * It's a class that contains all the information about a player in the game
+ */
 package fr.erusel.tssdkuhc.objects;
 
 import fr.erusel.tssdkuhc.Main;
+import fr.erusel.tssdkuhc.enums.Items;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.threads.HarvestFestivalRunnable;
@@ -22,6 +26,7 @@ public class GPlayer {
     private int playerKill;
     private Race race;
     private final ArrayList<Skill> playerSkills = new ArrayList<>();
+    private final ArrayList<GItem> playerItems = new ArrayList<>();
 
 
     // Skill information
@@ -58,6 +63,17 @@ public class GPlayer {
             if (skills.getName().equals(skill.getSkillName())) return true;
         }
         return false;
+    }
+
+    // Player Items
+    public ArrayList<GItem> getPlayerItems(){
+        return playerItems;
+    }
+    public void addItem(GItem item){
+        playerItems.add(item);
+    }
+    public void removeItem(GItem item){
+        playerItems.remove(item);
     }
 
     // Player Kills
@@ -197,6 +213,7 @@ public class GPlayer {
     public Inventory getStomachInventory(){
         return stomachInventory;
     }
+
     public void createPandoraInventory(){
         if (pandoraInventory != null) return;
 
