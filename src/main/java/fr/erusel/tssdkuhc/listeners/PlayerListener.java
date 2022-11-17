@@ -2,6 +2,8 @@ package fr.erusel.tssdkuhc.listeners;
 
 import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.GState;
+import fr.erusel.tssdkuhc.enums.Prefixs;
+import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.managers.GameManager;
 import fr.erusel.tssdkuhc.managers.ScoreBoardManager;
 import fr.erusel.tssdkuhc.objects.GPlayer;
@@ -61,7 +63,7 @@ public class PlayerListener implements Listener {
         GPlayer gKiller = Main.getInstance().getPlayerManager().getGPlayerByUUID(killer.getUniqueId());
         GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
         gKiller.addKill(1);
-        event.setDeathMessage("Le boloss " + player.getName() + " est mort comme une merde");
+        event.setDeathMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Player " + player.getName() + " is dead");
         for (Skill skill : gKiller.getPlayerSkills()) {
             if (skill instanceof PassiveSkill) {
                 ((PassiveSkill) skill).onKill(killer, player);
@@ -72,6 +74,10 @@ public class PlayerListener implements Listener {
             Skill skill = gPlayer.getPlayerSkills().get(i);
             gKiller.addSkill(skill);
             gPlayer.removeSkill(skill);
+        }
+        if (gPlayer.canRessurect() && gPlayer.haveSkill(Skills.OSIRIS)){
+            gPlayer.ressurect();
+            gPlayer.setCanResurrect(false);
         }
     }
 
