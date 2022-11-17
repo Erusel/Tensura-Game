@@ -8,7 +8,7 @@ import org.bukkit.entity.Player;
 
 public class AlbertSkill extends Skill implements ActiveSkill {
 
-    private int DODGE = 5;
+    private final int DODGE = 5;
 
     public AlbertSkill() {
         super("Albert, Lord of Algebria", "Ignore the next 5 damage", SkillTier.ULTIMATE, 1000, null);

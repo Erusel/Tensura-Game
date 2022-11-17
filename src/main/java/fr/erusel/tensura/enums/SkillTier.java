@@ -8,7 +8,7 @@ public enum SkillTier {
     RESISTANCE("§9§bResistance");
 
 
-    private String text;
+    private final String text;
 
     SkillTier(String text) {
         this.text = text;
