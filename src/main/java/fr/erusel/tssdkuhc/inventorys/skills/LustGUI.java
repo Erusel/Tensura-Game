@@ -33,10 +33,7 @@ public class LustGUI extends FastInv {
 
 
     public void resurrect(Player player, Skill skill, Player p){
-        Main.getInstance().getGameManager().removeDeadPlayers(player.getUniqueId());
-        player.setGameMode(GameMode.SURVIVAL);
-        player.teleport(player.getWorld().getSpawnLocation());
-        player.sendMessage("Vous avez été ressucité cool sa nan ?");
+        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).ressurect();
         skill.activateCooldown();
         p.closeInventory();
     }

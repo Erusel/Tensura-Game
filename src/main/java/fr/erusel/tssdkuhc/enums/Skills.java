@@ -53,6 +53,7 @@ public enum Skills {
     HECATE("Hecate, Lord of Protection", SkillTier.ULTIMATE, HecateSkill.class),
     HERMES("Hermes, Lord of Haste", SkillTier.ULTIMATE, HermesSkill.class),
     MALAR("Malar, Lord of Tracking", SkillTier.ULTIMATE, MalarSkill.class),
+    OSIRIS("Osiris, Lord of Resurrection", SkillTier.ULTIMATE, OsirisSkill.class),
     PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class);
 
     private final String name;

@@ -4,11 +4,11 @@
 package fr.erusel.tssdkuhc.objects;
 
 import fr.erusel.tssdkuhc.Main;
-import fr.erusel.tssdkuhc.enums.Items;
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.enums.Skills;
 import fr.erusel.tssdkuhc.threads.HarvestFestivalRunnable;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -33,6 +33,7 @@ public class GPlayer {
     private boolean glutonnyActivated;
     private boolean oppressorActivated;
     private boolean inHarvestFestival;
+    private boolean canResurrect = true;
     private int oppressorTime;
     private int mathematicianDodgeLeft;
     private UUID trackingPlayer;
@@ -222,6 +223,22 @@ public class GPlayer {
     }
     public Inventory getPandoraInventory(){
         return pandoraInventory;
+    }
+
+    public boolean canRessurect(){
+        return canResurrect;
+    }
+
+    public void setCanResurrect(Boolean b){
+        canResurrect = b;
+    }
+
+    public void ressurect(){
+        Player player = Bukkit.getPlayer(playerUUID);
+        Main.getInstance().getGameManager().removeDeadPlayers(player.getUniqueId());
+        player.setGameMode(GameMode.SURVIVAL);
+        player.teleport(player.getWorld().getSpawnLocation());
+        player.sendMessage("You been be resurrected");
     }
 
 }

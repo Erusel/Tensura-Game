@@ -1,16 +1,15 @@
-package fr.erusel.tssdkuhc.skills.active.unique;
+package fr.erusel.tssdkuhc.skills.active.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
 import fr.erusel.tssdkuhc.inventorys.skills.LustGUI;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
-import fr.erusel.tssdkuhc.skills.active.ultimate.OsirisSkill;
 import org.bukkit.entity.Player;
 
-public class LustSkill extends Skill implements ActiveSkill {
+public class OsirisSkill extends Skill implements ActiveSkill {
 
-    public LustSkill() {
-        super("Lust", "Resurrect any dead players", SkillTier.UNIQUE, 2000, OsirisSkill.class);
+    public OsirisSkill() {
+        super("Osiris, Lord of resurrection", "Resurrect any dead players and give you second life", SkillTier.ULTIMATE, 2000, null);
     }
 
     @Override
