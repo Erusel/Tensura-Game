@@ -1,6 +1,7 @@
 package fr.erusel.tssdkuhc.skills.active.ultimate;
 
 import fr.erusel.tssdkuhc.enums.SkillTier;
+import fr.erusel.tssdkuhc.inventorys.PlayerChooseGUI;
 import fr.erusel.tssdkuhc.inventorys.skills.LustGUI;
 import fr.erusel.tssdkuhc.objects.ActiveSkill;
 import fr.erusel.tssdkuhc.objects.Skill;
@@ -14,6 +15,6 @@ public class OsirisSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        new LustGUI(this, player).open(player);
+        new PlayerChooseGUI(this).open(player);
     }
 }

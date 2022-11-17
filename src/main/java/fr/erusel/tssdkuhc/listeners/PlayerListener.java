@@ -75,17 +75,18 @@ public class PlayerListener implements Listener {
             gKiller.addSkill(skill);
             gPlayer.removeSkill(skill);
         }
-        if (gPlayer.canRessurect() && gPlayer.haveSkill(Skills.OSIRIS)){
-            gPlayer.ressurect();
-            gPlayer.setCanResurrect(false);
-        }
     }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event){
         Player player = event.getPlayer();
+        GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
         player.setGameMode(GameMode.SPECTATOR);
         Main.getInstance().getGameManager().addDeadPlayer(player.getUniqueId());
+        if (gPlayer.canRessurect() && gPlayer.haveSkill(Skills.OSIRIS)){
+            gPlayer.ressurect();
+            gPlayer.setCanResurrect(false);
+        }
     }
 
     @EventHandler

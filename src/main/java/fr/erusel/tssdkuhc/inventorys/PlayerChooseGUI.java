@@ -36,7 +36,7 @@ public class PlayerChooseGUI extends FastInv {
             skill.activateCooldown();
             new VictimInventoryGUI(victim).open(player);
         }
-        if (skill.getName().equals(Skills.INVESTIGATOR.getSkillName())){
+        if (skill.getName().equals(Skills.FAUST.getSkillName())){
             new FaustChooseGUI(skill, victim, player).open(player);
         }
     }

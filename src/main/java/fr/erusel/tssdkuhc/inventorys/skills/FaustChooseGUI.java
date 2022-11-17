@@ -13,9 +13,9 @@ public class FaustChooseGUI extends FastInv {
     public FaustChooseGUI(Skill skill, Player victim, Player player) {
         super(27, "Faust | Choose the category");
 
-        setItems(getBorders(), new ItemBuilder(Material.BLACK_STAINED_GLASS).build());
-        setItem(11, new ItemBuilder(Material.CHEST).name("Inventory").build(), e -> inventory(skill, victim, player));
-        setItem(13, new ItemBuilder(Material.ORANGE_WOOL).name("Skills").build());
+        setItems(getBorders(), new ItemBuilder(Material.BLACK_STAINED_GLASS_PANE).build());
+        setItem(11, new ItemBuilder(Material.CHEST).name("§6Inventory").build(), e -> inventory(skill, victim, player));
+        setItem(13, new ItemBuilder(Material.ORANGE_WOOL).name("§6Skills").build(), e -> skills(skill, victim, player));
     }
 
 
