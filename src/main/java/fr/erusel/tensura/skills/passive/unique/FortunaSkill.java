@@ -45,7 +45,7 @@ public class FortunaSkill extends Skill implements PassiveSkill {
 
     @Override
     public void onBlockBreak(BlockBreakEvent event) {
-        if (Arrays.stream(ores).anyMatch(event.getBlock().getType()::equals)) {
+        if (Arrays.asList(ores).contains(event.getBlock().getType())) {
             Block block = event.getBlock();
             event.setDropItems(false);
             for (ItemStack item: block.getDrops()) {

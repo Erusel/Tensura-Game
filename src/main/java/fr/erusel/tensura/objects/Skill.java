@@ -9,7 +9,7 @@ public abstract class Skill {
     private final SkillTier skillTier;
     int COOLDOWN;
     private int currentCooldown = 0;
-    private Class<?> ultimateSkill;
+    private final Class<?> ultimateSkill;
 
     public Skill(String name, String lore, SkillTier skillTier, int cooldown, Class<?> ultimateSkill) {
         this.name = name;

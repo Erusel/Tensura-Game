@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class MathematicianSkill extends Skill implements ActiveSkill {
 
-    private int DODGE = 3;
+    private final int DODGE = 3;
 
     public MathematicianSkill() {
         super("Mathematician", "Ignore the next 3 damage", SkillTier.UNIQUE, 1000, AlbertSkill.class);
