@@ -1,4 +1,4 @@
-package fr.erusel.tssdkuhc.inventorys;
+package fr.erusel.tssdkuhc.inventorys.skills;
 
 import fr.erusel.tssdkuhc.Main;
 import fr.erusel.tssdkuhc.enums.Skills;

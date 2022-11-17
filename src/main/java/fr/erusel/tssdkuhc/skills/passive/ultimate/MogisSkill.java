@@ -16,7 +16,7 @@ public class MogisSkill extends Skill implements PassiveSkill {
 
 
     public MogisSkill() {
-        super("Mogis, Lord of Berserk", "Each kill give you Strength", SkillTier.ULTIMATE, 0, null);
+        super("Mogis, Lord of Berserk", "Each kill give you Strength 2", SkillTier.ULTIMATE, 0, null);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class MogisSkill extends Skill implements PassiveSkill {
 
     @Override
     public void onKill(Player killer, Player deadPlayer) {
-        killer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 0));
+        killer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 1));
     }
 
     @Override
