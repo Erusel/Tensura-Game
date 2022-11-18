@@ -1,6 +1,6 @@
 name: Tsddkuhc
 version: '${version}'
-main: fr.erusel.tssdkuhc.Main
+main: fr.erusel.tensura.Main
 api-version: 1.16
 authors: [ Erusel ]
 commands:
