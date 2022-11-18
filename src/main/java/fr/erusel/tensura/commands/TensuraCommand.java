@@ -50,6 +50,14 @@ public class TensuraCommand implements CommandExecutor {
                 player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully gived " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
             }else player.sendMessage("§cPlayer not found");
         }
+        if (args[0].equalsIgnoreCase("resetcooldown")){
+            if (Bukkit.getPlayer(args[1]) != null){
+                for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getPlayerSkills()){
+                    skill.setCurrentCooldown(0);
+                }
+                player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully gived " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
+            }else player.sendMessage("§cPlayer not found");
+        }
         if (args[0].equalsIgnoreCase("giveitem")){
             if (Bukkit.getPlayer(args[1]) != null){
                 Skills.valueOf(args[2]);

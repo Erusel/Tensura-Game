@@ -1,5 +1,7 @@
 package fr.erusel.tensura.commands;
 
+import fr.erusel.tensura.Main;
+import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Items;
 import fr.erusel.tensura.enums.Skills;
 import org.bukkit.Bukkit;
@@ -23,10 +25,12 @@ public class TensuraTabCompleter implements TabCompleter {
         int arg = 0;
 
         if (args.length == 1){
-            list.add("start");
-            list.add("sethost");
-            list.add("giveskill");
-            list.add("harvestfestival");
+            if (Main.getInstance().getGameManager().getGameState().equals(GState.WAITING)) list.add("start");
+            if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
+                list.add("sethost");
+                list.add("giveskill");
+                list.add("harvestfestival");
+            }
         }
         if (args.length == 2){
             arg = 1;
