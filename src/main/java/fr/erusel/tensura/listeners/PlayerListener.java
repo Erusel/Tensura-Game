@@ -40,7 +40,6 @@ public class PlayerListener implements Listener {
         board.updateTitle("§bTensura §3Game");
         Main.getInstance().getScoreboardManager().scoreboard.put(player.getUniqueId(), board);
 
-        scoreBoardManager.refreshWaitingScoreboard();
         if (gameManager.getGameState().equals(GState.WAITING)){
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
             scoreBoardManager.refreshWaitingScoreboard();
