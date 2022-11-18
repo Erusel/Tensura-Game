@@ -55,7 +55,7 @@ public class TensuraCommand implements CommandExecutor {
                 for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getPlayerSkills()){
                     skill.setCurrentCooldown(0);
                 }
-                player.sendMessage("§3Cooldown reseted for " + Bukkit.getPlayer(args[1]));
+                player.sendMessage("§3Cooldown reseted for " + Bukkit.getPlayer(args[1]).getName());
             }else player.sendMessage("§cPlayer not found");
         }
         if (args[0].equalsIgnoreCase("giveitem")){
