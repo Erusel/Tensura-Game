@@ -1,7 +1,7 @@
 package fr.erusel.tensura.skills.active.unique;
 
 import fr.erusel.tensura.enums.SkillTier;
-import fr.erusel.tensura.inventorys.skills.LustGUI;
+import fr.erusel.tensura.inventories.skills.LustGUI;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.OsirisSkill;

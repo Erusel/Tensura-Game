@@ -1,7 +1,7 @@
 package fr.erusel.tensura.skills.active.unique;
 
 import fr.erusel.tensura.enums.SkillTier;
-import fr.erusel.tensura.inventorys.PlayerChooseGUI;
+import fr.erusel.tensura.inventories.PlayerChooseGUI;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.FaustSkill;

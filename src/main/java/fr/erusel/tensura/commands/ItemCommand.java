@@ -2,7 +2,7 @@ package fr.erusel.tensura.commands;
 
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
-import fr.erusel.tensura.inventorys.ItemGUI;
+import fr.erusel.tensura.inventories.ItemGUI;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

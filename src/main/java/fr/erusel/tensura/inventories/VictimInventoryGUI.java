@@ -1,4 +1,4 @@
-package fr.erusel.tensura.inventorys;
+package fr.erusel.tensura.inventories;
 
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;

@@ -1,8 +1,8 @@
-package fr.erusel.tensura.inventorys;
+package fr.erusel.tensura.inventories;
 
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Skills;
-import fr.erusel.tensura.inventorys.skills.FaustChooseGUI;
+import fr.erusel.tensura.inventories.skills.FaustChooseGUI;
 import fr.erusel.tensura.objects.Skill;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;

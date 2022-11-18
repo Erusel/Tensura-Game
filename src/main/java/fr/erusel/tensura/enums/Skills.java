@@ -40,6 +40,7 @@ public enum Skills {
     TRACKER("Tracker", SkillTier.UNIQUE, TrackerSkill.class),
     LUST("Lust", SkillTier.UNIQUE, LustSkill.class),
     IMPERCEPTIBLE("Imperceptible", SkillTier.UNIQUE, ImperceptibleSkill.class),
+    MAGICWOLF("Magic Wolf", SkillTier.UNIQUE, MagicWolfSkill.class),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),

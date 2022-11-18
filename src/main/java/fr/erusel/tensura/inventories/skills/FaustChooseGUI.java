@@ -1,7 +1,7 @@
-package fr.erusel.tensura.inventorys.skills;
+package fr.erusel.tensura.inventories.skills;
 
-import fr.erusel.tensura.inventorys.VictimInventoryGUI;
-import fr.erusel.tensura.inventorys.VictimSkillGUI;
+import fr.erusel.tensura.inventories.VictimInventoryGUI;
+import fr.erusel.tensura.inventories.VictimSkillGUI;
 import fr.erusel.tensura.objects.Skill;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;

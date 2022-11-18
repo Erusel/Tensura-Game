@@ -1,4 +1,4 @@
-package fr.erusel.tensura.inventorys;
+package fr.erusel.tensura.inventories;
 
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.objects.ActiveSkill;
