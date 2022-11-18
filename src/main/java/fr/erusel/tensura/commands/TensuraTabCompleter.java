@@ -25,11 +25,14 @@ public class TensuraTabCompleter implements TabCompleter {
         int arg = 0;
 
         if (args.length == 1){
-            if (Main.getInstance().getGameManager().getGameState().equals(GState.WAITING)) list.add("start");
-            if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
+            if (Main.getInstance().getGameManager().getGameState().equals(GState.WAITING)) {
+                list.add("start");
                 list.add("sethost");
+            }
+            if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
                 list.add("giveskill");
                 list.add("harvestfestival");
+                list.add("resetcooldown");
             }
         }
         if (args.length == 2){
