@@ -57,7 +57,8 @@ public enum Skills {
     MALAR("Malar, Lord of Tracking", SkillTier.ULTIMATE, MalarSkill.class),
     HADES("Hades, Lord of Invisibility", SkillTier.ULTIMATE, HadesSkill.class),
     OSIRIS("Osiris, Lord of Resurrection", SkillTier.ULTIMATE, OsirisSkill.class),
-    PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class);
+    PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class),
+    RANGA("Ranga, Lord of the toutous", SkillTier.ULTIMATE, RangaSkill.class);
 
     private final String name;
     private final SkillTier skillTier;

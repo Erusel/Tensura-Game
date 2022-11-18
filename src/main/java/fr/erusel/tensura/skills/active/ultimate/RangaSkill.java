@@ -1,20 +1,24 @@
-package fr.erusel.tensura.skills.active.unique;
+package fr.erusel.tensura.skills.active.ultimate;
 
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.skills.active.ultimate.RangaSkill;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.*;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 
-public class MagicWolfSkill extends Skill implements ActiveSkill {
+public class RangaSkill extends Skill implements ActiveSkill {
 
-    public MagicWolfSkill() {
-        super("Magic Wolf", "Summon a powerful wolf for you", SkillTier.UNIQUE, 2000, RangaSkill.class);
+
+    public RangaSkill() {
+        super("Ranga, Lord of the toutous", "Summon powerfuls wolf for you", SkillTier.ULTIMATE, 900, null);
     }
 
     @Override
+
     public void onUse(Player player) {
         Location location = player.getLocation();
         LivingEntity entity = (LivingEntity) player.getWorld().spawnEntity(location, EntityType.WOLF);
@@ -24,7 +28,10 @@ public class MagicWolfSkill extends Skill implements ActiveSkill {
         ((Wolf)entity).setCustomNameVisible(true);
         ((Wolf)entity).setBreed(false);
         entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*3);
+        entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue()*2);
+        entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue()*1.5);
         entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         activateCooldown();
     }
 }
+
