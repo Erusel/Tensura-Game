@@ -43,6 +43,9 @@ public class TensuraTabCompleter implements TabCompleter {
             if (args[0].equalsIgnoreCase("giveskill")){
                 for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
             }
+            if (args[0].equalsIgnoreCase("resetcooldown")){
+                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+            }
             if (args[0].equalsIgnoreCase("harvestfestival")){
                 for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
             }
