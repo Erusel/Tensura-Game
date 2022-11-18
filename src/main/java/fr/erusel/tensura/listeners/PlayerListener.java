@@ -43,6 +43,9 @@ public class PlayerListener implements Listener {
         scoreBoardManager.refreshWaitingScoreboard();
         if (gameManager.getGameState().equals(GState.WAITING)){
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
+            scoreBoardManager.refreshWaitingScoreboard();
+        } else if (gameManager.getGameState().equals(GState.PLAYING)) {
+            scoreBoardManager.refreshPlayingScoreboard();
         }
     }
 
