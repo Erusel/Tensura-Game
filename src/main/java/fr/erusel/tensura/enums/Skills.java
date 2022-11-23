@@ -1,5 +1,6 @@
 package fr.erusel.tensura.enums;
 
+import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.*;
 import fr.erusel.tensura.skills.active.unique.*;
 import fr.erusel.tensura.skills.passive.resistance.*;
@@ -62,9 +63,9 @@ public enum Skills {
 
     private final String name;
     private final SkillTier skillTier;
-    private final Class<?> skillClass;
+    private final Class<? extends Skill> skillClass;
 
-    Skills(String skillName, SkillTier skillTier, Class<?> skillClass) {
+    Skills(String skillName, SkillTier skillTier, Class<? extends Skill> skillClass) {
         this.name = skillName;
         this.skillTier = skillTier;
         this.skillClass = skillClass;
@@ -76,7 +77,7 @@ public enum Skills {
     public SkillTier getSkillTier(){
         return skillTier;
     }
-    public Class<?> getSkillClass(){
+    public Class<? extends Skill> getSkillClass(){
         return skillClass;
     }
 

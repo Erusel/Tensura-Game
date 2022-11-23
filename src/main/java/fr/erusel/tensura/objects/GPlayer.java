@@ -145,11 +145,6 @@ public class GPlayer {
 
         new HarvestFestivalRunnable(player, this, skill, sacrificeSkill).runTaskTimer(Main.getInstance(), 0, 20);
         setInHarvestFestival(true);
-
-
-
-
-
     }
 
     // Skills

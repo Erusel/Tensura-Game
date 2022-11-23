@@ -30,7 +30,7 @@ public class GameManager {
         }
         for (Skills skill : Skills.getAllSkillByTier(SkillTier.UNIQUE)){
             try {
-                uniqueSkillAvailable.add((Skill) skill.getSkillClass().getConstructor().newInstance());
+                uniqueSkillAvailable.add(skill.getSkillClass().getConstructor().newInstance());
             } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                      NoSuchMethodException e) {
                 throw new RuntimeException(e);
@@ -49,7 +49,7 @@ public class GameManager {
             Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
             Race race;
             try {
-                race = (Race) Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).getRaceClass().getConstructor().newInstance();
+                race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).getRaceClass().getConstructor().newInstance();
             } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
                 throw new RuntimeException(e);
             }
