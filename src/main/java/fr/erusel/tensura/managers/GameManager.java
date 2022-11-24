@@ -2,6 +2,7 @@ package fr.erusel.tensura.managers;
 
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.*;
+import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Bukkit;
@@ -18,12 +19,20 @@ public class GameManager {
 
     private GState gameState = GState.WAITING;
     private UUID gameHost;
-    private String hostName = "Aucun";
+    private String hostName = "None";
+
+
+
+    // Game
+    private Modes gameMode = Modes.NONE;
+    private Mode gameModeInstance;
     public int gameStartTime;
     private final List<UUID> playerList = new ArrayList<>();
     private final List<UUID> deadPlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
+
+    // Game methode
     public void startGame(){
         if (!gameHasHost()){
             return;
@@ -67,44 +76,57 @@ public class GameManager {
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
     }
+    public void finishGame(){
+
+    }
 
     public List<UUID> getPlayerList(){
         return playerList;
     }
+    public Modes getGameMode(){
+        return gameMode;
+    }
+    public void setGameMode(Modes mode){
+        this.gameMode = mode;
+    }
+    public Mode getGameModeInstance(){
+        return gameModeInstance;
+    }
 
+    // GameState
     public void setGameState(GState gameState){
         this.gameState = gameState;
     }
-
     public GState getGameState(){
         return gameState;
     }
 
+
+    // Game Host
     public void setPlayerHost(Player player){
         this.gameHost = player.getUniqueId();
         this.hostName = player.getName();
     }
-
     public boolean gameHasHost(){
         return gameHost != null;
     }
-
     public UUID getHostUUID(){
         return gameHost;
     }
-
+    public boolean playerIsHost(Player player){
+        return player.getUniqueId().equals(getHostUUID());
+    }
     public String getHostName(){
         return hostName;
     }
 
+    // Dead Players
     public List<UUID> getDeadPlayers(){
         return deadPlayers;
     }
-
     public void addDeadPlayer(UUID uuid){
         deadPlayers.add(uuid);
     }
-
     public void removeDeadPlayers(UUID uuid){
         deadPlayers.remove(uuid);
     }

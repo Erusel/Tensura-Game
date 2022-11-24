@@ -20,19 +20,26 @@ public class TensuraTabCompleter implements TabCompleter {
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
+        Player p = (Player) sender;
+
         List<String> list = new ArrayList<>();
         List<String> completions = new ArrayList<>();
         int arg = 0;
 
         if (args.length == 1){
             if (Main.getInstance().getGameManager().getGameState().equals(GState.WAITING)) {
-                list.add("start");
                 list.add("sethost");
+                if (Main.getInstance().getGameManager().playerIsHost(p)){
+                    list.add("config");
+                    list.add("start");
+                }
             }
             if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
-                list.add("giveskill");
-                list.add("harvestfestival");
-                list.add("resetcooldown");
+                if (Main.getInstance().getGameManager().playerIsHost(p)){
+                    list.add("giveskill");
+                    list.add("harvestfestival");
+                    list.add("resetcooldown");
+                }
             }
         }
         if (args.length == 2){
