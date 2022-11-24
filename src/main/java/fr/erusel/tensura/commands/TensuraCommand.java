@@ -3,6 +3,7 @@ package fr.erusel.tensura.commands;
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Prefixs;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.inventories.config.ConfigMainGUI;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -30,6 +31,11 @@ public class TensuraCommand implements CommandExecutor {
 
         if (args[0].equalsIgnoreCase("start")){
             Main.getInstance().getGameManager().startGame();
+            return true;
+        }
+        if (args[0].equalsIgnoreCase("config")){
+            new ConfigMainGUI().open(player);
+            return true;
         }
         if (args[0].equalsIgnoreCase("sethost")) {
             if (Bukkit.getPlayer(args[1]) != null){
@@ -42,7 +48,7 @@ public class TensuraCommand implements CommandExecutor {
             if (Bukkit.getPlayer(args[1]) != null){
                 Skills.valueOf(args[2]);
                 try {
-                    Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill((Skill) Skills.valueOf(args[2]).getSkillClass().getConstructor().newInstance());
+                    Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).getSkillClass().getConstructor().newInstance());
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                          NoSuchMethodException e) {
                     throw new RuntimeException(e);
@@ -62,7 +68,7 @@ public class TensuraCommand implements CommandExecutor {
             if (Bukkit.getPlayer(args[1]) != null){
                 Skills.valueOf(args[2]);
                 try {
-                    Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill((Skill) Skills.valueOf(args[2]).getSkillClass().getConstructor().newInstance());
+                    Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).getSkillClass().getConstructor().newInstance());
                 } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
                          NoSuchMethodException e) {
                     throw new RuntimeException(e);
@@ -76,6 +82,6 @@ public class TensuraCommand implements CommandExecutor {
             }
         }
 
-        return false;
+        return true;
     }
 }
