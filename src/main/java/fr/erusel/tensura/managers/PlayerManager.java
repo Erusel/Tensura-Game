@@ -10,7 +10,6 @@ public class PlayerManager {
 
     private final HashMap<UUID, GPlayer> GPlayers = new HashMap<>();
 
-
     // GPlayers
     public void createPlayerGPlayer(Player player){
         if (!GPlayers.containsKey(player.getUniqueId())) GPlayers.put(player.getUniqueId(), new GPlayer(player.getUniqueId()));

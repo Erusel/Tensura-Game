@@ -1,5 +1,6 @@
 package fr.erusel.tensura.enums;
 
+import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.races.demonlordstage.*;
 import fr.erusel.tensura.races.firststage.*;
 
@@ -33,10 +34,10 @@ public enum Races {
 
     private final String raceName;
     private final RaceStages raceStages;
-    private final Class<?> raceClass;
-    private final Class<?> raceEvolution;
+    private final Class<? extends Race> raceClass;
+    private final Class<? extends Race> raceEvolution;
 
-    Races(String name, RaceStages raceStages, Class<?> raceClass, Class<?> evolution) {
+    Races(String name, RaceStages raceStages, Class<? extends Race> raceClass, Class<? extends Race> evolution) {
         this.raceName = name;
         this.raceStages = raceStages;
         this.raceClass = raceClass;
@@ -49,17 +50,16 @@ public enum Races {
     public RaceStages getRaceStages(){
         return raceStages;
     }
-    public Class<?> getRaceClass(){
+    public Class<? extends Race> getRaceClass(){
         return raceClass;
     }
-    public Class<?> getRaceEvolutionClass(){
+    public Class<? extends Race> getRaceEvolutionClass(){
         return raceEvolution;
     }
 
 
     public static Races getRandomRaceByStage(RaceStages stages){
         Races races = getRandomRace();
-        System.out.println(races.getName());
         while (!races.getRaceStages().equals(stages)){
             races = getRandomRace();
             System.out.println(races.getName());
