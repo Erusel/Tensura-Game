@@ -1,6 +1,3 @@
-/**
- * It's a class that contains all the information about a player in the game
- */
 package fr.erusel.tensura.objects;
 
 import fr.erusel.tensura.Main;
@@ -20,8 +17,6 @@ import java.util.Random;
 import java.util.UUID;
 
 public class GPlayer {
-
-    // Main information
     private final UUID playerUUID;
     private int playerKill;
     private Race race;
@@ -61,6 +56,12 @@ public class GPlayer {
     public void removeSkill(Skill skill){
         playerSkills.remove(skill);
     }
+    /**
+     * It checks if the player has a certain skill.
+     *
+     * @param skill The skill you want to check if the player has.
+     * @return A boolean value.
+     */
     public boolean haveSkill(Skills skill){
         for (Skill skills: getPlayerSkills()) {
             if (skills.getName().equals(skill.getSkillName())) return true;
