@@ -6,7 +6,10 @@ import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.RangaSkill;
 import org.bukkit.Location;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.entity.*;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Wolf;
 
 public class MagicWolfSkill extends Skill implements ActiveSkill {
 

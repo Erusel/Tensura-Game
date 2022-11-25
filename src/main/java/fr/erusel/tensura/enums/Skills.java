@@ -42,6 +42,7 @@ public enum Skills {
     LUST("Lust", SkillTier.UNIQUE, LustSkill.class),
     IMPERCEPTIBLE("Imperceptible", SkillTier.UNIQUE, ImperceptibleSkill.class),
     MAGICWOLF("Magic Wolf", SkillTier.UNIQUE, MagicWolfSkill.class),
+    POTIONMASTER("Potion Master", SkillTier.UNIQUE, PotionMasterSkill.class),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
@@ -59,7 +60,8 @@ public enum Skills {
     HADES("Hades, Lord of Invisibility", SkillTier.ULTIMATE, HadesSkill.class),
     OSIRIS("Osiris, Lord of Resurrection", SkillTier.ULTIMATE, OsirisSkill.class),
     PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class),
-    RANGA("Ranga, Lord of the toutous", SkillTier.ULTIMATE, RangaSkill.class);
+    RANGA("Ranga, Lord of the toutous", SkillTier.ULTIMATE, RangaSkill.class),
+    AMBROISIE("Ambroisie, Lord of Alchemy", SkillTier.ULTIMATE, AmbroisieSkill.class);
 
     private final String name;
     private final SkillTier skillTier;
