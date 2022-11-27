@@ -5,24 +5,29 @@ import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.Skill;
+import fr.erusel.tensura.skills.active.ultimate.MalarSkill;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class TrackerSkill extends Skill implements ActiveSkill {
 
     public TrackerSkill() {
-        super("Tracker", "Track your last ennemy", SkillTier.UNIQUE, 600, null);
+        super("Tracker", "Track your last enemy", SkillTier.UNIQUE, 600, MalarSkill.class);
     }
 
     @Override
     public void onUse(Player player) {
         GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
         if (gPlayer.getTrackingPlayer() == null) {
-            player.sendMessage("§cYou hit nobody");
+            player.sendMessage("§cYou didn't hit anyone");
             return;
         }
         if (Bukkit.getPlayer(gPlayer.getTrackingPlayer()) == null){
             player.sendMessage("§cPlayer not found");
+            return;
+        }
+        else if (Main.getInstance().getGameManager().getDeadPlayers().contains(gPlayer.getTrackingPlayer())) {
+            player.sendMessage("§cPlayer is dead");
             return;
         }
         Player trackedPlayer = Bukkit.getPlayer(gPlayer.getTrackingPlayer());
