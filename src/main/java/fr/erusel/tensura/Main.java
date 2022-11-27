@@ -1,9 +1,6 @@
 package fr.erusel.tensura;
 
-import fr.erusel.tensura.commands.ItemCommand;
-import fr.erusel.tensura.commands.SkillCommand;
-import fr.erusel.tensura.commands.TensuraCommand;
-import fr.erusel.tensura.commands.TensuraTabCompleter;
+import fr.erusel.tensura.commands.*;
 import fr.erusel.tensura.listeners.PlayerListener;
 import fr.erusel.tensura.managers.*;
 import fr.erusel.tensura.threads.GameLoopRunnable;
@@ -59,12 +56,13 @@ public final class Main extends JavaPlugin {
     public static Main getInstance(){
         return main;
     }
+    @SuppressWarnings("all")
     public void registerCommands(){
         getCommand("tensura").setExecutor(new TensuraCommand());
         getCommand("tensura").setTabCompleter(new TensuraTabCompleter());
 
         getCommand("skill").setExecutor(new SkillCommand());
-        getCommand("item").setExecutor(new ItemCommand());
+        getCommand("team").setExecutor(new TeamCommand());
     }
     public void registerListeners(){
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);

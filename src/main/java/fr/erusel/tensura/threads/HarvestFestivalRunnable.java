@@ -137,7 +137,7 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
             }
         }
         if (second == 91){
-            player.sendMessage(Prefixs.VOICE_OF_THE_WORLD + "Unique skill §6" + skillEvolve.getName() + " §3has evolved into Ultimate skill §6§n§l" + ultimateSkill.getName());
+            player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Unique skill §6" + skillEvolve.getName() + " §3has evolved into Ultimate skill §6§n§l" + ultimateSkill.getName());
         }
 
         if (second == 94){
@@ -147,7 +147,7 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
             gPlayer.addSkill(ultimateSkill);
 
 
-            player.sendMessage(Prefixs.VOICE_OF_THE_WORLD + "The Harvest Festival is now finished");
+            player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "The Harvest Festival is now finished");
             gPlayer.setInHarvestFestival(false);
             player.removePotionEffect(PotionEffectType.BLINDNESS);
             this.cancel();
