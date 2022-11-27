@@ -1,7 +1,6 @@
 package fr.erusel.tensura.inventories;
 
 import fr.erusel.tensura.Main;
-import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;

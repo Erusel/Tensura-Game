@@ -10,6 +10,7 @@ import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Scenario;
 import fr.erusel.tensura.objects.Skill;
+import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -42,6 +43,7 @@ public class PlayerListener implements Listener {
 
         if (gameManager.getGameState().equals(GState.WAITING)){
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
+            Utils.resetPlayer(player);
             scoreBoardManager.refreshWaitingScoreboard();
         } else if (gameManager.getGameState().equals(GState.PLAYING)) {
             scoreBoardManager.refreshPlayingScoreboard();
@@ -173,7 +175,8 @@ public class PlayerListener implements Listener {
 
     @EventHandler
     public void onChat(AsyncPlayerChatEvent event){
-        event.setMessage("§8" + event.getPlayer().getName() + " §6> §7" + event.getMessage());
+        event.setCancelled(true);
+        Bukkit.broadcastMessage("§8" + event.getPlayer().getName() + " §6> §7" + event.getMessage());
         if (gameManager.getGameState().equals(GState.PLAYING)){
             gameManager.getGameModeInstance().onChat(event);
         }

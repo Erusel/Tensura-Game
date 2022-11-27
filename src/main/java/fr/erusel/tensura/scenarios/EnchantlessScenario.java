@@ -7,15 +7,14 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
-public class AutoSmeltScenario extends Scenario {
-
-    public AutoSmeltScenario() {
-        super("Auto Smelt", "Auto smelt every mined ore.");
+public class EnchantlessScenario extends Scenario {
+    public EnchantlessScenario() {
+        super("Enchantless", "Dab");
     }
 
     @Override
     public void onStart() {
-        Bukkit.broadcastMessage("§6AUTO SMELT SCENARIO ACTIVATED");
+        Bukkit.broadcastMessage("§6ENCHANTLESS SCENARIO ACTIVATED");
     }
 
     @Override

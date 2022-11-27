@@ -1,5 +1,7 @@
 package fr.erusel.tensura.utils;
 
+import fr.erusel.tensura.enums.Prefixs;
+import org.bukkit.Bukkit;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 
@@ -23,4 +25,9 @@ public class Utils {
         player.getInventory().getChestplate().setType(null);
         player.getInventory().getHelmet().setType(null);
     }
+
+    public static void VoiceOfTheWorldBroadcast(String message){
+        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + message);
+    }
+
 }

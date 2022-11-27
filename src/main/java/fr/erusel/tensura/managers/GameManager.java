@@ -5,6 +5,7 @@ import fr.erusel.tensura.enums.*;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Scenario;
 import fr.erusel.tensura.objects.Skill;
+import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -60,19 +61,15 @@ public class GameManager {
 
         // Creating UniqueSkills Instances
         for (Skills skill : Skills.getAllSkillByTier(SkillTier.UNIQUE)){
-            try {
-                uniqueSkillAvailable.add(skill.getSkillClass().getConstructor().newInstance());
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException e) {
-                throw new RuntimeException(e);
-            }
+            uniqueSkillAvailable.add(skill.createInstance());
         }
+
         // Creating World
         Main.getInstance().getWorldManager().deletePlayingWorld();
-        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Creating world...");
+        Utils.VoiceOfTheWorldBroadcast("Creating world...");
         Main.getInstance().getWorldManager().createPlayingWorld();
-        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successful");
-        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Reincarnation of players");
+        Utils.VoiceOfTheWorldBroadcast("Successful");
+        Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
 
         // Player resurrection
         for (Player player : Bukkit.getOnlinePlayers()){
@@ -81,12 +78,10 @@ public class GameManager {
             gameModeInstance.onPlayerSpawn(player);
             Main.getInstance().getWorldManager().teleportPlayerToMap(player);
         }
+        for (Scenario scenario : getActivatedScenariosInstance()) scenario.onStart();
         gameModeInstance.onStart();
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
-    }
-    public void finishGame(){
-
     }
 
     public List<UUID> getPlayerList(){
