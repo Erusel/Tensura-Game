@@ -3,8 +3,9 @@ package fr.erusel.tensura.managers;
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.*;
 import fr.erusel.tensura.objects.Mode;
-import fr.erusel.tensura.objects.Race;
+import fr.erusel.tensura.objects.Scenario;
 import fr.erusel.tensura.objects.Skill;
+import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -12,72 +13,75 @@ import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.UUID;
 
 public class GameManager {
 
+    // Server
     private GState gameState = GState.WAITING;
     private UUID gameHost;
     private String hostName = "None";
 
 
-
     // Game
-    private Modes gameMode = Modes.NONE;
+    private Modes gameMode = Modes.DEBUG;
     private Mode gameModeInstance;
+    private final TeamManager teamManager = new TeamManager();
+    private final List<Scenarios> activatedScenarios = new ArrayList<>();
+    private final List<Scenario> activatedScenariosInstance = new ArrayList<>();
     public int gameStartTime;
     private final List<UUID> playerList = new ArrayList<>();
     private final List<UUID> deadPlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
 
+
+
+
+
+
+
     // Game methode
-    public void startGame(){
+    public void startGame(Player p){
         if (!gameHasHost()){
+            p.sendMessage("§cNo host selected !");
             return;
         }
-        for (Skills skill : Skills.getAllSkillByTier(SkillTier.UNIQUE)){
-            try {
-                uniqueSkillAvailable.add(skill.getSkillClass().getConstructor().newInstance());
-            } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                     NoSuchMethodException e) {
-                throw new RuntimeException(e);
-            }
+        if (gameMode.equals(Modes.NONE)) {
+            p.sendMessage("§cPlease choose a gamemode !");
+            return;
         }
         setGameState(GState.STARTING);
+
+        // Creating games Instances
+        gameModeInstance = gameMode.createInstance();
+
+        // Creating Scenarios Instances
+        for (Scenarios scenarios : getActivatedScenarios()) getActivatedScenariosInstance().add(scenarios.createInstance());
+
+        // Creating UniqueSkills Instances
+        for (Skills skill : Skills.getAllSkillByTier(SkillTier.UNIQUE)){
+            uniqueSkillAvailable.add(skill.createInstance());
+        }
+
+        // Creating World
         Main.getInstance().getWorldManager().deletePlayingWorld();
-        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Creating world...");
+        Utils.VoiceOfTheWorldBroadcast("Creating world...");
         Main.getInstance().getWorldManager().createPlayingWorld();
-        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successful");
-        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Reincarnation of players");
+        Utils.VoiceOfTheWorldBroadcast("Successful");
+        Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
 
         // Player resurrection
         for (Player player : Bukkit.getOnlinePlayers()){
             playerList.add(player.getUniqueId());
             Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
-            Race race;
-            try {
-                race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).getRaceClass().getConstructor().newInstance();
-            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-                throw new RuntimeException(e);
-            }
-            int i = new Random().nextInt(uniqueSkillAvailable.size());
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(uniqueSkillAvailable.get(i));
-            uniqueSkillAvailable.remove(uniqueSkillAvailable.get(i));
-
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
+            gameModeInstance.onPlayerSpawn(player);
             Main.getInstance().getWorldManager().teleportPlayerToMap(player);
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
-
-            player.sendMessage("§aYou have been resurrected as a " + race.getName());
         }
-
+        for (Scenario scenario : getActivatedScenariosInstance()) scenario.onStart();
+        gameModeInstance.onStart();
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
-    }
-    public void finishGame(){
-
     }
 
     public List<UUID> getPlayerList(){
@@ -131,4 +135,21 @@ public class GameManager {
         deadPlayers.remove(uuid);
     }
 
+    // Team Manager
+    public TeamManager getTeamManager(){
+        return teamManager;
+    }
+
+    // Unique Skills
+    public List<Skill> getUniqueSkillAvailable(){
+        return uniqueSkillAvailable;
+    }
+
+    // Scenarios
+    public List<Scenarios> getActivatedScenarios() {
+        return activatedScenarios;
+    }
+    public List<Scenario> getActivatedScenariosInstance() {
+        return activatedScenariosInstance;
+    }
 }

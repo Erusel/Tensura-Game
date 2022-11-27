@@ -7,6 +7,7 @@ import fr.erusel.tensura.skills.passive.resistance.*;
 import fr.erusel.tensura.skills.passive.ultimate.*;
 import fr.erusel.tensura.skills.passive.unique.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -96,6 +97,14 @@ public enum Skills {
         List<Skills> list = new ArrayList<>();
         for (Skills skills : Skills.values()) if (skills.getSkillTier().equals(skillTier)) list.add(skills);
         return list;
+    }
+
+    public Skill createInstance(){
+        try {
+            return skillClass.getConstructor().newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

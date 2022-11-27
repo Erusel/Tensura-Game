@@ -30,7 +30,7 @@ public class TensuraCommand implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("start")){
-            Main.getInstance().getGameManager().startGame();
+            Main.getInstance().getGameManager().startGame(player);
             return true;
         }
         if (args[0].equalsIgnoreCase("config")){

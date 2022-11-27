@@ -9,5 +9,5 @@ commands:
     permission: tensura.tensura
   skill:
     description: "Affiche les skills du joueur"
-  item:
-    description: "Affiche les items du joueur"
+  team:
+    description: "Teamers de merde"
