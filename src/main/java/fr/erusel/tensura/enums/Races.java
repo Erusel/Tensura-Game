@@ -4,6 +4,7 @@ import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.races.demonlordstage.*;
 import fr.erusel.tensura.races.firststage.*;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 
 public enum Races {
@@ -57,6 +58,13 @@ public enum Races {
         return raceEvolution;
     }
 
+    public Race createInstance(){
+        try {
+            return raceClass.getConstructor().newInstance();
+        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static Races getRandomRaceByStage(RaceStages stages){
         Races races = getRandomRace();

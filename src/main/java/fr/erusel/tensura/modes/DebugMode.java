@@ -1,8 +1,11 @@
 package fr.erusel.tensura.modes;
 
+import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Modes;
-import fr.erusel.tensura.managers.TeamManager;
+import fr.erusel.tensura.enums.RaceStages;
+import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.objects.Mode;
+import fr.erusel.tensura.objects.Race;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -10,19 +13,30 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
-public class CharybdisMode extends Mode {
-    public CharybdisMode() {
-        super("Charybdis Hunt", Modes.CHARYBDIS, true);
+import java.util.Random;
+
+public class DebugMode extends Mode {
+
+    public DebugMode() {
+        super("Debug", Modes.DEBUG, false);
     }
 
     @Override
     public void onPlayerSpawn(Player player) {
+        Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
+        int i = new Random().nextInt(Main.getInstance().getGameManager().getUniqueSkillAvailable().size());
+        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
+        Main.getInstance().getGameManager().getUniqueSkillAvailable().remove(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
 
+        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
+        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
+
+        player.sendMessage("§aYou have been resurrected as a " + race.getName());
     }
 
     @Override
     public void onStart() {
-        Bukkit.broadcastMessage("§5Charybdis Hunt");
+        Bukkit.broadcastMessage("§c DEBUG MODE | ONLY FOR DEVELOPMENT !");
     }
 
     @Override

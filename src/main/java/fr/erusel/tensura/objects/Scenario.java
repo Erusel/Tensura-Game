@@ -1,45 +1,37 @@
 package fr.erusel.tensura.objects;
 
-import fr.erusel.tensura.enums.Modes;
-import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
-public abstract class Mode {
+public abstract class Scenario {
 
-    private final String modeName;
-    private final Modes mode;
-    private final boolean haveTeam;
+    private final String name;
+    private final String lore;
 
-    public Mode(String modeName, Modes mode, boolean haveTeam) {
-        this.modeName = modeName;
-        this.mode = mode;
-        this.haveTeam = haveTeam;
+    public Scenario(String name, String lore) {
+        this.name = name;
+        this.lore = lore;
     }
 
-    public Modes getMode() {
-        return mode;
-    }
-    public String getModeName() {
-        return modeName;
-    }
-    public boolean haveTeam(){
-        return haveTeam;
-    }
-
-
-    public abstract void onPlayerSpawn(Player player);
     public abstract void onStart();
     public abstract void onFinish();
     public abstract void onPlayerJoin(PlayerJoinEvent event);
     public abstract void onPlayerLeave(PlayerQuitEvent event);
     public abstract void onPlayerDeath(PlayerDeathEvent event);
-    public abstract void onPlayerRespawn(PlayerRespawnEvent event);
     public abstract void onEntityDamageByEntity(EntityDamageByEntityEvent event);
     public abstract void onPlayerMove(PlayerMoveEvent event);
     public abstract void onBlockBreak(BlockBreakEvent event);
     public abstract void onChat(AsyncPlayerChatEvent event);
     public abstract void onAdvancement(PlayerAdvancementDoneEvent event);
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLore() {
+        return lore;
+    }
 }

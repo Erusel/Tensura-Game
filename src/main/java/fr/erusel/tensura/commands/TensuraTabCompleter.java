@@ -2,7 +2,6 @@ package fr.erusel.tensura.commands;
 
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
-import fr.erusel.tensura.enums.Items;
 import fr.erusel.tensura.enums.Skills;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -63,10 +62,7 @@ public class TensuraTabCompleter implements TabCompleter {
                 arg = 2;
                 for (Skills skills : Skills.values()) list.add(skills.name());
             }
-            if (args[0].equalsIgnoreCase("giveitem")){
-                arg = 2;
-                for (Items items : Items.values()) list.add(items.name());
-            }
+
         }
 
 

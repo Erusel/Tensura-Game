@@ -11,10 +11,10 @@ public class ConfigMainGUI extends FastInv {
     public ConfigMainGUI() {
         super(27, "Tensura Configuration");
 
-        setItem(11, new ItemBuilder(Material.NETHER_STAR).name("§7Mode").build(), this::mode);
-        setItem(12, new ItemBuilder(Material.NETHER_STAR).name("§7Scenarios").build(), this::scenarios);
-        setItem(13, new ItemBuilder(Material.NETHER_STAR).name("§7Skills").build(), this::skills);
-        setItem(14, new ItemBuilder(Material.NETHER_STAR).name("§7Others").build(), this::others);
+        setItem(10, new ItemBuilder(Material.BOOK).name("§7Mode").addLore("§7Change or set the Gamemode").build(), this::mode);
+        setItem(12, new ItemBuilder(Material.GOLD_BLOCK).name("§7Scenarios").addLore("§7Add and remove scenarios").build(), this::scenarios);
+        setItem(14, new ItemBuilder(Material.DIAMOND_BLOCK).name("§7Skills").addLore("§7A voir, sa m'etonne que sa reste").build(), this::skills);
+        setItem(16, new ItemBuilder(Material.REDSTONE_BLOCK).name("§7Others").addLore("§7Other settings").build(), this::others);
     }
 
     public void mode(InventoryClickEvent event){
@@ -24,8 +24,7 @@ public class ConfigMainGUI extends FastInv {
 
     public void scenarios(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
-        player.sendMessage("scenarios");
-        player.closeInventory();
+        new ConfigScenariosGUI().open(player);
     }
 
     public void skills(InventoryClickEvent event){

@@ -1,28 +1,20 @@
-package fr.erusel.tensura.modes;
+package fr.erusel.tensura.scenarios;
 
-import fr.erusel.tensura.enums.Modes;
-import fr.erusel.tensura.managers.TeamManager;
-import fr.erusel.tensura.objects.Mode;
+import fr.erusel.tensura.objects.Scenario;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
-public class CharybdisMode extends Mode {
-    public CharybdisMode() {
-        super("Charybdis Hunt", Modes.CHARYBDIS, true);
-    }
-
-    @Override
-    public void onPlayerSpawn(Player player) {
-
+public class EnchantlessScenario extends Scenario {
+    public EnchantlessScenario() {
+        super("Enchantless", "Dab");
     }
 
     @Override
     public void onStart() {
-        Bukkit.broadcastMessage("§5Charybdis Hunt");
+        Bukkit.broadcastMessage("§6ENCHANTLESS SCENARIO ACTIVATED");
     }
 
     @Override
@@ -42,11 +34,6 @@ public class CharybdisMode extends Mode {
 
     @Override
     public void onPlayerDeath(PlayerDeathEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerRespawn(PlayerRespawnEvent event) {
 
     }
 
