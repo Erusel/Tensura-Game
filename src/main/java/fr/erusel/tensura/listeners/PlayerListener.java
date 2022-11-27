@@ -15,6 +15,7 @@ import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -116,6 +117,10 @@ public class PlayerListener implements Listener {
         if(damaged instanceof Player){
             for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getPlayerSkills()){
                 if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
+            }
+            if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).isReflectorActivated()) {
+                ((LivingEntity) damager).damage(event.getDamage());
+                event.setCancelled(true);
             }
             for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onEntityDamageByEntity(event);
 

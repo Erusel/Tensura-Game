@@ -44,6 +44,7 @@ public enum Skills {
     IMPERCEPTIBLE("Imperceptible", SkillTier.UNIQUE, ImperceptibleSkill.class),
     MAGICWOLF("Magic Wolf", SkillTier.UNIQUE, MagicWolfSkill.class),
     POTIONMASTER("Potion Master", SkillTier.UNIQUE, PotionMasterSkill.class),
+    REFLECTOR("Reflector", SkillTier.UNIQUE, ReflectorSkill.class),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
