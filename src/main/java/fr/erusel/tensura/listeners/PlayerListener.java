@@ -14,7 +14,9 @@ import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -91,7 +93,7 @@ public class PlayerListener implements Listener {
         GPlayer gKiller = Main.getInstance().getPlayerManager().getGPlayerByUUID(killer.getUniqueId());
         GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
         gKiller.addKill(1);
-        event.setDeathMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Player " + player.getName() + " is dead");
+        event.setDeathMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Player §c" + player.getName() + " §3died against §c" + killer.getName());
 
         for (Skill skill : gKiller.getPlayerSkills()) if (skill instanceof PassiveSkill) ((PassiveSkill) skill).onKill(killer, player);
         for (Scenario scenario : gameManager.getActivatedScenariosInstance()) scenario.onPlayerDeath(event);
@@ -134,6 +136,11 @@ public class PlayerListener implements Listener {
         if(damaged instanceof Player){
             for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getPlayerSkills()){
                 if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
+            }
+            if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).isReflectorActivated()) {
+                if (damager instanceof Arrow) event.setCancelled(true);
+                ((LivingEntity) damager).damage(event.getDamage());
+                event.setCancelled(true);
             }
             for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onEntityDamageByEntity(event);
 

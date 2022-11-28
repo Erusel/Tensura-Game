@@ -28,10 +28,12 @@ public class GPlayer {
     private boolean glutonnyActivated;
     private boolean oppressorActivated;
     private boolean imperceptibleActivated;
+    private boolean ReflectorActivated;
     private boolean inHarvestFestival;
     private boolean canResurrect = true;
     private int oppressorTime;
     private int imperceptibleTime;
+    private int ReflectorTime;
     private int mathematicianDodgeLeft;
     private UUID trackingPlayer;
     private Inventory stomachInventory;
@@ -160,20 +162,26 @@ public class GPlayer {
         oppressorActivated = b;
     }
     public void setImperceptible(boolean b) { imperceptibleActivated = b;}
+    public void setReflector(boolean b) { ReflectorActivated = b;}
     public void setOppressorTime(int i){
         oppressorTime = i;
     }
     public void setImperceptibleTime(int i){
         imperceptibleTime = i;
     }
+    public void setReflectorTime(int i){
+        ReflectorTime = i;
+    }
     public int getOppressorTime(){
         return oppressorTime;
     }
     public int getImperceptibleTime() { return imperceptibleTime;}
+    public int getReflectorTime() { return ReflectorTime;}
     public boolean isOppressorActivated(){
         return oppressorActivated;
     }
     public boolean isImperceptibleActivated() { return imperceptibleActivated;}
+    public boolean isReflectorActivated() { return ReflectorActivated;}
     public void setMathematicianDodgeLeft(int i){
         mathematicianDodgeLeft = i;
     }

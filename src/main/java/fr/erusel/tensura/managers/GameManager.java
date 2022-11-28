@@ -9,6 +9,8 @@ import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -78,6 +80,9 @@ public class GameManager {
 
         // Player resurrection
         for (Player player : Bukkit.getOnlinePlayers()){
+            player.setGameMode(GameMode.SURVIVAL);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1 , 200));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 10 , 200));
             playerList.add(player.getUniqueId());
             Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
             gameModeInstance.onPlayerSpawn(player);

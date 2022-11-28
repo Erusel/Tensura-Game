@@ -65,18 +65,6 @@ public class TensuraCommand implements CommandExecutor {
                 player.sendMessage("§3Cooldown reseted for " + Bukkit.getPlayer(args[1]).getName());
             }else player.sendMessage("§cPlayer not found");
         }
-        if (args[0].equalsIgnoreCase("giveitem")){
-            if (Bukkit.getPlayer(args[1]) != null){
-                Skills.valueOf(args[2]);
-                try {
-                    Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).getSkillClass().getConstructor().newInstance());
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                         NoSuchMethodException e) {
-                    throw new RuntimeException(e);
-                }
-                player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
-            }else player.sendMessage("§cPlayer not found");
-        }
         if (args[0].equalsIgnoreCase("harvestfestival")){
             if (Bukkit.getPlayer(args[1]) != null){
                 Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).launchHarvestFestival();
@@ -90,7 +78,6 @@ public class TensuraCommand implements CommandExecutor {
             Utils.VoiceOfTheWorldBroadcast(message.toString());
 
         }
-
         return true;
     }
 }
