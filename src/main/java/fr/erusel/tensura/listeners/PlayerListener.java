@@ -36,18 +36,24 @@ public class PlayerListener implements Listener {
 
         Player player = event.getPlayer();
         event.setJoinMessage("§7[§5+§7] " + player.getDisplayName());
-
+        Utils.resetPlayer(player);
         FastBoard board = new FastBoard(player);
         board.updateTitle("§bTensura §3Game");
         Main.getInstance().getScoreboardManager().scoreboard.put(player.getUniqueId(), board);
 
         if (gameManager.getGameState().equals(GState.WAITING)){
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
-            Utils.resetPlayer(player);
             scoreBoardManager.refreshWaitingScoreboard();
+            if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
+                gameManager.getPlayerList().add(player.getUniqueId());
+            }else {
+                gameManager.addWaitingList(player.getUniqueId());
+                player.sendMessage("§cToo many players, added in waiting list !");
+            }
         } else if (gameManager.getGameState().equals(GState.PLAYING)) {
             scoreBoardManager.refreshPlayingScoreboard();
             gameManager.getGameModeInstance().onPlayerJoin(event);
+            for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onPlayerJoin(event);
         } else {
             scoreBoardManager.refreshWaitingScoreboard();
         }
@@ -61,8 +67,20 @@ public class PlayerListener implements Listener {
         if (board != null) {
             board.delete();
         }
+        if (gameManager.getGameState().equals(GState.WAITING)){
+            if (gameManager.getPlayerList().contains(player.getUniqueId())){
+                gameManager.getPlayerList().remove(player.getUniqueId());
+                if (gameManager.getWaitingList().size() > 0){
+                    gameManager.getPlayerList().add(gameManager.getWaitingList().get(0));
+                    Bukkit.getPlayer(gameManager.getWaitingList().get(0)).sendMessage("§aA player leaved, you get is place !");
+                    gameManager.removeWaitingList(gameManager.getWaitingList().get(0));
+                }
+            }else if (gameManager.getWaitingList().contains(player.getUniqueId())) gameManager.removeWaitingList(player.getUniqueId());
+        }
         if (gameManager.getGameState().equals(GState.PLAYING)){
             gameManager.getGameModeInstance().onPlayerLeave(event);
+            for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onPlayerLeave(event);
+
         }
     }
 
@@ -146,6 +164,8 @@ public class PlayerListener implements Listener {
             return;
         }
         Player player = (Player) event.getEntity();
+        for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onDamage(event);
+
         for (Skill skill: Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
             if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamage(event);
         }

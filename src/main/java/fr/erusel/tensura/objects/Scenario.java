@@ -2,7 +2,9 @@ package fr.erusel.tensura.objects;
 
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.*;
 
 public abstract class Scenario {
@@ -25,6 +27,8 @@ public abstract class Scenario {
     public abstract void onBlockBreak(BlockBreakEvent event);
     public abstract void onChat(AsyncPlayerChatEvent event);
     public abstract void onAdvancement(PlayerAdvancementDoneEvent event);
+    public abstract void onCraft(CraftItemEvent event);
+    public abstract void onDamage(EntityDamageEvent event);
 
 
     public String getName() {

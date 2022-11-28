@@ -49,5 +49,9 @@ public class WorldManager {
         dir.delete();
     }
 
+    public World getMap(){
+        return map;
+    }
+
 
 }

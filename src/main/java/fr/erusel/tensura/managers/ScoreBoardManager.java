@@ -3,7 +3,6 @@ package fr.erusel.tensura.managers;
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.mrmicky.fastboard.FastBoard;
-import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import java.time.Instant;
@@ -19,7 +18,7 @@ public class ScoreBoardManager {
         for (FastBoard board: scoreboard.values()){
 
             board.updateLine(1,"§7------------------");
-            board.updateLine(2,"§7Players : " + Bukkit.getOnlinePlayers().size() + "§3/" + ChatColor.GRAY + Bukkit.getMaxPlayers());
+            board.updateLine(2,"§7Players : " + Main.getInstance().getGameManager().getPlayerList().size() + "§3/" + ChatColor.GRAY + Main.getInstance().getGameManager().getMaxPlayer());
             board.updateLine(3, "§7Host : §6" + Main.getInstance().getGameManager().getHostName());
             board.updateLine(4, "§7Mode : §6" + Main.getInstance().getGameManager().getGameMode().getModeName());
             board.updateLine(6,"§7------------------");
@@ -38,7 +37,7 @@ public class ScoreBoardManager {
             GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(uuid);
 
             board.updateLine(1, "§7------------------");
-            board.updateLine(2,"§7Players : " + Bukkit.getOnlinePlayers().size() + "§3/" + ChatColor.GRAY + Bukkit.getMaxPlayers());
+            board.updateLine(2,"§7Players : " + Main.getInstance().getGameManager().getPlayerList().size() + "§3/" + ChatColor.GRAY + Main.getInstance().getGameManager().getMaxPlayer());
             board.updateLine(3, "§7Host : §6" + Main.getInstance().getGameManager().getHostName());
             board.updateLine(4, "§7Mode : §6" + Main.getInstance().getGameManager().getGameMode().getModeName());
             board.updateLine(5, "§7Kills : §c" + gPlayer.getKills());

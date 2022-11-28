@@ -12,7 +12,7 @@ import org.bukkit.inventory.ItemFlag;
 public class ConfigModeGUI extends FastInv {
 
     public ConfigModeGUI() {
-        super(9, "Tensura Configuration | Mode");
+        super(9, "Tensura Config | Mode");
 
         ItemBuilder battleRoyal = new ItemBuilder(Material.DIAMOND_SWORD)
                 .name("§7Battle Royal")
