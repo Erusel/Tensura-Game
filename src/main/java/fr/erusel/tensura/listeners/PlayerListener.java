@@ -14,10 +14,7 @@ import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -25,6 +22,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.Random;
 
@@ -138,7 +136,13 @@ public class PlayerListener implements Listener {
                 if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
             }
             if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).isReflectorActivated()) {
-                if (damager instanceof Arrow) event.setCancelled(true);
+                if (damager instanceof Arrow) {
+                    Projectile projectile = (Projectile) damager;
+                    LivingEntity shooter = (LivingEntity) projectile.getShooter();
+                    shooter.damage(event.getDamage());
+                    event.setCancelled(true);
+                }
+                System.out.println("b");
                 ((LivingEntity) damager).damage(event.getDamage());
                 event.setCancelled(true);
             }
