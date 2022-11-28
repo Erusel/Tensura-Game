@@ -5,6 +5,7 @@ import fr.erusel.tensura.enums.Prefixs;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.inventories.config.ConfigMainGUI;
 import fr.erusel.tensura.objects.Skill;
+import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -53,7 +54,7 @@ public class TensuraCommand implements CommandExecutor {
                          NoSuchMethodException e) {
                     throw new RuntimeException(e);
                 }
-                player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully gived " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
+                player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
             }else player.sendMessage("§cPlayer not found");
         }
         if (args[0].equalsIgnoreCase("resetcooldown")){
@@ -68,6 +69,14 @@ public class TensuraCommand implements CommandExecutor {
             if (Bukkit.getPlayer(args[1]) != null){
                 Main.getInstance().getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).launchHarvestFestival();
             }
+        }
+        if (args[0].equalsIgnoreCase("broadcast")){
+            StringBuilder message = new StringBuilder();
+            for (int i = 1; i > 0; i++){
+                message.append(args[i]);
+            }
+            Utils.VoiceOfTheWorldBroadcast(message.toString());
+
         }
         return true;
     }

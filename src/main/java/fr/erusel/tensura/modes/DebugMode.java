@@ -7,6 +7,7 @@ import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Race;
 import org.bukkit.Bukkit;
+import org.bukkit.GameRule;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -23,11 +24,15 @@ public class DebugMode extends Mode {
 
     @Override
     public void onPlayerSpawn(Player player) {
-        Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
-        int i = new Random().nextInt(Main.getInstance().getGameManager().getUniqueSkillAvailable().size());
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
-        Main.getInstance().getGameManager().getUniqueSkillAvailable().remove(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
 
+        for (int z = 0; z < Main.getInstance().getGameManager().getSkillOnStart(); z++) {
+            int i = new Random().nextInt(Main.getInstance().getGameManager().getUniqueSkillAvailable().size());
+            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
+            Main.getInstance().getGameManager().getUniqueSkillAvailable().remove(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
+        }
+
+        // Race
+        Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
         Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
         Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
 
@@ -37,6 +42,8 @@ public class DebugMode extends Mode {
     @Override
     public void onStart() {
         Bukkit.broadcastMessage("§c DEBUG MODE | ONLY FOR DEVELOPMENT !");
+        Main.getInstance().getWorldManager().getMap().setGameRule(GameRule.NATURAL_REGENERATION, Main.getInstance().getGameManager().getNaturalRegen());
+        Main.getInstance().getWorldManager().getMap().setGameRule(GameRule.DO_MOB_SPAWNING, Main.getInstance().getGameManager().getMonsterSpawn());
     }
 
     @Override

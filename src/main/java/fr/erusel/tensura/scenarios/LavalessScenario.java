@@ -9,9 +9,9 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.*;
 
-public class FirelessScenario extends Scenario {
-    public FirelessScenario() {
-        super("Fireless", "Lore");
+public class LavalessScenario extends Scenario {
+    public LavalessScenario() {
+        super("Lavaless", "Lore");
     }
 
     @Override
@@ -70,7 +70,7 @@ public class FirelessScenario extends Scenario {
 
     @Override
     public void onDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.FIRE) || event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
+        if (event.getCause().equals(EntityDamageEvent.DamageCause.LAVA)) {
             event.setCancelled(true);
         }
     }

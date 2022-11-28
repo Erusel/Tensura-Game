@@ -9,12 +9,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 public class ConfigMainGUI extends FastInv {
 
     public ConfigMainGUI() {
-        super(27, "Tensura Configuration");
+        super(27, "Tensura Config");
 
         setItem(10, new ItemBuilder(Material.BOOK).name("§7Mode").addLore("§7Change or set the Gamemode").build(), this::mode);
         setItem(12, new ItemBuilder(Material.GOLD_BLOCK).name("§7Scenarios").addLore("§7Add and remove scenarios").build(), this::scenarios);
         setItem(14, new ItemBuilder(Material.DIAMOND_BLOCK).name("§7Skills").addLore("§7A voir, sa m'etonne que sa reste").build(), this::skills);
-        setItem(16, new ItemBuilder(Material.REDSTONE_BLOCK).name("§7Others").addLore("§7Other settings").build(), this::others);
+        setItem(16, new ItemBuilder(Material.REDSTONE_BLOCK).name("§7Settings").addLore("§7Main Settings").build(), this::settings);
     }
 
     public void mode(InventoryClickEvent event){
@@ -33,10 +33,9 @@ public class ConfigMainGUI extends FastInv {
         player.closeInventory();
     }
 
-    public void others(InventoryClickEvent event){
+    public void settings(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
-        player.sendMessage("others");
-        player.closeInventory();
+        new ConfigSettingsGUI().open(player);
     }
 
 

@@ -4,7 +4,9 @@ import fr.erusel.tensura.objects.Scenario;
 import org.bukkit.Bukkit;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.player.*;
 
 public class EnchantlessScenario extends Scenario {
@@ -14,7 +16,6 @@ public class EnchantlessScenario extends Scenario {
 
     @Override
     public void onStart() {
-        Bukkit.broadcastMessage("§6ENCHANTLESS SCENARIO ACTIVATED");
     }
 
     @Override
@@ -59,6 +60,16 @@ public class EnchantlessScenario extends Scenario {
 
     @Override
     public void onAdvancement(PlayerAdvancementDoneEvent event) {
+
+    }
+
+    @Override
+    public void onCraft(CraftItemEvent event) {
+
+    }
+
+    @Override
+    public void onDamage(EntityDamageEvent event) {
 
     }
 }

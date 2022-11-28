@@ -31,6 +31,7 @@ public class TensuraTabCompleter implements TabCompleter {
                 if (Main.getInstance().getGameManager().playerIsHost(p)){
                     list.add("config");
                     list.add("start");
+                    list.add("broadcast");
                 }
             }
             if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
@@ -38,6 +39,7 @@ public class TensuraTabCompleter implements TabCompleter {
                     list.add("giveskill");
                     list.add("harvestfestival");
                     list.add("resetcooldown");
+                    list.add("broadcast");
                 }
             }
         }

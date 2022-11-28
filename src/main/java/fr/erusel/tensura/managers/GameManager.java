@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.lang.reflect.InvocationTargetException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,12 @@ public class GameManager {
     private GState gameState = GState.WAITING;
     private UUID gameHost;
     private String hostName = "None";
+    private final List<UUID> waitingList = new ArrayList<>();
 
+    // Settings
+    private int skillOnStart = 1;
+    private boolean naturalRegen = false;
+    private boolean monsterSpawn = true;
 
     // Game
     private Modes gameMode = Modes.DEBUG;
@@ -83,13 +87,14 @@ public class GameManager {
             Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
             gameModeInstance.onPlayerSpawn(player);
             Main.getInstance().getWorldManager().teleportPlayerToMap(player);
+            Utils.resetPlayer(player);
+            player.setGameMode(GameMode.SURVIVAL);
         }
-        for (Scenario scenario : getActivatedScenariosInstance()) scenario.onStart();
-        gameModeInstance.onStart();
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
+        gameModeInstance.onStart();
+        for (Scenario scenario : getActivatedScenariosInstance()) scenario.onStart();
     }
-
     public List<UUID> getPlayerList(){
         return playerList;
     }
@@ -102,7 +107,15 @@ public class GameManager {
     public Mode getGameModeInstance(){
         return gameModeInstance;
     }
-
+    public void addWaitingList(UUID uuid){
+        if (!waitingList.contains(uuid)) waitingList.add(uuid);
+    }
+    public void removeWaitingList(UUID uuid){
+        waitingList.remove(uuid);
+    }
+    public List<UUID> getWaitingList(){
+        return waitingList;
+    }
     // GameState
     public void setGameState(GState gameState){
         this.gameState = gameState;
@@ -158,4 +171,28 @@ public class GameManager {
     public List<Scenario> getActivatedScenariosInstance() {
         return activatedScenariosInstance;
     }
+
+    // Game Settings
+    public int getSkillOnStart(){
+        return skillOnStart;
+    }
+    public void setSkillOnStart(int i) {
+        this.skillOnStart = i;
+    }
+    public int getMaxPlayer(){
+        return (int) Math.floor(Skills.getAllSkillByTier(SkillTier.UNIQUE).size() / getSkillOnStart());
+    }
+    public boolean getNaturalRegen(){
+        return naturalRegen;
+    }
+    public void setNaturalRegen(boolean b){
+        naturalRegen = b;
+    }
+    public boolean getMonsterSpawn(){
+        return monsterSpawn;
+    }
+    public void setMonsterSpawn(boolean b){
+        monsterSpawn = b;
+    }
+
 }
