@@ -80,6 +80,7 @@ public class GameManager {
 
         // Player resurrection
         for (Player player : Bukkit.getOnlinePlayers()){
+            Utils.resetPlayer(player);
             player.setGameMode(GameMode.SURVIVAL);
             player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1 , 200));
             player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 10 , 200));
@@ -87,7 +88,6 @@ public class GameManager {
             Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
             gameModeInstance.onPlayerSpawn(player);
             Main.getInstance().getWorldManager().teleportPlayerToMap(player);
-            Utils.resetPlayer(player);
             player.setGameMode(GameMode.SURVIVAL);
         }
         setGameState(GState.PLAYING);

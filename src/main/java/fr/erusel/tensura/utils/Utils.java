@@ -20,10 +20,10 @@ public class Utils {
 
         // reset Inventory
         player.getInventory().clear();
-        player.getInventory().getBoots().setType(Material.AIR);
-        player.getInventory().getLeggings().setType(Material.AIR);
-        player.getInventory().getChestplate().setType(Material.AIR);
-        player.getInventory().getHelmet().setType(Material.AIR);
+        if (player.getInventory().getBoots() != null) player.getInventory().getBoots().setType(Material.AIR);
+        if (player.getInventory().getLeggings() != null) player.getInventory().getLeggings().setType(Material.AIR);
+        if (player.getInventory().getChestplate() != null) player.getInventory().getChestplate().setType(Material.AIR);
+        if (player.getInventory().getHelmet() != null) player.getInventory().getHelmet().setType(Material.AIR);
     }
 
     public static void VoiceOfTheWorldBroadcast(String message){
