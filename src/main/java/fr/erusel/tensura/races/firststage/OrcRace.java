@@ -17,5 +17,6 @@ public class OrcRace extends Race {
     public void onGive(Player player) {
         player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(26);
         player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue()+1);
+        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.07);
     }
 }
