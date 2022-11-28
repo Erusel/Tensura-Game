@@ -11,7 +11,7 @@ public class JanusSkill extends Skill implements ActiveSkill {
 
 
     public JanusSkill() {
-        super("Janus, Lord of Gravity", "Increase your knockback for 30s", SkillTier.ULTIMATE, 1100, null);
+        super("Janus, Lord of Gravity", "Increase your knockback for 60s", SkillTier.ULTIMATE, 1100, null);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class JanusSkill extends Skill implements ActiveSkill {
         Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setOppressor(true);
         Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
-                setOppressorTime(30);
+                setOppressorTime(60);
         new OppressorRunnable(Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
                 .runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();

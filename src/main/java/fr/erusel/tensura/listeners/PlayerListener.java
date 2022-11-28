@@ -3,25 +3,27 @@ package fr.erusel.tensura.listeners;
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Prefixs;
+import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
-import fr.erusel.tensura.objects.GPlayer;
-import fr.erusel.tensura.objects.PassiveSkill;
-import fr.erusel.tensura.objects.Scenario;
-import fr.erusel.tensura.objects.Skill;
+import fr.erusel.tensura.objects.*;
 import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.projectiles.ProjectileSource;
 
 import java.util.Random;
@@ -142,13 +144,34 @@ public class PlayerListener implements Listener {
                     shooter.damage(event.getDamage());
                     event.setCancelled(true);
                 }
-                System.out.println("b");
                 ((LivingEntity) damager).damage(event.getDamage());
                 event.setCancelled(true);
+            }
+            if (damager instanceof Arrow) {
+                Projectile projectile = (Projectile) damager;
+                LivingEntity shooter = (LivingEntity) projectile.getShooter();
+                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(shooter.getUniqueId()).getRace().getName().equals(Races.ELF.getName())) {
+                    int i = new Random().nextInt(100);
+                    if (i <= 19) {
+                        ((Player) damaged).damage(event.getDamage()*1.2);
+                        shooter.sendMessage("§6x1.2 damage !");
+                        }
+                    }
             }
             for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onEntityDamageByEntity(event);
 
             if (damager instanceof Player){
+                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).getRace().getName().equals(Races.MAJIN.getName())) {
+                    int i = new Random().nextInt(100);
+                    if (i<=5) {
+                        ((Player) damaged).addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 300,0));
+                    }
+                }
+                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getRace().getName().equals(Races.MAJIN.getName())) {
+                    if (((Player) damager).getInventory().getItemInMainHand().containsEnchantment(Enchantment.DAMAGE_UNDEAD)) {
+                        ((Player) damaged).damage(((Player) damager).getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.DAMAGE_UNDEAD)*1.3);
+                    }
+                }
                 Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).setTrackingPlayer(damaged.getUniqueId());
             }
         }
@@ -227,7 +250,11 @@ public class PlayerListener implements Listener {
         }
     }
 
-
+    @EventHandler
+    public void onFoodLevelChange(FoodLevelChangeEvent event) {
+        if (gameManager.getGameState().equals(GState.WAITING)) event.setCancelled(true);
+        if (!(event.getEntity() instanceof Player)) return;
+        Player player = (Player) event.getEntity();
+        if (Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().equals(Races.SLIME)) event.setCancelled(true);
+    }
 }
-
-
