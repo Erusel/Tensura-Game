@@ -14,6 +14,6 @@ public class MajinRace extends Race {
 
     @Override
     public void onGive(Player player) {
-
+        // 5% chance to give hunger when hit someone BUT take x1.3 damage from smite
     }
 }

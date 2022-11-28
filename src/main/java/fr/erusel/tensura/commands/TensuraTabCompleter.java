@@ -2,6 +2,7 @@ package fr.erusel.tensura.commands;
 
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
+import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -37,6 +38,7 @@ public class TensuraTabCompleter implements TabCompleter {
             if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
                 if (Main.getInstance().getGameManager().playerIsHost(p)){
                     list.add("giveskill");
+                    list.add("setrace");
                     list.add("harvestfestival");
                     list.add("resetcooldown");
                     list.add("broadcast");
@@ -51,6 +53,9 @@ public class TensuraTabCompleter implements TabCompleter {
             if (args[0].equalsIgnoreCase("giveskill")){
                 for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
             }
+            if (args[0].equalsIgnoreCase("setrace")) {
+                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+            }
             if (args[0].equalsIgnoreCase("resetcooldown")){
                 for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
             }
@@ -63,6 +68,10 @@ public class TensuraTabCompleter implements TabCompleter {
             if (args[0].equalsIgnoreCase("giveskill")){
                 arg = 2;
                 for (Skills skills : Skills.values()) list.add(skills.name());
+            }
+            if (args[0].equalsIgnoreCase("setrace")) {
+                arg = 2;
+                for (Races races : Races.values()) list.add(races.name());
             }
 
         }
