@@ -1,7 +1,9 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
 import fr.erusel.tensura.Main;
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.threads.ImperceptibleRunnable;
@@ -14,7 +16,7 @@ public class HadesSkill extends Skill implements ActiveSkill {
 
 
     public HadesSkill() {
-        super("Hades, Lord of Invisibility", "Grant you invisibility for 30sec and knockback near players", SkillTier.ULTIMATE, 1000, null);
+        super("Hades, Lord of Invisibility", "Grant you invisibility for 30sec and knockback near players", Skills.HADES, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1000, null);
     }
 
     @Override

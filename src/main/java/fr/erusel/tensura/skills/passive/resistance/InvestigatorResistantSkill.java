@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.resistance;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Player;
@@ -11,7 +13,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class InvestigatorResistantSkill extends Skill implements PassiveSkill {
 
-    public InvestigatorResistantSkill() { super("Investigator Resistant", "Investigator skill cant see your inventory", SkillTier.RESISTANCE, 0, null);}
+    public InvestigatorResistantSkill() { super("Investigator Resistant", "Investigator skill cant see your inventory", Skills.INVESTIGATOR, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {

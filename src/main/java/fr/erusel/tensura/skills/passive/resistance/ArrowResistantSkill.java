@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.resistance;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Arrow;
@@ -12,7 +14,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class ArrowResistantSkill extends Skill implements PassiveSkill {
 
-    public ArrowResistantSkill() { super("Arrow Resistant", "Cancel Arrow Damage", SkillTier.RESISTANCE, 0, null);}
+    public ArrowResistantSkill() { super("Arrow Resistant", "Cancel Arrow Damage", Skills.ARROWRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {

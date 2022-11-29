@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.active.unique;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.RangaSkill;
@@ -14,7 +16,7 @@ import org.bukkit.entity.Wolf;
 public class MagicWolfSkill extends Skill implements ActiveSkill {
 
     public MagicWolfSkill() {
-        super("Magic Wolf", "Summon a powerful wolf for you", SkillTier.UNIQUE, 2000, RangaSkill.class);
+        super("Magic Wolf", "Summon a powerful wolf for you", Skills.MAGICWOLF, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 2000, RangaSkill.class);
     }
 
     @Override

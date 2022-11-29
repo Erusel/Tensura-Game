@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.unique;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.passive.ultimate.FlashSkill;
@@ -16,7 +18,7 @@ public class SpeedySkill extends Skill implements PassiveSkill {
 
 
     public SpeedySkill() {
-        super("Speedy", "Grant you speed 2", SkillTier.UNIQUE, 0, FlashSkill.class);
+        super("Speedy", "Grant you speed 2", Skills.SPEEDY, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, FlashSkill.class);
     }
 
     @Override

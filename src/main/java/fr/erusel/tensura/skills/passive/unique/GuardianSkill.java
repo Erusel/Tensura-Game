@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.unique;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.passive.ultimate.HecateSkill;
@@ -15,7 +17,7 @@ import org.bukkit.potion.PotionEffectType;
 public class GuardianSkill extends Skill implements PassiveSkill {
 
     public GuardianSkill() {
-        super("Guardian", "Grant you resistance", SkillTier.UNIQUE, 0, HecateSkill.class);
+        super("Guardian", "Grant you resistance", Skills.GUARDIAN, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, HecateSkill.class);
     }
 
     @Override

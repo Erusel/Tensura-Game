@@ -5,7 +5,6 @@ import fr.erusel.tensura.enums.Prefixs;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.inventories.config.ConfigMainGUI;
-import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
@@ -16,7 +15,6 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class TensuraCommand implements CommandExecutor {

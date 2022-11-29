@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.ultimate;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Player;
@@ -15,7 +17,7 @@ public class HecateSkill extends Skill implements PassiveSkill {
 
 
     public HecateSkill() {
-        super("Hecate, Lord of Protection", "Grant you resistance 2", SkillTier.ULTIMATE, 900, null);
+        super("Hecate, Lord of Protection", "Grant you resistance 2", Skills.HECATE, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 900, null);
     }
 
     @Override

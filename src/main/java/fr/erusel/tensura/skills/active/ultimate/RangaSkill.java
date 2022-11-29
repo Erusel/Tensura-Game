@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Location;
@@ -14,7 +16,7 @@ public class RangaSkill extends Skill implements ActiveSkill {
 
 
     public RangaSkill() {
-        super("Ranga, Lord of the toutous", "Summon powerfuls wolf for you", SkillTier.ULTIMATE, 900, null);
+        super("Ranga, Lord of the toutous", "Summon powerfuls wolf for you", Skills.RANGA, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 900, null);
     }
 
     @Override

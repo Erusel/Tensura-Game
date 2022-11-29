@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.unique;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.passive.ultimate.MogisSkill;
@@ -16,7 +18,7 @@ public class BerserkerSkill extends Skill implements PassiveSkill {
 
 
     public BerserkerSkill() {
-        super("Berserker", "Each kill give you Strength", SkillTier.UNIQUE, 0, MogisSkill.class);
+        super("Berserker", "Each kill give you Strength", Skills.BERSERKER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, MogisSkill.class);
     }
 
     @Override
