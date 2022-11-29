@@ -14,6 +14,6 @@ public class DemonRace extends Race {
 
     @Override
     public void onGive(Player player) {
-
+        // 5% chance to set the attacked opponent in fire for 10sec
     }
 }

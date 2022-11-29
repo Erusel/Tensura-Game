@@ -34,6 +34,7 @@ public class TensuraTabCompleter implements TabCompleter {
                     list.add("start");
                     list.add("pregen");
                     list.add("broadcast");
+                    list.add("help");
                 }
             }
             if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
@@ -63,6 +64,9 @@ public class TensuraTabCompleter implements TabCompleter {
             if (args[0].equalsIgnoreCase("harvestfestival")){
                 for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
             }
+            if (args[0].equalsIgnoreCase("help")) {
+                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+            }
 
         }
         if (args.length == 3){
@@ -74,9 +78,7 @@ public class TensuraTabCompleter implements TabCompleter {
                 arg = 2;
                 for (Races races : Races.values()) list.add(races.name());
             }
-
         }
-
 
         StringUtil.copyPartialMatches(args[arg], list, completions);
         Collections.sort(completions);

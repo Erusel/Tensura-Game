@@ -78,14 +78,23 @@ public class GameManager {
             uniqueSkillAvailable.add(skill.createInstance());
         }
 
+        // Creating World
+        Main.getInstance().getWorldManager().deletePlayingWorld();
+        Utils.VoiceOfTheWorldBroadcast("Creating world...");
+        Main.getInstance().getWorldManager().createPlayingWorld();
+        Utils.VoiceOfTheWorldBroadcast("Successful");
+        Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
+
         // Player resurrection
-        for (UUID uuid : getPlayerList()){
-            Player player = Bukkit.getPlayer(uuid);
+        for (Player player : Bukkit.getOnlinePlayers()){
+            Utils.resetPlayer(player);
+            player.setGameMode(GameMode.SURVIVAL);
+            player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1 , 200));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 10 , 200));
             playerList.add(player.getUniqueId());
             Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
             gameModeInstance.onPlayerSpawn(player);
             Main.getInstance().getWorldManager().teleportPlayerToMap(player);
-            Utils.resetPlayer(player);
             player.setGameMode(GameMode.SURVIVAL);
         }
         setGameState(GState.PLAYING);

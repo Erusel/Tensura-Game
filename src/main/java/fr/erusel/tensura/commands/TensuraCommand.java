@@ -28,10 +28,15 @@ public class TensuraCommand implements CommandExecutor {
         if (!(sender instanceof Player)) return false;
         Player player = (Player) sender;
 
-        if (args.length == 0){
+        if (args.length == 0  || args[0].equalsIgnoreCase("help")){
             player.sendMessage("-----------------------§bTensura§f-----------------------");
             player.sendMessage("\n\n§a/tensura sethost [Player] §7- §eSet the player host of the game");
             player.sendMessage("\n§a/tensura start §7- §eStart the game if a player is host");
+            player.sendMessage("\n§a/tensura config §7- §eAllow you to config the settings of the game");
+            player.sendMessage("\n§a/tensura giveskill [Player] [Skill] §7- §eGive to the player a skill (only work during a game)");
+            player.sendMessage("\n§a/tensura setrace [Player] [race] §7- §eChange the race of the player (only work during a game)");
+            player.sendMessage("\n§a/tensura resetcooldown [Player] §7- §eReset the cooldown of every skill of the player");
+            player.sendMessage("\n§a/tensura broadcast [Message] §7- §eSend a broadcast message");
             return true;
         }
 
