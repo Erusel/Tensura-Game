@@ -66,6 +66,13 @@ public class GameManager {
         // Creating Scenarios Instances
         for (Scenarios scenarios : getActivatedScenarios()) getActivatedScenariosInstance().add(scenarios.createInstance());
 
+        // Creating World
+        Main.getInstance().getWorldManager().deletePlayingWorld();
+        Utils.VoiceOfTheWorldBroadcast("Creating world...");
+        Main.getInstance().getWorldManager().createPlayingWorld();
+        Utils.VoiceOfTheWorldBroadcast("Successful");
+        Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
+
         // Creating UniqueSkills Instances
         for (Skills skill : Skills.getAllSkillByTier(SkillTier.UNIQUE)){
             uniqueSkillAvailable.add(skill.createInstance());

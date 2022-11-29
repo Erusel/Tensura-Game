@@ -102,11 +102,7 @@ public class TensuraCommand implements CommandExecutor {
 
         }
         if (args[0].equalsIgnoreCase("pregen")){
-            Main.getInstance().getWorldManager().deletePlayingWorld();
-            Utils.VoiceOfTheWorldBroadcast("Creating world...");
-            Main.getInstance().getWorldManager().createPlayingWorld();
-            Utils.VoiceOfTheWorldBroadcast("Successful");
-            Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
+
         }
         return true;
     }
