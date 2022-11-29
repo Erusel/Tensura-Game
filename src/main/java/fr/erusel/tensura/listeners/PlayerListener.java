@@ -160,16 +160,20 @@ public class PlayerListener implements Listener {
             for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onEntityDamageByEntity(event);
 
             if (damager instanceof Player){
+                // Checking if the damager is a Majin, and if so, it has a 5% chance to apply the hunger effect to the
+                // damaged player.
                 if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).getRace().getName().equals(Races.MAJIN.getName())) {
                     int i = new Random().nextInt(100);
-                    if (i<=5) {
-                        ((Player) damaged).addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 300,0));
-                    }
+                    if (i<=5) ((Player) damaged).addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 300,0));
                 }
-                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getRace().getName().equals(Races.MAJIN.getName())) {
-                    if (((Player) damager).getInventory().getItemInMainHand().containsEnchantment(Enchantment.DAMAGE_UNDEAD)) {
-                        ((Player) damaged).damage(((Player) damager).getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.DAMAGE_UNDEAD)*1.3);
-                    }
+                // Checking if the player is a demon, and if they are, it has a 5% chance of setting the player on fire for 10sec.
+                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).getRace().getName().equals(Races.DEMON.getName())) {
+                    int i = new Random().nextInt(100);
+                    if (i<=5) damaged.setFireTicks(200);
+                }
+                // Checking if the player is a Dwarf, and if they are, it is reducing the damage they take by 20%.
+                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getRace().getName().equals(Races.DWARF)) {
+                    ((Player) damaged).damage(event.getDamage()*0.8);
                 }
                 Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).setTrackingPlayer(damaged.getUniqueId());
             }

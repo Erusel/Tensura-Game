@@ -14,6 +14,6 @@ public class DwarfRace extends Race {
 
     @Override
     public void onGive(Player player) {
-
+        // 20% damage resistance
     }
 }
