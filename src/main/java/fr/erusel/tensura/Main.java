@@ -33,6 +33,12 @@ public final class Main extends JavaPlugin {
             FastBoard board = new FastBoard(player);
             board.updateTitle("§bTensura §3Game");
             Main.getInstance().getScoreboardManager().scoreboard.put(player.getUniqueId(), board);
+            if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
+                gameManager.getPlayerList().add(player.getUniqueId());
+            }else {
+                gameManager.addWaitingList(player.getUniqueId());
+                player.sendMessage("§cToo many players, added in waiting list !");
+            }
         }
 
         new GameLoopRunnable().runTaskTimer(this, 0, 20);
