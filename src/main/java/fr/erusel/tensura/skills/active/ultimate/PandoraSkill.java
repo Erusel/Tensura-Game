@@ -1,7 +1,9 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
 import fr.erusel.tensura.Main;
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.Skill;
@@ -11,7 +13,7 @@ public class PandoraSkill extends Skill implements ActiveSkill {
 
 
     public PandoraSkill() {
-        super("Pandora, Lord of Gift", "Open bigger personnal chest", SkillTier.ULTIMATE, 20, null);
+        super("Pandora, Lord of Gift", "Open bigger personnal chest", Skills.PANDORA, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 20, null);
     }
 
     @Override

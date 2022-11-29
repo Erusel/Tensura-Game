@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.ultimate;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Material;
@@ -17,7 +19,7 @@ import java.util.Arrays;
 public class PloutosSkill extends Skill implements PassiveSkill {
 
     public PloutosSkill() {
-        super("Ploutos, Lord of Wealth", "Triple mined ores", SkillTier.UNIQUE, 0, null);
+        super("Ploutos, Lord of Wealth", "Triple mined ores", Skills.PLOUTOS, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, null);
     }
 
     Material[] ores = {Material.IRON_ORE, Material.COAL_ORE, Material.LAPIS_ORE, Material.REDSTONE_ORE, Material.EMERALD_ORE, Material.DIAMOND_ORE, Material.GOLD_ORE};

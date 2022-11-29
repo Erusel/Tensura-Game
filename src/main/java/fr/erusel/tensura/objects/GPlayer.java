@@ -210,6 +210,13 @@ public class GPlayer {
         }
         return skills;
     }
+    public List<Skill> getPlayerExtraSkill(){
+        List<Skill> skills = new ArrayList<>();
+        for (Skill skill : getPlayerSkills()){
+            if (skill.getSkillTier().equals(SkillTier.EXTRA)) skills.add(skill);
+        }
+        return skills;
+    }
     public List<Skill> getPlayerUltimateSkills(){
         List<Skill> skills = new ArrayList<>();
         for (Skill skill : getPlayerSkills()){

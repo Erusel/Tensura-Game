@@ -86,14 +86,6 @@ public enum Skills {
         return skillClass;
     }
 
-    public static Skills getSkillWithName(String name){
-        for (Skills skills : Skills.values()){
-            if (skills.getSkillName().equalsIgnoreCase(name)){
-                return skills;
-            }
-        }
-        return null;
-    }
     public static List<Skills> getAllSkillByTier(SkillTier skillTier){
         List<Skills> list = new ArrayList<>();
         for (Skills skills : Skills.values()) if (skills.getSkillTier().equals(skillTier)) list.add(skills);

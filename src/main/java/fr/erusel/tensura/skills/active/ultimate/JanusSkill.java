@@ -1,7 +1,9 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
 import fr.erusel.tensura.Main;
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.threads.OppressorRunnable;
@@ -11,7 +13,7 @@ public class JanusSkill extends Skill implements ActiveSkill {
 
 
     public JanusSkill() {
-        super("Janus, Lord of Gravity", "Increase your knockback for 60s", SkillTier.ULTIMATE, 1100, null);
+        super("Janus, Lord of Gravity", "Increase your knockback for 60s", Skills.JANUS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1100, null);
     }
 
     @Override

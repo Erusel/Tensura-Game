@@ -1,19 +1,25 @@
 package fr.erusel.tensura.objects;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 
 public abstract class Skill {
 
     private final String name;
     private final String lore;
     private final SkillTier skillTier;
+    private final Skills skill;
+    private final SkillScope skillScope;
     int COOLDOWN;
     private int currentCooldown = 0;
     private final Class<?> ultimateSkill;
 
-    public Skill(String name, String lore, SkillTier skillTier, int cooldown, Class<?> ultimateSkill) {
+    public Skill(String name, String lore,Skills skill, SkillScope skillScope, SkillTier skillTier, int cooldown, Class<?> ultimateSkill) {
         this.name = name;
         this.lore = lore;
+        this.skill = skill;
+        this.skillScope = skillScope;
         this.skillTier = skillTier;
         COOLDOWN = cooldown;
         this.ultimateSkill = ultimateSkill;
@@ -42,6 +48,16 @@ public abstract class Skill {
     }
     public Class<?> getUltimateSkillClass(){
         return ultimateSkill;
+    }
+    public SkillScope getSkillScope(){
+        return skillScope;
+    }
+    public Skills getSkill(){
+        return skill;
+    }
+
+    public boolean isSkill(Skills skill){
+        return this.skill == skill;
     }
 
 }

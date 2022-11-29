@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.ultimate;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Player;
@@ -15,7 +17,7 @@ public class MogisSkill extends Skill implements PassiveSkill {
 
 
     public MogisSkill() {
-        super("Mogis, Lord of Berserk", "Each kill give you Strength 2", SkillTier.ULTIMATE, 0, null);
+        super("Mogis, Lord of Berserk", "Each kill give you Strength 2", Skills.MOGIS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 0, null);
     }
 
     @Override

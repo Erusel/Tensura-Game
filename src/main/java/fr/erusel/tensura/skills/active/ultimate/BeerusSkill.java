@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Entity;
@@ -13,7 +15,7 @@ public class BeerusSkill extends Skill implements ActiveSkill {
 
 
     public BeerusSkill() {
-        super("Beerus, Lord of Death", "Kill every entity around you in a radius of 50 blocs\n if they are under 2 hearts or give them nausea if under 6 hearts", SkillTier.ULTIMATE, 1000, null);
+        super("Beerus, Lord of Death", "Kill every entity around you in a radius of 50 blocs\n if they are under 2 hearts or give them nausea if under 6 hearts", Skills.BEERUS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1000, null);
     }
 
     @Override

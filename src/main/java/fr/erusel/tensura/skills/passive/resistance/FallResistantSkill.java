@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.passive.resistance;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Player;
@@ -11,7 +13,7 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 
 public class FallResistantSkill extends Skill implements PassiveSkill {
 
-    public FallResistantSkill() { super("Fall Resistant", "Cancel Fall Damage", SkillTier.RESISTANCE, 0, null);}
+    public FallResistantSkill() { super("Fall Resistant", "Cancel Fall Damage", Skills.FALLRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
 
     @Override
     public void eachSecond(Player player) {

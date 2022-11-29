@@ -1,7 +1,9 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
 import fr.erusel.tensura.enums.Prefixs;
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Entity;
@@ -11,7 +13,7 @@ import org.bukkit.entity.Player;
 public class RaphaelSkill extends Skill implements ActiveSkill {
 
     public RaphaelSkill() {
-        super("Raphael, Lord of Wisdom", "Use for display all entities around", SkillTier.ULTIMATE, 800, null);
+        super("Raphael, Lord of Wisdom", "Use for display all entities around", Skills.RAPHAEL, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 800, null);
     }
 
     @Override

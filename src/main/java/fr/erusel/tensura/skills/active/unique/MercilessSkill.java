@@ -1,6 +1,8 @@
 package fr.erusel.tensura.skills.active.unique;
 
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.BeerusSkill;
@@ -13,7 +15,7 @@ public class MercilessSkill extends Skill implements ActiveSkill {
 
 
     public MercilessSkill() {
-        super("Merciless", "Kill every entity around you if they are under 2 heart", SkillTier.UNIQUE, 1000, BeerusSkill.class);
+        super("Merciless", "Kill every entity around you if they are under 2 heart", Skills.MERCILESS, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1000, BeerusSkill.class);
     }
 
     @Override

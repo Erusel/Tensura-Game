@@ -1,7 +1,9 @@
 package fr.erusel.tensura.skills.active.unique;
 
 import fr.erusel.tensura.enums.Prefixs;
+import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.RaphaelSkill;
@@ -11,7 +13,7 @@ import org.bukkit.entity.Player;
 public class GreatSageSkill extends Skill implements ActiveSkill {
 
     public GreatSageSkill() {
-        super("Great Sage", "Use for display all entities around", SkillTier.UNIQUE, 600, RaphaelSkill.class);
+        super("Great Sage", "Use for display all entities around", Skills.GREATSAGE, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, RaphaelSkill.class);
     }
 
     @Override
