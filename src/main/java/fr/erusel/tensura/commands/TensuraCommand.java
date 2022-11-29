@@ -13,6 +13,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TensuraCommand implements CommandExecutor {
 
@@ -72,11 +75,23 @@ public class TensuraCommand implements CommandExecutor {
         }
         if (args[0].equalsIgnoreCase("broadcast")){
             StringBuilder message = new StringBuilder();
-            for (int i = 1; i > 0; i++){
-                message.append(args[i]);
+            List<String> t = new ArrayList<>();
+            for (String text : args){
+                t.add(text + " ");
+            }
+            t.remove(0);
+            for (String i : t){
+                message.append(i);
             }
             Utils.VoiceOfTheWorldBroadcast(message.toString());
 
+        }
+        if (args[0].equalsIgnoreCase("pregen")){
+            Main.getInstance().getWorldManager().deletePlayingWorld();
+            Utils.VoiceOfTheWorldBroadcast("Creating world...");
+            Main.getInstance().getWorldManager().createPlayingWorld();
+            Utils.VoiceOfTheWorldBroadcast("Successful");
+            Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
         }
         return true;
     }

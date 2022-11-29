@@ -31,6 +31,7 @@ public class TensuraTabCompleter implements TabCompleter {
                 if (Main.getInstance().getGameManager().playerIsHost(p)){
                     list.add("config");
                     list.add("start");
+                    list.add("pregen");
                     list.add("broadcast");
                 }
             }
