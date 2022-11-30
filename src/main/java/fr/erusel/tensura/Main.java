@@ -16,10 +16,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Main extends JavaPlugin {
 
     private static Main main;
-    WorldManager worldManager = new WorldManager();
-    ScoreBoardManager scoreBoardManager = new ScoreBoardManager();
-    GameManager gameManager = new GameManager();
-    PlayerManager playerManager = new PlayerManager();
+    private final WorldManager worldManager = new WorldManager();
+    private final ScoreBoardManager scoreBoardManager = new ScoreBoardManager();
+    private final GameManager gameManager = new GameManager();
+    private final PlayerManager playerManager = new PlayerManager();
 
     @Override
     public void onEnable() {

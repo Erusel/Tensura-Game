@@ -6,6 +6,7 @@ import fr.erusel.tensura.enums.RaceStages;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Race;
+import fr.erusel.tensura.scoreboards.DebugScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameRule;
 import org.bukkit.entity.Player;
@@ -19,24 +20,26 @@ import java.util.Random;
 public class DebugMode extends Mode {
 
     public DebugMode() {
-        super("Debug", Modes.DEBUG, false);
+        super("Debug", Modes.DEBUG, new DebugScoreboard(), false);
     }
 
     @Override
     public void onPlayerSpawn(Player player) {
 
+        // Give Skill
         for (int z = 0; z < Main.getInstance().getGameManager().getSkillOnStart(); z++) {
             int i = new Random().nextInt(Main.getInstance().getGameManager().getUniqueSkillAvailable().size());
             Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
             Main.getInstance().getGameManager().getUniqueSkillAvailable().remove(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
         }
 
-        // Race
-        Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
-
-        player.sendMessage("§aYou have been resurrected as a " + race.getName());
+        // Give Races
+        if (Main.getInstance().getGameManager().isRaceActivated()){
+            Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
+            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
+            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
+            player.sendMessage("§aYou have been resurrected as a " + race.getName());
+        }
     }
 
     @Override

@@ -8,6 +8,7 @@ import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -29,6 +30,7 @@ public class GameManager {
     private int skillOnStart = 1;
     private boolean naturalRegen = false;
     private boolean monsterSpawn = true;
+    private boolean raceActivated = true;
 
     // Game
     private Modes gameMode = Modes.DEBUG;
@@ -39,6 +41,7 @@ public class GameManager {
     public int gameStartTime;
     private final List<UUID> playerList = new ArrayList<>();
     private final List<UUID> deadPlayers = new ArrayList<>();
+    private final List<UUID> alivePlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
 
@@ -58,10 +61,10 @@ public class GameManager {
             p.sendMessage("§cPlease choose a gamemode !");
             return;
         }
-        setGameState(GState.STARTING);
 
-        // Creating games Instances
         gameModeInstance = gameMode.createInstance();
+
+        setGameState(GState.STARTING);
 
         // Creating Scenarios Instances
         for (Scenarios scenarios : getActivatedScenarios()) getActivatedScenariosInstance().add(scenarios.createInstance());
@@ -78,29 +81,29 @@ public class GameManager {
             uniqueSkillAvailable.add(skill.createInstance());
         }
 
-        // Creating World
-        Main.getInstance().getWorldManager().deletePlayingWorld();
-        Utils.VoiceOfTheWorldBroadcast("Creating world...");
-        Main.getInstance().getWorldManager().createPlayingWorld();
-        Utils.VoiceOfTheWorldBroadcast("Successful");
-        Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
-
         // Player resurrection
         for (Player player : Bukkit.getOnlinePlayers()){
-            Utils.resetPlayer(player);
             player.setGameMode(GameMode.SURVIVAL);
-            player.addPotionEffect(new PotionEffect(PotionEffectType.HEAL, 1 , 200));
-            player.addPotionEffect(new PotionEffect(PotionEffectType.SATURATION, 10 , 200));
             playerList.add(player.getUniqueId());
             Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
             gameModeInstance.onPlayerSpawn(player);
             Main.getInstance().getWorldManager().teleportPlayerToMap(player);
-            player.setGameMode(GameMode.SURVIVAL);
+            Utils.resetPlayer(player);
         }
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
         gameModeInstance.onStart();
         for (Scenario scenario : getActivatedScenariosInstance()) scenario.onStart();
+    }
+    public void finishGame(UUID uuid){
+        Player winner = Bukkit.getPlayer(uuid);
+        setGameState(GState.FINISHING);
+        for (Player player : Bukkit.getOnlinePlayers()){
+            player.setGameMode(GameMode.SURVIVAL);
+            player.teleport(Bukkit.getWorld("World").getSpawnLocation());
+            Utils.resetPlayer(player);
+        }
+        Bukkit.broadcastMessage("The winner is " +  winner.getName());
     }
     public List<UUID> getPlayerList(){
         return playerList;
@@ -110,6 +113,7 @@ public class GameManager {
     }
     public void setGameMode(Modes mode){
         this.gameMode = mode;
+        gameModeInstance = mode.createInstance();
     }
     public Mode getGameModeInstance(){
         return gameModeInstance;
@@ -148,6 +152,17 @@ public class GameManager {
     }
     public String getHostName(){
         return hostName;
+    }
+
+    // Alive Players
+    public List<UUID> getAlivePlayers() {
+        return alivePlayers;
+    }
+    public void addAlivePlayer(UUID uuid){
+        if (alivePlayers.contains(uuid)) deadPlayers.add(uuid);
+    }
+    public void removeAlivePlayer(UUID uuid){
+        alivePlayers.remove(uuid);
     }
 
     // Dead Players
@@ -201,5 +216,10 @@ public class GameManager {
     public void setMonsterSpawn(boolean b){
         monsterSpawn = b;
     }
-
+    public boolean isRaceActivated() {
+        return raceActivated;
+    }
+    public void setRaceActivated(boolean raceActivated) {
+        this.raceActivated = raceActivated;
+    }
 }

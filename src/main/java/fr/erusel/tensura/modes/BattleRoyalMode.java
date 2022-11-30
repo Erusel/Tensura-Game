@@ -1,7 +1,13 @@
 package fr.erusel.tensura.modes;
 
+import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Modes;
+import fr.erusel.tensura.enums.RaceStages;
+import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.objects.Mode;
+import fr.erusel.tensura.objects.Race;
+import fr.erusel.tensura.scoreboards.BattleRoyalScoreboard;
+import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -9,14 +15,30 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
+import java.util.Random;
+
 public class BattleRoyalMode extends Mode {
     public BattleRoyalMode() {
-        super("Battle Royal", Modes.BATTLE_ROYAL, false);
+        super("Battle Royal", Modes.BATTLE_ROYAL, new BattleRoyalScoreboard(), false);
     }
 
     @Override
     public void onPlayerSpawn(Player player) {
 
+        // Give Skills
+        for (int z = 0; z < Main.getInstance().getGameManager().getSkillOnStart(); z++) {
+            int i = new Random().nextInt(Main.getInstance().getGameManager().getUniqueSkillAvailable().size());
+            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
+            Main.getInstance().getGameManager().getUniqueSkillAvailable().remove(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
+        }
+
+        // Give Races
+        if (Main.getInstance().getGameManager().isRaceActivated()){
+            Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
+            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
+            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
+            player.sendMessage("§aYou have been resurrected as a " + race.getName());
+        }
     }
 
     @Override
@@ -26,7 +48,7 @@ public class BattleRoyalMode extends Mode {
 
     @Override
     public void onFinish() {
-
+        Utils.VoiceOfTheWorldBroadcast("GAME ENDED, 1 ALIVE PLAYER");
     }
 
     @Override
@@ -41,12 +63,13 @@ public class BattleRoyalMode extends Mode {
 
     @Override
     public void onPlayerDeath(PlayerDeathEvent event) {
-
+        if (Main.getInstance().getGameManager().getAlivePlayers().size() == 1){
+            onFinish();
+        }
     }
 
     @Override
     public void onPlayerRespawn(PlayerRespawnEvent event) {
-
     }
 
     @Override

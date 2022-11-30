@@ -17,7 +17,7 @@ public class GameLoopRunnable extends BukkitRunnable {
         if (Main.getInstance().getGameManager().getGameState().equals(GState.WAITING))
             Main.getInstance().getScoreboardManager().refreshWaitingScoreboard();
         if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
-            Main.getInstance().getScoreboardManager().refreshPlayingScoreboard();
+            Main.getInstance().getGameManager().getGameModeInstance().refreshScoreboard();
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (Main.getInstance().getGameManager().getPlayerList().contains(player.getUniqueId())) {
                     for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {

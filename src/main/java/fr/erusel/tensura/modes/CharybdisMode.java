@@ -3,6 +3,7 @@ package fr.erusel.tensura.modes;
 import fr.erusel.tensura.enums.Modes;
 import fr.erusel.tensura.managers.TeamManager;
 import fr.erusel.tensura.objects.Mode;
+import fr.erusel.tensura.scoreboards.CharybdisScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -12,7 +13,7 @@ import org.bukkit.event.player.*;
 
 public class CharybdisMode extends Mode {
     public CharybdisMode() {
-        super("Charybdis Hunt", Modes.CHARYBDIS, true);
+        super("Charybdis Hunt", Modes.CHARYBDIS, new CharybdisScoreboard(), true);
     }
 
     @Override

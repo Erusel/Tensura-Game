@@ -66,7 +66,7 @@ public class GPlayer {
      */
     public boolean haveSkill(Skills skill){
         for (Skill skills: getPlayerSkills()) {
-            if (skills.getName().equals(skill.getSkillName())) return true;
+            if (skills.isSkill(skill)) return true;
         }
         return false;
     }
@@ -253,7 +253,8 @@ public class GPlayer {
 
     public void ressurect(){
         Player player = Bukkit.getPlayer(playerUUID);
-        Main.getInstance().getGameManager().removeDeadPlayers(player.getUniqueId());
+        Main.getInstance().getGameManager().removeDeadPlayers(playerUUID);
+        Main.getInstance().getGameManager().addAlivePlayer(playerUUID);
         player.setGameMode(GameMode.SURVIVAL);
         player.teleport(player.getWorld().getSpawnLocation());
         player.sendMessage("You been be resurrected");
