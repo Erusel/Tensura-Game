@@ -7,7 +7,7 @@ import fr.erusel.tensura.managers.ScoreBoardManager;
 public abstract class GScoreboard{
 
     ScoreBoardManager scoreBoardManager = Main.getInstance().getScoreboardManager();
-    GameManager gameManager = Main.getInstance().getGameManager();
+    GameManager gameManager = GameManager.getInstance();
 
     public GameManager getGameManager() {
         return gameManager;

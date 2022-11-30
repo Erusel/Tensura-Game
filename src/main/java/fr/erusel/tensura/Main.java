@@ -1,13 +1,15 @@
 package fr.erusel.tensura;
 
-import fr.erusel.tensura.commands.*;
+import fr.erusel.tensura.commands.SkillCommand;
+import fr.erusel.tensura.commands.TeamCommand;
+import fr.erusel.tensura.commands.TensuraCommand;
+import fr.erusel.tensura.commands.TensuraTabCompleter;
 import fr.erusel.tensura.listeners.PlayerListener;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
 import fr.erusel.tensura.managers.WorldManager;
 import fr.erusel.tensura.threads.GameLoopRunnable;
-import fr.mrmicky.fastboard.FastBoard;
 import fr.mrmicky.fastinv.FastInvManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -18,21 +20,21 @@ public final class Main extends JavaPlugin {
     private static Main main;
     private final WorldManager worldManager = new WorldManager();
     private final ScoreBoardManager scoreBoardManager = new ScoreBoardManager();
-    private final GameManager gameManager = new GameManager();
+    private GameManager gameManager;
     private final PlayerManager playerManager = new PlayerManager();
 
     @Override
     public void onEnable() {
         main = this;
+        gameManager = new GameManager();
         FastInvManager.register(this);
-
+        saveDefaultConfig();
         registerCommands();
         registerListeners();
 
         for (Player player : Bukkit.getOnlinePlayers()){
-            FastBoard board = new FastBoard(player);
-            board.updateTitle("§bTensura §3Game");
-            Main.getInstance().getScoreboardManager().scoreboard.put(player.getUniqueId(), board);
+            scoreBoardManager.initializeScoreboard(player);
+
             if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
                 gameManager.getPlayerList().add(player.getUniqueId());
             }else {
@@ -52,9 +54,6 @@ public final class Main extends JavaPlugin {
 
     public WorldManager getWorldManager(){
         return worldManager;
-    }
-    public GameManager getGameManager() {
-        return gameManager;
     }
     public ScoreBoardManager getScoreboardManager() {
         return scoreBoardManager;

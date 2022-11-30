@@ -8,10 +8,7 @@ import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -19,6 +16,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class GameManager {
+
+    private static GameManager instance = null;
 
     // Server
     private GState gameState = GState.WAITING;
@@ -44,12 +43,13 @@ public class GameManager {
     private final List<UUID> alivePlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
+    public GameManager() {
+        instance = this;
+    }
 
-
-
-
-
-
+    public static GameManager getInstance() {
+        return instance;
+    }
 
     // Game methode
     public void startGame(Player p){

@@ -1,7 +1,6 @@
 package fr.erusel.tensura.modes;
 
 import fr.erusel.tensura.enums.Modes;
-import fr.erusel.tensura.managers.TeamManager;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.scoreboards.CharybdisScoreboard;
 import org.bukkit.Bukkit;
@@ -23,7 +22,14 @@ public class CharybdisMode extends Mode {
 
     @Override
     public void onStart() {
-        Bukkit.broadcastMessage("§5Charybdis Hunt");
+        Bukkit.broadcastMessage("§7-------------§5Charybdis Hunt§7-------------");
+        Bukkit.broadcastMessage("§7Welcome in Charybdis Hunt");
+        Bukkit.broadcastMessage("§7You and your team you need to collect");
+        Bukkit.broadcastMessage("§7every part of Charybdis for winning !");
+        Bukkit.broadcastMessage("§7-------------------§6HINT-------------------");
+        Bukkit.broadcastMessage("§7You can craft a §6Compass§7 for find the");
+        Bukkit.broadcastMessage("§7sanctuaries where charybdis part are hidden !");
+        Bukkit.broadcastMessage("§7--------------------------------------------");
     }
 
     @Override

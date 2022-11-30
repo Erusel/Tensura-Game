@@ -5,6 +5,7 @@ import fr.erusel.tensura.enums.Prefixs;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.inventories.config.ConfigMainGUI;
+import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
@@ -39,7 +40,7 @@ public class TensuraCommand implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("start")){
-            Main.getInstance().getGameManager().startGame(player);
+            GameManager.getInstance().startGame(player);
             return true;
         }
         if (args[0].equalsIgnoreCase("config")){
@@ -48,7 +49,7 @@ public class TensuraCommand implements CommandExecutor {
         }
         if (args[0].equalsIgnoreCase("sethost")) {
             if (Bukkit.getPlayer(args[1]) != null){
-                Main.getInstance().getGameManager().setPlayerHost(Bukkit.getPlayer(args[1]));
+                GameManager.getInstance().setPlayerHost(Bukkit.getPlayer(args[1]));
                 player.sendMessage("Player " + Bukkit.getPlayer(args[1]).getName() + " has been set as Host");
                 return true;
             }else player.sendMessage("§cPlayer not found");

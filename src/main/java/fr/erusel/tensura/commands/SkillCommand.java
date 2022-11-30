@@ -3,6 +3,7 @@ package fr.erusel.tensura.commands;
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.inventories.SkillGUI;
+import fr.erusel.tensura.managers.GameManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -16,8 +17,8 @@ public class SkillCommand implements CommandExecutor {
         if (!(sender instanceof Player)) return false;
         Player player = (Player) sender;
 
-        if (!Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) return true;
-        if (Main.getInstance().getGameManager().getDeadPlayers().contains(player.getUniqueId())){
+        if (!GameManager.getInstance().getGameState().equals(GState.PLAYING)) return true;
+        if (GameManager.getInstance().getDeadPlayers().contains(player.getUniqueId())){
             player.sendMessage("§cYou can't do this, you are dead.");
             return true;
         }

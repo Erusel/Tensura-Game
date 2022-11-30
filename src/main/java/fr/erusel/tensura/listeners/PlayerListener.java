@@ -31,7 +31,7 @@ import java.util.Random;
 
 public class PlayerListener implements Listener {
 
-    GameManager gameManager = Main.getInstance().getGameManager();
+    GameManager gameManager = GameManager.getInstance();
     ScoreBoardManager scoreBoardManager = Main.getInstance().getScoreboardManager();
 
     @EventHandler
@@ -40,9 +40,7 @@ public class PlayerListener implements Listener {
         Player player = event.getPlayer();
         event.setJoinMessage("§7[§5+§7] " + player.getDisplayName());
         Utils.resetPlayer(player);
-        FastBoard board = new FastBoard(player);
-        board.updateTitle("§bTensura §3Game");
-        Main.getInstance().getScoreboardManager().scoreboard.put(player.getUniqueId(), board);
+        scoreBoardManager.initializeScoreboard(player);
 
         if (gameManager.getGameState().equals(GState.WAITING)){
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
@@ -56,7 +54,7 @@ public class PlayerListener implements Listener {
         } else if (gameManager.getGameState().equals(GState.PLAYING)) {
             gameManager.getGameModeInstance().refreshScoreboard();
             gameManager.getGameModeInstance().onPlayerJoin(event);
-            for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onPlayerJoin(event);
+            for (Scenario scenario : GameManager.getInstance().getActivatedScenariosInstance()) scenario.onPlayerJoin(event);
         } else {
             Main.getInstance().getScoreboardManager().refreshWaitingScoreboard();
         }
@@ -82,7 +80,7 @@ public class PlayerListener implements Listener {
         }
         if (gameManager.getGameState().equals(GState.PLAYING)){
             gameManager.getGameModeInstance().onPlayerLeave(event);
-            for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onPlayerLeave(event);
+            for (Scenario scenario : GameManager.getInstance().getActivatedScenariosInstance()) scenario.onPlayerLeave(event);
 
         }
     }
@@ -160,7 +158,7 @@ public class PlayerListener implements Listener {
                         }
                     }
             }
-            for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onEntityDamageByEntity(event);
+            for (Scenario scenario : GameManager.getInstance().getActivatedScenariosInstance()) scenario.onEntityDamageByEntity(event);
 
             if (damager instanceof Player){
                 // Checking if the damager is a Majin, and if so, it has a 5% chance to apply the hunger effect to the
@@ -204,7 +202,7 @@ public class PlayerListener implements Listener {
             return;
         }
         Player player = (Player) event.getEntity();
-        for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onDamage(event);
+        for (Scenario scenario : GameManager.getInstance().getActivatedScenariosInstance()) scenario.onDamage(event);
 
         for (Skill skill: Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
             if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamage(event);
@@ -261,7 +259,7 @@ public class PlayerListener implements Listener {
         if (gameManager.getGameState().equals(GState.WAITING)) event.setCancelled(true);
         if (!(event.getEntity() instanceof Player)) return;
         Player player = (Player) event.getEntity();
-        if (Main.getInstance().getGameManager().isRaceActivated()){
+        if (GameManager.getInstance().isRaceActivated()){
             if (Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().getName().equals(Races.SLIME.getName())) event.setCancelled(true);
 
         }

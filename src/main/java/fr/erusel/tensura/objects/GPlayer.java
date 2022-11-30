@@ -3,6 +3,7 @@ package fr.erusel.tensura.objects;
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.threads.HarvestFestivalRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -253,8 +254,8 @@ public class GPlayer {
 
     public void ressurect(){
         Player player = Bukkit.getPlayer(playerUUID);
-        Main.getInstance().getGameManager().removeDeadPlayers(playerUUID);
-        Main.getInstance().getGameManager().addAlivePlayer(playerUUID);
+        GameManager.getInstance().removeDeadPlayers(playerUUID);
+        GameManager.getInstance().addAlivePlayer(playerUUID);
         player.setGameMode(GameMode.SURVIVAL);
         player.teleport(player.getWorld().getSpawnLocation());
         player.sendMessage("You been be resurrected");

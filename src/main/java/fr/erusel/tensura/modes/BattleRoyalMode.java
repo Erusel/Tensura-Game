@@ -4,6 +4,7 @@ import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Modes;
 import fr.erusel.tensura.enums.RaceStages;
 import fr.erusel.tensura.enums.Races;
+import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.scoreboards.BattleRoyalScoreboard;
@@ -26,14 +27,14 @@ public class BattleRoyalMode extends Mode {
     public void onPlayerSpawn(Player player) {
 
         // Give Skills
-        for (int z = 0; z < Main.getInstance().getGameManager().getSkillOnStart(); z++) {
-            int i = new Random().nextInt(Main.getInstance().getGameManager().getUniqueSkillAvailable().size());
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
-            Main.getInstance().getGameManager().getUniqueSkillAvailable().remove(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
+        for (int z = 0; z < GameManager.getInstance().getSkillOnStart(); z++) {
+            int i = new Random().nextInt(GameManager.getInstance().getUniqueSkillAvailable().size());
+            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(GameManager.getInstance().getUniqueSkillAvailable().get(i));
+            GameManager.getInstance().getUniqueSkillAvailable().remove(GameManager.getInstance().getUniqueSkillAvailable().get(i));
         }
 
         // Give Races
-        if (Main.getInstance().getGameManager().isRaceActivated()){
+        if (GameManager.getInstance().isRaceActivated()){
             Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
             Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
             Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
@@ -63,7 +64,7 @@ public class BattleRoyalMode extends Mode {
 
     @Override
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (Main.getInstance().getGameManager().getAlivePlayers().size() == 1){
+        if (GameManager.getInstance().getAlivePlayers().size() == 1){
             onFinish();
         }
     }

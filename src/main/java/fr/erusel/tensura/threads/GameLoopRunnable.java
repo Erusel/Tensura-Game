@@ -2,6 +2,7 @@ package fr.erusel.tensura.threads;
 
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
+import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
@@ -14,12 +15,12 @@ public class GameLoopRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (Main.getInstance().getGameManager().getGameState().equals(GState.WAITING))
+        if (GameManager.getInstance().getGameState().equals(GState.WAITING))
             Main.getInstance().getScoreboardManager().refreshWaitingScoreboard();
-        if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
-            Main.getInstance().getGameManager().getGameModeInstance().refreshScoreboard();
+        if (GameManager.getInstance().getGameState().equals(GState.PLAYING)) {
+            GameManager.getInstance().getGameModeInstance().refreshScoreboard();
             for (Player player : Bukkit.getOnlinePlayers()) {
-                if (Main.getInstance().getGameManager().getPlayerList().contains(player.getUniqueId())) {
+                if (GameManager.getInstance().getPlayerList().contains(player.getUniqueId())) {
                     for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
                         if (skill instanceof PassiveSkill) {
                             ((PassiveSkill) skill).eachSecond(player);

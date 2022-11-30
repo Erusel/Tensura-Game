@@ -3,6 +3,7 @@ package fr.erusel.tensura.inventories.config;
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.managers.GameManager;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Material;
@@ -19,14 +20,14 @@ public class ConfigSettingsGUI extends FastInv {
 
         // Skill on start
         ItemBuilder skillOnStart = new ItemBuilder(Material.ACACIA_PLANKS);
-        skillOnStart.name("§6Unique Skill on start : " + Main.getInstance().getGameManager().getSkillOnStart());
+        skillOnStart.name("§6Unique Skill on start : " + GameManager.getInstance().getSkillOnStart());
         skillOnStart.addLore("§7---------------");
         skillOnStart.addLore("§7> §6Left Click +");
         skillOnStart.addLore("§7> §6Right Click -");
 
         // Natural Regen
         ItemBuilder naturalRegen;
-        if (Main.getInstance().getGameManager().getNaturalRegen()) {
+        if (GameManager.getInstance().getNaturalRegen()) {
             naturalRegen = new ItemBuilder(Material.GREEN_WOOL);
             naturalRegen.name("§6Natural Regeneration : §aEnabled");
         }
@@ -37,7 +38,7 @@ public class ConfigSettingsGUI extends FastInv {
 
         // Monster Spawn
         ItemBuilder monsterSpawn;
-        if (Main.getInstance().getGameManager().getNaturalRegen()) {
+        if (GameManager.getInstance().getNaturalRegen()) {
             monsterSpawn = new ItemBuilder(Material.GREEN_WOOL);
             monsterSpawn.name("§6Monster Spawn : §aEnabled");
         }
@@ -48,7 +49,7 @@ public class ConfigSettingsGUI extends FastInv {
 
         // Races Activated
         ItemBuilder raceActivated;
-        if (Main.getInstance().getGameManager().isRaceActivated()) {
+        if (GameManager.getInstance().isRaceActivated()) {
             raceActivated = new ItemBuilder(Material.GREEN_WOOL);
             raceActivated.name("§6Races : §aEnabled");
         }
@@ -68,20 +69,20 @@ public class ConfigSettingsGUI extends FastInv {
     private void skillOnStart(InventoryClickEvent event) {
 
         if (event.getClick().equals(ClickType.LEFT)) {
-            if (Main.getInstance().getGameManager().getSkillOnStart() < Skills.getAllSkillByTier(SkillTier.UNIQUE).size()) {
-                Main.getInstance().getGameManager().setSkillOnStart(Main.getInstance().getGameManager().getSkillOnStart() + 1);
+            if (GameManager.getInstance().getSkillOnStart() < Skills.getAllSkillByTier(SkillTier.UNIQUE).size()) {
+                GameManager.getInstance().setSkillOnStart(GameManager.getInstance().getSkillOnStart() + 1);
                 ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
-                itemMeta.setDisplayName("§6Unique Skill on start : " + Main.getInstance().getGameManager().getSkillOnStart());
+                itemMeta.setDisplayName("§6Unique Skill on start : " + GameManager.getInstance().getSkillOnStart());
                 event.getCurrentItem().setItemMeta(itemMeta);
                 ((Player) event.getWhoClicked()).updateInventory();
                 return;
             }
         }
         if (event.getClick().equals(ClickType.RIGHT)) {
-            if (Main.getInstance().getGameManager().getSkillOnStart() > 1) {
-                Main.getInstance().getGameManager().setSkillOnStart(Main.getInstance().getGameManager().getSkillOnStart() - 1);
+            if (GameManager.getInstance().getSkillOnStart() > 1) {
+                GameManager.getInstance().setSkillOnStart(GameManager.getInstance().getSkillOnStart() - 1);
                 ItemMeta itemMetaa = event.getCurrentItem().getItemMeta();
-                itemMetaa.setDisplayName("§6Unique Skill on start : " + Main.getInstance().getGameManager().getSkillOnStart());
+                itemMetaa.setDisplayName("§6Unique Skill on start : " + GameManager.getInstance().getSkillOnStart());
                 event.getCurrentItem().setItemMeta(itemMetaa);
                 ((Player) event.getWhoClicked()).updateInventory();
                 return;
@@ -92,15 +93,15 @@ public class ConfigSettingsGUI extends FastInv {
     }
 
     private void naturalRegen(InventoryClickEvent event){
-        if (!Main.getInstance().getGameManager().getNaturalRegen()){
-            Main.getInstance().getGameManager().setNaturalRegen(true);
+        if (!GameManager.getInstance().getNaturalRegen()){
+            GameManager.getInstance().setNaturalRegen(true);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Natural Regeneration : §aEnabled");
             event.getCurrentItem().setItemMeta(itemMeta);
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();
         }else {
-            Main.getInstance().getGameManager().setNaturalRegen(false);
+            GameManager.getInstance().setNaturalRegen(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Natural Regeneration : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
@@ -110,15 +111,15 @@ public class ConfigSettingsGUI extends FastInv {
     }
 
     private void monsterSpawn(InventoryClickEvent event){
-        if (!Main.getInstance().getGameManager().getMonsterSpawn()){
-            Main.getInstance().getGameManager().setMonsterSpawn(true);
+        if (!GameManager.getInstance().getMonsterSpawn()){
+            GameManager.getInstance().setMonsterSpawn(true);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Monster Spawn : §aEnabled");
             event.getCurrentItem().setItemMeta(itemMeta);
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();
         }else {
-            Main.getInstance().getGameManager().setMonsterSpawn(false);
+            GameManager.getInstance().setMonsterSpawn(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Monster Spawn : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
@@ -127,15 +128,15 @@ public class ConfigSettingsGUI extends FastInv {
         }
     }
     private void raceActivated(InventoryClickEvent event){
-        if (!Main.getInstance().getGameManager().isRaceActivated()){
-            Main.getInstance().getGameManager().setRaceActivated(true);
+        if (!GameManager.getInstance().isRaceActivated()){
+            GameManager.getInstance().setRaceActivated(true);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Races : §aEnabled");
             event.getCurrentItem().setItemMeta(itemMeta);
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();
         }else {
-            Main.getInstance().getGameManager().setRaceActivated(false);
+            GameManager.getInstance().setRaceActivated(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Races : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
