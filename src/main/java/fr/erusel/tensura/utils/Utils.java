@@ -29,4 +29,8 @@ public class Utils {
         Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + message);
     }
 
+    public static String getTime(Integer secs) {
+        return String.format("§7%02d§7:§7%02d§7:§7%02d", ((secs / 3600) % 24), (secs % 3600) / 60, secs % 60);
+    }
+
 }

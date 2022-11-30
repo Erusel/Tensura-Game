@@ -12,11 +12,13 @@ public abstract class Mode {
     private final String modeName;
     private final Modes mode;
     private final boolean haveTeam;
+    private final GScoreboard gScoreboard;
 
-    public Mode(String modeName, Modes mode, boolean haveTeam) {
+    public Mode(String modeName, Modes mode, GScoreboard gScoreboard, boolean haveTeam) {
         this.modeName = modeName;
         this.mode = mode;
         this.haveTeam = haveTeam;
+        this.gScoreboard = gScoreboard;
     }
 
     public Modes getMode() {
@@ -28,8 +30,13 @@ public abstract class Mode {
     public boolean haveTeam(){
         return haveTeam;
     }
+    public GScoreboard getGScoreboard(){
+        return gScoreboard;
+    }
 
-
+    public void refreshScoreboard(){
+        gScoreboard.refreshPlayingScoreboard();
+    }
     public abstract void onPlayerSpawn(Player player);
     public abstract void onStart();
     public abstract void onFinish();

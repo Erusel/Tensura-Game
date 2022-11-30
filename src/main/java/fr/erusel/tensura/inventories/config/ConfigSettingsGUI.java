@@ -46,9 +46,21 @@ public class ConfigSettingsGUI extends FastInv {
             monsterSpawn.name("§6Monster Spawn : §cDisabled");
         }
 
+        // Races Activated
+        ItemBuilder raceActivated;
+        if (Main.getInstance().getGameManager().isRaceActivated()) {
+            raceActivated = new ItemBuilder(Material.GREEN_WOOL);
+            raceActivated.name("§6Races : §aEnabled");
+        }
+        else {
+            raceActivated = new ItemBuilder(Material.RED_WOOL);
+            raceActivated.name("§6Races : §cDisabled");
+        }
+
         setItem(10, skillOnStart.build(), this::skillOnStart);
         setItem(11, naturalRegen.build(), this::naturalRegen);
         setItem(12, monsterSpawn.build(), this::monsterSpawn);
+        setItem(13, raceActivated.build(), this::raceActivated);
 
 
     }
@@ -109,6 +121,23 @@ public class ConfigSettingsGUI extends FastInv {
             Main.getInstance().getGameManager().setMonsterSpawn(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Monster Spawn : §cDisabled");
+            event.getCurrentItem().setItemMeta(itemMeta);
+            event.getCurrentItem().setType(Material.RED_WOOL);
+            ((Player) event.getWhoClicked()).updateInventory();
+        }
+    }
+    private void raceActivated(InventoryClickEvent event){
+        if (!Main.getInstance().getGameManager().isRaceActivated()){
+            Main.getInstance().getGameManager().setRaceActivated(true);
+            ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
+            itemMeta.setDisplayName("§6Races : §aEnabled");
+            event.getCurrentItem().setItemMeta(itemMeta);
+            event.getCurrentItem().setType(Material.GREEN_WOOL);
+            ((Player) event.getWhoClicked()).updateInventory();
+        }else {
+            Main.getInstance().getGameManager().setRaceActivated(false);
+            ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
+            itemMeta.setDisplayName("§6Races : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
             event.getCurrentItem().setType(Material.RED_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();

@@ -7,12 +7,14 @@ import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
-import fr.erusel.tensura.objects.*;
+import fr.erusel.tensura.objects.GPlayer;
+import fr.erusel.tensura.objects.PassiveSkill;
+import fr.erusel.tensura.objects.Scenario;
+import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,7 +46,7 @@ public class PlayerListener implements Listener {
 
         if (gameManager.getGameState().equals(GState.WAITING)){
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
-            scoreBoardManager.refreshWaitingScoreboard();
+            Main.getInstance().getScoreboardManager().refreshWaitingScoreboard();
             if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
                 gameManager.getPlayerList().add(player.getUniqueId());
             }else {
@@ -52,11 +54,11 @@ public class PlayerListener implements Listener {
                 player.sendMessage("§cToo many players, added in waiting list !");
             }
         } else if (gameManager.getGameState().equals(GState.PLAYING)) {
-            scoreBoardManager.refreshPlayingScoreboard();
+            gameManager.getGameModeInstance().refreshScoreboard();
             gameManager.getGameModeInstance().onPlayerJoin(event);
             for (Scenario scenario : Main.getInstance().getGameManager().getActivatedScenariosInstance()) scenario.onPlayerJoin(event);
         } else {
-            scoreBoardManager.refreshWaitingScoreboard();
+            Main.getInstance().getScoreboardManager().refreshWaitingScoreboard();
         }
     }
 
@@ -115,6 +117,7 @@ public class PlayerListener implements Listener {
         GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
         player.setGameMode(GameMode.SPECTATOR);
         gameManager.addDeadPlayer(player.getUniqueId());
+        gameManager.removeAlivePlayer(player.getUniqueId());
         if (gameManager.getGameState().equals(GState.PLAYING)){
             gameManager.getGameModeInstance().onPlayerRespawn(event);
         }
@@ -172,7 +175,7 @@ public class PlayerListener implements Listener {
                     if (i<=5) damaged.setFireTicks(200);
                 }
                 // Checking if the player is a Dwarf, and if they are, it is reducing the damage they take by 20%.
-                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getRace().getName().equals(Races.DWARF)) {
+                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getRace().getName().equals(Races.DWARF.getName())) {
                     ((Player) damaged).damage(event.getDamage()*0.8);
                 }
                 Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).setTrackingPlayer(damaged.getUniqueId());
@@ -258,6 +261,9 @@ public class PlayerListener implements Listener {
         if (gameManager.getGameState().equals(GState.WAITING)) event.setCancelled(true);
         if (!(event.getEntity() instanceof Player)) return;
         Player player = (Player) event.getEntity();
-        if (Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().equals(Races.SLIME)) event.setCancelled(true);
+        if (Main.getInstance().getGameManager().isRaceActivated()){
+            if (Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().getName().equals(Races.SLIME.getName())) event.setCancelled(true);
+
+        }
     }
 }

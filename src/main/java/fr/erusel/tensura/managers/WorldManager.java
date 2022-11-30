@@ -20,6 +20,7 @@ public class WorldManager {
         map.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
         map.setGameRule(GameRule.DO_INSOMNIA, false);
         map.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
+        map.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
     }
 
     public void deletePlayingWorld(){

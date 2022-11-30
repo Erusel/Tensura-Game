@@ -13,6 +13,16 @@ public class TeamManager {
     private final List<UUID> greenTeamPlayers = new ArrayList<>();
     private final List<UUID> yellowTeamPlayers = new ArrayList<>();
 
+
+    public String getPlayerTeam(UUID uuid){
+        if (redTeamPlayers.contains(uuid)) return "Red";
+        if (blueTeamPlayers.contains(uuid)) return "Blue";
+        if (greenTeamPlayers.contains(uuid)) return "Green";
+        if (yellowTeamPlayers.contains(uuid)) return "Yellow";
+        return "None";
+    }
+
+
     public void addRedTeamPlayer(Player player){
         if (!redTeamPlayers.contains(player.getUniqueId())) redTeamPlayers.add(player.getUniqueId());
         removeBlueTeamPlayer(player);
@@ -63,7 +73,6 @@ public class TeamManager {
     public List<UUID> getYellowTeamPlayers(){
         return yellowTeamPlayers;
     }
-
     public void clearTeams(){
         redTeamPlayers.clear();
         blueTeamPlayers.clear();
