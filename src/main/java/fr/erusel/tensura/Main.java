@@ -18,15 +18,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Main extends JavaPlugin {
 
     private static Main main;
-    private final WorldManager worldManager = new WorldManager();
-    private final ScoreBoardManager scoreBoardManager = new ScoreBoardManager();
-    private GameManager gameManager;
-    private final PlayerManager playerManager = new PlayerManager();
+    private static ScoreBoardManager scoreBoardManager;
+    private static GameManager gameManager;
 
     @Override
     public void onEnable() {
+
+        // Singleton Instance
         main = this;
         gameManager = new GameManager();
+        scoreBoardManager = new ScoreBoardManager();
+        new WorldManager();
+        new PlayerManager();
+
         FastInvManager.register(this);
         saveDefaultConfig();
         registerCommands();
@@ -52,15 +56,6 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    public WorldManager getWorldManager(){
-        return worldManager;
-    }
-    public ScoreBoardManager getScoreboardManager() {
-        return scoreBoardManager;
-    }
-    public PlayerManager getPlayerManager(){
-        return playerManager;
-    }
     public static Main getInstance(){
         return main;
     }

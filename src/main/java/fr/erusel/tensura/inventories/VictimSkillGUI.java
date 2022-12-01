@@ -1,6 +1,6 @@
 package fr.erusel.tensura.inventories;
 
-import fr.erusel.tensura.Main;
+import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
@@ -16,7 +16,7 @@ public class VictimSkillGUI extends FastInv {
         super(27, victim.getName() + "'s Skills");
 
         // Ultimate Skills
-        for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(victim.getUniqueId()).getPlayerUltimateSkills()){
+        for (Skill skill : PlayerManager.getInstance().getGPlayerByUUID(victim.getUniqueId()).getPlayerUltimateSkills()){
             if (skill instanceof PassiveSkill){
                 addItem(new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
             } else if (skill instanceof ActiveSkill) {
@@ -29,7 +29,7 @@ public class VictimSkillGUI extends FastInv {
         }
 
         // Unique Skill
-        for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(victim.getUniqueId()).getPlayerUniqueSkills()){
+        for (Skill skill : PlayerManager.getInstance().getGPlayerByUUID(victim.getUniqueId()).getPlayerUniqueSkills()){
             if (skill instanceof PassiveSkill){
                 addItem(new ItemBuilder(Material.BLUE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
             } else if (skill instanceof ActiveSkill) {

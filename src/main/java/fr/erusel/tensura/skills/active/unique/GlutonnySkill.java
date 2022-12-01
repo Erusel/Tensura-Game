@@ -1,9 +1,9 @@
 package fr.erusel.tensura.skills.active.unique;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.BeelzebuthSkill;
@@ -18,7 +18,7 @@ public class GlutonnySkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setGlutonny(true);
+        PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).setGlutonny(true);
         activateCooldown();
     }
 }

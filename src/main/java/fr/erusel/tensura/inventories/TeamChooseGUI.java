@@ -1,6 +1,5 @@
 package fr.erusel.tensura.inventories;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.managers.GameManager;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;

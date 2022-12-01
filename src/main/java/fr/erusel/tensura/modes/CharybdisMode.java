@@ -1,6 +1,7 @@
 package fr.erusel.tensura.modes;
 
 import fr.erusel.tensura.enums.Modes;
+import fr.erusel.tensura.managers.WorldManager;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.scoreboards.CharybdisScoreboard;
 import org.bukkit.Bukkit;
@@ -10,9 +11,19 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
+
 public class CharybdisMode extends Mode {
     public CharybdisMode() {
         super("Charybdis Hunt", Modes.CHARYBDIS, new CharybdisScoreboard(), true);
+    }
+
+    @Override
+    public void teleportPlayers() {
+
+        for (Player player : Bukkit.getOnlinePlayers()){
+            player.teleport(WorldManager.getInstance().getMap().getSpawnLocation());
+            onPlayerSpawn(player);
+        }
     }
 
     @Override

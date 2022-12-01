@@ -37,6 +37,7 @@ public abstract class Mode {
     public void refreshScoreboard(){
         gScoreboard.refreshPlayingScoreboard();
     }
+    public abstract void teleportPlayers();
     public abstract void onPlayerSpawn(Player player);
     public abstract void onStart();
     public abstract void onFinish();

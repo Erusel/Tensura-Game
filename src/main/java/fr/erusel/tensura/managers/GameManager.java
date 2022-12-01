@@ -1,6 +1,5 @@
 package fr.erusel.tensura.managers;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.*;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Scenario;
@@ -27,6 +26,7 @@ public class GameManager {
 
     // Settings
     private int skillOnStart = 1;
+    private int borderRadius = 1000;
     private boolean naturalRegen = false;
     private boolean monsterSpawn = true;
     private boolean raceActivated = true;
@@ -70,9 +70,9 @@ public class GameManager {
         for (Scenarios scenarios : getActivatedScenarios()) getActivatedScenariosInstance().add(scenarios.createInstance());
 
         // Creating World
-        Main.getInstance().getWorldManager().deletePlayingWorld();
+        WorldManager.getInstance().deletePlayingWorld();
         Utils.VoiceOfTheWorldBroadcast("Creating world...");
-        Main.getInstance().getWorldManager().createPlayingWorld();
+        WorldManager.getInstance().createPlayingWorld();
         Utils.VoiceOfTheWorldBroadcast("Successful");
         Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
 
@@ -85,11 +85,10 @@ public class GameManager {
         for (Player player : Bukkit.getOnlinePlayers()){
             player.setGameMode(GameMode.SURVIVAL);
             playerList.add(player.getUniqueId());
-            Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
-            gameModeInstance.onPlayerSpawn(player);
-            Main.getInstance().getWorldManager().teleportPlayerToMap(player);
+            PlayerManager.getInstance().createPlayerGPlayer(player);
             Utils.resetPlayer(player);
         }
+        gameModeInstance.teleportPlayers();
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
         gameModeInstance.onStart();
@@ -221,5 +220,11 @@ public class GameManager {
     }
     public void setRaceActivated(boolean raceActivated) {
         this.raceActivated = raceActivated;
+    }
+    public int getBorderRadius() {
+        return borderRadius;
+    }
+    public void setBorderRadius(int borderRadius) {
+        this.borderRadius = borderRadius;
     }
 }

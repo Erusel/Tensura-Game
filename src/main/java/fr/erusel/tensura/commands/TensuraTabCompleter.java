@@ -1,6 +1,5 @@
 package fr.erusel.tensura.commands;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;

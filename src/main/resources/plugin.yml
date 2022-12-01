@@ -1,13 +1,13 @@
-name: Tsddkuhc
+name: TensuraGame
 version: '${version}'
 main: fr.erusel.tensura.Main
 api-version: 1.16
-authors: [ Erusel ]
+authors: [ Erusel, Fnafgameur ]
 commands:
   tensura:
-    description: "Oui oui baguette"
+    description: "Host command for the Game"
     permission: tensura.tensura
   skill:
-    description: "Affiche les skills du joueur"
+    description: "Show skills of the player"
   team:
-    description: "Teamers de merde"
+    description: "Select your team here"

@@ -1,7 +1,7 @@
 package fr.erusel.tensura.scoreboards;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.managers.GameManager;
+import fr.erusel.tensura.managers.ScoreBoardManager;
 import fr.erusel.tensura.objects.GScoreboard;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.ChatColor;
@@ -12,7 +12,7 @@ import java.util.UUID;
 public class CharybdisScoreboard extends GScoreboard {
     @Override
     public void refreshPlayingScoreboard() {
-        HashMap<UUID, FastBoard> scoreboard = Main.getInstance().getScoreboardManager().scoreboard;
+        HashMap<UUID, FastBoard> scoreboard = ScoreBoardManager.getInstance().scoreboard;
 
         for (FastBoard board: scoreboard.values()){
 

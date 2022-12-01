@@ -1,26 +1,34 @@
 package fr.erusel.tensura.managers;
 
-import fr.erusel.tensura.Main;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
-import javax.swing.text.Element;
 import java.util.HashMap;
 import java.util.UUID;
 
 public class ScoreBoardManager  {
 
+    private static ScoreBoardManager instance;
+
     public final HashMap<UUID, FastBoard> scoreboard = new HashMap<>();
+
+    public ScoreBoardManager() {
+        instance = this;
+    }
+
+    public static ScoreBoardManager getInstance() {
+        return instance;
+    }
 
     public void initializeScoreboard(Player player){
         FastBoard board = new FastBoard(player);
         board.updateTitle("§bTensura §3Game");
-        Main.getInstance().getScoreboardManager().scoreboard.put(player.getUniqueId(), board);
+        ScoreBoardManager.getInstance().scoreboard.put(player.getUniqueId(), board);
     }
 
     public void refreshWaitingScoreboard(){
-        HashMap<UUID, FastBoard> scoreboard = Main.getInstance().getScoreboardManager().scoreboard;
+        HashMap<UUID, FastBoard> scoreboard = ScoreBoardManager.getInstance().scoreboard;
 
         for (FastBoard board: scoreboard.values()){
 

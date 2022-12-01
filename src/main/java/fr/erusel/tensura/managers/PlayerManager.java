@@ -8,7 +8,13 @@ import java.util.UUID;
 
 public class PlayerManager {
 
+    private static PlayerManager instance;
+
     private final HashMap<UUID, GPlayer> GPlayers = new HashMap<>();
+
+    public static PlayerManager getInstance() {
+        return instance;
+    }
 
     // GPlayers
     public void createPlayerGPlayer(Player player){

@@ -1,6 +1,5 @@
 package fr.erusel.tensura.inventories.config;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.managers.GameManager;

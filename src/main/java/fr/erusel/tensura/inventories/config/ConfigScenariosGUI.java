@@ -1,11 +1,9 @@
 package fr.erusel.tensura.inventories.config;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Scenarios;
 import fr.erusel.tensura.managers.GameManager;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
-import net.md_5.bungee.api.chat.hover.content.Item;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;

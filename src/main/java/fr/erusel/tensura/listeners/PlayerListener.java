@@ -1,11 +1,11 @@
 package fr.erusel.tensura.listeners;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Prefixs;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.managers.GameManager;
+import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.PassiveSkill;
@@ -32,7 +32,7 @@ import java.util.Random;
 public class PlayerListener implements Listener {
 
     GameManager gameManager = GameManager.getInstance();
-    ScoreBoardManager scoreBoardManager = Main.getInstance().getScoreboardManager();
+    ScoreBoardManager scoreBoardManager = ScoreBoardManager.getInstance();
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event){
@@ -44,7 +44,7 @@ public class PlayerListener implements Listener {
 
         if (gameManager.getGameState().equals(GState.WAITING)){
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
-            Main.getInstance().getScoreboardManager().refreshWaitingScoreboard();
+            ScoreBoardManager.getInstance().refreshWaitingScoreboard();
             if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
                 gameManager.getPlayerList().add(player.getUniqueId());
             }else {
@@ -56,7 +56,7 @@ public class PlayerListener implements Listener {
             gameManager.getGameModeInstance().onPlayerJoin(event);
             for (Scenario scenario : GameManager.getInstance().getActivatedScenariosInstance()) scenario.onPlayerJoin(event);
         } else {
-            Main.getInstance().getScoreboardManager().refreshWaitingScoreboard();
+            ScoreBoardManager.getInstance().refreshWaitingScoreboard();
         }
     }
 
@@ -64,7 +64,7 @@ public class PlayerListener implements Listener {
     public void onPlayerLeave(PlayerQuitEvent event){
         Player player = event.getPlayer();
         event.setQuitMessage("§7[§c-§7] " + player.getDisplayName());
-        FastBoard board = Main.getInstance().getScoreboardManager().scoreboard.remove(player.getUniqueId());
+        FastBoard board = ScoreBoardManager.getInstance().scoreboard.remove(player.getUniqueId());
         if (board != null) {
             board.delete();
         }
@@ -89,8 +89,8 @@ public class PlayerListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         Player killer = event.getEntity().getKiller();
-        GPlayer gKiller = Main.getInstance().getPlayerManager().getGPlayerByUUID(killer.getUniqueId());
-        GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
+        GPlayer gKiller = PlayerManager.getInstance().getGPlayerByUUID(killer.getUniqueId());
+        GPlayer gPlayer = PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId());
         gKiller.addKill(1);
         event.setDeathMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Player §c" + player.getName() + " §3died against §c" + killer.getName());
 
@@ -112,7 +112,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event){
         Player player = event.getPlayer();
-        GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
+        GPlayer gPlayer = PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId());
         player.setGameMode(GameMode.SPECTATOR);
         gameManager.addDeadPlayer(player.getUniqueId());
         gameManager.removeAlivePlayer(player.getUniqueId());
@@ -134,10 +134,10 @@ public class PlayerListener implements Listener {
             return;
         }
         if(damaged instanceof Player){
-            for (Skill skill : Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getPlayerSkills()){
+            for (Skill skill : PlayerManager.getInstance().getGPlayerByUUID(damaged.getUniqueId()).getPlayerSkills()){
                 if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
             }
-            if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).isReflectorActivated()) {
+            if (PlayerManager.getInstance().getGPlayerByUUID(damaged.getUniqueId()).isReflectorActivated()) {
                 if (damager instanceof Arrow) {
                     Projectile projectile = (Projectile) damager;
                     LivingEntity shooter = (LivingEntity) projectile.getShooter();
@@ -150,7 +150,7 @@ public class PlayerListener implements Listener {
             if (damager instanceof Arrow) {
                 Projectile projectile = (Projectile) damager;
                 LivingEntity shooter = (LivingEntity) projectile.getShooter();
-                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(shooter.getUniqueId()).getRace().getName().equals(Races.ELF.getName())) {
+                if (PlayerManager.getInstance().getGPlayerByUUID(shooter.getUniqueId()).getRace().getName().equals(Races.ELF.getName())) {
                     int i = new Random().nextInt(100);
                     if (i <= 19) {
                         ((Player) damaged).damage(event.getDamage()*1.2);
@@ -163,34 +163,34 @@ public class PlayerListener implements Listener {
             if (damager instanceof Player){
                 // Checking if the damager is a Majin, and if so, it has a 5% chance to apply the hunger effect to the
                 // damaged player.
-                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).getRace().getName().equals(Races.MAJIN.getName())) {
+                if (PlayerManager.getInstance().getGPlayerByUUID(damager.getUniqueId()).getRace().getName().equals(Races.MAJIN.getName())) {
                     int i = new Random().nextInt(100);
                     if (i<=5) ((Player) damaged).addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 300,0));
                 }
                 // Checking if the player is a demon, and if they are, it has a 5% chance of setting the player on fire for 10sec.
-                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).getRace().getName().equals(Races.DEMON.getName())) {
+                if (PlayerManager.getInstance().getGPlayerByUUID(damager.getUniqueId()).getRace().getName().equals(Races.DEMON.getName())) {
                     int i = new Random().nextInt(100);
                     if (i<=5) damaged.setFireTicks(200);
                 }
                 // Checking if the player is a Dwarf, and if they are, it is reducing the damage they take by 20%.
-                if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getRace().getName().equals(Races.DWARF.getName())) {
+                if (PlayerManager.getInstance().getGPlayerByUUID(damaged.getUniqueId()).getRace().getName().equals(Races.DWARF.getName())) {
                     ((Player) damaged).damage(event.getDamage()*0.8);
                 }
-                Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).setTrackingPlayer(damaged.getUniqueId());
+                PlayerManager.getInstance().getGPlayerByUUID(damager.getUniqueId()).setTrackingPlayer(damaged.getUniqueId());
             }
         }
         if (gameManager.getGameState().equals(GState.PLAYING)){
             gameManager.getGameModeInstance().onEntityDamageByEntity(event);
         }
-        if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).isImperceptibleActivated()) {
+        if (PlayerManager.getInstance().getGPlayerByUUID(damager.getUniqueId()).isImperceptibleActivated()) {
             event.setCancelled(true);
         }
-        if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).isOppressorActivated()){
+        if (PlayerManager.getInstance().getGPlayerByUUID(damager.getUniqueId()).isOppressorActivated()){
             damaged.setVelocity(damager.getLocation().getDirection().setY(0).normalize().multiply(2));
         }
-        if (Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getMathematicianDodgeLeft() >=1){
+        if (PlayerManager.getInstance().getGPlayerByUUID(damaged.getUniqueId()).getMathematicianDodgeLeft() >=1){
             event.setCancelled(true);
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).setMathematicianDodgeLeft(Main.getInstance().getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getMathematicianDodgeLeft()-1);
+            PlayerManager.getInstance().getGPlayerByUUID(damaged.getUniqueId()).setMathematicianDodgeLeft(PlayerManager.getInstance().getGPlayerByUUID(damaged.getUniqueId()).getMathematicianDodgeLeft()-1);
         }
     }
 
@@ -204,7 +204,7 @@ public class PlayerListener implements Listener {
         Player player = (Player) event.getEntity();
         for (Scenario scenario : GameManager.getInstance().getActivatedScenariosInstance()) scenario.onDamage(event);
 
-        for (Skill skill: Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
+        for (Skill skill: PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
             if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamage(event);
         }
     }
@@ -213,7 +213,7 @@ public class PlayerListener implements Listener {
     public void onPlayerMove(PlayerMoveEvent event){
         if (gameManager.getGameState().equals(GState.PLAYING)){
             gameManager.getGameModeInstance().onPlayerMove(event);
-            if (Main.getInstance().getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()).isInHarvestFestival()) event.setCancelled(true);
+            if (PlayerManager.getInstance().getGPlayerByUUID(event.getPlayer().getUniqueId()).isInHarvestFestival()) event.setCancelled(true);
         }
     }
 
@@ -225,7 +225,7 @@ public class PlayerListener implements Listener {
         }
 
         gameManager.getGameModeInstance().onBlockBreak(event);
-        for (Skill skill: Main.getInstance().getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()).getPlayerSkills()) {
+        for (Skill skill: PlayerManager.getInstance().getGPlayerByUUID(event.getPlayer().getUniqueId()).getPlayerSkills()) {
             if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onBlockBreak(event);
         }
     }
@@ -260,7 +260,7 @@ public class PlayerListener implements Listener {
         if (!(event.getEntity() instanceof Player)) return;
         Player player = (Player) event.getEntity();
         if (GameManager.getInstance().isRaceActivated()){
-            if (Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().getName().equals(Races.SLIME.getName())) event.setCancelled(true);
+            if (PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).getRace().getName().equals(Races.SLIME.getName())) event.setCancelled(true);
 
         }
     }

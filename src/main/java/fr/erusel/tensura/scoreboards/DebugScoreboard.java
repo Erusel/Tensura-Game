@@ -1,7 +1,7 @@
 package fr.erusel.tensura.scoreboards;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.managers.GameManager;
+import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.GScoreboard;
 import fr.erusel.tensura.utils.Utils;
@@ -23,7 +23,7 @@ public class DebugScoreboard extends GScoreboard {
         for (UUID uuid : scoreboard.keySet()) {
 
             FastBoard board = scoreboard.get(uuid);
-            GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(uuid);
+            GPlayer gPlayer = PlayerManager.getInstance().getGPlayerByUUID(uuid);
 
             board.updateLine(1, "§7------------------");
             board.updateLine(2,"§7Players : " + GameManager.getInstance().getPlayerList().size() + "§3/" + ChatColor.GRAY + GameManager.getInstance().getMaxPlayer());

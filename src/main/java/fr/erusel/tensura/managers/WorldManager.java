@@ -21,8 +21,14 @@ import java.io.IOException;
 
 public class WorldManager {
 
+    private static WorldManager instance;
+
     private final String MAP_NAME = "map";
     private World map;
+
+    public WorldManager() {
+        instance = this;
+    }
 
     public void createPlayingWorld(){
         WorldCreator worldCreator = new WorldCreator(MAP_NAME);
@@ -47,10 +53,6 @@ public class WorldManager {
             deleteMap(destDir);
         }
 
-    }
-
-    public void teleportPlayerToMap(Player player){
-        player.teleport(Bukkit.getWorld(MAP_NAME).getSpawnLocation());
     }
 
     private void deleteMap(File dir) {
@@ -87,6 +89,10 @@ public class WorldManager {
 
     public World getMap(){
         return map;
+    }
+
+    public static WorldManager getInstance() {
+        return instance;
     }
 
 

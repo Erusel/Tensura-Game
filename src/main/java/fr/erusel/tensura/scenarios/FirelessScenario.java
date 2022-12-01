@@ -1,7 +1,6 @@
 package fr.erusel.tensura.scenarios;
 
 import fr.erusel.tensura.objects.Scenario;
-import org.bukkit.Bukkit;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;

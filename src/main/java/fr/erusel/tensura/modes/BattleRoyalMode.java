@@ -1,10 +1,11 @@
 package fr.erusel.tensura.modes;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Modes;
 import fr.erusel.tensura.enums.RaceStages;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.managers.GameManager;
+import fr.erusel.tensura.managers.PlayerManager;
+import fr.erusel.tensura.managers.WorldManager;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.scoreboards.BattleRoyalScoreboard;
@@ -24,20 +25,28 @@ public class BattleRoyalMode extends Mode {
     }
 
     @Override
+    public void teleportPlayers() {
+        for (Player player : Bukkit.getOnlinePlayers()){
+            player.teleport(WorldManager.getInstance().getMap().getSpawnLocation());
+            onPlayerSpawn(player);
+        }
+    }
+
+    @Override
     public void onPlayerSpawn(Player player) {
 
         // Give Skills
         for (int z = 0; z < GameManager.getInstance().getSkillOnStart(); z++) {
             int i = new Random().nextInt(GameManager.getInstance().getUniqueSkillAvailable().size());
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(GameManager.getInstance().getUniqueSkillAvailable().get(i));
+            PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).addSkill(GameManager.getInstance().getUniqueSkillAvailable().get(i));
             GameManager.getInstance().getUniqueSkillAvailable().remove(GameManager.getInstance().getUniqueSkillAvailable().get(i));
         }
 
         // Give Races
         if (GameManager.getInstance().isRaceActivated()){
             Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
+            PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).setRace(race);
+            PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
             player.sendMessage("§aYou have been resurrected as a " + race.getName());
         }
     }
