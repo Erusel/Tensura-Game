@@ -2,6 +2,7 @@ package fr.erusel.tensura.scoreboards;
 
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
+import fr.erusel.tensura.managers.ScoreBoardManager;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.GScoreboard;
 import fr.erusel.tensura.utils.Utils;
@@ -16,7 +17,7 @@ public class BattleRoyalScoreboard extends GScoreboard {
 
     @Override
     public void refreshPlayingScoreboard() {
-        HashMap<UUID, FastBoard> scoreboard = getScoreBoardManager().scoreboard;
+        HashMap<UUID, FastBoard> scoreboard = ScoreBoardManager.getInstance().scoreboard;
         int time = Math.toIntExact(Instant.now().getEpochSecond());
 
         for (UUID uuid : scoreboard.keySet()) {
