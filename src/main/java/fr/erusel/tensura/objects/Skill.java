@@ -3,8 +3,13 @@ package fr.erusel.tensura.objects;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.managers.GameManager;
+import fr.erusel.tensura.managers.PlayerManager;
 
 public abstract class Skill {
+
+    GameManager gameManager;
+    PlayerManager playerManager;
 
     private final String name;
     private final String lore;
@@ -23,6 +28,8 @@ public abstract class Skill {
         this.skillTier = skillTier;
         COOLDOWN = cooldown;
         this.ultimateSkill = ultimateSkill;
+        this.gameManager = GameManager.getInstance();
+        this.playerManager = PlayerManager.getInstance();
     }
 
     public String getName(){
@@ -55,9 +62,13 @@ public abstract class Skill {
     public Skills getSkill(){
         return skill;
     }
-
     public boolean isSkill(Skills skill){
         return this.skill == skill;
     }
-
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
 }

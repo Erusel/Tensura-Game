@@ -30,6 +30,7 @@ public class Utils {
     }
 
     public static String getTime(Integer secs) {
+
         return String.format("§7%02d§7:§7%02d§7:§7%02d", ((secs / 3600) % 24), (secs % 3600) / 60, secs % 60);
     }
 

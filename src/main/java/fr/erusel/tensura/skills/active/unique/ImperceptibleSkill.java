@@ -4,6 +4,7 @@ import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.HadesSkill;
@@ -22,11 +23,11 @@ public class ImperceptibleSkill extends Skill implements ActiveSkill {
     @Override
     public void onUse(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 600, 0, false, true));
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setImperceptible(true);
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setImperceptibleTime(30);
-        new ImperceptibleRunnable(Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
+        new ImperceptibleRunnable(PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()))
                 .runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();
     }

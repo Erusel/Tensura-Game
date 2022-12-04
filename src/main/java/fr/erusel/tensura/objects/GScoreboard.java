@@ -1,21 +1,24 @@
 package fr.erusel.tensura.objects;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.managers.GameManager;
+import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
 
 public abstract class GScoreboard{
 
-    ScoreBoardManager scoreBoardManager = Main.getInstance().getScoreboardManager();
-    GameManager gameManager = Main.getInstance().getGameManager();
+    GameManager gameManager = GameManager.getInstance();
+    PlayerManager playerManager = PlayerManager.getInstance();
+    ScoreBoardManager scoreBoardManager = ScoreBoardManager.getInstance();
 
+    public abstract void refreshPlayingScoreboard();
+
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
     public GameManager getGameManager() {
         return gameManager;
     }
-
     public ScoreBoardManager getScoreBoardManager() {
         return scoreBoardManager;
     }
-
-    public abstract void refreshPlayingScoreboard();
 }

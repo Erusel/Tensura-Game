@@ -1,6 +1,5 @@
 package fr.erusel.tensura.inventories;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.inventories.skills.FaustChooseGUI;
 import fr.erusel.tensura.objects.Skill;
@@ -18,10 +17,10 @@ public class PlayerChooseGUI extends FastInv {
     public PlayerChooseGUI(Skill skill) {
         super(45, skill.getName());
 
-        for (UUID uuid : Main.getInstance().getGameManager().getPlayerList()){
+        for (UUID uuid : getGameManager().getPlayerList()){
             if (Bukkit.getPlayer(uuid) == null) continue;
             Player p = Bukkit.getPlayer(uuid);
-            if (!Main.getInstance().getPlayerManager().getGPlayerByUUID(uuid).haveSkill(Skills.INVESTIGATORRESISTANT)) {
+            if (!getPlayerManager().getGPlayerByUUID(uuid).haveSkill(Skills.INVESTIGATORRESISTANT)) {
                 addItem(new ItemBuilder(Material.PLAYER_HEAD).name("§7" + p.getName()).skullmeta(p.getName()).build(), e -> playerChoosed(p, e, skill));
             }
 

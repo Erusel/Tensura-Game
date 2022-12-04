@@ -1,6 +1,5 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
@@ -20,7 +19,7 @@ public class MalarSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
+        GPlayer gPlayer = getPlayerManager().getGPlayerByUUID(player.getUniqueId());
         if (gPlayer.getTrackingPlayer() == null) {
             player.sendMessage("§cYou hit nobody");
             return;
@@ -29,7 +28,7 @@ public class MalarSkill extends Skill implements ActiveSkill {
             player.sendMessage("§cPlayer not found");
             return;
         }
-        else if (Main.getInstance().getGameManager().getDeadPlayers().contains(player.getUniqueId())){
+        else if (getGameManager().getDeadPlayers().contains(player.getUniqueId())){
             player.sendMessage("§cPlayer is dead.");
             return;
         }

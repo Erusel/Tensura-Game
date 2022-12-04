@@ -1,6 +1,5 @@
 package fr.erusel.tensura.skills.active.unique;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
@@ -19,7 +18,7 @@ public class StomachSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
+        GPlayer gPlayer = getPlayerManager().getGPlayerByUUID(player.getUniqueId());
         gPlayer.createStomachInventory();
         player.openInventory(gPlayer.getStomachInventory());
         activateCooldown();

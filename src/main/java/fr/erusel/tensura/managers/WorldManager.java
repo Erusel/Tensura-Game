@@ -7,8 +7,14 @@ import java.io.File;
 
 public class WorldManager {
 
+    private static WorldManager instance;
+
     private final String MAP_NAME = "map";
     private World map;
+
+    public WorldManager() {
+        instance = this;
+    }
 
     public void createPlayingWorld(){
         WorldCreator worldCreator = new WorldCreator(MAP_NAME);
@@ -35,10 +41,6 @@ public class WorldManager {
 
     }
 
-    public void teleportPlayerToMap(Player player){
-        player.teleport(Bukkit.getWorld(MAP_NAME).getSpawnLocation());
-    }
-
     private void deleteMap(File dir) {
         File[] files = dir.listFiles();
         for(File d : files){
@@ -52,6 +54,10 @@ public class WorldManager {
 
     public World getMap(){
         return map;
+    }
+
+    public static WorldManager getInstance() {
+        return instance;
     }
 
 

@@ -19,9 +19,9 @@ public class ReflectorSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setReflector(true);
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setReflectorTime(10);
-        new ReflectorRunnable(Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId())).runTaskTimer(Main.getInstance(), 0, 20);
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setReflector(true);
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setReflectorTime(10);
+        new ReflectorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId())).runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();
     }
 }

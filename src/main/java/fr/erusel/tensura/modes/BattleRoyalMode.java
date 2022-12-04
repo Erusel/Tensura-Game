@@ -1,6 +1,5 @@
 package fr.erusel.tensura.modes;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Modes;
 import fr.erusel.tensura.enums.RaceStages;
 import fr.erusel.tensura.enums.Races;
@@ -23,20 +22,28 @@ public class BattleRoyalMode extends Mode {
     }
 
     @Override
+    public void teleportPlayers() {
+        for (Player player : Bukkit.getOnlinePlayers()){
+            player.teleport(getWorldManager().getMap().getSpawnLocation());
+            onPlayerSpawn(player);
+        }
+    }
+
+    @Override
     public void onPlayerSpawn(Player player) {
 
         // Give Skills
-        for (int z = 0; z < Main.getInstance().getGameManager().getSkillOnStart(); z++) {
-            int i = new Random().nextInt(Main.getInstance().getGameManager().getUniqueSkillAvailable().size());
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
-            Main.getInstance().getGameManager().getUniqueSkillAvailable().remove(Main.getInstance().getGameManager().getUniqueSkillAvailable().get(i));
+        for (int z = 0; z < getGameManager().getSkillOnStart(); z++) {
+            int i = new Random().nextInt(getGameManager().getUniqueSkillAvailable().size());
+            getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(getGameManager().getUniqueSkillAvailable().get(i));
+            getGameManager().getUniqueSkillAvailable().remove(getGameManager().getUniqueSkillAvailable().get(i));
         }
 
         // Give Races
-        if (Main.getInstance().getGameManager().isRaceActivated()){
+        if (getGameManager().isRaceActivated()){
             Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
-            Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
+            getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
+            getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
             player.sendMessage("§aYou have been resurrected as a " + race.getName());
         }
     }
@@ -63,7 +70,7 @@ public class BattleRoyalMode extends Mode {
 
     @Override
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (Main.getInstance().getGameManager().getAlivePlayers().size() == 1){
+        if (getGameManager().getAlivePlayers().size() == 1){
             onFinish();
         }
     }

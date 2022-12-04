@@ -8,11 +8,17 @@ import java.util.UUID;
 
 public class PlayerManager {
 
+    private static PlayerManager instance;
+
     private final HashMap<UUID, GPlayer> GPlayers = new HashMap<>();
+
+    public static PlayerManager getInstance() {
+        return instance;
+    }
 
     // GPlayers
     public void createPlayerGPlayer(Player player){
-        if (!GPlayers.containsKey(player.getUniqueId())) GPlayers.put(player.getUniqueId(), new GPlayer(player.getUniqueId()));
+        if (!GPlayers.containsKey(player.getUniqueId())) GPlayers.put(player.getUniqueId(), new GPlayer(player.getUniqueId(), GameManager.getInstance()));
     }
     public void removePlayerGPlayer(Player player){
         GPlayers.remove(player.getUniqueId());

@@ -1,6 +1,5 @@
 package fr.erusel.tensura.managers;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.*;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Scenario;
@@ -8,10 +7,7 @@ import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 
 import java.time.Instant;
 import java.util.ArrayList;
@@ -19,6 +15,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class GameManager {
+
+    private static GameManager instance = null;
+    private final PlayerManager playerManager;
+    private final WorldManager worldManager;
 
     // Server
     private GState gameState = GState.WAITING;
@@ -28,9 +28,11 @@ public class GameManager {
 
     // Settings
     private int skillOnStart = 1;
+    private int borderRadius = 1000;
     private boolean naturalRegen = false;
     private boolean monsterSpawn = true;
     private boolean raceActivated = true;
+    private boolean skillDrop = true;
 
     // Game
     private Modes gameMode = Modes.DEBUG;
@@ -44,12 +46,15 @@ public class GameManager {
     private final List<UUID> alivePlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
+    public GameManager(PlayerManager playerManager, WorldManager worldManager) {
+        instance = this;
+        this.playerManager = playerManager;
+        this.worldManager = worldManager;
+    }
 
-
-
-
-
-
+    public static GameManager getInstance() {
+        return instance;
+    }
 
     // Game methode
     public void startGame(Player p){
@@ -70,9 +75,9 @@ public class GameManager {
         for (Scenarios scenarios : getActivatedScenarios()) getActivatedScenariosInstance().add(scenarios.createInstance());
 
         // Creating World
-        Main.getInstance().getWorldManager().deletePlayingWorld();
+        worldManager.deletePlayingWorld();
         Utils.VoiceOfTheWorldBroadcast("Creating world...");
-        Main.getInstance().getWorldManager().createPlayingWorld();
+        worldManager.createPlayingWorld();
         Utils.VoiceOfTheWorldBroadcast("Successful");
         Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
 
@@ -85,11 +90,10 @@ public class GameManager {
         for (Player player : Bukkit.getOnlinePlayers()){
             player.setGameMode(GameMode.SURVIVAL);
             playerList.add(player.getUniqueId());
-            Main.getInstance().getPlayerManager().createPlayerGPlayer(player);
-            gameModeInstance.onPlayerSpawn(player);
-            Main.getInstance().getWorldManager().teleportPlayerToMap(player);
+            playerManager.createPlayerGPlayer(player);
             Utils.resetPlayer(player);
         }
+        gameModeInstance.teleportPlayers();
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
         gameModeInstance.onStart();
@@ -221,5 +225,17 @@ public class GameManager {
     }
     public void setRaceActivated(boolean raceActivated) {
         this.raceActivated = raceActivated;
+    }
+    public int getBorderRadius() {
+        return borderRadius;
+    }
+    public void setBorderRadius(int borderRadius) {
+        this.borderRadius = borderRadius;
+    }
+    public boolean isSkillDrop(){
+        return skillDrop;
+    }
+    public void setSkillDrop(boolean skillDrop) {
+        this.skillDrop = skillDrop;
     }
 }

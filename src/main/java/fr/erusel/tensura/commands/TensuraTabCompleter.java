@@ -1,9 +1,9 @@
 package fr.erusel.tensura.commands;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.managers.GameManager;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -27,9 +27,9 @@ public class TensuraTabCompleter implements TabCompleter {
         int arg = 0;
 
         if (args.length == 1){
-            if (Main.getInstance().getGameManager().getGameState().equals(GState.WAITING)) {
+            if (GameManager.getInstance().getGameState().equals(GState.WAITING)) {
                 list.add("sethost");
-                if (Main.getInstance().getGameManager().playerIsHost(p)){
+                if (GameManager.getInstance().playerIsHost(p)){
                     list.add("config");
                     list.add("start");
                     list.add("pregen");
@@ -37,8 +37,8 @@ public class TensuraTabCompleter implements TabCompleter {
                     list.add("help");
                 }
             }
-            if (Main.getInstance().getGameManager().getGameState().equals(GState.PLAYING)) {
-                if (Main.getInstance().getGameManager().playerIsHost(p)){
+            if (GameManager.getInstance().getGameState().equals(GState.PLAYING)) {
+                if (GameManager.getInstance().playerIsHost(p)){
                     list.add("giveskill");
                     list.add("setrace");
                     list.add("harvestfestival");

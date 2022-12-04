@@ -1,6 +1,5 @@
 package fr.erusel.tensura.skills.active.unique;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
@@ -19,7 +18,7 @@ public class TrackerSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        GPlayer gPlayer = Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId());
+        GPlayer gPlayer = getPlayerManager().getGPlayerByUUID(player.getUniqueId());
         if (gPlayer.getTrackingPlayer() == null) {
             player.sendMessage("§cYou didn't hit anyone");
             return;
@@ -28,7 +27,7 @@ public class TrackerSkill extends Skill implements ActiveSkill {
             player.sendMessage("§cPlayer not found");
             return;
         }
-        else if (Main.getInstance().getGameManager().getDeadPlayers().contains(gPlayer.getTrackingPlayer())) {
+        else if (getGameManager().getDeadPlayers().contains(gPlayer.getTrackingPlayer())) {
             player.sendMessage("§cPlayer is dead");
             return;
         }

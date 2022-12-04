@@ -3,6 +3,7 @@ package fr.erusel.tensura.objects;
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.threads.HarvestFestivalRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -17,6 +18,9 @@ import java.util.Random;
 import java.util.UUID;
 
 public class GPlayer {
+
+    private GameManager gameManager;
+
     private final UUID playerUUID;
     private int playerKill;
     private Race race;
@@ -39,8 +43,9 @@ public class GPlayer {
     private Inventory stomachInventory;
     private Inventory pandoraInventory;
 
-    public GPlayer(UUID playerUUID) {
+    public GPlayer(UUID playerUUID, GameManager gameManager) {
         this.playerUUID = playerUUID;
+        this.gameManager = gameManager;
     }
 
     public UUID getUUID(){
@@ -253,8 +258,8 @@ public class GPlayer {
 
     public void ressurect(){
         Player player = Bukkit.getPlayer(playerUUID);
-        Main.getInstance().getGameManager().removeDeadPlayers(playerUUID);
-        Main.getInstance().getGameManager().addAlivePlayer(playerUUID);
+        gameManager.removeDeadPlayers(playerUUID);
+        gameManager.addAlivePlayer(playerUUID);
         player.setGameMode(GameMode.SURVIVAL);
         player.teleport(player.getWorld().getSpawnLocation());
         player.sendMessage("You been be resurrected");

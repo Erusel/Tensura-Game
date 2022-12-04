@@ -18,11 +18,11 @@ public class JanusSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setOppressor(true);
-        Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setOppressorTime(60);
-        new OppressorRunnable(Main.getInstance().getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
+        new OppressorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
                 .runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();
     }

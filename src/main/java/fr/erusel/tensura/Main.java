@@ -7,7 +7,6 @@ import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
 import fr.erusel.tensura.managers.WorldManager;
 import fr.erusel.tensura.threads.GameLoopRunnable;
-import fr.mrmicky.fastboard.FastBoard;
 import fr.mrmicky.fastinv.FastInvManager;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,32 +15,30 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Main extends JavaPlugin {
 
     private static Main main;
-    private final WorldManager worldManager = new WorldManager();
-    private final ScoreBoardManager scoreBoardManager = new ScoreBoardManager();
-    private final GameManager gameManager = new GameManager();
-    private final PlayerManager playerManager = new PlayerManager();
+    private GameManager gameManager;
+    private WorldManager worldManager;
+    private PlayerManager playerManager;
+    private ScoreBoardManager scoreBoardManager;
 
     @Override
     public void onEnable() {
         main = this;
-        FastInvManager.register(this);
 
+        worldManager = new WorldManager();
+        playerManager = new PlayerManager();
+        gameManager = new GameManager(playerManager, worldManager);
+        scoreBoardManager = new ScoreBoardManager(gameManager);
+
+        FastInvManager.register(this);
+        saveDefaultConfig();
         registerCommands();
         registerListeners();
 
         for (Player player : Bukkit.getOnlinePlayers()){
-            FastBoard board = new FastBoard(player);
-            board.updateTitle("§bTensura §3Game");
-            Main.getInstance().getScoreboardManager().scoreboard.put(player.getUniqueId(), board);
-            if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
-                gameManager.getPlayerList().add(player.getUniqueId());
-            }else {
-                gameManager.addWaitingList(player.getUniqueId());
-                player.sendMessage("§cToo many players, added in waiting list !");
-            }
+            scoreBoardManager.initializeScoreboard(player);
         }
 
-        new GameLoopRunnable().runTaskTimer(this, 0, 20);
+        new GameLoopRunnable(gameManager, playerManager, scoreBoardManager).runTaskTimer(this, 0, 20);
 
     }
 
@@ -50,18 +47,6 @@ public final class Main extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    public WorldManager getWorldManager(){
-        return worldManager;
-    }
-    public GameManager getGameManager() {
-        return gameManager;
-    }
-    public ScoreBoardManager getScoreboardManager() {
-        return scoreBoardManager;
-    }
-    public PlayerManager getPlayerManager(){
-        return playerManager;
-    }
     public static Main getInstance(){
         return main;
     }
@@ -72,8 +57,9 @@ public final class Main extends JavaPlugin {
 
         getCommand("skill").setExecutor(new SkillCommand());
         getCommand("team").setExecutor(new TeamCommand());
+        getCommand("join").setExecutor(new JoinCommand());
     }
     public void registerListeners(){
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(gameManager, scoreBoardManager, playerManager), this);
     }
 }
