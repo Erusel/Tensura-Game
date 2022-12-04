@@ -1,7 +1,6 @@
 package fr.erusel.tensura.inventories.config;
 
 import fr.erusel.tensura.enums.Modes;
-import fr.erusel.tensura.managers.GameManager;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Material;
@@ -35,12 +34,12 @@ public class ConfigModeGUI extends FastInv {
     }
 
     public void battleRoyal(InventoryClickEvent event){
-        GameManager.getInstance().setGameMode(Modes.BATTLE_ROYAL);
+        getGameManager().setGameMode(Modes.BATTLE_ROYAL);
         new ConfigMainGUI().open((Player) event.getWhoClicked());
     }
 
     public void charybdis(InventoryClickEvent event){
-        GameManager.getInstance().setGameMode(Modes.CHARYBDIS);
+        getGameManager().setGameMode(Modes.CHARYBDIS);
         new ConfigMainGUI().open((Player) event.getWhoClicked());
     }
 

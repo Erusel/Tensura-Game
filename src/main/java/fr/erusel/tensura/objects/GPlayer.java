@@ -18,6 +18,9 @@ import java.util.Random;
 import java.util.UUID;
 
 public class GPlayer {
+
+    private GameManager gameManager;
+
     private final UUID playerUUID;
     private int playerKill;
     private Race race;
@@ -40,8 +43,9 @@ public class GPlayer {
     private Inventory stomachInventory;
     private Inventory pandoraInventory;
 
-    public GPlayer(UUID playerUUID) {
+    public GPlayer(UUID playerUUID, GameManager gameManager) {
         this.playerUUID = playerUUID;
+        this.gameManager = gameManager;
     }
 
     public UUID getUUID(){
@@ -254,8 +258,8 @@ public class GPlayer {
 
     public void ressurect(){
         Player player = Bukkit.getPlayer(playerUUID);
-        GameManager.getInstance().removeDeadPlayers(playerUUID);
-        GameManager.getInstance().addAlivePlayer(playerUUID);
+        gameManager.removeDeadPlayers(playerUUID);
+        gameManager.addAlivePlayer(playerUUID);
         player.setGameMode(GameMode.SURVIVAL);
         player.teleport(player.getWorld().getSpawnLocation());
         player.sendMessage("You been be resurrected");

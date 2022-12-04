@@ -23,9 +23,9 @@ public class ImperceptibleSkill extends Skill implements ActiveSkill {
     @Override
     public void onUse(Player player) {
         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 600, 0, false, true));
-        PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setImperceptible(true);
-        PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setImperceptibleTime(30);
         new ImperceptibleRunnable(PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()))
                 .runTaskTimer(Main.getInstance(), 0, 20);

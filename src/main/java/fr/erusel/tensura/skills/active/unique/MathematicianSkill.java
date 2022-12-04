@@ -3,7 +3,6 @@ package fr.erusel.tensura.skills.active.unique;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
-import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.AlbertSkill;
@@ -19,7 +18,7 @@ public class MathematicianSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).setMathematicianDodgeLeft(DODGE);
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setMathematicianDodgeLeft(DODGE);
         activateCooldown();
     }
 }

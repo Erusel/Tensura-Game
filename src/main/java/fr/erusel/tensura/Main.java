@@ -1,9 +1,6 @@
 package fr.erusel.tensura;
 
-import fr.erusel.tensura.commands.SkillCommand;
-import fr.erusel.tensura.commands.TeamCommand;
-import fr.erusel.tensura.commands.TensuraCommand;
-import fr.erusel.tensura.commands.TensuraTabCompleter;
+import fr.erusel.tensura.commands.*;
 import fr.erusel.tensura.listeners.PlayerListener;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
@@ -18,18 +15,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class Main extends JavaPlugin {
 
     private static Main main;
-    private static ScoreBoardManager scoreBoardManager;
-    private static GameManager gameManager;
+    private GameManager gameManager;
+    private WorldManager worldManager;
+    private PlayerManager playerManager;
+    private ScoreBoardManager scoreBoardManager;
 
     @Override
     public void onEnable() {
-
-        // Singleton Instance
         main = this;
-        gameManager = new GameManager();
-        scoreBoardManager = new ScoreBoardManager();
-        new WorldManager();
-        new PlayerManager();
+
+        worldManager = new WorldManager();
+        playerManager = new PlayerManager();
+        gameManager = new GameManager(playerManager, worldManager);
+        scoreBoardManager = new ScoreBoardManager(gameManager);
 
         FastInvManager.register(this);
         saveDefaultConfig();
@@ -38,16 +36,9 @@ public final class Main extends JavaPlugin {
 
         for (Player player : Bukkit.getOnlinePlayers()){
             scoreBoardManager.initializeScoreboard(player);
-
-            if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
-                gameManager.getPlayerList().add(player.getUniqueId());
-            }else {
-                gameManager.addWaitingList(player.getUniqueId());
-                player.sendMessage("§cToo many players, added in waiting list !");
-            }
         }
 
-        new GameLoopRunnable().runTaskTimer(this, 0, 20);
+        new GameLoopRunnable(gameManager, playerManager, scoreBoardManager).runTaskTimer(this, 0, 20);
 
     }
 
@@ -66,8 +57,9 @@ public final class Main extends JavaPlugin {
 
         getCommand("skill").setExecutor(new SkillCommand());
         getCommand("team").setExecutor(new TeamCommand());
+        getCommand("join").setExecutor(new JoinCommand());
     }
     public void registerListeners(){
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(gameManager, scoreBoardManager, playerManager), this);
     }
 }

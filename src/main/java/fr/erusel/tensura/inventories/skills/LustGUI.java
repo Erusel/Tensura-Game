@@ -1,7 +1,6 @@
 package fr.erusel.tensura.inventories.skills;
 
 import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.Skill;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
@@ -29,7 +28,7 @@ public class LustGUI extends FastInv {
 
 
     public void resurrect(Player player, Skill skill, Player p){
-        PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).ressurect();
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).ressurect();
         skill.activateCooldown();
         p.closeInventory();
     }

@@ -1,15 +1,17 @@
 package fr.erusel.tensura.modes;
 
 import fr.erusel.tensura.enums.Modes;
-import fr.erusel.tensura.managers.WorldManager;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.scoreboards.CharybdisScoreboard;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
+
+import java.util.Random;
 
 
 public class CharybdisMode extends Mode {
@@ -20,8 +22,34 @@ public class CharybdisMode extends Mode {
     @Override
     public void teleportPlayers() {
 
+        int borderRadius = getGameManager().getBorderRadius();
+        int redTeamX = new Random().nextInt(borderRadius);
+        int redTeamZ = new Random().nextInt(borderRadius);
+        Location redTeamSpawn = getWorldManager().getMap().getHighestBlockAt(redTeamX, redTeamZ).getLocation();
+        int blueTeamX = new Random().nextInt(borderRadius);
+        int blueTeamZ = new Random().nextInt(borderRadius);
+        Location blueTeamSpawn = getWorldManager().getMap().getHighestBlockAt(blueTeamX, blueTeamZ).getLocation();
+        int greenTeamX = new Random().nextInt(borderRadius);
+        int greenTeamZ = new Random().nextInt(borderRadius);
+        Location greenTeamSpawn = getWorldManager().getMap().getHighestBlockAt(greenTeamX, greenTeamZ).getLocation();
+        int yellowTeamX = new Random().nextInt(borderRadius);
+        int yellowTeamZ = new Random().nextInt(borderRadius);
+        Location yellowTeamSpawn = getWorldManager().getMap().getHighestBlockAt(yellowTeamX, yellowTeamZ).getLocation();
+
+        // Teleport Players with teams
         for (Player player : Bukkit.getOnlinePlayers()){
-            player.teleport(WorldManager.getInstance().getMap().getSpawnLocation());
+            switch (getGameManager().getTeamManager().getPlayerTeam(player.getUniqueId())){
+                case "Red":
+                    player.teleport(redTeamSpawn);
+                case "Blue":
+                    player.teleport(blueTeamSpawn);
+                case "Green":
+                    player.teleport(greenTeamSpawn);
+                case "Yellow":
+                    player.teleport(yellowTeamSpawn);
+                case "None":
+                    player.teleport(getWorldManager().getMap().getSpawnLocation());
+            }
             onPlayerSpawn(player);
         }
     }

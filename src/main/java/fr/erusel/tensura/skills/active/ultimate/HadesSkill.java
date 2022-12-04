@@ -4,7 +4,6 @@ import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
-import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.threads.ImperceptibleRunnable;
@@ -26,11 +25,11 @@ public class HadesSkill extends Skill implements ActiveSkill {
         for(Entity entity: player.getNearbyEntities(20,20,20)) {
             entity.setVelocity(entity.getLocation().getDirection().setY(0).normalize().multiply(3));
         }
-        PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setImperceptible(true);
-        PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
                 setImperceptibleTime(30);
-        new ImperceptibleRunnable(PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()))
+        new ImperceptibleRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
                 .runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();
     }

@@ -10,11 +10,13 @@ import java.util.UUID;
 public class ScoreBoardManager  {
 
     private static ScoreBoardManager instance;
+    private final GameManager gameManager;
 
     public final HashMap<UUID, FastBoard> scoreboard = new HashMap<>();
 
-    public ScoreBoardManager() {
+    public ScoreBoardManager(GameManager gameManager) {
         instance = this;
+        this.gameManager = gameManager;
     }
 
     public static ScoreBoardManager getInstance() {
@@ -24,20 +26,19 @@ public class ScoreBoardManager  {
     public void initializeScoreboard(Player player){
         FastBoard board = new FastBoard(player);
         board.updateTitle("§bTensura §3Game");
-        ScoreBoardManager.getInstance().scoreboard.put(player.getUniqueId(), board);
+        scoreboard.put(player.getUniqueId(), board);
     }
 
     public void refreshWaitingScoreboard(){
-        HashMap<UUID, FastBoard> scoreboard = ScoreBoardManager.getInstance().scoreboard;
 
         for (FastBoard board: scoreboard.values()){
 
             board.updateLine(1,"§7------------------");
-            board.updateLine(2,"§7Players : " + GameManager.getInstance().getPlayerList().size() + "§3/" + ChatColor.GRAY + GameManager.getInstance().getMaxPlayer());
-            board.updateLine(3, "§7Host : §6" + GameManager.getInstance().getHostName());
-            board.updateLine(4, "§7Mode : §6" + GameManager.getInstance().getGameMode().getModeName());
-            if (GameManager.getInstance().getGameMode().haveTeam()){
-                board.updateLine(5, "§7Team : §6" + GameManager.getInstance().getTeamManager().getPlayerTeam(board.getPlayer().getUniqueId()));
+            board.updateLine(2,"§7Players : " + gameManager.getPlayerList().size() + "§3/" + ChatColor.GRAY + gameManager.getMaxPlayer());
+            board.updateLine(3, "§7Host : §6" + gameManager.getHostName());
+            board.updateLine(4, "§7Mode : §6" + gameManager.getGameMode().getModeName());
+            if (gameManager.getGameMode().haveTeam()){
+                board.updateLine(5, "§7Team : §6" + gameManager.getTeamManager().getPlayerTeam(board.getPlayer().getUniqueId()));
                 board.updateLine(6,"§7------------------");
                 board.updateLine(7, "§3By Erusel");
             } else {

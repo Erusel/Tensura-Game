@@ -17,6 +17,8 @@ import java.util.UUID;
 public class GameManager {
 
     private static GameManager instance = null;
+    private final PlayerManager playerManager;
+    private final WorldManager worldManager;
 
     // Server
     private GState gameState = GState.WAITING;
@@ -30,6 +32,7 @@ public class GameManager {
     private boolean naturalRegen = false;
     private boolean monsterSpawn = true;
     private boolean raceActivated = true;
+    private boolean skillDrop = true;
 
     // Game
     private Modes gameMode = Modes.DEBUG;
@@ -43,8 +46,10 @@ public class GameManager {
     private final List<UUID> alivePlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
-    public GameManager() {
+    public GameManager(PlayerManager playerManager, WorldManager worldManager) {
         instance = this;
+        this.playerManager = playerManager;
+        this.worldManager = worldManager;
     }
 
     public static GameManager getInstance() {
@@ -70,9 +75,9 @@ public class GameManager {
         for (Scenarios scenarios : getActivatedScenarios()) getActivatedScenariosInstance().add(scenarios.createInstance());
 
         // Creating World
-        WorldManager.getInstance().deletePlayingWorld();
+        worldManager.deletePlayingWorld();
         Utils.VoiceOfTheWorldBroadcast("Creating world...");
-        WorldManager.getInstance().createPlayingWorld();
+        worldManager.createPlayingWorld();
         Utils.VoiceOfTheWorldBroadcast("Successful");
         Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
 
@@ -85,7 +90,7 @@ public class GameManager {
         for (Player player : Bukkit.getOnlinePlayers()){
             player.setGameMode(GameMode.SURVIVAL);
             playerList.add(player.getUniqueId());
-            PlayerManager.getInstance().createPlayerGPlayer(player);
+            playerManager.createPlayerGPlayer(player);
             Utils.resetPlayer(player);
         }
         gameModeInstance.teleportPlayers();
@@ -226,5 +231,11 @@ public class GameManager {
     }
     public void setBorderRadius(int borderRadius) {
         this.borderRadius = borderRadius;
+    }
+    public boolean isSkillDrop(){
+        return skillDrop;
+    }
+    public void setSkillDrop(boolean skillDrop) {
+        this.skillDrop = skillDrop;
     }
 }

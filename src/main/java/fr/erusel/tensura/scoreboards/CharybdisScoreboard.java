@@ -1,6 +1,5 @@
 package fr.erusel.tensura.scoreboards;
 
-import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
 import fr.erusel.tensura.objects.GScoreboard;
 import fr.mrmicky.fastboard.FastBoard;
@@ -17,10 +16,10 @@ public class CharybdisScoreboard extends GScoreboard {
         for (FastBoard board: scoreboard.values()){
 
             board.updateLine(1,"§7------------------");
-            board.updateLine(2,"§7Players : " + GameManager.getInstance().getPlayerList().size() + "§3/" + ChatColor.GRAY + GameManager.getInstance().getMaxPlayer());
-            board.updateLine(3, "§7Host : §6" + GameManager.getInstance().getHostName());
-            board.updateLine(4, "§7Mode : §6" + GameManager.getInstance().getGameMode().getModeName());
-            board.updateLine(5, "§7Team : §6" + GameManager.getInstance().getTeamManager().getPlayerTeam(board.getPlayer().getUniqueId()));
+            board.updateLine(2,"§7Players : " + getGameManager().getPlayerList().size() + "§3/" + ChatColor.GRAY + getGameManager().getMaxPlayer());
+            board.updateLine(3, "§7Host : §6" + getGameManager().getHostName());
+            board.updateLine(4, "§7Mode : §6" + getGameManager().getGameMode().getModeName());
+            board.updateLine(5, "§7Team : §6" + getGameManager().getTeamManager().getPlayerTeam(board.getPlayer().getUniqueId()));
             board.updateLine(6,"§7------------------");
             board.updateLine(7, "§3By Erusel");
         }

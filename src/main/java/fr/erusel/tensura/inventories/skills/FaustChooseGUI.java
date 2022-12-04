@@ -23,10 +23,6 @@ public class FaustChooseGUI extends FastInv {
         new VictimInventoryGUI(victim).open(player);
         skill.activateCooldown();
     }
-
-
-
-
     private void skills(Player victim, Player player){
         new VictimSkillGUI(victim).open(player);
     }

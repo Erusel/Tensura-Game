@@ -1,6 +1,9 @@
 package fr.erusel.tensura.objects;
 
 import fr.erusel.tensura.enums.Modes;
+import fr.erusel.tensura.managers.GameManager;
+import fr.erusel.tensura.managers.PlayerManager;
+import fr.erusel.tensura.managers.WorldManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
@@ -8,6 +11,11 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
 public abstract class Mode {
+
+    GameManager gameManager = GameManager.getInstance();
+    PlayerManager playerManager = PlayerManager.getInstance();
+    WorldManager worldManager = WorldManager.getInstance();
+
 
     private final String modeName;
     private final Modes mode;
@@ -50,4 +58,14 @@ public abstract class Mode {
     public abstract void onBlockBreak(BlockBreakEvent event);
     public abstract void onChat(AsyncPlayerChatEvent event);
     public abstract void onAdvancement(PlayerAdvancementDoneEvent event);
+
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+    public PlayerManager getPlayerManager() {
+        return playerManager;
+    }
+    public WorldManager getWorldManager() {
+        return worldManager;
+    }
 }

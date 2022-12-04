@@ -1,7 +1,6 @@
 package fr.erusel.tensura.inventories.config;
 
 import fr.erusel.tensura.enums.GState;
-import fr.erusel.tensura.managers.GameManager;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Material;
@@ -15,21 +14,21 @@ public class ConfigMainGUI extends FastInv {
 
         // Mode Item
         ItemBuilder mode;
-        if (GameManager.getInstance().getGameState().equals(GState.PLAYING)) mode = new ItemBuilder(Material.BARRIER);
+        if (getGameManager().getGameState().equals(GState.PLAYING)) mode = new ItemBuilder(Material.BARRIER);
         else mode = new ItemBuilder(Material.BOOK);
         mode.name("§7Mode")
                 .addLore("§7Change or set the Gamemode");
 
         // Scenario Item
         ItemBuilder scenario;
-        if (GameManager.getInstance().getGameState().equals(GState.PLAYING)) scenario = new ItemBuilder(Material.BARRIER);
+        if (getGameManager().getGameState().equals(GState.PLAYING)) scenario = new ItemBuilder(Material.BARRIER);
         else scenario = new ItemBuilder(Material.GOLD_BLOCK);
         scenario.name("§7Scenarios")
                 .addLore("§7Add and remove scenarios");
 
         // Skills Item
         ItemBuilder skills;
-        if (GameManager.getInstance().getGameState().equals(GState.PLAYING)) skills = new ItemBuilder(Material.BARRIER);
+        if (getGameManager().getGameState().equals(GState.PLAYING)) skills = new ItemBuilder(Material.BARRIER);
         else skills = new ItemBuilder(Material.DIAMOND_BLOCK);
         skills.name("§7Skills")
                 .addLore("§7A voir, sa m'etonne que sa reste");
@@ -48,25 +47,25 @@ public class ConfigMainGUI extends FastInv {
 
     public void mode(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
-        if (!GameManager.getInstance().getGameState().equals(GState.WAITING)) return;
+        if (!getGameManager().getGameState().equals(GState.WAITING)) return;
         new ConfigModeGUI().open(player);
     }
 
     public void scenarios(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
-        if (!GameManager.getInstance().getGameState().equals(GState.WAITING)) return;
+        if (!getGameManager().getGameState().equals(GState.WAITING)) return;
         new ConfigScenariosGUI().open(player);
     }
 
     public void skills(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
-        if (!GameManager.getInstance().getGameState().equals(GState.WAITING)) return;
+        if (!getGameManager().getGameState().equals(GState.WAITING)) return;
         player.closeInventory();
     }
 
     public void settings(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
-        if (!GameManager.getInstance().getGameState().equals(GState.WAITING)) return;
+        if (!getGameManager().getGameState().equals(GState.WAITING)) return;
         new ConfigSettingsGUI().open(player);
     }
 

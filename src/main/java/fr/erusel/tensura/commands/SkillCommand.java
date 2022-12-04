@@ -13,8 +13,7 @@ public class SkillCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (!(sender instanceof Player)) return false;
-        Player player = (Player) sender;
+        if (!(sender instanceof Player player)) return false;
 
         if (!GameManager.getInstance().getGameState().equals(GState.PLAYING)) return true;
         if (GameManager.getInstance().getDeadPlayers().contains(player.getUniqueId())){

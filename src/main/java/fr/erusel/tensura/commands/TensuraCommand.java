@@ -14,7 +14,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,25 +55,13 @@ public class TensuraCommand implements CommandExecutor {
         }
         if (args[0].equalsIgnoreCase("giveskill")){
             if (Bukkit.getPlayer(args[1]) != null){
-                Skills.valueOf(args[2]);
-                try {
-                    PlayerManager.getInstance().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).getSkillClass().getConstructor().newInstance());
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                         NoSuchMethodException e) {
-                    throw new RuntimeException(e);
-                }
+                PlayerManager.getInstance().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).createInstance());
                 player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
             }else player.sendMessage("§cPlayer not found");
         }
         if (args[0].equalsIgnoreCase("setrace")) {
             if (Bukkit.getPlayer(args[1]) != null) {
-                Races.valueOf(args[2]);
-                try {
-                    PlayerManager.getInstance().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).getRaceClass().getConstructor().newInstance());
-                } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                         NoSuchMethodException e) {
-                    throw new RuntimeException(e);
-                }
+                PlayerManager.getInstance().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).createInstance());
                 player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Races.valueOf(args[2]).getName() + " to " + Bukkit.getPlayer(args[1]).getName());
             }
             else player.sendMessage("§cPlayer not found");
@@ -95,18 +82,10 @@ public class TensuraCommand implements CommandExecutor {
         if (args[0].equalsIgnoreCase("broadcast")){
             StringBuilder message = new StringBuilder();
             List<String> t = new ArrayList<>();
-            for (String text : args){
-                t.add(text + " ");
-            }
+            for (String text : args) t.add(text + " ");
             t.remove(0);
-            for (String i : t){
-                message.append(i);
-            }
+            for (String i : t) message.append(i);
             Utils.VoiceOfTheWorldBroadcast(message.toString());
-
-        }
-        if (args[0].equalsIgnoreCase("pregen")){
-
         }
         return true;
     }

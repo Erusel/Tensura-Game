@@ -3,9 +3,6 @@ package fr.erusel.tensura.modes;
 import fr.erusel.tensura.enums.Modes;
 import fr.erusel.tensura.enums.RaceStages;
 import fr.erusel.tensura.enums.Races;
-import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.PlayerManager;
-import fr.erusel.tensura.managers.WorldManager;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.scoreboards.DebugScoreboard;
@@ -28,7 +25,7 @@ public class DebugMode extends Mode {
     @Override
     public void teleportPlayers() {
         for (Player player : Bukkit.getOnlinePlayers()){
-            player.teleport(WorldManager.getInstance().getMap().getSpawnLocation());
+            player.teleport(getWorldManager().getMap().getSpawnLocation());
             onPlayerSpawn(player);
         }
     }
@@ -37,17 +34,17 @@ public class DebugMode extends Mode {
     public void onPlayerSpawn(Player player) {
 
         // Give Skill
-        for (int z = 0; z < GameManager.getInstance().getSkillOnStart(); z++) {
-            int i = new Random().nextInt(GameManager.getInstance().getUniqueSkillAvailable().size());
-            PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).addSkill(GameManager.getInstance().getUniqueSkillAvailable().get(i));
-            GameManager.getInstance().getUniqueSkillAvailable().remove(GameManager.getInstance().getUniqueSkillAvailable().get(i));
+        for (int z = 0; z < getGameManager().getSkillOnStart(); z++) {
+            int i = new Random().nextInt(getGameManager().getUniqueSkillAvailable().size());
+            getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(getGameManager().getUniqueSkillAvailable().get(i));
+            getGameManager().getUniqueSkillAvailable().remove(getGameManager().getUniqueSkillAvailable().get(i));
         }
 
         // Give Races
-        if (GameManager.getInstance().isRaceActivated()){
+        if (getGameManager().isRaceActivated()){
             Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
-            PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).setRace(race);
-            PlayerManager.getInstance().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
+            getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
+            getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
             player.sendMessage("§aYou have been resurrected as a " + race.getName());
         }
     }
@@ -55,9 +52,9 @@ public class DebugMode extends Mode {
     @Override
     public void onStart() {
         Bukkit.broadcastMessage("§c DEBUG MODE | ONLY FOR DEVELOPMENT !");
-        WorldManager.getInstance().getMap().setGameRule(GameRule.NATURAL_REGENERATION, GameManager.getInstance().getNaturalRegen());
-        WorldManager.getInstance().getMap().setGameRule(GameRule.DO_MOB_SPAWNING, GameManager.getInstance().getMonsterSpawn());
-        WorldManager.getInstance().getMap().getWorldBorder().setSize(GameManager.getInstance().getBorderRadius());
+        getWorldManager().getMap().setGameRule(GameRule.NATURAL_REGENERATION, getGameManager().getNaturalRegen());
+        getWorldManager().getMap().setGameRule(GameRule.DO_MOB_SPAWNING, getGameManager().getMonsterSpawn());
+        getWorldManager().getMap().getWorldBorder().setSize(getGameManager().getBorderRadius());
     }
 
     @Override

@@ -11,3 +11,5 @@ commands:
     description: "Show skills of the player"
   team:
     description: "Select your team here"
+  join:
+    description: "Join the game"

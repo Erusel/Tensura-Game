@@ -1,7 +1,6 @@
 package fr.erusel.tensura.inventories.config;
 
 import fr.erusel.tensura.enums.Scenarios;
-import fr.erusel.tensura.managers.GameManager;
 import fr.mrmicky.fastinv.FastInv;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Material;
@@ -15,7 +14,7 @@ public class ConfigScenariosGUI extends FastInv {
 
         for (Scenarios scenarios : Scenarios.values()){
             ItemBuilder itemBuilder;
-            if (GameManager.getInstance().getActivatedScenarios().contains(scenarios)) itemBuilder = new ItemBuilder(Material.GREEN_WOOL);
+            if (getGameManager().getActivatedScenarios().contains(scenarios)) itemBuilder = new ItemBuilder(Material.GREEN_WOOL);
             else itemBuilder = new ItemBuilder(Material.RED_WOOL);
             itemBuilder.name("§6" + scenarios.getName());
             itemBuilder.addLore("§7" + scenarios.getDescription());
@@ -24,13 +23,13 @@ public class ConfigScenariosGUI extends FastInv {
 
     public void clickScenario(InventoryClickEvent event, Scenarios scenarios){
         Player player = (Player) event.getWhoClicked();
-        if (GameManager.getInstance().getActivatedScenarios().contains(scenarios)) {
-            GameManager.getInstance().getActivatedScenarios().remove(scenarios);
+        if (getGameManager().getActivatedScenarios().contains(scenarios)) {
+            getGameManager().getActivatedScenarios().remove(scenarios);
             event.getCurrentItem().setType(Material.RED_WOOL);
             player.updateInventory();
         }
         else {
-            GameManager.getInstance().getActivatedScenarios().add(scenarios);
+            getGameManager().getActivatedScenarios().add(scenarios);
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             player.updateInventory();
 

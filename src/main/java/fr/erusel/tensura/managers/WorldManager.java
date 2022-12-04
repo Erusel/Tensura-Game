@@ -1,23 +1,9 @@
 package fr.erusel.tensura.managers;
 
-import com.sk89q.worldedit.EditSession;
-import com.sk89q.worldedit.WorldEdit;
-import com.sk89q.worldedit.WorldEditException;
-import com.sk89q.worldedit.bukkit.BukkitAdapter;
-import com.sk89q.worldedit.extent.clipboard.Clipboard;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormat;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardFormats;
-import com.sk89q.worldedit.extent.clipboard.io.ClipboardReader;
-import com.sk89q.worldedit.function.operation.Operation;
-import com.sk89q.worldedit.function.operation.Operations;
-import com.sk89q.worldedit.math.BlockVector3;
-import com.sk89q.worldedit.session.ClipboardHolder;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 
 public class WorldManager {
 
@@ -64,27 +50,6 @@ public class WorldManager {
             d.delete();
         }
         dir.delete();
-    }
-
-    private void pasteShematics(File file, int x, int y, int z){
-        Clipboard clipboard;
-
-        ClipboardFormat format = ClipboardFormats.findByFile(file);
-        try (ClipboardReader reader = format.getReader(new FileInputStream(file))) {
-            clipboard = reader.read();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        try (EditSession editSession = WorldEdit.getInstance().newEditSession(BukkitAdapter.adapt(map))) {
-            Operation operation = new ClipboardHolder(clipboard)
-                    .createPaste(editSession)
-                    .to(BlockVector3.at(x, y, z))
-                    .build();
-            Operations.complete(operation);
-        } catch (WorldEditException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public World getMap(){
