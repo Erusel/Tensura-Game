@@ -1,7 +1,10 @@
 package fr.erusel.tensura;
 
 import fr.erusel.tensura.commands.*;
-import fr.erusel.tensura.listeners.PlayerListener;
+import fr.erusel.tensura.listeners.DamageListener;
+import fr.erusel.tensura.listeners.PlayerDeathListener;
+import fr.erusel.tensura.listeners.PlayerInteractionListener;
+import fr.erusel.tensura.listeners.PlayerJoinQuitListener;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
@@ -60,6 +63,9 @@ public final class Main extends JavaPlugin {
         getCommand("join").setExecutor(new JoinCommand());
     }
     public void registerListeners(){
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(gameManager, scoreBoardManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(gameManager, scoreBoardManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerInteractionListener(gameManager, scoreBoardManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new DamageListener(gameManager, scoreBoardManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(gameManager, scoreBoardManager, playerManager), this);
     }
 }
