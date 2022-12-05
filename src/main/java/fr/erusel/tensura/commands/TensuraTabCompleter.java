@@ -17,6 +17,12 @@ import java.util.List;
 
 public class TensuraTabCompleter implements TabCompleter {
 
+    GameManager gameManager;
+
+    public TensuraTabCompleter(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
+
     @Override
     public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
@@ -27,9 +33,9 @@ public class TensuraTabCompleter implements TabCompleter {
         int arg = 0;
 
         if (args.length == 1){
-            if (GameManager.getInstance().getGameState().equals(GState.WAITING)) {
+            if (gameManager.getGameState().equals(GState.WAITING)) {
                 list.add("sethost");
-                if (GameManager.getInstance().playerIsHost(p)){
+                if (gameManager.playerIsHost(p)){
                     list.add("config");
                     list.add("start");
                     list.add("pregen");
@@ -37,8 +43,8 @@ public class TensuraTabCompleter implements TabCompleter {
                     list.add("help");
                 }
             }
-            if (GameManager.getInstance().getGameState().equals(GState.PLAYING)) {
-                if (GameManager.getInstance().playerIsHost(p)){
+            if (gameManager.getGameState().equals(GState.PLAYING)) {
+                if (gameManager.playerIsHost(p)){
                     list.add("giveskill");
                     list.add("setrace");
                     list.add("harvestfestival");

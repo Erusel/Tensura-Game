@@ -8,17 +8,21 @@ import org.bukkit.entity.Player;
 
 public class JoinCommand implements CommandExecutor {
 
+    GameManager gameManager;
 
+    public JoinCommand(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (sender instanceof Player player){
-            if (!GameManager.getInstance().getGameMode().haveTeam()){
-                if (!(GameManager.getInstance().getPlayerList().size() >= GameManager.getInstance().getMaxPlayer())){
-                    GameManager.getInstance().getPlayerList().add(player.getUniqueId());
+            if (!gameManager.getGameMode().haveTeam()){
+                if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
+                    gameManager.getPlayerList().add(player.getUniqueId());
                 }else {
-                    GameManager.getInstance().addWaitingList(player.getUniqueId());
+                    gameManager.addWaitingList(player.getUniqueId());
                     player.sendMessage("§cToo many players, added in waiting list !");
                 }
             }else {
