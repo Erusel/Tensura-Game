@@ -1,6 +1,7 @@
 package fr.erusel.tensura.objects;
 
 import fr.erusel.tensura.Main;
+import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.managers.GameManager;
@@ -19,7 +20,7 @@ import java.util.UUID;
 
 public class GPlayer {
 
-    private GameManager gameManager;
+    private final GameManager gameManager;
 
     private final UUID playerUUID;
     private int playerKill;
@@ -108,6 +109,9 @@ public class GPlayer {
     public Race getRace(){
         return race;
     }
+    public boolean isRace(Races races){
+        return race.getRace().equals(races);
+    }
 
     public boolean haveHarvestFestivalPrerequisite(){
         return true;
@@ -162,7 +166,6 @@ public class GPlayer {
     public boolean isGlutonnyActivated(){
         return glutonnyActivated;
     }
-
     public void setOppressor(boolean b){
         oppressorActivated = b;
     }

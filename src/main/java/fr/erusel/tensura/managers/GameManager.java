@@ -16,7 +16,7 @@ import java.util.UUID;
 
 public class GameManager {
 
-    private static GameManager instance = null;
+    private static GameManager instance;
     private final PlayerManager playerManager;
     private final WorldManager worldManager;
 
