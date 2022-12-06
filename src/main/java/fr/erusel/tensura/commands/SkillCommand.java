@@ -10,13 +10,19 @@ import org.bukkit.entity.Player;
 
 public class SkillCommand implements CommandExecutor {
 
+    GameManager gameManager;
+
+    public SkillCommand(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player player)) return false;
 
-        if (!GameManager.getInstance().getGameState().equals(GState.PLAYING)) return true;
-        if (GameManager.getInstance().getDeadPlayers().contains(player.getUniqueId())){
+        if (!gameManager.getGameState().equals(GState.PLAYING)) return true;
+        if (gameManager.getDeadPlayers().contains(player.getUniqueId())){
             player.sendMessage("§cYou can't do this, you are dead.");
             return true;
         }

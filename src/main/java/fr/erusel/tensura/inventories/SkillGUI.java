@@ -1,6 +1,7 @@
 package fr.erusel.tensura.inventories;
 
 import fr.erusel.tensura.objects.ActiveSkill;
+import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.mrmicky.fastinv.FastInv;
@@ -11,14 +12,14 @@ import org.bukkit.entity.Player;
 public class SkillGUI extends FastInv {
 
     Player player;
-
-
+    
     public SkillGUI(Player player) {
         super(27, "Your Skills | " + player.getName());
         this.player = player;
+        GPlayer gPlayer = getPlayerManager().getGPlayerByUUID(player.getUniqueId());
 
         // Ultimate Skills
-        for (Skill skill : getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerUltimateSkills()){
+        for (Skill skill : gPlayer.getPlayerUltimateSkills()){
             if (skill instanceof PassiveSkill){
                 addItem(new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
             } else if (skill instanceof ActiveSkill) {
@@ -33,7 +34,7 @@ public class SkillGUI extends FastInv {
         }
 
         // Unique Skill
-        for (Skill skill : getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerUniqueSkills()){
+        for (Skill skill : gPlayer.getPlayerUniqueSkills()){
             if (skill instanceof PassiveSkill){
                 addItem(new ItemBuilder(Material.BLUE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
             } else if (skill instanceof ActiveSkill) {
@@ -47,7 +48,7 @@ public class SkillGUI extends FastInv {
         }
 
         // Extra Skill
-        for (Skill skill : getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getPlayerExtraSkill()){
+        for (Skill skill : gPlayer.getPlayerExtraSkill()){
             if (skill instanceof PassiveSkill){
                 addItem(new ItemBuilder(Material.YELLOW_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
             } else if (skill instanceof ActiveSkill) {
@@ -58,6 +59,11 @@ public class SkillGUI extends FastInv {
             }else {
                 addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
             }
+        }
+
+        // Resistance Skill
+        for (Skill skill : gPlayer.getPlayerResistance()){
+            addItem(new ItemBuilder(Material.GREEN_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
         }
 
 

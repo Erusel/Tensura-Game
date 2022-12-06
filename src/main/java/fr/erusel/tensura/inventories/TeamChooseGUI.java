@@ -44,32 +44,32 @@ public class TeamChooseGUI extends FastInv {
         Player player = (Player) event.getWhoClicked();
 
         getGameManager().getTeamManager().addRedTeamPlayer(player);
-        player.sendMessage("You joined red team !");
-        player.closeInventory();
+        player.sendMessage("§6You joined red team !");
+        player.updateInventory();
     }
 
     private void blueTeam(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
 
         getGameManager().getTeamManager().addBlueTeamPlayer(player);
-        player.sendMessage("You joined blue team !");
-        player.closeInventory();
+        player.sendMessage("§6You joined blue team !");
+        player.updateInventory();
     }
 
     private void greenTeam(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
 
         getGameManager().getTeamManager().addGreenTeamPlayer(player);
-        player.sendMessage("You joined green team !");
-        player.closeInventory();
+        player.sendMessage("§6You joined green team !");
+        player.updateInventory();
     }
 
     private void yellowTeam(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
 
         getGameManager().getTeamManager().addYellowTeamPlayer(player);
-        player.sendMessage("You joined yellow team !");
-        player.closeInventory();
+        player.sendMessage("§6You joined yellow team !");
+        player.updateInventory();
     }
 
 }

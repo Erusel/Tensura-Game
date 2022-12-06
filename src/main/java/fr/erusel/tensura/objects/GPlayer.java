@@ -1,6 +1,7 @@
 package fr.erusel.tensura.objects;
 
 import fr.erusel.tensura.Main;
+import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.managers.GameManager;
@@ -19,16 +20,16 @@ import java.util.UUID;
 
 public class GPlayer {
 
-    private GameManager gameManager;
+    private final GameManager gameManager;
 
+    // Player Info
     private final UUID playerUUID;
     private int playerKill;
     private Race race;
     private final ArrayList<Skill> playerSkills = new ArrayList<>();
-    private final ArrayList<GItem> playerItems = new ArrayList<>();
 
 
-    // Skill information
+    // Skills
     private boolean glutonnyActivated;
     private boolean oppressorActivated;
     private boolean imperceptibleActivated;
@@ -65,6 +66,8 @@ public class GPlayer {
     public void removeSkill(Skill skill){
         playerSkills.remove(skill);
     }
+
+
     /**
      * It checks if the player has a certain skill.
      *
@@ -76,17 +79,6 @@ public class GPlayer {
             if (skills.isSkill(skill)) return true;
         }
         return false;
-    }
-
-    // Player Items
-    public ArrayList<GItem> getPlayerItems(){
-        return playerItems;
-    }
-    public void addItem(GItem item){
-        playerItems.add(item);
-    }
-    public void removeItem(GItem item){
-        playerItems.remove(item);
     }
 
     // Player Kills
@@ -109,6 +101,9 @@ public class GPlayer {
     }
     public Race getRace(){
         return race;
+    }
+    public boolean isRace(Races races){
+        return race.getRace().equals(races);
     }
 
     public boolean haveHarvestFestivalPrerequisite(){
@@ -164,7 +159,6 @@ public class GPlayer {
     public boolean isGlutonnyActivated(){
         return glutonnyActivated;
     }
-
     public void setOppressor(boolean b){
         oppressorActivated = b;
     }

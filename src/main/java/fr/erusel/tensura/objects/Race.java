@@ -1,6 +1,7 @@
 package fr.erusel.tensura.objects;
 
 import fr.erusel.tensura.enums.RaceStages;
+import fr.erusel.tensura.enums.Races;
 import org.bukkit.entity.Player;
 
 public abstract class Race {
@@ -9,11 +10,13 @@ public abstract class Race {
     private final String description;
     private final RaceStages stage;
     private final Class<?> demonLordStage;
+    private final Races race;
 
-    public Race(String name, String description, RaceStages stage, Class<?> demonLordStage) {
+    public Race(String name, String description, RaceStages stage,Races race, Class<?> demonLordStage) {
         this.name = name;
         this.description = description;
         this.stage = stage;
+        this.race = race;
         this.demonLordStage = demonLordStage;
     }
 
@@ -26,7 +29,9 @@ public abstract class Race {
     public RaceStages getStage() {
         return stage;
     }
-
+    public Races getRace(){
+        return race;
+    }
     public Class<?> getDemonLordStage() {
         return demonLordStage;
     }
