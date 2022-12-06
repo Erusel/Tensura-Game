@@ -107,6 +107,7 @@ public class GameManager {
             player.teleport(Bukkit.getWorld("World").getSpawnLocation());
             Utils.resetPlayer(player);
         }
+        teamManager.clearTeams();
         Bukkit.broadcastMessage("The winner is " +  winner.getName());
     }
     public List<UUID> getPlayerList(){

@@ -12,6 +12,10 @@ public class PlayerManager {
 
     private final HashMap<UUID, GPlayer> GPlayers = new HashMap<>();
 
+    public PlayerManager() {
+        instance = this;
+    }
+
     public static PlayerManager getInstance() {
         return instance;
     }
