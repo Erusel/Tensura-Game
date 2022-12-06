@@ -6,15 +6,17 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class OppressorRunnable extends BukkitRunnable {
 
     GPlayer gPlayer;
+    int time;
 
-    public OppressorRunnable(GPlayer gPlayer) {
+    public OppressorRunnable(GPlayer gPlayer, int time) {
         this.gPlayer = gPlayer;
+        this.time = time;
     }
 
     @Override
     public void run() {
-        gPlayer.setOppressorTime(gPlayer.getOppressorTime()-1);
-        if (gPlayer.getOppressorTime()<=0){
+        time--;
+        if (time<=0){
             gPlayer.setOppressor(false);
             this.cancel();
         }

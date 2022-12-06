@@ -5,6 +5,7 @@ import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
+import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.OmoikaneSkill;
 import fr.erusel.tensura.threads.skills.ReflectorRunnable;
@@ -19,9 +20,10 @@ public class ReflectorSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setReflector(true);
-        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setReflectorTime(10);
-        new ReflectorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId())).runTaskTimer(Main.getInstance(), 0, 20);
+        GPlayer gPlayer = getPlayerManager().getGPlayerByUUID(player.getUniqueId());
+        gPlayer.setReflector(true);
+        new ReflectorRunnable(gPlayer, 10)
+                .runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();
     }
 }

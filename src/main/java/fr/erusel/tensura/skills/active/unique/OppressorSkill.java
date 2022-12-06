@@ -19,11 +19,8 @@ public class OppressorSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
-                setOppressor(true);
-        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
-                setOppressorTime(30);
-        new OppressorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setOppressor(true);
+        new OppressorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 30)
                 .runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();
     }
