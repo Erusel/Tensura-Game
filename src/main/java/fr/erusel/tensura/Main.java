@@ -1,6 +1,9 @@
 package fr.erusel.tensura;
 
-import fr.erusel.tensura.commands.*;
+import fr.erusel.tensura.commands.SkillCommand;
+import fr.erusel.tensura.commands.TeamCommand;
+import fr.erusel.tensura.commands.TensuraCommand;
+import fr.erusel.tensura.commands.TensuraTabCompleter;
 import fr.erusel.tensura.listeners.PlayerListener;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;

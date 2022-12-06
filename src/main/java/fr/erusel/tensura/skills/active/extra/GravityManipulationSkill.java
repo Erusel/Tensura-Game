@@ -1,4 +1,4 @@
-package fr.erusel.tensura.skills.active.ultimate;
+package fr.erusel.tensura.skills.active.extra;
 
 import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
@@ -6,23 +6,23 @@ import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.threads.skills.OppressorRunnable;
+import fr.erusel.tensura.threads.skills.GravityManipulationRunnable;
 import org.bukkit.entity.Player;
 
-public class JanusSkill extends Skill implements ActiveSkill {
+public class GravityManipulationSkill extends Skill implements ActiveSkill {
 
 
-    public JanusSkill() {
-        super("Janus, Lord of Gravity", "Increase your knockback for 60s", Skills.JANUS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1100, null);
+    public GravityManipulationSkill() {
+        super("Gravity Manipulation", "Allow you to fly for 10sec", Skills.FLETCHER, SkillScope.UNOBTAINABLE,  SkillTier.EXTRA, 1300, null);
     }
 
     @Override
     public void onUse(Player player) {
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
-                setOppressor(true);
+                setGravity(true);
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
-                setOppressorTime(60);
-        new OppressorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
+                setGravityTime(10);
+        new GravityManipulationRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
                 .runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();
     }

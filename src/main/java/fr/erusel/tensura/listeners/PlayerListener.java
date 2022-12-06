@@ -15,14 +15,12 @@ import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.*;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -267,4 +265,14 @@ public class PlayerListener implements Listener {
 
         }
     }
-}
+
+    @EventHandler
+    public void onProjectileHit(ProjectileHitEvent event) {
+        EntityType fireball = event.getEntityType();
+        if (fireball.equals(EntityType.FIREBALL)) {
+            Fireball f = (Fireball) event.getEntity();
+            Location location = f.getLocation();
+            f.getWorld().createExplosion(location, 2);
+            }
+        }
+    }

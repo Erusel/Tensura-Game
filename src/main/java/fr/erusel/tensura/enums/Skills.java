@@ -1,6 +1,8 @@
 package fr.erusel.tensura.enums;
 
 import fr.erusel.tensura.objects.Skill;
+import fr.erusel.tensura.skills.active.extra.FireballSkill;
+import fr.erusel.tensura.skills.active.extra.FletcherSkill;
 import fr.erusel.tensura.skills.active.ultimate.*;
 import fr.erusel.tensura.skills.active.unique.*;
 import fr.erusel.tensura.skills.passive.resistance.*;
@@ -45,6 +47,10 @@ public enum Skills {
     MAGICWOLF("Magic Wolf", SkillTier.UNIQUE, MagicWolfSkill.class),
     POTIONMASTER("Potion Master", SkillTier.UNIQUE, PotionMasterSkill.class),
     REFLECTOR("Reflector", SkillTier.UNIQUE, ReflectorSkill.class),
+
+    // Extra Skills
+    FIREBALL("Fireball", SkillTier.EXTRA, FireballSkill.class),
+    FLETCHER("Fletcher", SkillTier.EXTRA, FletcherSkill.class),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
