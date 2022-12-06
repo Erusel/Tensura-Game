@@ -1,4 +1,4 @@
-package fr.erusel.tensura.threads;
+package fr.erusel.tensura.threads.skills;
 
 import fr.erusel.tensura.objects.GPlayer;
 import org.bukkit.scheduler.BukkitRunnable;

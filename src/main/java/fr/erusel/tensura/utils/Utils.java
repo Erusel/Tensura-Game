@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 public class Utils {
 
+
     public static void resetPlayer(Player player){
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         player.setFoodLevel(20);

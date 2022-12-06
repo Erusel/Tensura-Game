@@ -41,6 +41,8 @@ public class AmbroisieSkill extends Skill implements ActiveSkill {
                 PotionEffectType.WEAKNESS,
                 PotionEffectType.SLOW_DIGGING,
                 PotionEffectType.BLINDNESS,
+                PotionEffectType.CONFUSION,
+                PotionEffectType.HUNGER,
         };
         if (i >= 7) {duration=600; amplifier=0;} // Avoid cheat effect (strength 2, regen 2...)
         else {duration=1200; amplifier=1;}
@@ -48,7 +50,7 @@ public class AmbroisieSkill extends Skill implements ActiveSkill {
         for (Entity entity: player.getNearbyEntities(20,20,20)) {
             if (entity instanceof Player) {
                 Player players = (Player) entity;
-                int i2 = new Random().nextInt(5);
+                int i2 = new Random().nextInt(7);
                 players.addPotionEffect(new PotionEffect(potionsDebuff[i2], 600, 0));
             }
         }

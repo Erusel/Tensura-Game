@@ -32,8 +32,8 @@ public class GameLoopRunnable extends BukkitRunnable {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 if (gameManager.getPlayerList().contains(player.getUniqueId())) {
                     for (Skill skill : playerManager.getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
-                        if (skill instanceof PassiveSkill) {
-                            ((PassiveSkill) skill).eachSecond(player);
+                        if (skill instanceof PassiveSkill passiveSkill) {
+                            passiveSkill.eachSecond(player);
                         } else if (skill instanceof ActiveSkill) {
                             if (skill.inCooldown()) {
                                 skill.setCurrentCooldown(skill.getCurrentCooldown() - 1);

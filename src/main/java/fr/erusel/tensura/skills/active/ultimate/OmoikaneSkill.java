@@ -6,7 +6,7 @@ import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.threads.ReflectorRunnable;
+import fr.erusel.tensura.threads.skills.ReflectorRunnable;
 import org.bukkit.entity.Player;
 
 public class OmoikaneSkill extends Skill implements ActiveSkill {

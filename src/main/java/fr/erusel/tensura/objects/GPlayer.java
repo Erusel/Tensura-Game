@@ -34,9 +34,11 @@ public class GPlayer {
     private boolean oppressorActivated;
     private boolean imperceptibleActivated;
     private boolean ReflectorActivated;
+    private boolean gravityActivated;
     private boolean inHarvestFestival;
     private boolean canResurrect = true;
     private int oppressorTime;
+    private int gravityTime;
     private int imperceptibleTime;
     private int ReflectorTime;
     private int mathematicianDodgeLeft;
@@ -160,6 +162,9 @@ public class GPlayer {
     public void setOppressor(boolean b){
         oppressorActivated = b;
     }
+    public void setGravity(boolean b) {
+        gravityActivated = b;
+    }
     public void setImperceptible(boolean b) { imperceptibleActivated = b;}
     public void setReflector(boolean b) { ReflectorActivated = b;}
     public void setOppressorTime(int i){
@@ -171,13 +176,22 @@ public class GPlayer {
     public void setReflectorTime(int i){
         ReflectorTime = i;
     }
+    public void setGravityTime(int i){
+        gravityTime = i;
+    }
     public int getOppressorTime(){
         return oppressorTime;
     }
     public int getImperceptibleTime() { return imperceptibleTime;}
     public int getReflectorTime() { return ReflectorTime;}
+    public int getGravityTime(){
+        return gravityTime;
+    }
     public boolean isOppressorActivated(){
         return oppressorActivated;
+    }
+    public boolean isGravityActivated(){
+        return gravityActivated;
     }
     public boolean isImperceptibleActivated() { return imperceptibleActivated;}
     public boolean isReflectorActivated() { return ReflectorActivated;}

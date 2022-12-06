@@ -8,7 +8,7 @@ import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.HadesSkill;
-import fr.erusel.tensura.threads.ImperceptibleRunnable;
+import fr.erusel.tensura.threads.skills.ImperceptibleRunnable;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;

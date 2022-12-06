@@ -7,7 +7,7 @@ import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.ultimate.JanusSkill;
-import fr.erusel.tensura.threads.OppressorRunnable;
+import fr.erusel.tensura.threads.skills.OppressorRunnable;
 import org.bukkit.entity.Player;
 
 public class OppressorSkill extends Skill implements ActiveSkill {
