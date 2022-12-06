@@ -1,6 +1,5 @@
 package fr.erusel.tensura.skills.active.unique;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
@@ -21,7 +20,7 @@ public class OppressorSkill extends Skill implements ActiveSkill {
     public void onUse(Player player) {
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setOppressor(true);
         new OppressorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 30)
-                .runTaskTimer(Main.getInstance(), 0, 20);
+                .runTaskTimer(getMain(), 0, 20);
         activateCooldown();
     }
 }

@@ -1,5 +1,6 @@
 package fr.erusel.tensura.objects;
 
+import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
@@ -10,6 +11,7 @@ public abstract class Skill {
 
     GameManager gameManager;
     PlayerManager playerManager;
+    Main main;
 
     private final String name;
     private final String lore;
@@ -30,6 +32,7 @@ public abstract class Skill {
         this.ultimateSkill = ultimateSkill;
         this.gameManager = GameManager.getInstance();
         this.playerManager = PlayerManager.getInstance();
+        this.main = Main.getInstance();
     }
 
     public String getName(){
@@ -70,5 +73,9 @@ public abstract class Skill {
     }
     public PlayerManager getPlayerManager() {
         return playerManager;
+    }
+
+    public Main getMain() {
+        return main;
     }
 }

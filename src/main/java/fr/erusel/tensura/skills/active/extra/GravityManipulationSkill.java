@@ -1,6 +1,5 @@
 package fr.erusel.tensura.skills.active.extra;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
@@ -20,7 +19,7 @@ public class GravityManipulationSkill extends Skill implements ActiveSkill {
     public void onUse(Player player) {
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setGravity(true);
         new GravityManipulationRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 10)
-                .runTaskTimer(Main.getInstance(), 0, 20);
+                .runTaskTimer(getMain(), 0, 20);
         activateCooldown();
     }
 }
