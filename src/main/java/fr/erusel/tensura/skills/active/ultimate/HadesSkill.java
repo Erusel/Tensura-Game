@@ -1,6 +1,5 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
-import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
@@ -27,7 +26,7 @@ public class HadesSkill extends Skill implements ActiveSkill {
         }
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setImperceptible(true);
         new ImperceptibleRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 30)
-                .runTaskTimer(Main.getInstance(), 0, 20);
+                .runTaskTimer(getMain(), 0, 20);
         activateCooldown();
     }
 }
