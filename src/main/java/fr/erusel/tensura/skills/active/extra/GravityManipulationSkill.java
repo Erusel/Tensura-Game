@@ -18,11 +18,8 @@ public class GravityManipulationSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
-                setGravity(true);
-        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).
-                setGravityTime(10);
-        new GravityManipulationRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()))
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setGravity(true);
+        new GravityManipulationRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 10)
                 .runTaskTimer(Main.getInstance(), 0, 20);
         activateCooldown();
     }

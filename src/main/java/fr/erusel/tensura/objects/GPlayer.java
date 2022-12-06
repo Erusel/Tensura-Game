@@ -167,31 +167,8 @@ public class GPlayer {
     }
     public void setImperceptible(boolean b) { imperceptibleActivated = b;}
     public void setReflector(boolean b) { ReflectorActivated = b;}
-    public void setOppressorTime(int i){
-        oppressorTime = i;
-    }
-    public void setImperceptibleTime(int i){
-        imperceptibleTime = i;
-    }
-    public void setReflectorTime(int i){
-        ReflectorTime = i;
-    }
-    public void setGravityTime(int i){
-        gravityTime = i;
-    }
-    public int getOppressorTime(){
-        return oppressorTime;
-    }
-    public int getImperceptibleTime() { return imperceptibleTime;}
-    public int getReflectorTime() { return ReflectorTime;}
-    public int getGravityTime(){
-        return gravityTime;
-    }
     public boolean isOppressorActivated(){
         return oppressorActivated;
-    }
-    public boolean isGravityActivated(){
-        return gravityActivated;
     }
     public boolean isImperceptibleActivated() { return imperceptibleActivated;}
     public boolean isReflectorActivated() { return ReflectorActivated;}

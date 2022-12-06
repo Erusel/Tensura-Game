@@ -6,15 +6,17 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class ReflectorRunnable extends BukkitRunnable {
 
     GPlayer gPlayer;
+    int time;
 
-    public ReflectorRunnable(GPlayer gPlayer) {
+    public ReflectorRunnable(GPlayer gPlayer, int time) {
         this.gPlayer = gPlayer;
+        this.time = time;
     }
 
     @Override
     public void run() {
-        gPlayer.setReflectorTime(gPlayer.getReflectorTime()-1);
-        if (gPlayer.getReflectorTime()<=0){
+        time--;
+        if (time<=0){
             gPlayer.setReflector(false);
             this.cancel();
         }

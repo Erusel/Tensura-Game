@@ -6,15 +6,17 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class GravityManipulationRunnable extends BukkitRunnable {
 
     GPlayer gPlayer;
+    int time;
 
-    public GravityManipulationRunnable(GPlayer gPlayer) {
+    public GravityManipulationRunnable(GPlayer gPlayer, int time) {
         this.gPlayer = gPlayer;
+        this.time = time;
     }
 
     @Override
     public void run() {
-        gPlayer.setGravityTime(gPlayer.getGravityTime()-1);
-        if (gPlayer.getGravityTime()<=0){
+        time--;
+        if (time<=0){
             gPlayer.setGravity(false);
             this.cancel();
         }
