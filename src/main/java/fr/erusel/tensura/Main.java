@@ -55,12 +55,12 @@ public final class Main extends JavaPlugin {
     }
     @SuppressWarnings("all")
     public void registerCommands(){
-        getCommand("tensura").setExecutor(new TensuraCommand());
-        getCommand("tensura").setTabCompleter(new TensuraTabCompleter());
+        getCommand("tensura").setExecutor(new TensuraCommand(gameManager, playerManager));
+        getCommand("tensura").setTabCompleter(new TensuraTabCompleter(gameManager));
 
-        getCommand("skill").setExecutor(new SkillCommand());
-        getCommand("team").setExecutor(new TeamCommand());
-        getCommand("join").setExecutor(new JoinCommand());
+        getCommand("skill").setExecutor(new SkillCommand(gameManager));
+        getCommand("team").setExecutor(new TeamCommand(gameManager));
+        getCommand("join").setExecutor(new JoinCommand(gameManager));
     }
     public void registerListeners(){
         Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(gameManager, scoreBoardManager, playerManager), this);

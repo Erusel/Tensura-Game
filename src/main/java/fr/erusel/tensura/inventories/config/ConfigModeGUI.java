@@ -35,11 +35,13 @@ public class ConfigModeGUI extends FastInv {
 
     public void battleRoyal(InventoryClickEvent event){
         getGameManager().setGameMode(Modes.BATTLE_ROYAL);
+        getGameManager().getTeamManager().clearTeams();
         new ConfigMainGUI().open((Player) event.getWhoClicked());
     }
 
     public void charybdis(InventoryClickEvent event){
         getGameManager().setGameMode(Modes.CHARYBDIS);
+        getGameManager().getTeamManager().clearTeams();
         new ConfigMainGUI().open((Player) event.getWhoClicked());
     }
 

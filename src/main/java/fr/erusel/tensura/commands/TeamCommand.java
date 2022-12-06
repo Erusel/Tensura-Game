@@ -10,14 +10,19 @@ import org.bukkit.entity.Player;
 
 public class TeamCommand implements CommandExecutor {
 
+    GameManager gameManager;
+
+    public TeamCommand(GameManager gameManager) {
+        this.gameManager = gameManager;
+    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         Player player = (Player) sender;
 
-        if (GameManager.getInstance().getGameState().equals(GState.WAITING)){
-            if (GameManager.getInstance().getGameMode().haveTeam()){
+        if (gameManager.getGameState().equals(GState.WAITING)){
+            if (gameManager.getGameMode().haveTeam()){
                 new TeamChooseGUI().open(player);
             }else {
                 player.sendMessage("This gamemode have no teams");

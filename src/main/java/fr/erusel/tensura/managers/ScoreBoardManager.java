@@ -33,16 +33,16 @@ public class ScoreBoardManager  {
 
         for (FastBoard board: scoreboard.values()){
 
-            board.updateLine(1,"§7------------------");
+            board.updateLine(1,"§7§m------------------");
             board.updateLine(2,"§7Players : " + gameManager.getPlayerList().size() + "§3/" + ChatColor.GRAY + gameManager.getMaxPlayer());
             board.updateLine(3, "§7Host : §6" + gameManager.getHostName());
             board.updateLine(4, "§7Mode : §6" + gameManager.getGameMode().getModeName());
             if (gameManager.getGameMode().haveTeam()){
                 board.updateLine(5, "§7Team : §6" + gameManager.getTeamManager().getPlayerTeam(board.getPlayer().getUniqueId()));
-                board.updateLine(6,"§7------------------");
+                board.updateLine(6,"§7§m------------------");
                 board.updateLine(7, "§3By Erusel");
             } else {
-                board.updateLine(5,"§7------------------");
+                board.updateLine(5,"§7§m------------------");
                 board.updateLine(6, "§3By Erusel");
                 board.removeLine(7);
             }
