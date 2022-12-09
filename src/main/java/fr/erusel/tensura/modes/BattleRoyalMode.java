@@ -24,7 +24,10 @@ public class BattleRoyalMode extends Mode {
     @Override
     public void teleportPlayers() {
         for (Player player : Bukkit.getOnlinePlayers()){
-            player.teleport(getWorldManager().getMap().getSpawnLocation());
+            //spawn player at random location in the map
+            int x = new Random().nextInt(getGameManager().getBorderRadius())-500;
+            int z = new Random().nextInt(getGameManager().getBorderRadius())-500;
+            player.teleport(getWorldManager().getMap().getHighestBlockAt(x, z).getLocation());
             onPlayerSpawn(player);
         }
     }
@@ -51,6 +54,8 @@ public class BattleRoyalMode extends Mode {
     @Override
     public void onStart() {
         Bukkit.broadcastMessage("§5Battle Royal");
+        // Change the world border size to 20000 blocks max
+        getWorldManager().getMap().getWorldBorder().setSize(20000);
     }
 
     @Override
