@@ -7,9 +7,7 @@ import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
-import org.bukkit.util.Vector;
 
 public class FireballSkill extends Skill implements ActiveSkill {
 
