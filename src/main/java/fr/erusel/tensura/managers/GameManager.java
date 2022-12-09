@@ -72,7 +72,7 @@ public class GameManager {
         setGameState(GState.STARTING);
 
         // Creating Scenarios Instances
-        for (Scenarios scenarios : getActivatedScenarios()) getActivatedScenariosInstance().add(scenarios.createInstance());
+        getActivatedScenarios().forEach(scenarios -> getActivatedScenariosInstance().add(scenarios.createInstance()));
 
         // Creating World
         worldManager.deletePlayingWorld();
@@ -82,9 +82,10 @@ public class GameManager {
         Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
 
         // Creating UniqueSkills Instances
-        for (Skills skill : Skills.getAllSkillByTier(SkillTier.UNIQUE)){
-            uniqueSkillAvailable.add(skill.createInstance());
-        }
+        Skills.getAllSkillByTier(SkillTier.UNIQUE).forEach(
+                skill -> getUniqueSkillAvailable().add(skill.createInstance())
+        );
+
 
         // Player resurrection
         for (Player player : Bukkit.getOnlinePlayers()){
@@ -93,11 +94,12 @@ public class GameManager {
             playerManager.createPlayerGPlayer(player);
             Utils.resetPlayer(player);
         }
+
         gameModeInstance.teleportPlayers();
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
         gameModeInstance.onStart();
-        for (Scenario scenario : getActivatedScenariosInstance()) scenario.onStart();
+        getActivatedScenariosInstance().forEach(Scenario::onStart);
     }
     public void finishGame(UUID uuid){
         Player winner = Bukkit.getPlayer(uuid);

@@ -71,14 +71,11 @@ public class GPlayer {
     /**
      * It checks if the player has a certain skill.
      *
-     * @param skill The skill you want to check if the player has.
+     * @param skills The skill you want to check if the player has.
      * @return A boolean value.
      */
-    public boolean haveSkill(Skills skill){
-        for (Skill skills: getPlayerSkills()) {
-            if (skills.isSkill(skill)) return true;
-        }
-        return false;
+    public boolean haveSkill(Skills skills){
+        return getPlayerSkills().stream().anyMatch(skill -> skill.getSkill() == skills);
     }
 
     // Player Kills

@@ -15,7 +15,6 @@ public class StomachSkill extends Skill implements ActiveSkill {
     public StomachSkill() {
         super("Stomach", "Open personnal chest", Skills.STOMACH, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 20, PandoraSkill.class);
     }
-
     @Override
     public void onUse(Player player) {
         GPlayer gPlayer = getPlayerManager().getGPlayerByUUID(player.getUniqueId());

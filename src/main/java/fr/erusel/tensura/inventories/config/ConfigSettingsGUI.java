@@ -110,7 +110,7 @@ public class ConfigSettingsGUI extends FastInv {
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();
         }else {
-            getGameManager().setRaceActivated(false);
+            getGameManager().setSkillDrop(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Skill Drop : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
@@ -123,16 +123,16 @@ public class ConfigSettingsGUI extends FastInv {
         if (event.getClick().equals(ClickType.LEFT)) {
             getGameManager().setBorderRadius(getGameManager().getBorderRadius() + 100);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
-            itemMeta.setDisplayName("§6Border Radius : " + getGameManager().getSkillOnStart());
+            itemMeta.setDisplayName("§6Border Radius : " + getGameManager().getBorderRadius());
             event.getCurrentItem().setItemMeta(itemMeta);
             ((Player) event.getWhoClicked()).updateInventory();
             return;
         }
         if (event.getClick().equals(ClickType.RIGHT)) {
-            if (getGameManager().getSkillOnStart() > 100) {
-                getGameManager().setSkillOnStart(getGameManager().getSkillOnStart() - 100);
+            if (getGameManager().getBorderRadius() > 100) {
+                getGameManager().setBorderRadius(getGameManager().getBorderRadius() - 100);
                 ItemMeta itemMetaa = event.getCurrentItem().getItemMeta();
-                itemMetaa.setDisplayName("§6Border Radius : " + getGameManager().getSkillOnStart());
+                itemMetaa.setDisplayName("§6Border Radius : " + getGameManager().getBorderRadius());
                 event.getCurrentItem().setItemMeta(itemMetaa);
                 ((Player) event.getWhoClicked()).updateInventory();
                 return;
