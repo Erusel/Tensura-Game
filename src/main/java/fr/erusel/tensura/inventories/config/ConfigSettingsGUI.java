@@ -21,6 +21,7 @@ public class ConfigSettingsGUI extends FastInv {
         setItem(13, createRaceActivatedItem().build(), this::raceActivated);
         setItem(14, createSkillDropItem().build(), this::skillDrop);
         setItem(15, createBorderRadiusItem().build(), this::borderRadius);
+        setItem(16, createAmountLootCratesItem().build(), this::amountLootCrates);
     }
 
 
@@ -37,7 +38,7 @@ public class ConfigSettingsGUI extends FastInv {
                 return;
             }
         }
-        if (event.getClick().equals(ClickType.RIGHT)) {
+        else if (event.getClick().equals(ClickType.RIGHT)) {
             if (getGameManager().getSkillOnStart() > 1) {
                 getGameManager().setSkillOnStart(getGameManager().getSkillOnStart() - 1);
                 ItemMeta itemMetaa = event.getCurrentItem().getItemMeta();
@@ -128,7 +129,7 @@ public class ConfigSettingsGUI extends FastInv {
             ((Player) event.getWhoClicked()).updateInventory();
             return;
         }
-        if (event.getClick().equals(ClickType.RIGHT)) {
+        else if (event.getClick().equals(ClickType.RIGHT)) {
             if (getGameManager().getBorderRadius() > 100) {
                 getGameManager().setBorderRadius(getGameManager().getBorderRadius() - 100);
                 ItemMeta itemMetaa = event.getCurrentItem().getItemMeta();
@@ -138,8 +139,27 @@ public class ConfigSettingsGUI extends FastInv {
                 return;
             }
         }
+    }
+    private void amountLootCrates(InventoryClickEvent event) {
 
-
+        if (event.getClick().equals(ClickType.LEFT)) {
+            getGameManager().setAmountLootCrates(getGameManager().getAmountLootCrates() + 1);
+            ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
+            itemMeta.setDisplayName("§6Amount Loot Crates : " + getGameManager().getAmountLootCrates());
+            event.getCurrentItem().setItemMeta(itemMeta);
+            ((Player) event.getWhoClicked()).updateInventory();
+            return;
+        }
+        else if (event.getClick().equals(ClickType.RIGHT)) {
+            if (getGameManager().getAmountLootCrates() > 0) {
+                getGameManager().setAmountLootCrates(getGameManager().getAmountLootCrates() - 1);
+                ItemMeta itemMetaa = event.getCurrentItem().getItemMeta();
+                itemMetaa.setDisplayName("§6Amount Loot Crates : " + getGameManager().getAmountLootCrates());
+                event.getCurrentItem().setItemMeta(itemMetaa);
+                ((Player) event.getWhoClicked()).updateInventory();
+                return;
+            }
+        }
     }
 
 
@@ -213,5 +233,13 @@ public class ConfigSettingsGUI extends FastInv {
         borderRadius.addLore("§7> §6Left Click +100");
         borderRadius.addLore("§7> §6Right Click -100");
         return borderRadius;
+    }
+    private ItemBuilder createAmountLootCratesItem() {
+        ItemBuilder amountLootCrates = new ItemBuilder(Material.CHEST);
+        amountLootCrates.name("§6Amount Loot Crates : " + getGameManager().getAmountLootCrates());
+        amountLootCrates.addLore("§7---------------");
+        amountLootCrates.addLore("§7> §6Left Click +");
+        amountLootCrates.addLore("§7> §6Right Click -");
+        return amountLootCrates;
     }
 }

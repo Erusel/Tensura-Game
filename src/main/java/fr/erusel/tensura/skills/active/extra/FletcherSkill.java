@@ -14,7 +14,7 @@ public class FletcherSkill extends Skill implements ActiveSkill {
 
 
     public FletcherSkill() {
-        super("Fletcher", "Your next arrow will give a debuff effect", Skills.FLETCHER, SkillScope.UNOBTAINABLE,  SkillTier.EXTRA, 600, null);
+        super("Fletcher", "Your next arrow will give a debuff effect", Skills.FLETCHER, SkillScope.UNOBTAINABLE,  SkillTier.EXTRA, 800, null);
     }
 
     @Override
@@ -28,8 +28,9 @@ public class FletcherSkill extends Skill implements ActiveSkill {
                 PotionEffectType.CONFUSION,
                 PotionEffectType.HUNGER,
         };
-        int i = new Random().nextInt(7);
-
+        int i = new Random().nextInt(potionsDebuff.length);
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFletcherEffect(potionsDebuff[i]);
+        player.sendMessage("§6Your next arrow will inflict " + potionsDebuff[i].getName());
         activateCooldown();
     }
 }

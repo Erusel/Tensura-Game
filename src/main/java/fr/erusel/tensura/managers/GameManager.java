@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 public class GameManager {
@@ -33,6 +34,7 @@ public class GameManager {
     private boolean monsterSpawn = true;
     private boolean raceActivated = true;
     private boolean skillDrop = true;
+    private int amountLootCrates = 20;
 
     // Game
     private Modes gameMode = Modes.DEBUG;
@@ -166,7 +168,7 @@ public class GameManager {
         return alivePlayers;
     }
     public void addAlivePlayer(UUID uuid){
-        if (alivePlayers.contains(uuid)) deadPlayers.add(uuid);
+        alivePlayers.add(uuid);
     }
     public void removeAlivePlayer(UUID uuid){
         alivePlayers.remove(uuid);
@@ -240,5 +242,11 @@ public class GameManager {
     }
     public void setSkillDrop(boolean skillDrop) {
         this.skillDrop = skillDrop;
+    }
+    public int getAmountLootCrates() {
+        return amountLootCrates;
+    }
+    public void setAmountLootCrates(int amountLootCrates) {
+        this.amountLootCrates = amountLootCrates;
     }
 }

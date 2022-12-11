@@ -14,9 +14,9 @@ public class Utils {
         player.setFoodLevel(20);
 
         // Set attribute
-        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(2);
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.1f);
+        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue());
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue());
 
         // reset Inventory
         player.getInventory().clear();
@@ -31,7 +31,6 @@ public class Utils {
     }
 
     public static String getTime(Integer secs) {
-
         return String.format("§7%02d§7:§7%02d§7:§7%02d", ((secs / 3600) % 24), (secs % 3600) / 60, secs % 60);
     }
 

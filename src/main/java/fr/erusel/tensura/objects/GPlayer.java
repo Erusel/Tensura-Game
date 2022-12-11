@@ -12,6 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.potion.PotionEffectType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,7 @@ public class GPlayer {
     private UUID trackingPlayer;
     private Inventory stomachInventory;
     private Inventory pandoraInventory;
+    private PotionEffectType fletcherEffect;
 
     public GPlayer(UUID playerUUID, GameManager gameManager) {
         this.playerUUID = playerUUID;
@@ -182,6 +184,12 @@ public class GPlayer {
     public UUID getTrackingPlayer(){
         return trackingPlayer;
     }
+    public PotionEffectType getFletcherEffect() {
+        return fletcherEffect;
+    }
+    public void setFletcherEffect(PotionEffectType fletcherEffect) {
+        this.fletcherEffect = fletcherEffect;
+    }
 
     public List<Skill> getPlayerUniqueSkills(){
         List<Skill> skills = new ArrayList<>();
@@ -213,7 +221,7 @@ public class GPlayer {
     }
 
     public void createStomachInventory(){
-        if (stomachInventory == null) return;
+        if (stomachInventory != null) return;
         stomachInventory = Bukkit.createInventory(null, 27, "Stomach");
     }
     public Inventory getStomachInventory(){

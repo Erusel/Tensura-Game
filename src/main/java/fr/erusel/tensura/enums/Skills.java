@@ -55,6 +55,7 @@ public enum Skills {
     WINDMANIPULATION("Wind Manipulation", SkillTier.EXTRA, WindManipulationSkill.class),
     SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill.class),
     ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill.class),
+    GRAVITY("Gravity Manipulation", SkillTier.EXTRA, GravityManipulationSkill.class),
 
 
     // Ultimate Skills

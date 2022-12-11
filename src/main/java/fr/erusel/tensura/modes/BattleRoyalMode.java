@@ -41,6 +41,7 @@ public class BattleRoyalMode extends Mode {
     @Override
     public void onPlayerSpawn(Player player) {
 
+        getGameManager().addAlivePlayer(player.getUniqueId());
         // Give Skills
         for (int z = 0; z < getGameManager().getSkillOnStart(); z++) {
             int i = new Random().nextInt(getGameManager().getUniqueSkillAvailable().size());
@@ -64,7 +65,7 @@ public class BattleRoyalMode extends Mode {
         getWorldManager().getMap().getWorldBorder().setSize(20000);
         // place chest in random position in the map with random stuff
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < getGameManager().getAmountLootCrates(); i++) {
 
             int randomLvl = new Random().nextInt(5);
             int randomAmountStuff = new Random().nextInt(15);
@@ -106,7 +107,7 @@ public class BattleRoyalMode extends Mode {
                 int randomSlot = new Random().nextInt(27);
                 if (chest.getInventory().getItem(randomSlot) == null){
                     int rng = new Random().nextInt(100);
-                    if (rng <= 2){
+                    if (rng <= 7){
                         int randomRareItem = new Random().nextInt(rareItems.length);
                         chest.getInventory().setItem(randomSlot, rareItems[randomRareItem]);
                     } else {
@@ -121,6 +122,7 @@ public class BattleRoyalMode extends Mode {
     @Override
     public void onFinish() {
         Utils.VoiceOfTheWorldBroadcast("GAME ENDED, 1 ALIVE PLAYER");
+        getGameManager().finishGame(getGameManager().getAlivePlayers().get(0));
     }
 
     @Override
@@ -135,6 +137,8 @@ public class BattleRoyalMode extends Mode {
 
     @Override
     public void onPlayerDeath(PlayerDeathEvent event) {
+        getGameManager().removeAlivePlayer(event.getEntity().getUniqueId());
+        getGameManager().addDeadPlayer(event.getEntity().getUniqueId());
         if (getGameManager().getAlivePlayers().size() == 1){
             onFinish();
         }
