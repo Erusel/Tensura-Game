@@ -17,11 +17,9 @@ public abstract class GameElement {
     public GameManager getGameManager() {
         return gameManager;
     }
-
     public PlayerManager getPlayerManager() {
         return playerManager;
     }
-
     public WorldManager getWorldManager() {
         return worldManager;
     }
@@ -31,7 +29,6 @@ public abstract class GameElement {
     public ScoreBoardManager getScoreBoardManager() {
         return scoreBoardManager;
     }
-
     public TeamManager getTeamManager() {
         return teamManager;
     }

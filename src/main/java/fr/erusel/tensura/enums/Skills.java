@@ -54,6 +54,9 @@ public enum Skills {
     BLACKLIGHTNING("Black Lightning", SkillTier.EXTRA, BlackLightningSkill.class),
     WINDMANIPULATION("Wind Manipulation", SkillTier.EXTRA, WindManipulationSkill.class),
     SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill.class),
+    ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill.class),
+    GRAVITY("Gravity Manipulation", SkillTier.EXTRA, GravityManipulationSkill.class),
+
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),

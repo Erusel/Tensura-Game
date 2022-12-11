@@ -19,6 +19,7 @@ public class ConfigMainGUI extends FastInv {
                 .name("§7Mode")
                 .addLore("§7Change or set the Gamemode");
 
+
         // Scenario Item
         ItemBuilder scenario = getGameManager().getGameState().equals(GState.PLAYING)
                 ? new ItemBuilder(Material.GREEN_WOOL)

@@ -9,4 +9,6 @@ public class AutoSmeltScenario extends Scenario implements Eventable {
         super("Auto Smelt", "Auto smelt every mined ore.");
     }
 
+
+
 }

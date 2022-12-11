@@ -22,4 +22,5 @@ public class HastySkill extends Skill implements PassiveSkill {
         player.addPotionEffect(new PotionEffect(PotionEffectType.FAST_DIGGING, 40, 1));
     }
 
+
 }

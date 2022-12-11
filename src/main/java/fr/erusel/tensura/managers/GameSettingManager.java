@@ -13,6 +13,11 @@ public class GameSettingManager {
     private boolean monsterSpawn = true;
     private boolean raceActivated = true;
     private boolean skillDrop = true;
+    private int amountLootCrate = 20;
+
+    public GameSettingManager() {
+        instance = this;
+    }
 
     // Game Settings
     public int getSkillOnStart(){
@@ -53,6 +58,12 @@ public class GameSettingManager {
     }
     public void setSkillDrop(boolean skillDrop) {
         this.skillDrop = skillDrop;
+    }
+    public int getAmountLootCrate() {
+        return amountLootCrate;
+    }
+    public void setAmountLootCrate(int amountLootCrate) {
+        this.amountLootCrate = amountLootCrate;
     }
 
     public static GameSettingManager getInstance() {
