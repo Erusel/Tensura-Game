@@ -1,11 +1,10 @@
 package fr.erusel.tensura.commands;
 
-import fr.erusel.tensura.enums.Prefixs;
+import fr.erusel.tensura.enums.Prefixes;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.inventories.config.ConfigMainGUI;
-import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.PlayerManager;
+import fr.erusel.tensura.objects.GameElement;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
@@ -17,15 +16,7 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TensuraCommand implements CommandExecutor {
-
-    GameManager gameManager;
-    PlayerManager playerManager;
-
-    public TensuraCommand(GameManager gameManager, PlayerManager playerManager) {
-        this.gameManager = gameManager;
-        this.playerManager = playerManager;
-    }
+public class TensuraCommand extends GameElement implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -45,7 +36,7 @@ public class TensuraCommand implements CommandExecutor {
         }
 
         if (args[0].equalsIgnoreCase("start")){
-            gameManager.startGame(player);
+            getGameManager().startGame(player);
             return true;
         }
         if (args[0].equalsIgnoreCase("config")){
@@ -54,27 +45,27 @@ public class TensuraCommand implements CommandExecutor {
         }
         if (args[0].equalsIgnoreCase("sethost")) {
             if (Bukkit.getPlayer(args[1]) != null){
-                gameManager.setPlayerHost(Bukkit.getPlayer(args[1]));
+                getGameManager().setPlayerHost(Bukkit.getPlayer(args[1]));
                 player.sendMessage("Player " + Bukkit.getPlayer(args[1]).getName() + " has been set as Host");
                 return true;
             }else player.sendMessage("§cPlayer not found");
         }
         if (args[0].equalsIgnoreCase("giveskill")){
             if (Bukkit.getPlayer(args[1]) != null){
-                playerManager.getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).createInstance());
-                player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
+                getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).createInstance());
+                player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
             }else player.sendMessage("§cPlayer not found");
         }
         if (args[0].equalsIgnoreCase("setrace")) {
             if (Bukkit.getPlayer(args[1]) != null) {
-                playerManager.getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).createInstance());
-                player.sendMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Races.valueOf(args[2]).getName() + " to " + Bukkit.getPlayer(args[1]).getName());
+                getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).createInstance());
+                player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Races.valueOf(args[2]).getName() + " to " + Bukkit.getPlayer(args[1]).getName());
             }
             else player.sendMessage("§cPlayer not found");
         }
         if (args[0].equalsIgnoreCase("resetcooldown")){
             if (Bukkit.getPlayer(args[1]) != null){
-                for (Skill skill : playerManager.getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getPlayerSkills()){
+                for (Skill skill : getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getPlayerSkills()){
                     skill.setCurrentCooldown(0);
                 }
                 player.sendMessage("§3Cooldown reseted for " + Bukkit.getPlayer(args[1]).getName());
@@ -82,7 +73,7 @@ public class TensuraCommand implements CommandExecutor {
         }
         if (args[0].equalsIgnoreCase("harvestfestival")){
             if (Bukkit.getPlayer(args[1]) != null){
-                playerManager.getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).launchHarvestFestival();
+                getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).launchHarvestFestival();
             }
         }
         if (args[0].equalsIgnoreCase("broadcast")){

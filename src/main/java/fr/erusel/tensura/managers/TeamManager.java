@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class TeamManager {
-
+    
+    private static TeamManager instance;
+    
+    
     private final List<UUID> redTeamPlayers = new ArrayList<>();
     private final List<UUID> blueTeamPlayers = new ArrayList<>();
     private final List<UUID> greenTeamPlayers = new ArrayList<>();
@@ -78,6 +81,10 @@ public class TeamManager {
         blueTeamPlayers.clear();
         greenTeamPlayers.clear();
         yellowTeamPlayers.clear();
+    }
+
+    public static TeamManager getInstance() {
+        return instance;
     }
 
 }

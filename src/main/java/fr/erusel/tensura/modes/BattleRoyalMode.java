@@ -9,14 +9,14 @@ import fr.erusel.tensura.scoreboards.BattleRoyalScoreboard;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
 
 import java.util.Random;
 
 public class BattleRoyalMode extends Mode {
+
+    Random random = new Random();
+
     public BattleRoyalMode() {
         super("Battle Royal", Modes.BATTLE_ROYAL, new BattleRoyalScoreboard(), false);
     }
@@ -25,8 +25,8 @@ public class BattleRoyalMode extends Mode {
     public void teleportPlayers() {
         for (Player player : Bukkit.getOnlinePlayers()){
             //spawn player at random location in the map
-            int x = new Random().nextInt(getGameManager().getBorderRadius())-500;
-            int z = new Random().nextInt(getGameManager().getBorderRadius())-500;
+            int x = random.nextInt(getGameSettingManager().getBorderRadius())-500;
+            int z = random.nextInt(getGameSettingManager().getBorderRadius())-500;
             player.teleport(getWorldManager().getMap().getHighestBlockAt(x, z).getLocation());
             onPlayerSpawn(player);
         }
@@ -36,14 +36,14 @@ public class BattleRoyalMode extends Mode {
     public void onPlayerSpawn(Player player) {
 
         // Give Skills
-        for (int z = 0; z < getGameManager().getSkillOnStart(); z++) {
-            int i = new Random().nextInt(getGameManager().getUniqueSkillAvailable().size());
+        for (int z = 0; z < getGameSettingManager().getSkillOnStart(); z++) {
+            int i = random.nextInt(getGameManager().getUniqueSkillAvailable().size());
             getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(getGameManager().getUniqueSkillAvailable().get(i));
             getGameManager().getUniqueSkillAvailable().remove(getGameManager().getUniqueSkillAvailable().get(i));
         }
 
         // Give Races
-        if (getGameManager().isRaceActivated()){
+        if (getGameSettingManager().isRaceActivated()){
             Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
             getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
             getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
@@ -64,48 +64,10 @@ public class BattleRoyalMode extends Mode {
     }
 
     @Override
-    public void onPlayerJoin(PlayerJoinEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerLeave(PlayerQuitEvent event) {
-
-    }
-
-    @Override
     public void onPlayerDeath(PlayerDeathEvent event) {
         if (getGameManager().getAlivePlayers().size() == 1){
             onFinish();
         }
     }
 
-    @Override
-    public void onPlayerRespawn(PlayerRespawnEvent event) {
-    }
-
-    @Override
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerMove(PlayerMoveEvent event) {
-
-    }
-
-    @Override
-    public void onBlockBreak(BlockBreakEvent event) {
-
-    }
-
-    @Override
-    public void onChat(AsyncPlayerChatEvent event) {
-
-    }
-
-    @Override
-    public void onAdvancement(PlayerAdvancementDoneEvent event) {
-
-    }
 }

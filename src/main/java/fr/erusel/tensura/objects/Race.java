@@ -4,7 +4,7 @@ import fr.erusel.tensura.enums.RaceStages;
 import fr.erusel.tensura.enums.Races;
 import org.bukkit.entity.Player;
 
-public abstract class Race {
+public abstract class Race extends GameElement{
 
     private final String name;
     private final String description;

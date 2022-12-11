@@ -1,20 +1,8 @@
 package fr.erusel.tensura.objects;
 
 import fr.erusel.tensura.enums.Modes;
-import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.PlayerManager;
-import fr.erusel.tensura.managers.WorldManager;
-import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
 
-public abstract class Mode {
-
-    GameManager gameManager = GameManager.getInstance();
-    PlayerManager playerManager = PlayerManager.getInstance();
-    WorldManager worldManager = WorldManager.getInstance();
+public abstract class Mode extends GameElement implements Eventable{
 
 
     private final String modeName;
@@ -45,27 +33,5 @@ public abstract class Mode {
     public void refreshScoreboard(){
         gScoreboard.refreshPlayingScoreboard();
     }
-    public abstract void teleportPlayers();
-    public abstract void onPlayerSpawn(Player player);
-    public abstract void onStart();
-    public abstract void onFinish();
-    public abstract void onPlayerJoin(PlayerJoinEvent event);
-    public abstract void onPlayerLeave(PlayerQuitEvent event);
-    public abstract void onPlayerDeath(PlayerDeathEvent event);
-    public abstract void onPlayerRespawn(PlayerRespawnEvent event);
-    public abstract void onEntityDamageByEntity(EntityDamageByEntityEvent event);
-    public abstract void onPlayerMove(PlayerMoveEvent event);
-    public abstract void onBlockBreak(BlockBreakEvent event);
-    public abstract void onChat(AsyncPlayerChatEvent event);
-    public abstract void onAdvancement(PlayerAdvancementDoneEvent event);
 
-    public GameManager getGameManager() {
-        return gameManager;
-    }
-    public PlayerManager getPlayerManager() {
-        return playerManager;
-    }
-    public WorldManager getWorldManager() {
-        return worldManager;
-    }
 }

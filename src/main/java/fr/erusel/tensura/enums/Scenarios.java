@@ -39,7 +39,6 @@ public enum Scenarios {
     public Class<? extends Scenario> getScenarioClass() {
         return scenarioClass;
     }
-
     public Scenario createInstance(){
         try {
             return getScenarioClass().getConstructor().newInstance();

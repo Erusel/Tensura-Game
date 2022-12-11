@@ -1,14 +1,8 @@
 package fr.erusel.tensura;
 
 import fr.erusel.tensura.commands.*;
-import fr.erusel.tensura.listeners.DamageListener;
-import fr.erusel.tensura.listeners.PlayerDeathListener;
-import fr.erusel.tensura.listeners.PlayerInteractionListener;
-import fr.erusel.tensura.listeners.PlayerJoinQuitListener;
-import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.PlayerManager;
-import fr.erusel.tensura.managers.ScoreBoardManager;
-import fr.erusel.tensura.managers.WorldManager;
+import fr.erusel.tensura.listeners.*;
+import fr.erusel.tensura.managers.*;
 import fr.erusel.tensura.threads.GameLoopRunnable;
 import fr.mrmicky.fastinv.FastInvManager;
 import org.bukkit.Bukkit;
@@ -19,9 +13,11 @@ public final class Main extends JavaPlugin {
 
     private static Main main;
     private GameManager gameManager;
+    private GameSettingManager gameSettingManager;
     private WorldManager worldManager;
     private PlayerManager playerManager;
     private ScoreBoardManager scoreBoardManager;
+    private TeamManager teamManager;
 
     @Override
     public void onEnable() {
@@ -29,8 +25,10 @@ public final class Main extends JavaPlugin {
 
         worldManager = new WorldManager();
         playerManager = new PlayerManager();
-        gameManager = new GameManager(playerManager, worldManager);
-        scoreBoardManager = new ScoreBoardManager(gameManager);
+        gameSettingManager = new GameSettingManager();
+        teamManager = new TeamManager();
+        gameManager = new GameManager(playerManager, worldManager, teamManager);
+        scoreBoardManager = new ScoreBoardManager(gameManager, gameSettingManager, teamManager);
 
         FastInvManager.register(this);
         saveDefaultConfig();
@@ -45,27 +43,28 @@ public final class Main extends JavaPlugin {
 
     }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
-
     public static Main getInstance(){
         return main;
     }
     @SuppressWarnings("all")
     public void registerCommands(){
-        getCommand("tensura").setExecutor(new TensuraCommand(gameManager, playerManager));
-        getCommand("tensura").setTabCompleter(new TensuraTabCompleter(gameManager));
+        getCommand("tensura").setExecutor(new TensuraCommand());
+        getCommand("tensura").setTabCompleter(new TensuraTabCompleter());
 
-        getCommand("skill").setExecutor(new SkillCommand(gameManager));
-        getCommand("team").setExecutor(new TeamCommand(gameManager));
-        getCommand("join").setExecutor(new JoinCommand(gameManager));
+        getCommand("skill").setExecutor(new SkillCommand());
+        getCommand("team").setExecutor(new TeamCommand());
+        getCommand("join").setExecutor(new JoinCommand());
     }
     public void registerListeners(){
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(gameManager, scoreBoardManager, playerManager), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerInteractionListener(gameManager, scoreBoardManager, playerManager), this);
-        Bukkit.getPluginManager().registerEvents(new DamageListener(gameManager, scoreBoardManager, playerManager), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(gameManager, scoreBoardManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(gameManager, scoreBoardManager, gameSettingManager), this);
+        Bukkit.getPluginManager().registerEvents(new LevelFoodChangeListener(gameManager, playerManager,gameSettingManager), this);
+        Bukkit.getPluginManager().registerEvents(new EntityDamageListener(gameManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new BlockBreakListener(gameManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new EntityDamageByEntityListener(gameManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerAdvancementDoneListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerMoveListener(gameManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerRespawnListener(gameManager, playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerSendChatListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(gameManager, playerManager), this);
     }
 }

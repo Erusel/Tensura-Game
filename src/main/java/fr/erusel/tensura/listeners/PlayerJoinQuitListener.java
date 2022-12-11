@@ -2,9 +2,9 @@ package fr.erusel.tensura.listeners;
 
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.PlayerManager;
+import fr.erusel.tensura.managers.GameSettingManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
-import fr.erusel.tensura.objects.Scenario;
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastboard.FastBoard;
 import org.bukkit.Bukkit;
@@ -18,12 +18,12 @@ public class PlayerJoinQuitListener implements Listener {
 
     GameManager gameManager;
     ScoreBoardManager scoreBoardManager;
-    PlayerManager playerManager;
+    GameSettingManager gameSettingManager;
 
-    public PlayerJoinQuitListener(GameManager gameManager, ScoreBoardManager scoreBoardManager, PlayerManager playerManager) {
+    public PlayerJoinQuitListener(GameManager gameManager, ScoreBoardManager scoreBoardManager, GameSettingManager gameSettingManager) {
         this.gameManager = gameManager;
         this.scoreBoardManager = scoreBoardManager;
-        this.playerManager = playerManager;
+        this.gameSettingManager = gameSettingManager;
     }
 
     @EventHandler
@@ -37,7 +37,7 @@ public class PlayerJoinQuitListener implements Listener {
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
             Utils.resetPlayer(player);
             scoreBoardManager.refreshWaitingScoreboard();
-            if (!(gameManager.getPlayerList().size() >= gameManager.getMaxPlayer())){
+            if (!(gameManager.getPlayerList().size() >= gameSettingManager.getMaxPlayer())){
                 gameManager.getPlayerList().add(player.getUniqueId());
             }else {
                 gameManager.addWaitingList(player.getUniqueId());
@@ -47,7 +47,9 @@ public class PlayerJoinQuitListener implements Listener {
         if (gameManager.getGameState().equals(GState.PLAYING)) {
             gameManager.getGameModeInstance().refreshScoreboard();
             gameManager.getGameModeInstance().onPlayerJoin(event);
-            for (Scenario scenario : gameManager.getActivatedScenariosInstance()) scenario.onPlayerJoin(event);
+            gameManager.getActivatedScenariosInstance().stream()
+                    .filter(s -> s instanceof Eventable)
+                    .forEach(s -> ((Eventable) s).onPlayerJoin(event));
         } else {
             scoreBoardManager.refreshWaitingScoreboard();
         }
@@ -73,7 +75,9 @@ public class PlayerJoinQuitListener implements Listener {
         }
         if (gameManager.getGameState().equals(GState.PLAYING)){
             gameManager.getGameModeInstance().onPlayerLeave(event);
-            for (Scenario scenario : gameManager.getActivatedScenariosInstance()) scenario.onPlayerLeave(event);
+            gameManager.getActivatedScenariosInstance().stream()
+                    .filter(s -> s instanceof Eventable)
+                    .forEach(s -> ((Eventable) s).onPlayerLeave(event));
 
         }
     }

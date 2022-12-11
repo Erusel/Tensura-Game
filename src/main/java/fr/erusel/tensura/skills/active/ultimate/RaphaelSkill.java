@@ -1,6 +1,6 @@
 package fr.erusel.tensura.skills.active.ultimate;
 
-import fr.erusel.tensura.enums.Prefixs;
+import fr.erusel.tensura.enums.Prefixes;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
@@ -18,7 +18,7 @@ public class RaphaelSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        StringBuilder stringBuilder = new StringBuilder(Prefixs.RAPAHEL.getText() + "§aHere are the entity around you: \n");
+        StringBuilder stringBuilder = new StringBuilder(Prefixes.RAPAHEL.getText() + "§aHere are the entity around you: \n");
         for (Entity entity : player.getNearbyEntities(50, 50, 50)){
             if (entity instanceof LivingEntity) {
                 if (entity instanceof Player) stringBuilder.append(((Player) entity).getDisplayName()).append(" Life : ").append(((LivingEntity) entity).getHealth()).append("\n");

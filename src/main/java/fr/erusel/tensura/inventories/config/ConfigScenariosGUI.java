@@ -13,11 +13,11 @@ public class ConfigScenariosGUI extends FastInv {
         super(45, "Tensura Config | Scenarios");
 
         for (Scenarios scenarios : Scenarios.values()){
-            ItemBuilder itemBuilder;
-            if (getGameManager().getActivatedScenarios().contains(scenarios)) itemBuilder = new ItemBuilder(Material.GREEN_WOOL);
-            else itemBuilder = new ItemBuilder(Material.RED_WOOL);
-            itemBuilder.name("§6" + scenarios.getName());
-            itemBuilder.addLore("§7" + scenarios.getDescription());
+            ItemBuilder itemBuilder = getGameManager().getActivatedScenarios().contains(scenarios)
+                    ? new ItemBuilder(Material.GREEN_WOOL)
+                    : new ItemBuilder(Material.RED_WOOL)
+                    .name("§6" + scenarios.getName())
+                    .addLore("§7" + scenarios.getDescription());
             addItem(itemBuilder.build(), event -> clickScenario(event, scenarios));
         }}
 

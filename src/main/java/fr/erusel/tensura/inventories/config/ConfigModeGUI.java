@@ -18,14 +18,14 @@ public class ConfigModeGUI extends FastInv {
                 .flags(ItemFlag.HIDE_ATTRIBUTES)
                 .addLore("§7The last survivant won the game !")
                 .addLore("§7------------------")
-                .addLore("§7Team :§1 No");
+                .addLore("§7Team :§6 No");
 
         ItemBuilder charybdis = new ItemBuilder(Material.ENDERMAN_SPAWN_EGG)
                 .name("§7Charybdis Hunt")
                 .flags(ItemFlag.HIDE_ATTRIBUTES)
                 .addLore("§7Find all charybdis part with your team !")
                 .addLore("§7------------------")
-                .addLore("§7Team :§1 Yes");
+                .addLore("§7Team :§6 Yes");
 
 
 
@@ -35,13 +35,13 @@ public class ConfigModeGUI extends FastInv {
 
     public void battleRoyal(InventoryClickEvent event){
         getGameManager().setGameMode(Modes.BATTLE_ROYAL);
-        getGameManager().getTeamManager().clearTeams();
+        getTeamManager().clearTeams();
         new ConfigMainGUI().open((Player) event.getWhoClicked());
     }
 
     public void charybdis(InventoryClickEvent event){
         getGameManager().setGameMode(Modes.CHARYBDIS);
-        getGameManager().getTeamManager().clearTeams();
+        getTeamManager().clearTeams();
         new ConfigMainGUI().open((Player) event.getWhoClicked());
     }
 

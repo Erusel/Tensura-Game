@@ -28,20 +28,20 @@ public class ConfigSettingsGUI extends FastInv {
     private void skillOnStart(InventoryClickEvent event) {
 
         if (event.getClick().equals(ClickType.LEFT)) {
-            if (getGameManager().getSkillOnStart() < Skills.getAllSkillByTier(SkillTier.UNIQUE).size()) {
-                getGameManager().setSkillOnStart(getGameManager().getSkillOnStart() + 1);
+            if (getGameSettingManager().getSkillOnStart() < Skills.getAllSkillByTier(SkillTier.UNIQUE).size()) {
+                getGameSettingManager().setSkillOnStart(getGameSettingManager().getSkillOnStart() + 1);
                 ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
-                itemMeta.setDisplayName("§6Unique Skill on start : " + getGameManager().getSkillOnStart());
+                itemMeta.setDisplayName("§6Unique Skill on start : " + getGameSettingManager().getSkillOnStart());
                 event.getCurrentItem().setItemMeta(itemMeta);
                 ((Player) event.getWhoClicked()).updateInventory();
                 return;
             }
         }
         if (event.getClick().equals(ClickType.RIGHT)) {
-            if (getGameManager().getSkillOnStart() > 1) {
-                getGameManager().setSkillOnStart(getGameManager().getSkillOnStart() - 1);
+            if (getGameSettingManager().getSkillOnStart() > 1) {
+                getGameSettingManager().setSkillOnStart(getGameSettingManager().getSkillOnStart() - 1);
                 ItemMeta itemMetaa = event.getCurrentItem().getItemMeta();
-                itemMetaa.setDisplayName("§6Unique Skill on start : " + getGameManager().getSkillOnStart());
+                itemMetaa.setDisplayName("§6Unique Skill on start : " + getGameSettingManager().getSkillOnStart());
                 event.getCurrentItem().setItemMeta(itemMetaa);
                 ((Player) event.getWhoClicked()).updateInventory();
                 return;
@@ -51,15 +51,15 @@ public class ConfigSettingsGUI extends FastInv {
 
     }
     private void naturalRegen(InventoryClickEvent event){
-        if (!getGameManager().getNaturalRegen()){
-            getGameManager().setNaturalRegen(true);
+        if (!getGameSettingManager().getNaturalRegen()){
+            getGameSettingManager().setNaturalRegen(true);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Natural Regeneration : §aEnabled");
             event.getCurrentItem().setItemMeta(itemMeta);
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();
         }else {
-            getGameManager().setNaturalRegen(false);
+            getGameSettingManager().setNaturalRegen(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Natural Regeneration : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
@@ -68,15 +68,15 @@ public class ConfigSettingsGUI extends FastInv {
         }
     }
     private void monsterSpawn(InventoryClickEvent event){
-        if (!getGameManager().getMonsterSpawn()){
-            getGameManager().setMonsterSpawn(true);
+        if (!getGameSettingManager().getMonsterSpawn()){
+            getGameSettingManager().setMonsterSpawn(true);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Monster Spawn : §aEnabled");
             event.getCurrentItem().setItemMeta(itemMeta);
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();
         }else {
-            getGameManager().setMonsterSpawn(false);
+            getGameSettingManager().setMonsterSpawn(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Monster Spawn : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
@@ -85,15 +85,15 @@ public class ConfigSettingsGUI extends FastInv {
         }
     }
     private void raceActivated(InventoryClickEvent event){
-        if (!getGameManager().isRaceActivated()){
-            getGameManager().setRaceActivated(true);
+        if (!getGameSettingManager().isRaceActivated()){
+            getGameSettingManager().setRaceActivated(true);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Races : §aEnabled");
             event.getCurrentItem().setItemMeta(itemMeta);
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();
         }else {
-            getGameManager().setRaceActivated(false);
+            getGameSettingManager().setRaceActivated(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Races : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
@@ -102,15 +102,15 @@ public class ConfigSettingsGUI extends FastInv {
         }
     }
     private void skillDrop(InventoryClickEvent event){
-        if (!getGameManager().isSkillDrop()){
-            getGameManager().setSkillDrop(true);
+        if (!getGameSettingManager().isSkillDrop()){
+            getGameSettingManager().setSkillDrop(true);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Skill Drop : §aEnabled");
             event.getCurrentItem().setItemMeta(itemMeta);
             event.getCurrentItem().setType(Material.GREEN_WOOL);
             ((Player) event.getWhoClicked()).updateInventory();
         }else {
-            getGameManager().setSkillDrop(false);
+            getGameSettingManager().setSkillDrop(false);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
             itemMeta.setDisplayName("§6Skill Drop : §cDisabled");
             event.getCurrentItem().setItemMeta(itemMeta);
@@ -121,21 +121,20 @@ public class ConfigSettingsGUI extends FastInv {
     private void borderRadius(InventoryClickEvent event) {
 
         if (event.getClick().equals(ClickType.LEFT)) {
-            getGameManager().setBorderRadius(getGameManager().getBorderRadius() + 100);
+            getGameSettingManager().setBorderRadius(getGameSettingManager().getBorderRadius() + 100);
             ItemMeta itemMeta = event.getCurrentItem().getItemMeta();
-            itemMeta.setDisplayName("§6Border Radius : " + getGameManager().getBorderRadius());
+            itemMeta.setDisplayName("§6Border Radius : " + getGameSettingManager().getBorderRadius());
             event.getCurrentItem().setItemMeta(itemMeta);
             ((Player) event.getWhoClicked()).updateInventory();
             return;
         }
         if (event.getClick().equals(ClickType.RIGHT)) {
-            if (getGameManager().getBorderRadius() > 100) {
-                getGameManager().setBorderRadius(getGameManager().getBorderRadius() - 100);
+            if (getGameSettingManager().getBorderRadius() > 100) {
+                getGameSettingManager().setBorderRadius(getGameSettingManager().getBorderRadius() - 100);
                 ItemMeta itemMetaa = event.getCurrentItem().getItemMeta();
-                itemMetaa.setDisplayName("§6Border Radius : " + getGameManager().getBorderRadius());
+                itemMetaa.setDisplayName("§6Border Radius : " + getGameSettingManager().getBorderRadius());
                 event.getCurrentItem().setItemMeta(itemMetaa);
                 ((Player) event.getWhoClicked()).updateInventory();
-                return;
             }
         }
 
@@ -147,7 +146,7 @@ public class ConfigSettingsGUI extends FastInv {
     private ItemBuilder createSkillOnStartItem(){
         // Skill on start
         ItemBuilder skillOnStart = new ItemBuilder(Material.ACACIA_PLANKS);
-        skillOnStart.name("§6Unique Skill on start : " + getGameManager().getSkillOnStart());
+        skillOnStart.name("§6Unique Skill on start : " + getGameSettingManager().getSkillOnStart());
         skillOnStart.addLore("§7---------------");
         skillOnStart.addLore("§7> §6Left Click +");
         skillOnStart.addLore("§7> §6Right Click -");
@@ -156,7 +155,7 @@ public class ConfigSettingsGUI extends FastInv {
     private ItemBuilder createNaturalRegenItem(){
         // Natural Regen
         ItemBuilder naturalRegen;
-        if (getGameManager().getNaturalRegen()) {
+        if (getGameSettingManager().getNaturalRegen()) {
             naturalRegen = new ItemBuilder(Material.GREEN_WOOL);
             naturalRegen.name("§6Natural Regeneration : §aEnabled");
         }
@@ -169,7 +168,7 @@ public class ConfigSettingsGUI extends FastInv {
     private ItemBuilder createMonsterSpawnItem(){
         // Monster Spawn
         ItemBuilder monsterSpawn;
-        if (getGameManager().getNaturalRegen()) {
+        if (getGameSettingManager().getNaturalRegen()) {
             monsterSpawn = new ItemBuilder(Material.GREEN_WOOL);
             monsterSpawn.name("§6Monster Spawn : §aEnabled");
         }
@@ -182,7 +181,7 @@ public class ConfigSettingsGUI extends FastInv {
     private ItemBuilder createRaceActivatedItem(){
         // Races Activated
         ItemBuilder raceActivated;
-        if (getGameManager().isRaceActivated()) {
+        if (getGameSettingManager().isRaceActivated()) {
             raceActivated = new ItemBuilder(Material.GREEN_WOOL);
             raceActivated.name("§6Races : §aEnabled");
         }
@@ -195,7 +194,7 @@ public class ConfigSettingsGUI extends FastInv {
     private ItemBuilder createSkillDropItem(){
         // Races Activated
         ItemBuilder skillDrop;
-        if (getGameManager().isRaceActivated()) {
+        if (getGameSettingManager().isRaceActivated()) {
             skillDrop = new ItemBuilder(Material.GREEN_WOOL);
             skillDrop.name("§6Skill Drop : §aEnabled");
         }
@@ -208,7 +207,7 @@ public class ConfigSettingsGUI extends FastInv {
     private ItemBuilder createBorderRadiusItem() {
         // Skill on start
         ItemBuilder borderRadius = new ItemBuilder(Material.GLASS);
-        borderRadius.name("§6Border Radius : " + getGameManager().getBorderRadius());
+        borderRadius.name("§6Border Radius : " + getGameSettingManager().getBorderRadius());
         borderRadius.addLore("§7---------------");
         borderRadius.addLore("§7> §6Left Click +100");
         borderRadius.addLore("§7> §6Right Click -100");

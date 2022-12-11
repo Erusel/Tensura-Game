@@ -4,7 +4,6 @@ import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
-import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.threads.HarvestFestivalRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -18,9 +17,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class GPlayer {
-
-    private final GameManager gameManager;
+public class GPlayer extends GameElement{
 
     // Player Info
     private final UUID playerUUID;
@@ -37,18 +34,13 @@ public class GPlayer {
     private boolean gravityActivated;
     private boolean inHarvestFestival;
     private boolean canResurrect = true;
-    private int oppressorTime;
-    private int gravityTime;
-    private int imperceptibleTime;
-    private int ReflectorTime;
     private int mathematicianDodgeLeft;
     private UUID trackingPlayer;
     private Inventory stomachInventory;
     private Inventory pandoraInventory;
 
-    public GPlayer(UUID playerUUID, GameManager gameManager) {
+    public GPlayer(UUID playerUUID) {
         this.playerUUID = playerUUID;
-        this.gameManager = gameManager;
     }
 
     public UUID getUUID(){
@@ -100,7 +92,10 @@ public class GPlayer {
         return race;
     }
     public boolean isRace(Races races){
-        return race.getRace().equals(races);
+        if (getGameSettingManager().isRaceActivated()){
+            return race.getRace().equals(races);
+        }
+        return false;
     }
 
     public boolean haveHarvestFestivalPrerequisite(){

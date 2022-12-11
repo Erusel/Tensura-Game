@@ -6,10 +6,6 @@ import fr.erusel.tensura.scoreboards.CharybdisScoreboard;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
 
 import java.util.Random;
 
@@ -19,26 +15,28 @@ public class CharybdisMode extends Mode {
         super("Charybdis Hunt", Modes.CHARYBDIS, new CharybdisScoreboard(), true);
     }
 
+    Random random = new Random();
+
     @Override
     public void teleportPlayers() {
 
-        int borderRadius = getGameManager().getBorderRadius();
-        int redTeamX = new Random().nextInt(borderRadius);
-        int redTeamZ = new Random().nextInt(borderRadius);
+        int borderRadius = getGameSettingManager().getBorderRadius();
+        int redTeamX = random.nextInt(borderRadius);
+        int redTeamZ = random.nextInt(borderRadius);
         Location redTeamSpawn = getWorldManager().getMap().getHighestBlockAt(redTeamX, redTeamZ).getLocation();
-        int blueTeamX = new Random().nextInt(borderRadius);
-        int blueTeamZ = new Random().nextInt(borderRadius);
+        int blueTeamX = random.nextInt(borderRadius);
+        int blueTeamZ = random.nextInt(borderRadius);
         Location blueTeamSpawn = getWorldManager().getMap().getHighestBlockAt(blueTeamX, blueTeamZ).getLocation();
-        int greenTeamX = new Random().nextInt(borderRadius);
-        int greenTeamZ = new Random().nextInt(borderRadius);
+        int greenTeamX = random.nextInt(borderRadius);
+        int greenTeamZ = random.nextInt(borderRadius);
         Location greenTeamSpawn = getWorldManager().getMap().getHighestBlockAt(greenTeamX, greenTeamZ).getLocation();
-        int yellowTeamX = new Random().nextInt(borderRadius);
-        int yellowTeamZ = new Random().nextInt(borderRadius);
+        int yellowTeamX = random.nextInt(borderRadius);
+        int yellowTeamZ = random.nextInt(borderRadius);
         Location yellowTeamSpawn = getWorldManager().getMap().getHighestBlockAt(yellowTeamX, yellowTeamZ).getLocation();
 
         // Teleport Players with teams
         for (Player player : Bukkit.getOnlinePlayers()){
-            switch (getGameManager().getTeamManager().getPlayerTeam(player.getUniqueId())){
+            switch (getTeamManager().getPlayerTeam(player.getUniqueId())){
                 case "Red":
                     player.teleport(redTeamSpawn);
                 case "Blue":
@@ -55,11 +53,6 @@ public class CharybdisMode extends Mode {
     }
 
     @Override
-    public void onPlayerSpawn(Player player) {
-
-    }
-
-    @Override
     public void onStart() {
         Bukkit.broadcastMessage("§7-------------§5Charybdis Hunt§7-------------");
         Bukkit.broadcastMessage("§7Welcome in Charybdis Hunt");
@@ -71,53 +64,4 @@ public class CharybdisMode extends Mode {
         Bukkit.broadcastMessage("§7--------------------------------------------");
     }
 
-    @Override
-    public void onFinish() {
-
-    }
-
-    @Override
-    public void onPlayerJoin(PlayerJoinEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerLeave(PlayerQuitEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerDeath(PlayerDeathEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerRespawn(PlayerRespawnEvent event) {
-
-    }
-
-    @Override
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerMove(PlayerMoveEvent event) {
-
-    }
-
-    @Override
-    public void onBlockBreak(BlockBreakEvent event) {
-
-    }
-
-    @Override
-    public void onChat(AsyncPlayerChatEvent event) {
-
-    }
-
-    @Override
-    public void onAdvancement(PlayerAdvancementDoneEvent event) {
-
-    }
 }

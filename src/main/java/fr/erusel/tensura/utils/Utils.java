@@ -1,6 +1,6 @@
 package fr.erusel.tensura.utils;
 
-import fr.erusel.tensura.enums.Prefixs;
+import fr.erusel.tensura.enums.Prefixes;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
@@ -27,11 +27,10 @@ public class Utils {
     }
 
     public static void VoiceOfTheWorldBroadcast(String message){
-        Bukkit.broadcastMessage(Prefixs.VOICE_OF_THE_WORLD.getText() + message);
+        Bukkit.broadcastMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + message);
     }
 
     public static String getTime(Integer secs) {
-
         return String.format("§7%02d§7:§7%02d§7:§7%02d", ((secs / 3600) % 24), (secs % 3600) / 60, secs % 60);
     }
 

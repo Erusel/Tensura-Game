@@ -1,6 +1,7 @@
 package fr.erusel.tensura.managers;
 
 import fr.erusel.tensura.enums.*;
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Scenario;
 import fr.erusel.tensura.objects.Skill;
@@ -19,6 +20,7 @@ public class GameManager {
     private static GameManager instance;
     private final PlayerManager playerManager;
     private final WorldManager worldManager;
+    private final TeamManager teamManager;
 
     // Server
     private GState gameState = GState.WAITING;
@@ -26,18 +28,9 @@ public class GameManager {
     private String hostName = "None";
     private final List<UUID> waitingList = new ArrayList<>();
 
-    // Settings
-    private int skillOnStart = 1;
-    private int borderRadius = 1000;
-    private boolean naturalRegen = false;
-    private boolean monsterSpawn = true;
-    private boolean raceActivated = true;
-    private boolean skillDrop = true;
-
     // Game
     private Modes gameMode = Modes.DEBUG;
     private Mode gameModeInstance;
-    private final TeamManager teamManager = new TeamManager();
     private final List<Scenarios> activatedScenarios = new ArrayList<>();
     private final List<Scenario> activatedScenariosInstance = new ArrayList<>();
     public int gameStartTime;
@@ -46,10 +39,11 @@ public class GameManager {
     private final List<UUID> alivePlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
 
-    public GameManager(PlayerManager playerManager, WorldManager worldManager) {
+    public GameManager(PlayerManager playerManager, WorldManager worldManager, TeamManager teamManager) {
         instance = this;
         this.playerManager = playerManager;
         this.worldManager = worldManager;
+        this.teamManager = teamManager;
     }
 
     public static GameManager getInstance() {
@@ -86,29 +80,32 @@ public class GameManager {
                 skill -> getUniqueSkillAvailable().add(skill.createInstance())
         );
 
-
-        // Player resurrection
-        for (Player player : Bukkit.getOnlinePlayers()){
+        // Reincarnation of players
+        Bukkit.getOnlinePlayers().forEach(player -> {
             player.setGameMode(GameMode.SURVIVAL);
             playerList.add(player.getUniqueId());
             playerManager.createPlayerGPlayer(player);
             Utils.resetPlayer(player);
-        }
+        });
 
         gameModeInstance.teleportPlayers();
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
         gameModeInstance.onStart();
-        getActivatedScenariosInstance().forEach(Scenario::onStart);
+
+        getActivatedScenariosInstance().stream()
+                .filter(s -> s instanceof Eventable eventable)
+                .forEach(scenario -> ((Eventable) scenario).onStart());
     }
+
     public void finishGame(UUID uuid){
         Player winner = Bukkit.getPlayer(uuid);
         setGameState(GState.FINISHING);
-        for (Player player : Bukkit.getOnlinePlayers()){
+        Bukkit.getOnlinePlayers().forEach(player -> {
             player.setGameMode(GameMode.SURVIVAL);
             player.teleport(Bukkit.getWorld("World").getSpawnLocation());
             Utils.resetPlayer(player);
-        }
+        });
         teamManager.clearTeams();
         Bukkit.broadcastMessage("The winner is " +  winner.getName());
     }
@@ -183,10 +180,6 @@ public class GameManager {
         deadPlayers.remove(uuid);
     }
 
-    // Team Manager
-    public TeamManager getTeamManager(){
-        return teamManager;
-    }
 
     // Unique Skills
     public List<Skill> getUniqueSkillAvailable(){
@@ -201,44 +194,4 @@ public class GameManager {
         return activatedScenariosInstance;
     }
 
-    // Game Settings
-    public int getSkillOnStart(){
-        return skillOnStart;
-    }
-    public void setSkillOnStart(int i) {
-        this.skillOnStart = i;
-    }
-    public int getMaxPlayer(){
-        return (int) Math.floor(Skills.getAllSkillByTier(SkillTier.UNIQUE).size() / getSkillOnStart());
-    }
-    public boolean getNaturalRegen(){
-        return naturalRegen;
-    }
-    public void setNaturalRegen(boolean b){
-        naturalRegen = b;
-    }
-    public boolean getMonsterSpawn(){
-        return monsterSpawn;
-    }
-    public void setMonsterSpawn(boolean b){
-        monsterSpawn = b;
-    }
-    public boolean isRaceActivated() {
-        return raceActivated;
-    }
-    public void setRaceActivated(boolean raceActivated) {
-        this.raceActivated = raceActivated;
-    }
-    public int getBorderRadius() {
-        return borderRadius;
-    }
-    public void setBorderRadius(int borderRadius) {
-        this.borderRadius = borderRadius;
-    }
-    public boolean isSkillDrop(){
-        return skillDrop;
-    }
-    public void setSkillDrop(boolean skillDrop) {
-        this.skillDrop = skillDrop;
-    }
 }

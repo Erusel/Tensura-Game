@@ -7,16 +7,20 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.UUID;
 
-public class ScoreBoardManager  {
+public class ScoreBoardManager {
 
     private static ScoreBoardManager instance;
     private final GameManager gameManager;
+    private final GameSettingManager gameSettingManager;
+    private final TeamManager teamManager;
 
     public final HashMap<UUID, FastBoard> scoreboard = new HashMap<>();
 
-    public ScoreBoardManager(GameManager gameManager) {
+    public ScoreBoardManager(GameManager gameManager, GameSettingManager gameSettingManager, TeamManager teamManager) {
         instance = this;
         this.gameManager = gameManager;
+        this.gameSettingManager = gameSettingManager;
+        this.teamManager = teamManager;
     }
 
     public static ScoreBoardManager getInstance() {
@@ -34,11 +38,11 @@ public class ScoreBoardManager  {
         for (FastBoard board: scoreboard.values()){
 
             board.updateLine(1,"§7§m------------------");
-            board.updateLine(2,"§7Players : " + gameManager.getPlayerList().size() + "§3/" + ChatColor.GRAY + gameManager.getMaxPlayer());
+            board.updateLine(2,"§7Players : " + gameManager.getPlayerList().size() + "§3/" + ChatColor.GRAY + gameSettingManager.getMaxPlayer());
             board.updateLine(3, "§7Host : §6" + gameManager.getHostName());
             board.updateLine(4, "§7Mode : §6" + gameManager.getGameMode().getModeName());
             if (gameManager.getGameMode().haveTeam()){
-                board.updateLine(5, "§7Team : §6" + gameManager.getTeamManager().getPlayerTeam(board.getPlayer().getUniqueId()));
+                board.updateLine(5, "§7Team : §6" + teamManager.getPlayerTeam(board.getPlayer().getUniqueId()));
                 board.updateLine(6,"§7§m------------------");
                 board.updateLine(7, "§3By Erusel");
             } else {

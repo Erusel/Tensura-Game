@@ -34,14 +34,14 @@ public class DebugMode extends Mode {
     public void onPlayerSpawn(Player player) {
 
         // Give Skill
-        for (int z = 0; z < getGameManager().getSkillOnStart(); z++) {
+        for (int z = 0; z < getGameSettingManager().getSkillOnStart(); z++) {
             int i = new Random().nextInt(getGameManager().getUniqueSkillAvailable().size());
             getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(getGameManager().getUniqueSkillAvailable().get(i));
             getGameManager().getUniqueSkillAvailable().remove(getGameManager().getUniqueSkillAvailable().get(i));
         }
 
         // Give Races
-        if (getGameManager().isRaceActivated()){
+        if (getGameSettingManager().isRaceActivated()){
             Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
             getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
             getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
@@ -52,9 +52,9 @@ public class DebugMode extends Mode {
     @Override
     public void onStart() {
         Bukkit.broadcastMessage("§c DEBUG MODE | ONLY FOR DEVELOPMENT !");
-        getWorldManager().getMap().setGameRule(GameRule.NATURAL_REGENERATION, getGameManager().getNaturalRegen());
-        getWorldManager().getMap().setGameRule(GameRule.DO_MOB_SPAWNING, getGameManager().getMonsterSpawn());
-        getWorldManager().getMap().getWorldBorder().setSize(getGameManager().getBorderRadius());
+        getWorldManager().getMap().setGameRule(GameRule.NATURAL_REGENERATION, getGameSettingManager().getNaturalRegen());
+        getWorldManager().getMap().setGameRule(GameRule.DO_MOB_SPAWNING, getGameSettingManager().getMonsterSpawn());
+        getWorldManager().getMap().getWorldBorder().setSize(getGameSettingManager().getBorderRadius());
     }
 
     @Override
