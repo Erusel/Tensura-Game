@@ -64,10 +64,15 @@ public class PlayerInteractionListener implements Listener {
 
     @EventHandler
     public void onAdvancement(PlayerAdvancementDoneEvent event){
+        //check if the advancement is a recipe
+        if (event.getAdvancement().getKey().getKey().contains("recipes/")){
+            return;
+        }
         if (gameManager.getGameState().equals(GState.PLAYING)){
             Player player = event.getPlayer();
             gameManager.getGameModeInstance().onAdvancement(event);
             if (gameManager.getPlayerList().contains(player.getUniqueId())){
+                // 6% chance to get a skill
                 int i = new Random().nextInt(100);
                 if (i < 6){
                     player.sendMessage("§3You gain an skill");
@@ -82,7 +87,6 @@ public class PlayerInteractionListener implements Listener {
         if (!(event.getEntity() instanceof Player player)) return;
         if (gameManager.isRaceActivated()){
             if (playerManager.getGPlayerByUUID(player.getUniqueId()).getRace().getName().equals(Races.SLIME.getName())) event.setCancelled(true);
-
         }
     }
 }

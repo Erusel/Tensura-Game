@@ -46,7 +46,7 @@ public class DamageListener implements Listener {
         }
 
         // Scenarios
-        for (Scenario scenario : gameManager.getActivatedScenariosInstance()) scenario.onEntityDamageByEntity(event);
+        gameManager.getActivatedScenariosInstance().stream().forEach(scenario -> scenario.onEntityDamageByEntity(event));
 
         if (gameManager.getGameState().equals(GState.PLAYING)){
 
@@ -70,7 +70,7 @@ public class DamageListener implements Listener {
                         int i = new Random().nextInt(100);
                         if (i <= 19) {
                             player.damage(event.getDamage()*1.2);
-                            shooter.sendMessage("§6x1.2 damage !");
+                            shooter.sendMessage("§6Critical damage !");
                         }
                     }
                     if (damagedGPlayer.isReflectorActivated()) {
@@ -78,7 +78,15 @@ public class DamageListener implements Listener {
                         ((LivingEntity) damager).damage(event.getDamage());
                         event.setCancelled(true);
                     }
+                    if (shooter instanceof Player shooterPlayer) {
+                        GPlayer shooterGPlayer = playerManager.getGPlayerByUUID(shooterPlayer.getUniqueId());
+                        if (shooterGPlayer.getFletcherEffect() != null) {
+                            player.addPotionEffect(new PotionEffect(shooterGPlayer.getFletcherEffect(), 140, 1));
+                            shooterGPlayer.setFletcherEffect(null);
+                        }
+                    }
                 }
+
                 if (damager instanceof Player player2){
                     GPlayer damagerGPlayer = playerManager.getGPlayerByUUID(player2.getUniqueId());
                     // Checking if the player is a Dwarf, and if they are, it is reducing the damage they take by 20%.
