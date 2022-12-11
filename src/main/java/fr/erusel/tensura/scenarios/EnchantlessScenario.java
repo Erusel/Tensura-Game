@@ -1,74 +1,11 @@
 package fr.erusel.tensura.scenarios;
 
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.Scenario;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.inventory.CraftItemEvent;
-import org.bukkit.event.player.*;
 
-public class EnchantlessScenario extends Scenario {
+public class EnchantlessScenario extends Scenario implements Eventable {
     public EnchantlessScenario() {
         super("Enchantless", "Dab");
     }
 
-    @Override
-    public void onStart() {
-    }
-
-    @Override
-    public void onFinish() {
-
-    }
-
-    @Override
-    public void onPlayerJoin(PlayerJoinEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerLeave(PlayerQuitEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerDeath(PlayerDeathEvent event) {
-
-    }
-
-    @Override
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerMove(PlayerMoveEvent event) {
-
-    }
-
-    @Override
-    public void onBlockBreak(BlockBreakEvent event) {
-
-    }
-
-    @Override
-    public void onChat(AsyncPlayerChatEvent event) {
-
-    }
-
-    @Override
-    public void onAdvancement(PlayerAdvancementDoneEvent event) {
-
-    }
-
-    @Override
-    public void onCraft(CraftItemEvent event) {
-
-    }
-
-    @Override
-    public void onDamage(EntityDamageEvent event) {
-
-    }
 }

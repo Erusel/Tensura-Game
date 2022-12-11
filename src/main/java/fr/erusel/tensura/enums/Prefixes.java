@@ -1,6 +1,6 @@
 package fr.erusel.tensura.enums;
 
-public enum Prefixs {
+public enum Prefixes {
 
     VOICE_OF_THE_WORLD("§6§b[§r§6Voice of the World§6§b]§r§o§3 "),
     GREAT_SAGE("[§bGreat Sage§f] "),
@@ -9,7 +9,7 @@ public enum Prefixs {
 
     private final String text;
 
-    Prefixs(String text) {
+    Prefixes(String text) {
         this.text = text;
     }
 
@@ -17,5 +17,8 @@ public enum Prefixs {
         return text;
     }
 
-
+    @Override
+    public String toString() {
+        return getText();
+    }
 }

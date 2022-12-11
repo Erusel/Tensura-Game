@@ -1,9 +1,9 @@
 package fr.erusel.tensura.managers;
 
 import org.bukkit.*;
-import org.bukkit.entity.Player;
 
 import java.io.File;
+import java.util.Arrays;
 
 public class WorldManager {
 
@@ -31,9 +31,8 @@ public class WorldManager {
 
     public void deletePlayingWorld(){
         if (Bukkit.getWorld(MAP_NAME) != null){
-            for (Player player : Bukkit.getWorld(MAP_NAME).getPlayers()){
-                player.teleport(Bukkit.getWorld("world").getSpawnLocation());
-            }
+            Bukkit.getWorld(MAP_NAME).getPlayers()
+                    .forEach(p -> p.teleport(Bukkit.getWorld("world").getSpawnLocation()));
             Bukkit.getServer().unloadWorld(MAP_NAME, true);
             File destDir = new File("."+File.separator+MAP_NAME);
             deleteMap(destDir);
@@ -43,12 +42,13 @@ public class WorldManager {
 
     private void deleteMap(File dir) {
         File[] files = dir.listFiles();
-        for(File d : files){
-            if(d.isDirectory()){
-                deleteMap(d);
-            }
-            d.delete();
-        }
+        Arrays.stream(files)
+                .forEach(file -> {
+                    if(file.isDirectory()){
+                        deleteMap(file);
+                    }
+                    file.delete();
+                });
         dir.delete();
     }
 

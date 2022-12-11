@@ -56,9 +56,8 @@ public class VictimSkillGUI extends FastInv {
         }
 
         // Resistance Skill
-        for (Skill skill : gPlayer.getPlayerResistance()){
-            addItem(new ItemBuilder(Material.GREEN_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
-        }
+        gPlayer.getPlayerResistance()
+                .forEach(resistance -> addItem(new ItemBuilder(Material.BARRIER).name("§6" + resistance.getName()).addLore("§7" + resistance.getLore()).build()));
 
 
     }

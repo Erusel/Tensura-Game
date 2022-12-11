@@ -1,0 +1,74 @@
+package fr.erusel.tensura.managers;
+
+import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
+
+public class GameSettingManager {
+
+    private static GameSettingManager instance;
+
+    private int skillOnStart = 1;
+    private int borderRadius = 1000;
+    private boolean naturalRegen = false;
+    private boolean monsterSpawn = true;
+    private boolean raceActivated = true;
+    private boolean skillDrop = true;
+    private int amountLootCrate = 20;
+
+    public GameSettingManager() {
+        instance = this;
+    }
+
+    // Game Settings
+    public int getSkillOnStart(){
+        return skillOnStart;
+    }
+    public void setSkillOnStart(int i) {
+        this.skillOnStart = i;
+    }
+    public int getMaxPlayer(){
+        return (int) Math.floor(Skills.getAllSkillByTier(SkillTier.UNIQUE).size() / getSkillOnStart());
+    }
+    public boolean getNaturalRegen(){
+        return naturalRegen;
+    }
+    public void setNaturalRegen(boolean b){
+        naturalRegen = b;
+    }
+    public boolean getMonsterSpawn(){
+        return monsterSpawn;
+    }
+    public void setMonsterSpawn(boolean b){
+        monsterSpawn = b;
+    }
+    public boolean isRaceActivated() {
+        return raceActivated;
+    }
+    public void setRaceActivated(boolean raceActivated) {
+        this.raceActivated = raceActivated;
+    }
+    public int getBorderRadius() {
+        return borderRadius;
+    }
+    public void setBorderRadius(int borderRadius) {
+        this.borderRadius = borderRadius;
+    }
+    public boolean isSkillDrop(){
+        return skillDrop;
+    }
+    public void setSkillDrop(boolean skillDrop) {
+        this.skillDrop = skillDrop;
+    }
+    public int getAmountLootCrate() {
+        return amountLootCrate;
+    }
+    public void setAmountLootCrate(int amountLootCrate) {
+        this.amountLootCrate = amountLootCrate;
+    }
+
+    public static GameSettingManager getInstance() {
+        return instance;
+    }
+
+
+}

@@ -4,11 +4,8 @@ import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
-import fr.erusel.tensura.managers.ScoreBoardManager;
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.GPlayer;
-import fr.erusel.tensura.objects.PassiveSkill;
-import fr.erusel.tensura.objects.Scenario;
-import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -16,48 +13,48 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Random;
 
-public class DamageListener implements Listener {
+public class EntityDamageByEntityListener implements Listener {
 
     GameManager gameManager;
-    ScoreBoardManager scoreBoardManager;
     PlayerManager playerManager;
 
-    public DamageListener(GameManager gameManager, ScoreBoardManager scoreBoardManager, PlayerManager playerManager) {
+    public EntityDamageByEntityListener(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;
-        this.scoreBoardManager = scoreBoardManager;
         this.playerManager = playerManager;
     }
 
-
-
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+
         Entity damager = event.getDamager();
         Entity damaged = event.getEntity();
+
         if (!gameManager.getGameState().equals(GState.PLAYING)){
             event.setCancelled(true);
             return;
         }
 
-        // Scenarios
-        gameManager.getActivatedScenariosInstance().stream().forEach(scenario -> scenario.onEntityDamageByEntity(event));
+        gameManager.getActivatedScenariosInstance().stream()
+                .filter(s -> s instanceof Eventable)
+                .forEach(s -> ((Eventable) s).onEntityDamageByEntity(event));
 
+        // Scenarios
         if (gameManager.getGameState().equals(GState.PLAYING)){
 
             gameManager.getGameModeInstance().onEntityDamageByEntity(event);
 
             if(damaged instanceof Player player){
                 GPlayer damagedGPlayer = playerManager.getGPlayerByUUID(player.getUniqueId());
+
                 // Skill Use
-                for (Skill skill : damagedGPlayer.getPlayerSkills()){
-                    if (skill instanceof PassiveSkill) ((PassiveSkill)skill).onDamageByEntity(event);
-                }
+                damagedGPlayer.getPlayerSkills().stream()
+                        .filter(s -> s instanceof Eventable)
+                        .forEach(s -> ((Eventable) s).onEntityDamageByEntity(event));
 
                 if (damagedGPlayer.getMathematicianDodgeLeft() >=1){
                     event.setCancelled(true);
@@ -66,11 +63,11 @@ public class DamageListener implements Listener {
 
                 if (damager instanceof Arrow projectile) {
                     LivingEntity shooter = (LivingEntity) projectile.getShooter();
-                    if (damagedGPlayer.getRace().getName().equals(Races.ELF.getName())) {
+                    if (damagedGPlayer.isRace(Races.ELF)) {
                         int i = new Random().nextInt(100);
                         if (i <= 19) {
                             player.damage(event.getDamage()*1.2);
-                            shooter.sendMessage("§6Critical damage !");
+                            shooter.sendMessage("§6x1.2 damage !");
                         }
                     }
                     if (damagedGPlayer.isReflectorActivated()) {
@@ -78,15 +75,7 @@ public class DamageListener implements Listener {
                         ((LivingEntity) damager).damage(event.getDamage());
                         event.setCancelled(true);
                     }
-                    if (shooter instanceof Player shooterPlayer) {
-                        GPlayer shooterGPlayer = playerManager.getGPlayerByUUID(shooterPlayer.getUniqueId());
-                        if (shooterGPlayer.getFletcherEffect() != null) {
-                            player.addPotionEffect(new PotionEffect(shooterGPlayer.getFletcherEffect(), 140, 1));
-                            shooterGPlayer.setFletcherEffect(null);
-                        }
-                    }
                 }
-
                 if (damager instanceof Player player2){
                     GPlayer damagerGPlayer = playerManager.getGPlayerByUUID(player2.getUniqueId());
                     // Checking if the player is a Dwarf, and if they are, it is reducing the damage they take by 20%.
@@ -122,20 +111,5 @@ public class DamageListener implements Listener {
         }
 
     }
-
-    @EventHandler
-    public void onEntityDamage(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
-        if (!gameManager.getGameState().equals(GState.PLAYING)){
-            event.setCancelled(true);
-            return;
-        }
-        for (Scenario scenario : gameManager.getActivatedScenariosInstance()) scenario.onDamage(event);
-
-        for (Skill skill: playerManager.getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
-            if (skill instanceof PassiveSkill passiveSkill) passiveSkill.onDamage(event);
-        }
-    }
-
 
 }

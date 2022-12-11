@@ -3,17 +3,14 @@ package fr.erusel.tensura.skills.passive.ultimate;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class MogisSkill extends Skill implements PassiveSkill {
+public class MogisSkill extends Skill implements PassiveSkill, Eventable {
 
 
     public MogisSkill() {
@@ -26,26 +23,9 @@ public class MogisSkill extends Skill implements PassiveSkill {
     }
 
     @Override
-    public void onDeath(PlayerDeathEvent event) {
-    }
-
-    @Override
-    public void onKill(Player killer, Player deadPlayer) {
+    public void onPlayerKill(Player killer, Player deadPlayer) {
         killer.addPotionEffect(new PotionEffect(PotionEffectType.INCREASE_DAMAGE, 400, 1));
     }
 
-    @Override
-    public void onDamage(EntityDamageEvent event) {
-
-    }
-
-    @Override
-    public void onDamageByEntity(EntityDamageByEntityEvent event) {
-
-    }
-
-    @Override
-    public void onBlockBreak(BlockBreakEvent event) {
-    }
 
 }

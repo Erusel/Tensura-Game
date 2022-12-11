@@ -25,6 +25,7 @@ package fr.mrmicky.fastinv;
 
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
+import fr.erusel.tensura.objects.GameElement;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -47,10 +48,7 @@ import java.util.stream.IntStream;
  * @author MrMicky
  * @version 3.0.3
  */
-public class FastInv implements InventoryHolder {
-
-    GameManager gameManager = GameManager.getInstance();
-    PlayerManager playerManager = PlayerManager.getInstance();
+public class FastInv extends GameElement implements InventoryHolder {
 
     private final Map<Integer, Consumer<InventoryClickEvent>> itemHandlers = new HashMap<>();
     private final List<Consumer<InventoryOpenEvent>> openHandlers = new ArrayList<>();
@@ -338,13 +336,5 @@ public class FastInv implements InventoryHolder {
         if (clickConsumer != null) {
             clickConsumer.accept(e);
         }
-    }
-
-    public PlayerManager getPlayerManager() {
-        return playerManager;
-    }
-
-    public GameManager getGameManager() {
-        return gameManager;
     }
 }

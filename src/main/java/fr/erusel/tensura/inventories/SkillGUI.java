@@ -19,52 +19,55 @@ public class SkillGUI extends FastInv {
         GPlayer gPlayer = getPlayerManager().getGPlayerByUUID(player.getUniqueId());
 
         // Ultimate Skills
-        for (Skill skill : gPlayer.getPlayerUltimateSkills()){
-            if (skill instanceof PassiveSkill){
-                addItem(new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
-            } else if (skill instanceof ActiveSkill) {
-                ItemBuilder itemBuilder;
-                itemBuilder = new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
+        gPlayer.getPlayerUltimateSkills()
+                .forEach(skill -> {
+                    if (skill instanceof PassiveSkill){
+                        addItem(new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
+                    } else if (skill instanceof ActiveSkill) {
+                        ItemBuilder itemBuilder;
+                        itemBuilder = new ItemBuilder(Material.ORANGE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
 
-                if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconds");
-                addItem(itemBuilder.build(), e -> activeSkillUse(skill));
-            }else {
-                addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
-            }
-        }
+                        if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconds");
+                        addItem(itemBuilder.build(), e -> activeSkillUse(skill));
+                    }else {
+                        addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
+                    }
+                });
 
         // Unique Skill
-        for (Skill skill : gPlayer.getPlayerUniqueSkills()){
-            if (skill instanceof PassiveSkill){
-                addItem(new ItemBuilder(Material.BLUE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
-            } else if (skill instanceof ActiveSkill) {
-                ItemBuilder itemBuilder;
-                    itemBuilder = new ItemBuilder(Material.RED_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
-                if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconds");
-                addItem(itemBuilder.build(), e -> activeSkillUse(skill));
-            }else {
-                addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
-            }
-        }
+        gPlayer.getPlayerUniqueSkills()
+                .forEach(skill -> {
+                    if (skill instanceof PassiveSkill){
+                        addItem(new ItemBuilder(Material.BLUE_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
+                    } else if (skill instanceof ActiveSkill) {
+                        ItemBuilder itemBuilder;
+                        itemBuilder = new ItemBuilder(Material.RED_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
+                        if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconds");
+                        addItem(itemBuilder.build(), e -> activeSkillUse(skill));
+                    }else {
+                        addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
+                    }
+                });
 
         // Extra Skill
-        for (Skill skill : gPlayer.getPlayerExtraSkill()){
-            if (skill instanceof PassiveSkill){
-                addItem(new ItemBuilder(Material.YELLOW_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
-            } else if (skill instanceof ActiveSkill) {
-                ItemBuilder itemBuilder;
-                itemBuilder = new ItemBuilder(Material.YELLOW_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
-                if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconds");
-                addItem(itemBuilder.build(), e -> activeSkillUse(skill));
-            }else {
-                addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
-            }
-        }
+        gPlayer.getPlayerExtraSkill()
+                .forEach(skill -> {
+                    if (skill instanceof PassiveSkill){
+                        addItem(new ItemBuilder(Material.YELLOW_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
+                    } else if (skill instanceof ActiveSkill) {
+                        ItemBuilder itemBuilder;
+                        itemBuilder = new ItemBuilder(Material.YELLOW_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).addLore("§7Left Click to use");
+                        if (skill.inCooldown()) itemBuilder.addLore("§cCooldown : " + skill.getCurrentCooldown() + " seconds");
+                        addItem(itemBuilder.build(), e -> activeSkillUse(skill));
+                    }else {
+                        addItem(new ItemBuilder(Material.BARRIER).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).build());
+                    }
+                });
+
 
         // Resistance Skill
-        for (Skill skill : gPlayer.getPlayerResistance()){
-            addItem(new ItemBuilder(Material.GREEN_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build());
-        }
+        gPlayer.getPlayerResistance()
+                .forEach(skill -> addItem(new ItemBuilder(Material.GREEN_WOOL).name("§6" + skill.getName()).addLore("§7" + skill.getLore()).addLore("§2--------------------").addLore(skill.getSkillTier().getText()).build()));
 
 
     }
