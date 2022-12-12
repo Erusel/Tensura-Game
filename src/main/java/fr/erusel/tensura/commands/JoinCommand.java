@@ -1,5 +1,6 @@
 package fr.erusel.tensura.commands;
 
+import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.objects.GameElement;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,8 +15,15 @@ public class JoinCommand extends GameElement implements CommandExecutor {
         if (!(sender instanceof Player player)) {
             return false;
         }
+        if (!getGameManager().getGameState().equals(GState.WAITING)){
+            return true;
+        }
         if (getGameManager().getPlayerList().contains(player.getUniqueId())){
             player.sendMessage("§cYou are already in the game !");
+            return true;
+        }
+        if (getGameManager().getWaitingList().contains(player.getUniqueId())){
+            player.sendMessage("§cYou are already in the waiting list !");
             return true;
         }
         if (getGameManager().getGameMode().haveTeam()){
@@ -23,10 +31,6 @@ public class JoinCommand extends GameElement implements CommandExecutor {
             return true;
         }
         if (getGameManager().getPlayerList().size() > getGameSettingManager().getMaxPlayer()) {
-            if (getGameManager().getWaitingList().contains(player.getUniqueId())){
-                player.sendMessage("§cYou are already in the waiting list !");
-                return true;
-            }
             player.sendMessage("§cToo many players, added in waiting list !");
             getGameManager().addWaitingList(player.getUniqueId());
             return true;
