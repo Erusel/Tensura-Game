@@ -1,13 +1,15 @@
 package fr.erusel.tensura.utils;
 
 import fr.erusel.tensura.enums.Prefixes;
+import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
 public class Utils {
-
 
     public static void resetPlayer(Player player){
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
@@ -33,5 +35,4 @@ public class Utils {
     public static String getTime(Integer secs) {
         return String.format("§7%02d§7:§7%02d§7:§7%02d", ((secs / 3600) % 24), (secs % 3600) / 60, secs % 60);
     }
-
 }

@@ -17,6 +17,6 @@ public class ElfRace extends Race {
     @Override
     public void onGive(Player player) {
         // Faster
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue() + 0.2);
+        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.12);
     }
 }

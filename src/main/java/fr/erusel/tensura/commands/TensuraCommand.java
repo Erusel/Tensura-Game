@@ -60,6 +60,7 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             if (Bukkit.getPlayer(args[1]) != null) {
                 getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).createInstance());
                 player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Races.valueOf(args[2]).getName() + " to " + Bukkit.getPlayer(args[1]).getName());
+                getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getRace().onGive(Bukkit.getPlayer(args[1]));
             }
             else player.sendMessage("§cPlayer not found");
         }

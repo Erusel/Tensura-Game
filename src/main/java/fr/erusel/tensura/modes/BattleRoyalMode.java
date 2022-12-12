@@ -8,6 +8,9 @@ import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.scoreboards.BattleRoyalScoreboard;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.block.Chest;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
@@ -56,6 +59,14 @@ public class BattleRoyalMode extends Mode {
         Bukkit.broadcastMessage("§5Battle Royal");
         // Change the world border size to 20000 blocks max
         getWorldManager().getMap().getWorldBorder().setSize(20000);
+        for (int i = 0; i < getGameSettingManager().getAmountCrates(); i++) {
+            int x = random.nextInt(getGameSettingManager().getBorderRadius())-500;
+            int z = random.nextInt(getGameSettingManager().getBorderRadius())-500;
+            Location loc = getWorldManager().getMap().getHighestBlockAt(x, z).getLocation();
+            getWorldManager().getMap().getBlockAt(loc).setType(Material.CHEST);
+            Chest chest = (Chest) loc.getBlock().getState();
+            getGameManager().addCrateLocation(chest.getLocation());
+        }
     }
 
     @Override

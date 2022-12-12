@@ -59,10 +59,10 @@ public class GameSettingManager {
     public void setSkillDrop(boolean skillDrop) {
         this.skillDrop = skillDrop;
     }
-    public int getAmountLootCrate() {
+    public int getAmountCrates() {
         return amountLootCrate;
     }
-    public void setAmountLootCrate(int amountLootCrate) {
+    public void setAmountCrates(int amountLootCrate) {
         this.amountLootCrate = amountLootCrate;
     }
 
