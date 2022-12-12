@@ -4,9 +4,9 @@ import fr.erusel.tensura.commands.*;
 import fr.erusel.tensura.listeners.*;
 import fr.erusel.tensura.managers.*;
 import fr.erusel.tensura.threads.GameLoopRunnable;
+import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastinv.FastInvManager;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -35,9 +35,10 @@ public final class Main extends JavaPlugin {
         registerCommands();
         registerListeners();
 
-        for (Player player : Bukkit.getOnlinePlayers()){
+        Bukkit.getOnlinePlayers().forEach(player -> {
             scoreBoardManager.initializeScoreboard(player);
-        }
+            Utils.resetPlayer(player);
+        });
 
         new GameLoopRunnable(gameManager, playerManager, scoreBoardManager).runTaskTimer(this, 0, 20);
 

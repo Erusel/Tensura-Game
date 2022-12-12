@@ -50,39 +50,51 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             return true;
         }
 
-        // Player Host Douane
-        if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
-            return true;
-        }
-
         if (args[0].equalsIgnoreCase("start")){
+            if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+                return true;
+            }
             getGameManager().startGame(player);
             return true;
         }
         if (args[0].equalsIgnoreCase("config")){
+            if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+                return true;
+            }
             new ConfigMainGUI().open(player);
             return true;
         }
         if (args[0].equalsIgnoreCase("pregen")){
+            if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+                return true;
+            }
             getWorldManager().deletePlayingWorld();
             Utils.VoiceOfTheWorldBroadcast("Creating world...");
             getWorldManager().createPlayingWorld();
             Utils.VoiceOfTheWorldBroadcast("Successful");
-        }
-
-
-        // Extern Player Douane
-        if (Bukkit.getPlayer(args[1]) == null){
-            player.sendMessage("§cPlayer not found");
             return true;
         }
 
         if (args[0].equalsIgnoreCase("giveskill")){
+            if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+                return true;
+            }
+            if (Bukkit.getPlayer(args[1]) == null){
+                player.sendMessage("§cPlayer not found");
+                return true;
+            }
             getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).createInstance());
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
             return true;
         }
         if (args[0].equalsIgnoreCase("setrace")) {
+            if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+                return true;
+            }
+            if (Bukkit.getPlayer(args[1]) == null){
+                player.sendMessage("§cPlayer not found");
+                return true;
+            }
             Utils.resetPlayer(Bukkit.getPlayer(args[1]));
             getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).createInstance());
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Races.valueOf(args[2]).getName() + " to " + Bukkit.getPlayer(args[1]).getName());
@@ -90,15 +102,34 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             return true;
         }
         if (args[0].equalsIgnoreCase("resetcooldown")){
+            if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+                return true;
+            }
+            if (Bukkit.getPlayer(args[1]) == null){
+                player.sendMessage("§cPlayer not found");
+                return true;
+            }
             getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getPlayerSkills()
                     .forEach(skill -> skill.setCurrentCooldown(0));
             player.sendMessage("§3Cooldown reseted for " + Bukkit.getPlayer(args[1]).getName());
+            return true;
         }
         if (args[0].equalsIgnoreCase("harvestfestival")){
+            if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+                return true;
+            }
+            if (Bukkit.getPlayer(args[1]) == null){
+                player.sendMessage("§cPlayer not found");
+                return true;
+            }
             getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId())
                     .launchHarvestFestival();
+            return true;
         }
         if (args[0].equalsIgnoreCase("broadcast")){
+            if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+                return true;
+            }
             StringBuilder message = new StringBuilder();
             List<String> t = new ArrayList<>();
             for (String text : args) t.add(text + " ");

@@ -25,7 +25,7 @@ public class GameManager {
 
     // Server
     private GState gameState = GState.WAITING;
-    private UUID gameHost;
+    private UUID gameHost = UUID.randomUUID();
     private String hostName = "None";
     private final List<UUID> waitingList = new ArrayList<>();
 

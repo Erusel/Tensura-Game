@@ -6,7 +6,6 @@ authors: [ Erusel, Fnafgameur ]
 commands:
   tensura:
     description: "Host command for the Game"
-    permission: tensura.tensura
   skill:
     description: "Show skills of the player"
   team:
