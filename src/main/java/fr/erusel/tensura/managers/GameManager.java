@@ -70,12 +70,12 @@ public class GameManager {
         // Creating Scenarios Instances
         getActivatedScenarios().forEach(scenarios -> getActivatedScenariosInstance().add(scenarios.createInstance()));
 
+
         // Creating World
-        worldManager.deletePlayingWorld();
-        Utils.VoiceOfTheWorldBroadcast("Creating world...");
-        worldManager.createPlayingWorld();
-        Utils.VoiceOfTheWorldBroadcast("Successful");
-        Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
+        if (!worldManager.isPlayingMapExist()){
+            p.sendMessage("§cMap not found, pregen one with /tensura pregen");
+            return;
+        }
 
         // Creating UniqueSkills Instances
         Skills.getAllSkillByTier(SkillTier.UNIQUE).forEach(

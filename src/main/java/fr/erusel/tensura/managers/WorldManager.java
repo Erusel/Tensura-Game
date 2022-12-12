@@ -1,26 +1,24 @@
 package fr.erusel.tensura.managers;
 
-import fr.erusel.tensura.enums.Modes;
 import org.bukkit.*;
-import org.bukkit.block.Chest;
 
 import java.io.File;
 import java.util.Arrays;
-import java.util.Random;
 
 public class WorldManager {
-
-    GameManager gameManager;
 
     private static WorldManager instance;
 
     private final String MAP_NAME = "map";
-    private World map;
+    private World map = null;
 
     public WorldManager() {
         instance = this;
+        this.map = Bukkit.getWorld(MAP_NAME);
     }
-
+    public boolean isPlayingMapExist() {
+        return this.map != null;
+    }
     public void createPlayingWorld(){
         WorldCreator worldCreator = new WorldCreator(MAP_NAME);
         worldCreator.environment(World.Environment.NORMAL);
@@ -33,7 +31,6 @@ public class WorldManager {
         map.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
         map.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
     }
-
     public void deletePlayingWorld(){
         if (Bukkit.getWorld(MAP_NAME) != null){
             Bukkit.getWorld(MAP_NAME).getPlayers()
@@ -44,7 +41,6 @@ public class WorldManager {
         }
 
     }
-
     private void deleteMap(File dir) {
         File[] files = dir.listFiles();
         Arrays.stream(files)
@@ -56,11 +52,9 @@ public class WorldManager {
                 });
         dir.delete();
     }
-
     public World getMap(){
         return map;
     }
-
     public static WorldManager getInstance() {
         return instance;
     }
