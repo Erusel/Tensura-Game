@@ -13,31 +13,33 @@ public class ConfigMainGUI extends FastInv {
         super(27, "Tensura Config");
 
         // Mode Item
-        ItemBuilder mode = getGameManager().getGameState().equals(GState.PLAYING)
+        ItemBuilder mode = getGameManager().getGameState().equals(GState.WAITING)
                 ? new ItemBuilder(Material.GREEN_WOOL)
-                : new ItemBuilder(Material.BARRIER)
-                .name("§7Mode")
-                .addLore("§7Change or set the Gamemode");
+                : new ItemBuilder(Material.BARRIER);
+        mode.name("§aMode")
+                .lore("§7Change the mode");
 
 
         // Scenario Item
-        ItemBuilder scenario = getGameManager().getGameState().equals(GState.PLAYING)
-                ? new ItemBuilder(Material.GREEN_WOOL)
-                : new ItemBuilder(Material.BARRIER)
-                .name("§7Scenarios")
-                .addLore("§7Change or set the Scenarios");
+        ItemBuilder scenario = getGameManager().getGameState().equals(GState.WAITING)
+                ? new ItemBuilder(Material.ORANGE_WOOL)
+                : new ItemBuilder(Material.BARRIER);
+        scenario.name("§7Scenario")
+                .addLore("§7Change the Scenario");
 
         // Skills Item
-        ItemBuilder skills = getGameManager().getGameState().equals(GState.PLAYING)
-                ? new ItemBuilder(Material.GREEN_WOOL)
-                : new ItemBuilder(Material.BARRIER)
-                .name("§7Skills")
-                .addLore("§7Change or set the Skills");
+        ItemBuilder skills = getGameManager().getGameState().equals(GState.WAITING)
+                ? new ItemBuilder(Material.YELLOW_WOOL)
+                : new ItemBuilder(Material.BARRIER);
+        skills.name("§7Skills")
+                .addLore("§7Change the Skills");
 
         // Settings Item
-        ItemBuilder settings = new ItemBuilder(Material.REDSTONE_BLOCK);
+        ItemBuilder settings = getGameManager().getGameState().equals(GState.WAITING)
+                ? new ItemBuilder(Material.REDSTONE_BLOCK)
+                : new ItemBuilder(Material.BARRIER);
         settings.name("§7Settings")
-                .addLore("§7Change game settings");
+                        .lore("§7Change the Settings");
 
         setItem(10, mode.build(), this::mode);
         setItem(12, scenario.build(), this::scenarios);

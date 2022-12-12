@@ -1,11 +1,16 @@
 package fr.erusel.tensura.managers;
 
+import fr.erusel.tensura.enums.Modes;
 import org.bukkit.*;
+import org.bukkit.block.Chest;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Random;
 
 public class WorldManager {
+
+    GameManager gameManager;
 
     private static WorldManager instance;
 

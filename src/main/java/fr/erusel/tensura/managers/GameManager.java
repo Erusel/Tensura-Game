@@ -8,6 +8,7 @@ import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.time.Instant;
@@ -38,6 +39,7 @@ public class GameManager {
     private final List<UUID> deadPlayers = new ArrayList<>();
     private final List<UUID> alivePlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
+    private final List<Location> crateLocations = new ArrayList<>();
 
     public GameManager(PlayerManager playerManager, WorldManager worldManager, TeamManager teamManager) {
         instance = this;
@@ -181,6 +183,16 @@ public class GameManager {
         deadPlayers.remove(uuid);
     }
 
+    // Crates
+    public List<Location> getCrateLocations(){
+        return crateLocations;
+    }
+    public void addCrateLocation(Location location){
+        crateLocations.add(location);
+    }
+    public void removeCrateLocation(Location location) {
+        crateLocations.remove(location);
+    }
 
     // Unique Skills
     public List<Skill> getUniqueSkillAvailable(){

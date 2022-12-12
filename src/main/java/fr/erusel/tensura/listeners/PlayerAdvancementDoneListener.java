@@ -19,18 +19,20 @@ public class PlayerAdvancementDoneListener implements Listener {
     }
 
     @EventHandler
-    public void onAdvancement(PlayerAdvancementDoneEvent event){
-        if (gameManager.getGameState().equals(GState.PLAYING)){
-            Player player = event.getPlayer();
-            gameManager.getGameModeInstance().onAdvancement(event);
-            if (gameManager.getPlayerList().contains(player.getUniqueId())){
-                int i = new Random().nextInt(100);
-                if (i < 6){
-                    player.sendMessage("§3You gain an skill");
+    public void onAdvancement(PlayerAdvancementDoneEvent event) {
+        // Check if the advancement is a recipe
+        if (!event.getAdvancement().getKey().getKey().contains("recipes/")) {
+            if (gameManager.getGameState().equals(GState.PLAYING)) {
+                Player player = event.getPlayer();
+                gameManager.getGameModeInstance().onAdvancement(event);
+                if (gameManager.getPlayerList().contains(player.getUniqueId())) {
+                    int i = new Random().nextInt(100);
+                    if (i < 6) {
+                        player.sendMessage("§3You gain an skill");
+                    }
                 }
             }
         }
     }
-
 
 }
