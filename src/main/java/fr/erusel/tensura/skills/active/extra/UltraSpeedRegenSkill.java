@@ -13,12 +13,12 @@ public class UltraSpeedRegenSkill extends Skill implements ActiveSkill {
 
 
     public UltraSpeedRegenSkill() {
-        super("Ultra Speed Regen", "Grant you regeneration 2 for 10sec", Skills.ULTRASPEEDREGEN, SkillScope.UNOBTAINABLE,  SkillTier.EXTRA, 1300, null);
+        super("Ultra Speed Regen", "Grant you regeneration 2 for 10sec", Skills.ULTRASPEEDREGEN, SkillScope.UNOBTAINABLE,  SkillTier.EXTRA, 1500, null);
     }
 
     @Override
     public void onUse(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 1));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 200, 3));
         activateCooldown();
     }
 }

@@ -19,14 +19,14 @@ public class SpatialMotionSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        if (playerManager.getPlayerSpatialLocation(player) == null) {
-            playerManager.setPlayerSpatialLocation(player, player.getLocation());
-            player.sendMessage("§aTeleport point set");
-        } else {
+        if (playerManager.getPlayerSpatialLocation(player) != null) {
             player.teleport(playerManager.getPlayerSpatialLocation(player));
             player.sendMessage("§aTeleported");
             playerManager.deletePlayerSpatialLocation(player);
             activateCooldown();
+            return;
         }
+        playerManager.setPlayerSpatialLocation(player, player.getLocation());
+        player.sendMessage("§aTeleport point set");
     }
 }
