@@ -16,9 +16,9 @@ import org.bukkit.event.player.PlayerQuitEvent;
 
 public class PlayerJoinQuitListener implements Listener {
 
-    GameManager gameManager;
-    ScoreBoardManager scoreBoardManager;
-    GameSettingManager gameSettingManager;
+    private final GameManager gameManager;
+    private final ScoreBoardManager scoreBoardManager;
+    private final GameSettingManager gameSettingManager;
 
     public PlayerJoinQuitListener(GameManager gameManager, ScoreBoardManager scoreBoardManager, GameSettingManager gameSettingManager) {
         this.gameManager = gameManager;

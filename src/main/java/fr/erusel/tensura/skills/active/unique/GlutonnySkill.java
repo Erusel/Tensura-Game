@@ -5,14 +5,13 @@ import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.skills.active.ultimate.BeelzebuthSkill;
 import org.bukkit.entity.Player;
 
 public class GlutonnySkill extends Skill implements ActiveSkill {
 
 
     public GlutonnySkill() {
-        super("Glutonny", "Steal 1 skill of your next kill", Skills.GLUTONNY, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1200, BeelzebuthSkill.class);
+        super("Glutonny", "Steal 1 skill of your next kill", Skills.GLUTONNY, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1200, Skills.BEELZEBUTH);
     }
 
     @Override

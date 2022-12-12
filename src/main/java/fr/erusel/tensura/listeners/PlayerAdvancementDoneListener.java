@@ -11,7 +11,7 @@ import java.util.Random;
 
 public class PlayerAdvancementDoneListener implements Listener {
 
-    GameManager gameManager;
+    private final GameManager gameManager;
 
     public PlayerAdvancementDoneListener(GameManager gameManager) {
         this.gameManager = gameManager;

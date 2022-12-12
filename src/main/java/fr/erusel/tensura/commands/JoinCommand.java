@@ -17,6 +17,7 @@ public class JoinCommand extends GameElement implements CommandExecutor {
 
         if (getGameManager().getGameMode().haveTeam()){
             player.sendMessage("Join a team with the /team command");
+            return true;
         }
 
         if (getGameManager().getPlayerList().size() > getGameSettingManager().getMaxPlayer()) {
@@ -26,6 +27,6 @@ public class JoinCommand extends GameElement implements CommandExecutor {
         }
 
         getGameManager().getPlayerList().add(player.getUniqueId());
-        return false;
+        return true;
     }
 }

@@ -50,28 +50,29 @@ public class TensuraTabCompleter extends GameElement implements TabCompleter {
         if (args.length == 2){
             arg = 1;
             if (args[0].equalsIgnoreCase("sethost")){
-                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+                Bukkit.getOnlinePlayers().forEach(player -> list.add(player.getName()));
             }
             if (args[0].equalsIgnoreCase("giveskill")){
-                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+                Bukkit.getOnlinePlayers().forEach(player -> list.add(player.getName()));
             }
             if (args[0].equalsIgnoreCase("setrace")) {
-                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+                Bukkit.getOnlinePlayers().forEach(player -> list.add(player.getName()));
             }
             if (args[0].equalsIgnoreCase("resetcooldown")){
-                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+                Bukkit.getOnlinePlayers().forEach(player -> list.add(player.getName()));
             }
             if (args[0].equalsIgnoreCase("harvestfestival")){
-                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+                Bukkit.getOnlinePlayers().forEach(player -> list.add(player.getName()));
             }
             if (args[0].equalsIgnoreCase("help")) {
-                for (Player player : Bukkit.getOnlinePlayers()) list.add(player.getName());
+                Bukkit.getOnlinePlayers().forEach(player -> list.add(player.getName()));
             }
 
         }
         if (args.length == 3){
             if (args[0].equalsIgnoreCase("giveskill")){
                 arg = 2;
+
                 for (Skills skills : Skills.values()) list.add(skills.name());
             }
             if (args[0].equalsIgnoreCase("setrace")) {

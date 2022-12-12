@@ -94,7 +94,7 @@ public class GameManager {
         gameModeInstance.onStart();
 
         getActivatedScenariosInstance().stream()
-                .filter(s -> s instanceof Eventable eventable)
+                .filter(s -> s instanceof Eventable)
                 .forEach(scenario -> ((Eventable) scenario).onStart());
     }
 
@@ -102,6 +102,7 @@ public class GameManager {
         Player winner = Bukkit.getPlayer(uuid);
         setGameState(GState.FINISHING);
         Bukkit.getOnlinePlayers().forEach(player -> {
+            playerManager.removePlayerGPlayer(player);
             player.setGameMode(GameMode.SURVIVAL);
             player.teleport(Bukkit.getWorld("World").getSpawnLocation());
             Utils.resetPlayer(player);

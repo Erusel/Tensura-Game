@@ -15,10 +15,10 @@ public class OppressorRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        time--;
         if (time<=0){
             gPlayer.setOppressor(false);
             this.cancel();
         }
+        time--;
     }
 }

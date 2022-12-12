@@ -4,44 +4,63 @@ import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.races.demonlordstage.*;
 import fr.erusel.tensura.races.firststage.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
+import java.util.function.Supplier;
 
 public enum Races {
 
 
-    // First Stage
-    HUMAN("Human",RaceStages.FIRSTSTAGE, HumanRace.class, SaintRace.class),
-    DEMON("Demon",RaceStages.FIRSTSTAGE, DemonRace.class, DemonLordRace.class),
-    SLIME("Slime",RaceStages.FIRSTSTAGE, SlimeRace.class, DemonSlimeRace.class),
-    ELF("Elf",RaceStages.FIRSTSTAGE, ElfRace.class, DemonElfRace.class),
-    DWARF("Dwarf",RaceStages.FIRSTSTAGE, DwarfRace.class, DemonDwarfRace.class),
-    ORC("Orc",RaceStages.FIRSTSTAGE, OrcRace.class, DemonOrcRace.class),
-    MAJIN("Majin",RaceStages.FIRSTSTAGE, MajinRace.class, DemonMajinRace.class),
-    DRAGONEWT("Dragonewt",RaceStages.FIRSTSTAGE, DragonewtRace.class, DragonoidRace.class),
+    // Human
+    SAINT("Saint",RaceStages.DEMONLORDSTAGE, SaintRace::new, null),
+    HUMAN("Human",RaceStages.FIRSTSTAGE, HumanRace::new, SAINT),
 
 
+    // Demon
+    DEMON_LORD("Demon Lord",RaceStages.DEMONLORDSTAGE, DemonLordRace::new, null),
+    DEMON("Demon",RaceStages.FIRSTSTAGE, DemonRace::new, DEMON_LORD),
 
-    // Demon Lord Stage
-    SAINT("Saint",RaceStages.DEMONLORDSTAGE, SaintRace.class, null),
-    DEMON_LORD("Demon Lord",RaceStages.DEMONLORDSTAGE, DemonLordRace.class, null),
-    DEMON_SLIME("Demon Slime",RaceStages.DEMONLORDSTAGE, DemonSlimeRace.class, null),
-    DEMON_ELF("Demon Elf",RaceStages.DEMONLORDSTAGE, DemonElfRace.class, null),
-    DEMON_DWARF("Demon Dwarf",RaceStages.DEMONLORDSTAGE, DemonDwarfRace.class, null),
-    DEMON_ORC("Demon Orc",RaceStages.DEMONLORDSTAGE, DemonOrcRace.class, null),
-    DEMON_MAJIN("Demon Majin",RaceStages.DEMONLORDSTAGE, DemonMajinRace.class, null),
-    DRAGONOID("Dragonoid",RaceStages.DEMONLORDSTAGE, DragonoidRace.class, null);
+
+    // Slime
+    DEMON_SLIME("Demon Slime",RaceStages.DEMONLORDSTAGE, DemonSlimeRace::new, null),
+    SLIME("Slime",RaceStages.FIRSTSTAGE, SlimeRace::new, DEMON_SLIME),
+
+
+    // Elf
+    DEMON_ELF("Demon Elf",RaceStages.DEMONLORDSTAGE, DemonElfRace::new, null),
+    ELF("Elf",RaceStages.FIRSTSTAGE, ElfRace::new, DEMON_ELF),
+
+
+    // Dwarf
+    DEMON_DWARF("Demon Dwarf",RaceStages.DEMONLORDSTAGE, DemonDwarfRace::new, null),
+    DWARF("Dwarf",RaceStages.FIRSTSTAGE, DwarfRace::new, DEMON_DWARF),
+
+
+    // Orc
+    DEMON_ORC("Demon Orc",RaceStages.DEMONLORDSTAGE, DemonOrcRace::new, null),
+    ORC("Orc",RaceStages.FIRSTSTAGE, OrcRace::new, DEMON_ORC),
+
+
+    // Majin
+    DEMON_MAJIN("Demon Majin",RaceStages.DEMONLORDSTAGE, DemonMajinRace::new, null),
+    MAJIN("Majin",RaceStages.FIRSTSTAGE, MajinRace::new, DEMON_MAJIN),
+
+
+    // Dragonewt
+    DRAGONOID("Dragonoid",RaceStages.DEMONLORDSTAGE, DragonoidRace::new, null),
+    DRAGONEWT("Dragonewt",RaceStages.FIRSTSTAGE, DragonewtRace::new, DRAGONOID);
+
+
 
 
     private final String raceName;
     private final RaceStages raceStages;
-    private final Class<? extends Race> raceClass;
-    private final Class<? extends Race> raceEvolution;
+    private final Supplier<Race> raceSupplier;
+    private final Races raceEvolution;
 
-    Races(String name, RaceStages raceStages, Class<? extends Race> raceClass, Class<? extends Race> evolution) {
+    Races(String name, RaceStages raceStages, Supplier<Race> raceClass, Races evolution) {
         this.raceName = name;
         this.raceStages = raceStages;
-        this.raceClass = raceClass;
+        this.raceSupplier = raceClass;
         this.raceEvolution = evolution;
     }
 
@@ -51,19 +70,12 @@ public enum Races {
     public RaceStages getRaceStages(){
         return raceStages;
     }
-    public Class<? extends Race> getRaceClass(){
-        return raceClass;
-    }
-    public Class<? extends Race> getRaceEvolutionClass(){
+    public Races getEvolution(){
         return raceEvolution;
     }
 
     public Race createInstance(){
-        try {
-            return raceClass.getConstructor().newInstance();
-        } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
+        return raceSupplier.get();
     }
 
     public static Races getRandomRaceByStage(RaceStages stages){

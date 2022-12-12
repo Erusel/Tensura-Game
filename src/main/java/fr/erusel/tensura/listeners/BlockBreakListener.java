@@ -10,8 +10,8 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 public class BlockBreakListener implements Listener {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
 
     public BlockBreakListener(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;

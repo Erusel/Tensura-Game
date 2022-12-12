@@ -9,7 +9,7 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 public class PlayerSendChatListener implements Listener {
 
-    GameManager gameManager;
+    private final GameManager gameManager;
 
     public PlayerSendChatListener(GameManager gameManager) {
         this.gameManager = gameManager;

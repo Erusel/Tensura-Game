@@ -5,7 +5,6 @@ import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.skills.active.ultimate.JanusSkill;
 import fr.erusel.tensura.threads.skills.OppressorRunnable;
 import org.bukkit.entity.Player;
 
@@ -13,7 +12,7 @@ public class OppressorSkill extends Skill implements ActiveSkill {
 
 
     public OppressorSkill() {
-        super("Oppressor", "Increase your knockback for 30s", Skills.OPPRESSOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, JanusSkill.class);
+        super("Oppressor", "Increase your knockback for 30s", Skills.OPPRESSOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, Skills.JANUS);
     }
 
     @Override

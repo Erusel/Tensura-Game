@@ -5,7 +5,6 @@ import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.skills.active.ultimate.AmbroisieSkill;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -16,7 +15,7 @@ public class PotionMasterSkill extends Skill implements ActiveSkill {
 
 
     public PotionMasterSkill() {
-        super("Potion Master", "Give you a random buff potion effect", Skills.POTIONMASTER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, AmbroisieSkill.class);
+        super("Potion Master", "Give you a random buff potion effect", Skills.POTIONMASTER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, Skills.AMBROISIE);
     }
 
     @Override

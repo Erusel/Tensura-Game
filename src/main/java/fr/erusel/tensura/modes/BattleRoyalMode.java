@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class BattleRoyalMode extends Mode {
 
-    Random random = new Random();
+    private final Random random = new Random();
 
     public BattleRoyalMode() {
         super("Battle Royal", Modes.BATTLE_ROYAL, new BattleRoyalScoreboard(), false);

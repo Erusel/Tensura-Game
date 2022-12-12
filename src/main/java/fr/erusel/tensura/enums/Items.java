@@ -5,29 +5,22 @@ import fr.erusel.tensura.items.charybdis.CharybdisPartThreeItem;
 import fr.erusel.tensura.items.charybdis.CharybdisPartTwoItem;
 import fr.erusel.tensura.objects.GItem;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.function.Supplier;
 
 public enum Items {
 
-    CHARYBDISPARTONE(CharybdisPartOneItem.class),
-    CHARYBDISPARTTWO(CharybdisPartTwoItem.class),
-    CHARYBDISPARTTHREE(CharybdisPartThreeItem.class);
+    CHARYBDISPARTONE(CharybdisPartOneItem::new),
+    CHARYBDISPARTTWO(CharybdisPartTwoItem::new),
+    CHARYBDISPARTTHREE(CharybdisPartThreeItem::new);
 
 
-    private final Class<? extends GItem> itemClass;
+    private final Supplier<GItem> itemSupplier;
 
-    Items(Class itemClass) {
-        this.itemClass = itemClass;
-    }
-    public Class<? extends GItem> getItemClass(){
-        return itemClass;
+    Items(Supplier<GItem> itemSupplier) {
+        this.itemSupplier = itemSupplier;
     }
 
     public GItem createInstance(){
-        try {
-            return itemClass.getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+        return itemSupplier.get();
     }
 }

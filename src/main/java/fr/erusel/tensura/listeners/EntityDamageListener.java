@@ -11,8 +11,8 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class EntityDamageListener implements Listener {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
 
     public EntityDamageListener(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;

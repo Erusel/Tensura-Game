@@ -13,9 +13,13 @@ public class SkillCommand extends GameElement implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (!(sender instanceof Player player)) return false;
+        if (!(sender instanceof Player player)) {
+            return false;
+        }
 
-        if (!getGameManager().getGameState().equals(GState.PLAYING)) return true;
+        if (!getGameManager().getGameState().equals(GState.PLAYING)) {
+            return true;
+        }
 
         if (getGameManager().getDeadPlayers().contains(player.getUniqueId())){
             player.sendMessage("§cYou can't do this, you are dead.");
@@ -23,7 +27,6 @@ public class SkillCommand extends GameElement implements CommandExecutor {
         }
 
         new SkillGUI(player).open(player);
-
         return true;
     }
 }

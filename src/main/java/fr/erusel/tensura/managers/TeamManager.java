@@ -16,39 +16,50 @@ public class TeamManager {
     private final List<UUID> greenTeamPlayers = new ArrayList<>();
     private final List<UUID> yellowTeamPlayers = new ArrayList<>();
 
+    public TeamManager() {
+        instance = this;
+    }
 
     public String getPlayerTeam(UUID uuid){
-        if (redTeamPlayers.contains(uuid)) return "Red";
-        if (blueTeamPlayers.contains(uuid)) return "Blue";
-        if (greenTeamPlayers.contains(uuid)) return "Green";
-        if (yellowTeamPlayers.contains(uuid)) return "Yellow";
+        if (redTeamPlayers.contains(uuid)) {
+            return "Red";
+        }
+        if (blueTeamPlayers.contains(uuid)) {
+            return "Blue";
+        }
+        if (greenTeamPlayers.contains(uuid)) {
+            return "Green";
+        }
+        if (yellowTeamPlayers.contains(uuid)) {
+            return "Yellow";
+        }
         return "None";
     }
 
 
     public void addRedTeamPlayer(Player player){
-        if (!redTeamPlayers.contains(player.getUniqueId())) redTeamPlayers.add(player.getUniqueId());
-        removeBlueTeamPlayer(player);
-        removeGreenTeamPlayer(player);
-        removeYellowTeamPlayer(player);
+        clearPlayerTeam(player);
+        if (!redTeamPlayers.contains(player.getUniqueId())) {
+            redTeamPlayers.add(player.getUniqueId());
+        }
     }
     public void addBlueTeamPlayer(Player player){
-        if (!blueTeamPlayers.contains(player.getUniqueId())) blueTeamPlayers.add(player.getUniqueId());
-        removeRedTeamPlayer(player);
-        removeYellowTeamPlayer(player);
-        removeGreenTeamPlayer(player);
+        clearPlayerTeam(player);
+        if (!blueTeamPlayers.contains(player.getUniqueId())) {
+            blueTeamPlayers.add(player.getUniqueId());
+        }
     }
     public void addGreenTeamPlayer(Player player){
-        if (!greenTeamPlayers.contains(player.getUniqueId())) greenTeamPlayers.add(player.getUniqueId());
-        removeBlueTeamPlayer(player);
-        removeYellowTeamPlayer(player);
-        removeRedTeamPlayer(player);
+        clearPlayerTeam(player);
+        if (!greenTeamPlayers.contains(player.getUniqueId())) {
+            greenTeamPlayers.add(player.getUniqueId());
+        }
     }
     public void addYellowTeamPlayer(Player player){
-        if (!yellowTeamPlayers.contains(player.getUniqueId())) yellowTeamPlayers.add(player.getUniqueId());
-        removeBlueTeamPlayer(player);
-        removeGreenTeamPlayer(player);
-        removeRedTeamPlayer(player);
+        clearPlayerTeam(player);
+        if (!yellowTeamPlayers.contains(player.getUniqueId())) {
+            yellowTeamPlayers.add(player.getUniqueId());
+        }
     }
 
     public void removeRedTeamPlayer(Player player){
@@ -81,6 +92,13 @@ public class TeamManager {
         blueTeamPlayers.clear();
         greenTeamPlayers.clear();
         yellowTeamPlayers.clear();
+    }
+
+    public void clearPlayerTeam(Player player){
+        removeRedTeamPlayer(player);
+        removeBlueTeamPlayer(player);
+        removeGreenTeamPlayer(player);
+        removeYellowTeamPlayer(player);
     }
 
     public static TeamManager getInstance() {

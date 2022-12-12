@@ -15,8 +15,8 @@ import java.util.Random;
 
 public class PlayerDeathListener implements Listener {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
 
     public PlayerDeathListener(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;
