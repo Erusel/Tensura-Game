@@ -16,6 +16,9 @@ public class TeamManager {
     private final List<UUID> greenTeamPlayers = new ArrayList<>();
     private final List<UUID> yellowTeamPlayers = new ArrayList<>();
 
+    public TeamManager() {
+        instance = this;
+    }
 
     public String getPlayerTeam(UUID uuid){
         if (redTeamPlayers.contains(uuid)) {
