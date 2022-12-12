@@ -79,14 +79,6 @@ public class GameManager {
                 skill -> getUniqueSkillAvailable().add(skill.createInstance())
         );
 
-        // Reincarnation of players
-        Bukkit.getOnlinePlayers().forEach(player -> {
-            player.setGameMode(GameMode.SURVIVAL);
-            playerList.add(player.getUniqueId());
-            playerManager.createPlayerGPlayer(player);
-            Utils.resetPlayer(player);
-        });
-
         gameModeInstance.teleportPlayers();
         setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());

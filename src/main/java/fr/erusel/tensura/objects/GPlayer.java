@@ -12,6 +12,7 @@ import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,8 @@ public class GPlayer extends GameElement{
     private int playerKill;
     private Race race;
     private final ArrayList<Skill> playerSkills = new ArrayList<>();
+    private BukkitTask leaveRunnable;
+    private boolean leaved = false;
 
 
     // Skills
@@ -47,7 +50,18 @@ public class GPlayer extends GameElement{
     public UUID getUUID(){
         return playerUUID;
     }
-
+    public void setLeaveRunnable(BukkitTask runnable){
+        leaveRunnable = runnable;
+    }
+    public BukkitTask getLeaveRunnable(){
+        return leaveRunnable;
+    }
+    public void setLeaved(boolean leaved){
+        this.leaved = leaved;
+    }
+    public boolean haveLeaved(){
+        return leaved;
+    }
 
     // Player Skills
     public ArrayList<Skill> getPlayerSkills(){
@@ -251,5 +265,6 @@ public class GPlayer extends GameElement{
         player.teleport(player.getWorld().getSpawnLocation());
         player.sendMessage("You been be resurrected");
     }
+
 
 }

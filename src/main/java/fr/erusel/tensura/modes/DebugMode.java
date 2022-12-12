@@ -6,13 +6,12 @@ import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.scoreboards.DebugScoreboard;
+import fr.erusel.tensura.threads.PlayerLeaveRunnable;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.entity.Player;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
-import org.bukkit.event.player.*;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Random;
 
@@ -24,10 +23,17 @@ public class DebugMode extends Mode {
 
     @Override
     public void teleportPlayers() {
-        for (Player player : Bukkit.getOnlinePlayers()){
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            if (!getGameManager().getPlayerList().contains(player.getUniqueId())){
+                player.setGameMode(GameMode.SPECTATOR);
+            }else {
+                getGameManager().addAlivePlayer(player.getUniqueId());
+                player.setGameMode(GameMode.SURVIVAL);
+            }
+            getPlayerManager().createPlayerGPlayer(player);
             player.teleport(getWorldManager().getMap().getSpawnLocation());
             onPlayerSpawn(player);
-        }
+        });
     }
 
     @Override
@@ -58,52 +64,8 @@ public class DebugMode extends Mode {
     }
 
     @Override
-    public void onFinish() {
-
-    }
-
-    @Override
-    public void onPlayerJoin(PlayerJoinEvent event) {
-
-    }
-
-    @Override
     public void onPlayerLeave(PlayerQuitEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerDeath(PlayerDeathEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerRespawn(PlayerRespawnEvent event) {
-
-    }
-
-    @Override
-    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-
-    }
-
-    @Override
-    public void onPlayerMove(PlayerMoveEvent event) {
-
-    }
-
-    @Override
-    public void onBlockBreak(BlockBreakEvent event) {
-
-    }
-
-    @Override
-    public void onChat(AsyncPlayerChatEvent event) {
-
-    }
-
-    @Override
-    public void onAdvancement(PlayerAdvancementDoneEvent event) {
-
+        getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()).setLeaveRunnable(new PlayerLeaveRunnable(event.getPlayer(), getGameManager(), getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()))
+                .runTaskTimer(getMain(), 0, 20));
     }
 }

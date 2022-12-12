@@ -57,7 +57,7 @@ public final class Main extends JavaPlugin {
         getCommand("join").setExecutor(new JoinCommand());
     }
     public void registerListeners(){
-        Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(gameManager, scoreBoardManager, gameSettingManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(gameManager, scoreBoardManager, gameSettingManager, playerManager), this);
         Bukkit.getPluginManager().registerEvents(new LevelFoodChangeListener(gameManager, playerManager,gameSettingManager), this);
         Bukkit.getPluginManager().registerEvents(new EntityDamageListener(gameManager, playerManager), this);
         Bukkit.getPluginManager().registerEvents(new BlockBreakListener(gameManager, playerManager), this);
