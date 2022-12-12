@@ -5,7 +5,6 @@ import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.inventories.config.ConfigMainGUI;
 import fr.erusel.tensura.objects.GameElement;
-import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -25,6 +24,7 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             return false;
         }
 
+        // No Host Command
         if (args.length == 0  || args[0].equalsIgnoreCase("help")){
             player.sendMessage("-----------------------§bTensura§f-----------------------");
             player.sendMessage("\n\n§a/tensura sethost [Player] §7- §eSet the player host of the game");
@@ -36,6 +36,24 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             player.sendMessage("\n§a/tensura broadcast [Message] §7- §eSend a broadcast message");
             return true;
         }
+        if (args[0].equalsIgnoreCase("sethost")) {
+            if (!player.isOp()){
+                player.sendMessage("§cYou don't have the permission to do this !");
+                return true;
+            }
+            if (Bukkit.getPlayer(args[1]) == null){
+                player.sendMessage("§cPlayer not found");
+                return true;
+            }
+            getGameManager().setPlayerHost(Bukkit.getPlayer(args[1]));
+            player.sendMessage("Player " + Bukkit.getPlayer(args[1]).getName() + " has been set as Host");
+            return true;
+        }
+
+        // Player Host Douane
+        if (!getGameManager().getHostUUID().equals(player.getUniqueId())){
+            return true;
+        }
 
         if (args[0].equalsIgnoreCase("start")){
             getGameManager().startGame(player);
@@ -45,39 +63,40 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             new ConfigMainGUI().open(player);
             return true;
         }
-        if (args[0].equalsIgnoreCase("sethost")) {
-            if (Bukkit.getPlayer(args[1]) != null){
-                getGameManager().setPlayerHost(Bukkit.getPlayer(args[1]));
-                player.sendMessage("Player " + Bukkit.getPlayer(args[1]).getName() + " has been set as Host");
-                return true;
-            }else player.sendMessage("§cPlayer not found");
+        if (args[0].equalsIgnoreCase("pregen")){
+            getWorldManager().deletePlayingWorld();
+            Utils.VoiceOfTheWorldBroadcast("Creating world...");
+            getWorldManager().createPlayingWorld();
+            Utils.VoiceOfTheWorldBroadcast("Successful");
         }
+
+
+        // Extern Player Douane
+        if (Bukkit.getPlayer(args[1]) == null){
+            player.sendMessage("§cPlayer not found");
+            return true;
+        }
+
         if (args[0].equalsIgnoreCase("giveskill")){
-            if (Bukkit.getPlayer(args[1]) != null){
-                getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).createInstance());
-                player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
-            }else player.sendMessage("§cPlayer not found");
+            getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).addSkill(Skills.valueOf(args[2]).createInstance());
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Skills.valueOf(args[2]).getSkillName() + " to " + Bukkit.getPlayer(args[1]).getName());
+            return true;
         }
         if (args[0].equalsIgnoreCase("setrace")) {
-            if (Bukkit.getPlayer(args[1]) != null) {
-                getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).createInstance());
-                player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Races.valueOf(args[2]).getName() + " to " + Bukkit.getPlayer(args[1]).getName());
-                getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getRace().onGive(Bukkit.getPlayer(args[1]));
-            }
-            else player.sendMessage("§cPlayer not found");
+            Utils.resetPlayer(Bukkit.getPlayer(args[1]));
+            getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).createInstance());
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Races.valueOf(args[2]).getName() + " to " + Bukkit.getPlayer(args[1]).getName());
+            getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getRace().onGive(Bukkit.getPlayer(args[1]));
+            return true;
         }
         if (args[0].equalsIgnoreCase("resetcooldown")){
-            if (Bukkit.getPlayer(args[1]) != null){
-                for (Skill skill : getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getPlayerSkills()){
-                    skill.setCurrentCooldown(0);
-                }
-                player.sendMessage("§3Cooldown reseted for " + Bukkit.getPlayer(args[1]).getName());
-            }else player.sendMessage("§cPlayer not found");
+            getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getPlayerSkills()
+                    .forEach(skill -> skill.setCurrentCooldown(0));
+            player.sendMessage("§3Cooldown reseted for " + Bukkit.getPlayer(args[1]).getName());
         }
         if (args[0].equalsIgnoreCase("harvestfestival")){
-            if (Bukkit.getPlayer(args[1]) != null){
-                getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).launchHarvestFestival();
-            }
+            getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId())
+                    .launchHarvestFestival();
         }
         if (args[0].equalsIgnoreCase("broadcast")){
             StringBuilder message = new StringBuilder();
@@ -86,13 +105,6 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             t.remove(0);
             for (String i : t) message.append(i);
             Utils.VoiceOfTheWorldBroadcast(message.toString());
-        }
-        if (args[0].equalsIgnoreCase("pregen")){
-            getWorldManager().deletePlayingWorld();
-            Utils.VoiceOfTheWorldBroadcast("Creating world...");
-            getWorldManager().createPlayingWorld();
-            Utils.VoiceOfTheWorldBroadcast("Successful");
-            Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
         }
         return true;
     }
