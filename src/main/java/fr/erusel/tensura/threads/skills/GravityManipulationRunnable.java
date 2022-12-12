@@ -1,7 +1,5 @@
 package fr.erusel.tensura.threads.skills;
 
-import fr.erusel.tensura.Main;
-import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.GPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -19,15 +17,14 @@ public class GravityManipulationRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        time--;
         if (time<=0){
             gPlayer.setGravity(false);
-            //set flying to false for the player
             Player player = Bukkit.getPlayer(gPlayer.getUUID());
             player.getAllowFlight();
             player.setAllowFlight(false);
             player.setFlying(false);
             this.cancel();
         }
+        time--;
     }
 }

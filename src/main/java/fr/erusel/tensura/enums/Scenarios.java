@@ -6,28 +6,24 @@ import fr.erusel.tensura.scenarios.EnchantlessScenario;
 import fr.erusel.tensura.scenarios.FirelessScenario;
 import fr.erusel.tensura.scenarios.LavalessScenario;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.function.Supplier;
 
 public enum Scenarios {
 
-    AUTO_SMELT("Auto Smelt","Automatically smelt ore when mined", AutoSmeltScenario.class),
-    ENCHANTLESS("Enchantless", "Disable enchanting table", EnchantlessScenario.class),
-    LAVALESS("Lavaless", "Lava damage are disabled", LavalessScenario.class),
-    FIRELESS("Fireless","Fire damage are disabled", FirelessScenario.class);
-
-
-
-
+    AUTO_SMELT("Auto Smelt","Automatically smelt ore when mined", AutoSmeltScenario::new),
+    ENCHANTLESS("Enchantless", "Disable enchanting table", EnchantlessScenario::new),
+    LAVALESS("Lavaless", "Lava damage are disabled", LavalessScenario::new),
+    FIRELESS("Fireless","Fire damage are disabled", FirelessScenario::new);
 
 
     private final String name;
     private final String description;
-    private final Class<? extends Scenario> scenarioClass;
+    private final Supplier<Scenario> scenarioSupplier;
 
-    Scenarios(String name,String description,  Class<? extends Scenario> scenarioClass) {
+    Scenarios(String name,String description,  Supplier<Scenario> scenarioSupplier) {
         this.name = name;
         this.description = description;
-        this.scenarioClass = scenarioClass;
+        this.scenarioSupplier = scenarioSupplier;
     }
 
     public String getName() {
@@ -36,14 +32,7 @@ public enum Scenarios {
     public String getDescription(){
         return description;
     }
-    public Class<? extends Scenario> getScenarioClass() {
-        return scenarioClass;
-    }
     public Scenario createInstance(){
-        try {
-            return getScenarioClass().getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+        return scenarioSupplier.get();
     }
 }

@@ -13,8 +13,8 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 
 public class PlayerRespawnListener implements Listener {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
 
     public PlayerRespawnListener(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;

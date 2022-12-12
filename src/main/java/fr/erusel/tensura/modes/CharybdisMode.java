@@ -15,7 +15,7 @@ public class CharybdisMode extends Mode {
         super("Charybdis Hunt", Modes.CHARYBDIS, new CharybdisScoreboard(), true);
     }
 
-    Random random = new Random();
+    private final Random random = new Random();
 
     @Override
     public void teleportPlayers() {

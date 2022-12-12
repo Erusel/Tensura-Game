@@ -6,7 +6,6 @@ import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.skills.passive.ultimate.MogisSkill;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -15,7 +14,7 @@ public class BerserkerSkill extends Skill implements PassiveSkill, Eventable {
 
 
     public BerserkerSkill() {
-        super("Berserker", "Each kill give you Strength", Skills.BERSERKER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, MogisSkill.class);
+        super("Berserker", "Each kill give you Strength", Skills.BERSERKER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.MOGIS);
     }
 
     @Override

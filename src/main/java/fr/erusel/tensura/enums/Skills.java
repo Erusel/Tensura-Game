@@ -8,84 +8,84 @@ import fr.erusel.tensura.skills.passive.resistance.*;
 import fr.erusel.tensura.skills.passive.ultimate.*;
 import fr.erusel.tensura.skills.passive.unique.*;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 public enum Skills {
 
     // Resistance Skill
 
-    FIRERESISTANT("Fire Resistant", SkillTier.RESISTANCE, FireResistantSkill.class),
-    LAVARESISTANT("Lava Resistant", SkillTier.RESISTANCE, LavaResistantSkill.class),
-    FALLRESISTANT("Fall Resistant",SkillTier.RESISTANCE, FallResistantSkill.class),
-    ARROWRESISTANT("Arrow Resistant",SkillTier.RESISTANCE, ArrowResistantSkill.class),
-    POISONRESISTANT("Poison Resistant",SkillTier.RESISTANCE, PoisonResistantSkill.class),
-    EXPLOSIONRESISTANT("Explosion Resistant", SkillTier.RESISTANCE, ExplosionResistantSkill.class),
-    DROWNINGRESISTANT("Drowning Resistant", SkillTier.RESISTANCE, DrowningResistantSkill.class),
-    LIGHTNINGRESISTANT("Lightning Resistant", SkillTier.RESISTANCE, LightningResistantSkill.class),
-    INVESTIGATORRESISTANT("Investigator Resistant", SkillTier.RESISTANCE, InvestigatorResistantSkill.class),
-    WITHERRESISTANT("Wither Resistant", SkillTier.RESISTANCE, WitherResistantSkill.class),
+    FIRERESISTANT("Fire Resistant", SkillTier.RESISTANCE, FireResistantSkill::new),
+    LAVARESISTANT("Lava Resistant", SkillTier.RESISTANCE, LavaResistantSkill::new),
+    FALLRESISTANT("Fall Resistant",SkillTier.RESISTANCE, FallResistantSkill::new),
+    ARROWRESISTANT("Arrow Resistant",SkillTier.RESISTANCE, ArrowResistantSkill::new),
+    POISONRESISTANT("Poison Resistant",SkillTier.RESISTANCE, PoisonResistantSkill::new),
+    EXPLOSIONRESISTANT("Explosion Resistant", SkillTier.RESISTANCE, ExplosionResistantSkill::new),
+    DROWNINGRESISTANT("Drowning Resistant", SkillTier.RESISTANCE, DrowningResistantSkill::new),
+    LIGHTNINGRESISTANT("Lightning Resistant", SkillTier.RESISTANCE, LightningResistantSkill::new),
+    INVESTIGATORRESISTANT("Investigator Resistant", SkillTier.RESISTANCE, InvestigatorResistantSkill::new),
+    WITHERRESISTANT("Wither Resistant", SkillTier.RESISTANCE, WitherResistantSkill::new),
 
     // Unique Skills
-    GREATSAGE("Great Sage", SkillTier.UNIQUE, GreatSageSkill.class),
-    SPEEDY("Speedy", SkillTier.UNIQUE, SpeedySkill.class),
-    GLUTONNY("Glutonny", SkillTier.UNIQUE, GlutonnySkill.class),
-    BERSERKER("Berserker", SkillTier.UNIQUE, BerserkerSkill.class),
-    OPPRESSOR("Oppressor", SkillTier.UNIQUE, OppressorSkill.class),
-    MERCILESS("Merciless", SkillTier.UNIQUE, MercilessSkill.class),
-    MATHEMATICIAN("Mathematician", SkillTier.UNIQUE, MathematicianSkill.class),
-    STOMACH("Stomach", SkillTier.UNIQUE, StomachSkill.class),
-    INVESTIGATOR("Investigator",SkillTier.UNIQUE, InvestigatorSkill.class),
-    GUARDIAN("Guardian", SkillTier.UNIQUE, GuardianSkill.class),
-    HASTY("Hasty", SkillTier.UNIQUE, HastySkill.class),
-    FORTUNA("Fortuna", SkillTier.UNIQUE, FortunaSkill.class),
-    TRACKER("Tracker", SkillTier.UNIQUE, TrackerSkill.class),
-    LUST("Lust", SkillTier.UNIQUE, LustSkill.class),
-    IMPERCEPTIBLE("Imperceptible", SkillTier.UNIQUE, ImperceptibleSkill.class),
-    MAGICWOLF("Magic Wolf", SkillTier.UNIQUE, MagicWolfSkill.class),
-    POTIONMASTER("Potion Master", SkillTier.UNIQUE, PotionMasterSkill.class),
-    REFLECTOR("Reflector", SkillTier.UNIQUE, ReflectorSkill.class),
+    GREATSAGE("Great Sage", SkillTier.UNIQUE, GreatSageSkill::new),
+    SPEEDY("Speedy", SkillTier.UNIQUE, SpeedySkill::new),
+    GLUTONNY("Glutonny", SkillTier.UNIQUE, GlutonnySkill::new),
+    BERSERKER("Berserker", SkillTier.UNIQUE, BerserkerSkill::new),
+    OPPRESSOR("Oppressor", SkillTier.UNIQUE, OppressorSkill::new),
+    MERCILESS("Merciless", SkillTier.UNIQUE, MercilessSkill::new),
+    MATHEMATICIAN("Mathematician", SkillTier.UNIQUE, MathematicianSkill::new),
+    STOMACH("Stomach", SkillTier.UNIQUE, StomachSkill::new),
+    INVESTIGATOR("Investigator",SkillTier.UNIQUE, InvestigatorSkill::new),
+    GUARDIAN("Guardian", SkillTier.UNIQUE, GuardianSkill::new),
+    HASTY("Hasty", SkillTier.UNIQUE, HastySkill::new),
+    FORTUNA("Fortuna", SkillTier.UNIQUE, FortunaSkill::new),
+    TRACKER("Tracker", SkillTier.UNIQUE, TrackerSkill::new),
+    LUST("Lust", SkillTier.UNIQUE, LustSkill::new),
+    IMPERCEPTIBLE("Imperceptible", SkillTier.UNIQUE, ImperceptibleSkill::new),
+    MAGICWOLF("Magic Wolf", SkillTier.UNIQUE, MagicWolfSkill::new),
+    POTIONMASTER("Potion Master", SkillTier.UNIQUE, PotionMasterSkill::new),
+    REFLECTOR("Reflector", SkillTier.UNIQUE, ReflectorSkill::new),
 
     // Extra Skills
-    FIREBALL("Fireball", SkillTier.EXTRA, FireballSkill.class),
-    FLETCHER("Fletcher", SkillTier.EXTRA, FletcherSkill.class),
-    SENSEHEAT("Sense Heat", SkillTier.EXTRA, SenseHeatSourceSkill.class),
-    BLACKLIGHTNING("Black Lightning", SkillTier.EXTRA, BlackLightningSkill.class),
-    WINDMANIPULATION("Wind Manipulation", SkillTier.EXTRA, WindManipulationSkill.class),
-    SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill.class),
-    ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill.class),
-    GRAVITY("Gravity Manipulation", SkillTier.EXTRA, GravityManipulationSkill.class),
+    FIREBALL("Fireball", SkillTier.EXTRA, FireballSkill::new),
+    FLETCHER("Fletcher", SkillTier.EXTRA, FletcherSkill::new),
+    SENSEHEAT("Sense Heat", SkillTier.EXTRA, SenseHeatSourceSkill::new),
+    BLACKLIGHTNING("Black Lightning", SkillTier.EXTRA, BlackLightningSkill::new),
+    WINDMANIPULATION("Wind Manipulation", SkillTier.EXTRA, WindManipulationSkill::new),
+    SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill::new),
+    ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill::new),
+    GRAVITY("Gravity Manipulation", SkillTier.EXTRA, GravityManipulationSkill::new),
 
 
     // Ultimate Skills
-    RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill.class),
-    FLASH("Flash, Lord of Speed", SkillTier.ULTIMATE, FlashSkill.class),
-    BEELZEBUTH("Beelzebuth, Lord of Gluttony", SkillTier.ULTIMATE, BeelzebuthSkill.class),
-    MOGIS("Mogis, Lord of Berserk", SkillTier.ULTIMATE, MogisSkill.class),
-    JANUS("Janus, Lord of Gravity", SkillTier.ULTIMATE, JanusSkill.class),
-    BEERUS("Beerus, Lord of Death", SkillTier.ULTIMATE, BeerusSkill.class),
-    ALBERT("Albert, Lord of Algebria", SkillTier.ULTIMATE, AlbertSkill.class),
-    PANDORA("Pandora, Lord of Gift", SkillTier.ULTIMATE, PandoraSkill.class),
-    FAUST("Faust, Lord of Investigation", SkillTier.ULTIMATE, FaustSkill.class),
-    HECATE("Hecate, Lord of Protection", SkillTier.ULTIMATE, HecateSkill.class),
-    HERMES("Hermes, Lord of Haste", SkillTier.ULTIMATE, HermesSkill.class),
-    MALAR("Malar, Lord of Tracking", SkillTier.ULTIMATE, MalarSkill.class),
-    HADES("Hades, Lord of Invisibility", SkillTier.ULTIMATE, HadesSkill.class),
-    OSIRIS("Osiris, Lord of Resurrection", SkillTier.ULTIMATE, OsirisSkill.class),
-    PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill.class),
-    RANGA("Ranga, Lord of the toutous", SkillTier.ULTIMATE, RangaSkill.class),
-    AMBROISIE("Ambroisie, Lord of Alchemy", SkillTier.ULTIMATE, AmbroisieSkill.class),
-    OMOIKANE("Omoikane, Lord of Reflection", SkillTier.ULTIMATE, OmoikaneSkill.class);
+    RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill::new),
+    FLASH("Flash, Lord of Speed", SkillTier.ULTIMATE, FlashSkill::new),
+    BEELZEBUTH("Beelzebuth, Lord of Gluttony", SkillTier.ULTIMATE, BeelzebuthSkill::new),
+    MOGIS("Mogis, Lord of Berserk", SkillTier.ULTIMATE, MogisSkill::new),
+    JANUS("Janus, Lord of Gravity", SkillTier.ULTIMATE, JanusSkill::new),
+    BEERUS("Beerus, Lord of Death", SkillTier.ULTIMATE, BeerusSkill::new),
+    ALBERT("Albert, Lord of Algebria", SkillTier.ULTIMATE, AlbertSkill::new),
+    PANDORA("Pandora, Lord of Gift", SkillTier.ULTIMATE, PandoraSkill::new),
+    FAUST("Faust, Lord of Investigation", SkillTier.ULTIMATE, FaustSkill::new),
+    HECATE("Hecate, Lord of Protection", SkillTier.ULTIMATE, HecateSkill::new),
+    HERMES("Hermes, Lord of Haste", SkillTier.ULTIMATE, HermesSkill::new),
+    MALAR("Malar, Lord of Tracking", SkillTier.ULTIMATE, MalarSkill::new),
+    HADES("Hades, Lord of Invisibility", SkillTier.ULTIMATE, HadesSkill::new),
+    OSIRIS("Osiris, Lord of Resurrection", SkillTier.ULTIMATE, OsirisSkill::new),
+    PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill::new),
+    RANGA("Ranga, Lord of the toutous", SkillTier.ULTIMATE, RangaSkill::new),
+    AMBROISIE("Ambroisie, Lord of Alchemy", SkillTier.ULTIMATE, AmbroisieSkill::new),
+    OMOIKANE("Omoikane, Lord of Reflection", SkillTier.ULTIMATE, OmoikaneSkill::new);
 
     private final String name;
     private final SkillTier skillTier;
-    private final Class<? extends Skill> skillClass;
+    private final Supplier<Skill> skillSupplier;
 
-    Skills(String skillName, SkillTier skillTier, Class<? extends Skill> skillClass) {
+    Skills(String skillName, SkillTier skillTier, Supplier<Skill> skillSupplier) {
         this.name = skillName;
         this.skillTier = skillTier;
-        this.skillClass = skillClass;
+        this.skillSupplier = skillSupplier;
     }
 
     public String getSkillName(){
@@ -93,9 +93,6 @@ public enum Skills {
     }
     public SkillTier getSkillTier(){
         return skillTier;
-    }
-    public Class<? extends Skill> getSkillClass(){
-        return skillClass;
     }
 
     public static List<Skills> getAllSkillByTier(SkillTier skillTier){
@@ -105,11 +102,7 @@ public enum Skills {
     }
 
     public Skill createInstance(){
-        try {
-            return skillClass.getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+        return skillSupplier.get();
     }
 
 }

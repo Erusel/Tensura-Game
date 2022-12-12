@@ -16,10 +16,10 @@ public class ImperceptibleRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        time--;
         if (time<=0){
             gPlayer.setImperceptible(false);
             this.cancel();
         }
+        time--;
     }
 }

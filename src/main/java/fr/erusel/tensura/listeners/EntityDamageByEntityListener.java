@@ -20,8 +20,8 @@ import java.util.Random;
 
 public class EntityDamageByEntityListener implements Listener {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
 
     public EntityDamageByEntityListener(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;

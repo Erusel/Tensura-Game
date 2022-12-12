@@ -13,9 +13,9 @@ public abstract class Skill extends GameElement {
     private final SkillScope skillScope;
     int COOLDOWN;
     private int currentCooldown = 0;
-    private final Class<?> ultimateSkill;
+    private final Skills ultimateSkill;
 
-    public Skill(String name, String lore,Skills skill, SkillScope skillScope, SkillTier skillTier, int cooldown, Class<?> ultimateSkill) {
+    public Skill(String name, String lore,Skills skill, SkillScope skillScope, SkillTier skillTier, int cooldown, Skills ultimateSkill) {
         this.name = name;
         this.lore = lore;
         this.skill = skill;
@@ -46,7 +46,7 @@ public abstract class Skill extends GameElement {
     public boolean inCooldown(){
         return (currentCooldown > 0);
     }
-    public Class<?> getUltimateSkillClass(){
+    public Skills getUltimateSkill(){
         return ultimateSkill;
     }
     public SkillScope getSkillScope(){

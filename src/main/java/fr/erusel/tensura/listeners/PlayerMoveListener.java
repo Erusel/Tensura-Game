@@ -9,8 +9,8 @@ import org.bukkit.event.player.PlayerMoveEvent;
 
 public class PlayerMoveListener implements Listener {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
 
     public PlayerMoveListener(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;

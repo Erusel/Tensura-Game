@@ -8,14 +8,13 @@ import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class GameLoopRunnable extends BukkitRunnable {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
-    ScoreBoardManager scoreBoardManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
+    private final ScoreBoardManager scoreBoardManager;
 
     public GameLoopRunnable(GameManager gameManager, PlayerManager playerManager, ScoreBoardManager scoreBoardManager) {
         this.gameManager = gameManager;
@@ -25,23 +24,24 @@ public class GameLoopRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (gameManager.getGameState().equals(GState.WAITING))
-           scoreBoardManager.refreshWaitingScoreboard();
+        if (gameManager.getGameState().equals(GState.WAITING)) {
+            scoreBoardManager.refreshWaitingScoreboard();
+            return;
+        }
+
         if (gameManager.getGameState().equals(GState.PLAYING)) {
             gameManager.getGameModeInstance().refreshScoreboard();
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                if (gameManager.getPlayerList().contains(player.getUniqueId())) {
-                    for (Skill skill : playerManager.getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()) {
-                        if (skill instanceof PassiveSkill passiveSkill) {
-                            passiveSkill.eachSecond(player);
-                        } else if (skill instanceof ActiveSkill) {
-                            if (skill.inCooldown()) {
-                                skill.setCurrentCooldown(skill.getCurrentCooldown() - 1);
-                            }
-                        }
-                    }
-                }
-            }
+            Bukkit.getOnlinePlayers().stream()
+                    .filter(p -> gameManager.getPlayerList().contains(p.getUniqueId()))
+                    .forEach(p -> playerManager.getGPlayerByUUID(p.getUniqueId()).getPlayerSkills().stream()
+                            .filter(skill -> skill instanceof PassiveSkill)
+                            .forEach(skill -> ((PassiveSkill) skill).eachSecond(p)));
+            Bukkit.getOnlinePlayers().stream()
+                    .filter(p -> gameManager.getPlayerList().contains(p.getUniqueId()))
+                    .forEach(p -> playerManager.getGPlayerByUUID(p.getUniqueId()).getPlayerSkills().stream()
+                            .filter(Skill::inCooldown)
+                            .filter(skill -> skill instanceof ActiveSkill)
+                            .forEach(skill -> skill.setCurrentCooldown(skill.getCurrentCooldown() - 1)));
         }
     }
 }

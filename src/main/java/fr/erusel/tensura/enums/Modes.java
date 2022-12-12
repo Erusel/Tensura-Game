@@ -5,28 +5,25 @@ import fr.erusel.tensura.modes.CharybdisMode;
 import fr.erusel.tensura.modes.DebugMode;
 import fr.erusel.tensura.objects.Mode;
 
-import java.lang.reflect.InvocationTargetException;
+import java.util.function.Supplier;
 
 public enum Modes {
 
     NONE(null, "None", false),
-    BATTLE_ROYAL(BattleRoyalMode.class, "Battle Royal", false),
-    DEBUG(DebugMode.class, "Debug", false),
-    CHARYBDIS(CharybdisMode.class, "Charybdis Hunt", true);
+    BATTLE_ROYAL(BattleRoyalMode::new, "Battle Royal", false),
+    DEBUG(DebugMode::new, "Debug", false),
+    CHARYBDIS(CharybdisMode::new, "Charybdis Hunt", true);
 
-    private final Class<? extends Mode> modeClass;
+    private final Supplier<Mode> modeSupplier;
     private final String modeName;
     private final boolean haveTeam;
 
-    Modes(Class<? extends Mode> modeClass, String modeName, boolean haveTeam) {
-        this.modeClass = modeClass;
+    Modes(Supplier<Mode> modeSupplier, String modeName, boolean haveTeam) {
+        this.modeSupplier = modeSupplier;
         this.modeName = modeName;
         this.haveTeam = haveTeam;
     }
 
-    public Class<? extends Mode> getModeClass(){
-        return modeClass;
-    }
     public String getModeName(){
         return modeName;
     }
@@ -35,10 +32,6 @@ public enum Modes {
     }
 
     public Mode createInstance(){
-        try {
-            return modeClass.getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
+        return modeSupplier.get();
     }
 }

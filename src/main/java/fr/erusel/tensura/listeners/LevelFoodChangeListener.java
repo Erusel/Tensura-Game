@@ -12,9 +12,9 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 
 public class LevelFoodChangeListener implements Listener {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
-    GameSettingManager gameSettingManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
+    private final GameSettingManager gameSettingManager;
 
     public LevelFoodChangeListener(GameManager gameManager, PlayerManager playerManager, GameSettingManager gameSettingManager) {
         this.gameManager = gameManager;

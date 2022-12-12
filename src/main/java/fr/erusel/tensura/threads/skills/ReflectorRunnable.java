@@ -15,10 +15,10 @@ public class ReflectorRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        time--;
         if (time<=0){
             gPlayer.setReflector(false);
             this.cancel();
         }
+        time--;
     }
 }

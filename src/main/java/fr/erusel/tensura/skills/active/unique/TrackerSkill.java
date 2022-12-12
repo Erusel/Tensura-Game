@@ -6,14 +6,13 @@ import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.skills.active.ultimate.MalarSkill;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class TrackerSkill extends Skill implements ActiveSkill {
 
     public TrackerSkill() {
-        super("Tracker", "Track your last enemy",Skills.TRACKER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, MalarSkill.class);
+        super("Tracker", "Track your last enemy",Skills.TRACKER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.TRACKER);
     }
 
     @Override

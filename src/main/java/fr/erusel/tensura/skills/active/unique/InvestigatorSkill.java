@@ -6,14 +6,13 @@ import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.inventories.PlayerChooseGUI;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.skills.active.ultimate.FaustSkill;
 import org.bukkit.entity.Player;
 
 public class InvestigatorSkill extends Skill implements ActiveSkill {
 
 
     public InvestigatorSkill() {
-        super("Investigator", "See the inventory of a Player", Skills.INVESTIGATOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, FaustSkill.class);
+        super("Investigator", "See the inventory of a Player", Skills.INVESTIGATOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.FAUST);
     }
 
     @Override

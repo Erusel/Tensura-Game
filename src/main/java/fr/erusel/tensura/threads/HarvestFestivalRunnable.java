@@ -10,8 +10,6 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.lang.reflect.InvocationTargetException;
-
 public class HarvestFestivalRunnable extends BukkitRunnable {
 
     Player player;
@@ -26,18 +24,8 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
         this.gPlayer = gPlayer;
         this.skillEvolve = skillEvolve;
         this.sacrificeSkill = sacrificeSkill;
-        try {
-            this.evolvedRace = (Race) gPlayer.getRace().getDemonLordStage().getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            ultimateSkill = (Skill) skillEvolve.getUltimateSkillClass().getConstructor().newInstance();
-        } catch (InstantiationException | IllegalAccessException | InvocationTargetException |
-                 NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
-
+        evolvedRace = gPlayer.getRaces().getEvolution().createInstance();
+        ultimateSkill = skillEvolve.getUltimateSkill().createInstance();
     }
 
     int second = 0;

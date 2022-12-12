@@ -44,7 +44,6 @@ public class GPlayer extends GameElement{
     public GPlayer(UUID playerUUID) {
         this.playerUUID = playerUUID;
     }
-
     public UUID getUUID(){
         return playerUUID;
     }
@@ -93,9 +92,12 @@ public class GPlayer extends GameElement{
     public Race getRace(){
         return race;
     }
+    public Races getRaces(){
+        return race.getRace();
+    }
     public boolean isRace(Races races){
         if (getGameSettingManager().isRaceActivated()){
-            return race.getRace().equals(races);
+            return getRaces().equals(races);
         }
         return false;
     }

@@ -6,7 +6,6 @@ import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.skills.passive.ultimate.PloutosSkill;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -17,7 +16,7 @@ import java.util.Arrays;
 public class FortunaSkill extends Skill implements PassiveSkill, Eventable {
 
     public FortunaSkill() {
-        super("Fortuna", "Double mined ores", Skills.FORTUNA, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, PloutosSkill.class);
+        super("Fortuna", "Double mined ores", Skills.FORTUNA, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.PLOUTOS);
     }
 
     Material[] ores = {Material.IRON_ORE, Material.COAL_ORE, Material.LAPIS_ORE, Material.REDSTONE_ORE, Material.EMERALD_ORE, Material.DIAMOND_ORE, Material.GOLD_ORE};
