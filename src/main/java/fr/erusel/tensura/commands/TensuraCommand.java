@@ -87,6 +87,13 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             for (String i : t) message.append(i);
             Utils.VoiceOfTheWorldBroadcast(message.toString());
         }
+        if (args[0].equalsIgnoreCase("pregen")){
+            getWorldManager().deletePlayingWorld();
+            Utils.VoiceOfTheWorldBroadcast("Creating world...");
+            getWorldManager().createPlayingWorld();
+            Utils.VoiceOfTheWorldBroadcast("Successful");
+            Utils.VoiceOfTheWorldBroadcast("Reincarnation of players");
+        }
         return true;
     }
 }
