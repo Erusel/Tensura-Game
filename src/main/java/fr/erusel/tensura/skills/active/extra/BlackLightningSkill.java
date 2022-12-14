@@ -18,7 +18,7 @@ public class BlackLightningSkill extends Skill implements ActiveSkill {
     public void onUse(Player player) {
         // Strike near players with a lightning if there is no block above them
         for (Player p : player.getWorld().getPlayers()) {
-            if (p.getLocation().distance(player.getLocation()) <= 30 && p.getLocation().getBlock().getRelative(0, 1, 0).isEmpty()) {
+            if (p.getLocation().distance(player.getLocation()) <= 30 && p.getLocation().getBlock().getLightLevel() == 15) {
                 p.getWorld().strikeLightning(p.getLocation());
             }
         }

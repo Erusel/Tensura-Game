@@ -12,3 +12,5 @@ commands:
     description: "Select your team here"
   join:
     description: "Join the game"
+  remove:
+    description: "Remove a player from the game"

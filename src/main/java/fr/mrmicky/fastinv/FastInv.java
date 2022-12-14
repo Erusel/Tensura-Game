@@ -23,8 +23,6 @@
  */
 package fr.mrmicky.fastinv;
 
-import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.GameElement;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

@@ -18,7 +18,7 @@ public class PlayerLeaveRunnable extends BukkitRunnable {
         this.gameManager = gameManager;
     }
 
-    int time = 300;
+    int time = 5; //300
 
     @Override
     public void run() {

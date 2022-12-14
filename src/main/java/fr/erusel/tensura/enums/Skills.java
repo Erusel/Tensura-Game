@@ -53,9 +53,11 @@ public enum Skills {
     SENSEHEAT("Sense Heat", SkillTier.EXTRA, SenseHeatSourceSkill::new),
     BLACKLIGHTNING("Black Lightning", SkillTier.EXTRA, BlackLightningSkill::new),
     WINDMANIPULATION("Wind Manipulation", SkillTier.EXTRA, WindManipulationSkill::new),
+    ICEMANIPULATION("Ice Manipulation", SkillTier.EXTRA, IceManipulationSkill::new),
     SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill::new),
     ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill::new),
     GRAVITY("Gravity Manipulation", SkillTier.EXTRA, GravityManipulationSkill::new),
+    FIREMANIPULATION("Fire Manipulation", SkillTier.EXTRA, FireManipulationSkill::new),
 
 
     // Ultimate Skills

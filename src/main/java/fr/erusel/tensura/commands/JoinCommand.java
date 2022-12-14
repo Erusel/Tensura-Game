@@ -37,6 +37,7 @@ public class JoinCommand extends GameElement implements CommandExecutor {
         }
 
         getGameManager().getPlayerList().add(player.getUniqueId());
+        player.sendMessage("§aYou joined the game !");
         return true;
     }
 }
