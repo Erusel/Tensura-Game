@@ -37,7 +37,6 @@ public class GameManager {
     public int gameStartTime;
     private final List<UUID> playerList = new ArrayList<>();
     private final List<UUID> deadPlayers = new ArrayList<>();
-    private final List<UUID> alivePlayers = new ArrayList<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
     private final List<Location> crateLocations = new ArrayList<>();
 
@@ -65,11 +64,13 @@ public class GameManager {
         if (!worldManager.isPlayingMapExist()){
             p.sendMessage("§cMap not found, pregen one with /tensura pregen");
             return;
+
         }
+
+        setGameState(GState.STARTING);
 
         gameModeInstance = gameMode.createInstance();
 
-        setGameState(GState.STARTING);
 
         // Creating Scenarios Instances
         getActivatedScenarios().forEach(scenarios -> getActivatedScenariosInstance().add(scenarios.createInstance()));
@@ -80,13 +81,13 @@ public class GameManager {
         );
 
         gameModeInstance.teleportPlayers();
-        setGameState(GState.PLAYING);
         gameStartTime = Math.toIntExact(Instant.now().getEpochSecond());
         gameModeInstance.onStart();
 
         getActivatedScenariosInstance().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(scenario -> ((Eventable) scenario).onStart());
+        setGameState(GState.PLAYING);
     }
 
     public void finishGame(UUID uuid){
@@ -150,17 +151,6 @@ public class GameManager {
         return hostName;
     }
 
-    // Alive Players
-    public List<UUID> getAlivePlayers() {
-        return alivePlayers;
-    }
-    public void addAlivePlayer(UUID uuid){
-        if (alivePlayers.contains(uuid)) deadPlayers.add(uuid);
-    }
-    public void removeAlivePlayer(UUID uuid){
-        alivePlayers.remove(uuid);
-    }
-
     // Dead Players
     public List<UUID> getDeadPlayers(){
         return deadPlayers;
@@ -168,7 +158,7 @@ public class GameManager {
     public void addDeadPlayer(UUID uuid){
         deadPlayers.add(uuid);
     }
-    public void removeDeadPlayers(UUID uuid){
+    public void removeDeadPlayers(UUID uuid) {
         deadPlayers.remove(uuid);
     }
 

@@ -76,7 +76,7 @@ public class BattleRoyalMode extends Mode {
 
     @Override
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (getGameManager().getAlivePlayers().size() == 1){
+        if ((getGameManager().getPlayerList().size() - getGameManager().getDeadPlayers().size()) == 1){
             onFinish();
         }
     }

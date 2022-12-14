@@ -34,6 +34,14 @@ public class PlayerDeathListener implements Listener {
         Player player = event.getEntity();
         GPlayer gPlayer = playerManager.getGPlayerByUUID(player.getUniqueId());
 
+        gameManager.getGameModeInstance().onPlayerDeath(event);
+        gameManager.getActivatedScenariosInstance().stream()
+                .filter(s -> s instanceof Eventable)
+                .forEach(s -> ((Eventable) s).onPlayerDeath(event));
+        gPlayer.getPlayerSkills().stream()
+                .filter(skill -> skill instanceof Eventable)
+                .forEach(skill -> ((Eventable) skill).onPlayerDeath(event));
+
         if (event.getEntity().getKiller() != null){
             Player killer = event.getEntity().getKiller();
             GPlayer gKiller = playerManager.getGPlayerByUUID(killer.getUniqueId());
@@ -50,14 +58,6 @@ public class PlayerDeathListener implements Listener {
                 gKiller.setGlutonny(false);
             }
         }
-
-        gameManager.getGameModeInstance().onPlayerDeath(event);
-        gameManager.getActivatedScenariosInstance().stream()
-                .filter(s -> s instanceof Eventable)
-                .forEach(s -> ((Eventable) s).onPlayerDeath(event));
-        gPlayer.getPlayerSkills().stream()
-                .filter(skill -> skill instanceof Eventable)
-                .forEach(skill -> ((Eventable) skill).onPlayerDeath(event));
 
     }
 

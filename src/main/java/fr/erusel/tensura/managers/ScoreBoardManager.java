@@ -35,10 +35,12 @@ public class ScoreBoardManager {
 
     public void refreshWaitingScoreboard(){
 
+        int playerAlive = gameManager.getPlayerList().size() - gameManager.getDeadPlayers().size();
+
         for (FastBoard board: scoreboard.values()){
 
             board.updateLine(1,"§7§m------------------");
-            board.updateLine(2,"§7Players : " + gameManager.getPlayerList().size() + "§3/" + ChatColor.GRAY + gameSettingManager.getMaxPlayer());
+            board.updateLine(2,"§7Players : " + playerAlive + "§3/" + ChatColor.GRAY + gameSettingManager.getMaxPlayer());
             board.updateLine(3, "§7Host : §6" + gameManager.getHostName());
             board.updateLine(4, "§7Mode : §6" + gameManager.getGameMode().getModeName());
             if (gameManager.getGameMode().haveTeam()){

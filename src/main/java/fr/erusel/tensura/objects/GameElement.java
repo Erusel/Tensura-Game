@@ -10,6 +10,7 @@ public abstract class GameElement {
     WorldManager worldManager = WorldManager.getInstance();
     ScoreBoardManager scoreBoardManager = ScoreBoardManager.getInstance();
     TeamManager teamManager = TeamManager.getInstance();
+    GItemManager gItemManager = GItemManager.getInstance();
     Main main = Main.getInstance();
 
 
@@ -32,7 +33,9 @@ public abstract class GameElement {
     public TeamManager getTeamManager() {
         return teamManager;
     }
-
+    public GItemManager getGItemManager() {
+        return gItemManager;
+    }
     public Main getMain() {
         return main;
     }

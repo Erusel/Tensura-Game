@@ -110,10 +110,10 @@ public class GPlayer extends GameElement{
         return race.getRace();
     }
     public boolean isRace(Races races){
-        if (getGameSettingManager().isRaceActivated()){
-            return getRaces().equals(races);
+        if (!getGameSettingManager().isRaceActivated()){
+            return false;
         }
-        return false;
+        return getRaces().equals(races);
     }
 
     public boolean haveHarvestFestivalPrerequisite(){
@@ -260,10 +260,13 @@ public class GPlayer extends GameElement{
     public void ressurect(){
         Player player = Bukkit.getPlayer(playerUUID);
         gameManager.removeDeadPlayers(playerUUID);
-        gameManager.addAlivePlayer(playerUUID);
         player.setGameMode(GameMode.SURVIVAL);
         player.teleport(player.getWorld().getSpawnLocation());
         player.sendMessage("You been be resurrected");
+    }
+
+    public boolean isDead(){
+        return getGameManager().getDeadPlayers().contains(playerUUID);
     }
 
 

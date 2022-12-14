@@ -12,8 +12,23 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 public class PlayerChooseGUI extends FastInv {
 
-    public PlayerChooseGUI(Skill skill) {
+    public PlayerChooseGUI(Skill skill, boolean onlyDead, boolean withDead) {
         super(45, skill.getName());
+        if (onlyDead){
+            getGameManager().getDeadPlayers().stream()
+                    .filter(uuid -> Bukkit.getPlayer(uuid) != null)
+                    .forEach(uuid -> addItem(new ItemBuilder(Material.PLAYER_HEAD).name("§7" + Bukkit.getPlayer(uuid).getName()).skullmeta(Bukkit.getPlayer(uuid).getName()).build(),
+                            e -> playerChoosed(Bukkit.getPlayer(uuid), e, skill)));
+            return;
+        }
+        if (withDead){
+            getGameManager().getPlayerList().stream()
+                    .filter(uuid -> Bukkit.getPlayer(uuid) != null)
+                    .filter(uuid -> !getGameManager().getDeadPlayers().contains(uuid))
+                    .forEach(uuid -> addItem(new ItemBuilder(Material.PLAYER_HEAD).name("§7" + Bukkit.getPlayer(uuid).getName()).skullmeta(Bukkit.getPlayer(uuid).getName()).build(),
+                            e -> playerChoosed(Bukkit.getPlayer(uuid), e, skill)));
+            return;
+        }
 
         getGameManager().getPlayerList().stream()
                 .filter(uuid -> Bukkit.getPlayer(uuid) != null)

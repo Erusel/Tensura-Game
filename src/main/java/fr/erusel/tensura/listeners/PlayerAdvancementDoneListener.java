@@ -12,6 +12,7 @@ import java.util.Random;
 public class PlayerAdvancementDoneListener implements Listener {
 
     private final GameManager gameManager;
+    Random random = new Random();
 
     public PlayerAdvancementDoneListener(GameManager gameManager) {
         this.gameManager = gameManager;
@@ -20,19 +21,23 @@ public class PlayerAdvancementDoneListener implements Listener {
 
     @EventHandler
     public void onAdvancement(PlayerAdvancementDoneEvent event) {
-        // Check if the advancement is a recipe
-        if (!event.getAdvancement().getKey().getKey().contains("recipes/")) {
-            if (gameManager.getGameState().equals(GState.PLAYING)) {
-                Player player = event.getPlayer();
-                gameManager.getGameModeInstance().onAdvancement(event);
-                if (gameManager.getPlayerList().contains(player.getUniqueId())) {
-                    int i = new Random().nextInt(100);
-                    if (i < 6) {
-                        player.sendMessage("§3You gain an skill");
-                    }
-                }
-            }
+        if (!gameManager.getGameState().equals(GState.PLAYING)){
+            return;
         }
+        if (!event.getAdvancement().getKey().getKey().contains("recipes/")) {
+            return;
+        }
+
+        Player player = event.getPlayer();
+        gameManager.getGameModeInstance().onAdvancement(event);
+
+        if (gameManager.getPlayerList().contains(player.getUniqueId())) {
+            return;
+        }
+        if (random.nextInt(100) < 6) {
+            player.sendMessage("§3You gain an skill");
+        }
+
     }
 
 }

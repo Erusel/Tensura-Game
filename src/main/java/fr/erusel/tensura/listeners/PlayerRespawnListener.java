@@ -23,17 +23,18 @@ public class PlayerRespawnListener implements Listener {
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event){
+        if (!gameManager.getGameState().equals(GState.PLAYING)){
+            return;
+        }
         Player player = event.getPlayer();
         GPlayer gPlayer = playerManager.getGPlayerByUUID(player.getUniqueId());
-        if (gameManager.getGameState().equals(GState.PLAYING)){
-            gameManager.getGameModeInstance().onPlayerRespawn(event);
-            player.setGameMode(GameMode.SPECTATOR);
-            gameManager.addDeadPlayer(player.getUniqueId());
-            gameManager.removeAlivePlayer(player.getUniqueId());
-            if (gPlayer.canRessurect() && gPlayer.haveSkill(Skills.OSIRIS)){
-                gPlayer.ressurect();
-                gPlayer.setCanResurrect(false);
-            }
+        gameManager.getGameModeInstance().onPlayerRespawn(event);
+        player.setGameMode(GameMode.SPECTATOR);
+        gameManager.addDeadPlayer(player.getUniqueId());
+        if (gPlayer.canRessurect() && gPlayer.haveSkill(Skills.OSIRIS)){
+            gPlayer.ressurect();
+            gPlayer.setCanResurrect(false);
         }
+
     }
 }
