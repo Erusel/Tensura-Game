@@ -17,7 +17,6 @@ public class DebugScoreboard extends GScoreboard {
 
         HashMap<UUID, FastBoard> scoreboard = getScoreBoardManager().scoreboard;
         int time = Math.toIntExact(Instant.now().getEpochSecond());
-
         for (UUID uuid : scoreboard.keySet()) {
 
             FastBoard board = scoreboard.get(uuid);
@@ -32,7 +31,11 @@ public class DebugScoreboard extends GScoreboard {
             board.updateLine(7, "§7Time : " + Utils.getTime(time - getGameManager().gameStartTime));
             board.updateLine(8, "§7§m------------------");
             if (getGameSettingManager().isRaceActivated()){
-                board.updateLine(9, "§7Race : §a" + gPlayer.getRace().getName());
+                String raceName = "Spectator";
+                if (gPlayer.getRace() != null){
+                    raceName = gPlayer.getRaces().getName();
+                }
+                board.updateLine(9, "§7Race : §a" + raceName);
                 board.updateLine(10, "§7§m------------------");
                 board.updateLine(11, "§3By Erusel");
             }else {

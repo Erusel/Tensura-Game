@@ -20,7 +20,10 @@ public class SkillCommand extends GameElement implements CommandExecutor {
         if (!getGameManager().getGameState().equals(GState.PLAYING)) {
             return true;
         }
-
+        if (!getGameManager().getPlayerList().contains(player.getUniqueId())){
+            player.sendMessage("§cYou can't do this, you are not in game.");
+            return true;
+        }
         if (getGameManager().getDeadPlayers().contains(player.getUniqueId())){
             player.sendMessage("§cYou can't do this, you are dead.");
             return true;

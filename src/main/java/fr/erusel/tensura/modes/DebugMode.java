@@ -21,13 +21,14 @@ public class DebugMode extends Mode {
         super("Debug", Modes.DEBUG, new DebugScoreboard(), false);
     }
 
+    Random random = new Random();
+
     @Override
     public void teleportPlayers() {
         Bukkit.getOnlinePlayers().forEach(player -> {
             if (!getGameManager().getPlayerList().contains(player.getUniqueId())){
                 player.setGameMode(GameMode.SPECTATOR);
             }else {
-                getGameManager().addAlivePlayer(player.getUniqueId());
                 player.setGameMode(GameMode.SURVIVAL);
             }
             getPlayerManager().createPlayerGPlayer(player);
@@ -41,18 +42,19 @@ public class DebugMode extends Mode {
 
         // Give Skill
         for (int z = 0; z < getGameSettingManager().getSkillOnStart(); z++) {
-            int i = new Random().nextInt(getGameManager().getUniqueSkillAvailable().size());
+            int i = random.nextInt(getGameManager().getUniqueSkillAvailable().size());
             getPlayerManager().getGPlayerByUUID(player.getUniqueId()).addSkill(getGameManager().getUniqueSkillAvailable().get(i));
             getGameManager().getUniqueSkillAvailable().remove(getGameManager().getUniqueSkillAvailable().get(i));
         }
 
         // Give Races
-        if (getGameSettingManager().isRaceActivated()){
-            Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
-            getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
-            getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
-            player.sendMessage("§aYou have been resurrected as a " + race.getName());
+        if (!getGameSettingManager().isRaceActivated()){
+            return;
         }
+        Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
+        player.sendMessage("§aYou have been resurrected as a " + race.getName());
     }
 
     @Override

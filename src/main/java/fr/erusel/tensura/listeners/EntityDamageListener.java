@@ -21,11 +21,15 @@ public class EntityDamageListener implements Listener {
 
     @EventHandler
     public void onEntityDamage(EntityDamageEvent event) {
-        if (!(event.getEntity() instanceof Player player)) return;
         if (!gameManager.getGameState().equals(GState.PLAYING)){
             event.setCancelled(true);
             return;
         }
+        if (!(event.getEntity() instanceof Player player)) {
+            return;
+        }
+
+
         gameManager.getActivatedScenariosInstance().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(s -> ((Eventable) s).onEntityDamage(event));

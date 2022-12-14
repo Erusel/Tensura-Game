@@ -25,7 +25,6 @@ public class PlayerLeaveRunnable extends BukkitRunnable {
 
         if (time == 0) {
             gameManager.getPlayerList().remove(gPlayer.getUUID());
-            gameManager.removeAlivePlayer(player.getUniqueId());
             gameManager.addDeadPlayer(player.getUniqueId());
             gPlayer.setLeaved(true);
             Bukkit.broadcastMessage("§cDue to the left of a player, he was kicked of the game !");

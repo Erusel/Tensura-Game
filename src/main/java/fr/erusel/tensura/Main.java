@@ -18,6 +18,7 @@ public final class Main extends JavaPlugin {
     private PlayerManager playerManager;
     private ScoreBoardManager scoreBoardManager;
     private TeamManager teamManager;
+    private GItemManager GItemManager;
 
     @Override
     public void onEnable() {
@@ -26,6 +27,7 @@ public final class Main extends JavaPlugin {
         worldManager = new WorldManager();
         playerManager = new PlayerManager();
         gameSettingManager = new GameSettingManager();
+        GItemManager = new GItemManager();
         teamManager = new TeamManager();
         gameManager = new GameManager(playerManager, worldManager, teamManager);
         scoreBoardManager = new ScoreBoardManager(gameManager, gameSettingManager, teamManager);

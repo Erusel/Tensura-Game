@@ -5,11 +5,28 @@ import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 public class Utils {
+
+    public static ItemStack[] items = {
+            new ItemBuilder(Material.DIAMOND).build(),
+            new ItemBuilder(Material.IRON_INGOT).build(),
+            new ItemBuilder(Material.GOLD_INGOT).build(),
+            new ItemBuilder(Material.GOLDEN_APPLE).build(),
+            new ItemBuilder(Material.ENDER_PEARL).build(),
+            new ItemBuilder(Material.BOW).build(),
+            new ItemBuilder(Material.ARROW).build(),
+            new ItemBuilder(Material.IRON_HELMET).build(),
+            new ItemBuilder(Material.IRON_CHESTPLATE).build(),
+            new ItemBuilder(Material.IRON_LEGGINGS).build(),
+            new ItemBuilder(Material.IRON_BOOTS).build(),
+            new ItemBuilder(Material.FURNACE_MINECART).name("§elol useless").build(),
+            new ItemBuilder(Material.WATER_BUCKET).build(),
+            new ItemBuilder(Material.LAVA_BUCKET).build(),
+            new ItemBuilder(Material.CAKE).name("§eThe lie").build(),
+    };
 
     public static void resetPlayer(Player player){
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());

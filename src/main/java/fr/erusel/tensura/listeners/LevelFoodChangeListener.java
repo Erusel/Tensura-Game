@@ -29,6 +29,7 @@ public class LevelFoodChangeListener implements Listener {
         if (!(event.getEntity() instanceof Player player)) {
             return;
         }
+
         if (gameSettingManager.isRaceActivated()){
             if (playerManager.getGPlayerByUUID(player.getUniqueId()).isRace(Races.SLIME)) {
                 event.setCancelled(true);

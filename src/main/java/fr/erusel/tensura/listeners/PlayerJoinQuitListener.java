@@ -38,6 +38,7 @@ public class PlayerJoinQuitListener implements Listener {
         scoreBoardManager.initializeScoreboard(player);
 
         if (gameManager.getGameState().equals(GState.WAITING)){
+
             if (!(gameManager.getPlayerList().size() >= gameSettingManager.getMaxPlayer())){
                 gameManager.getPlayerList().add(player.getUniqueId());
             }else {
@@ -52,8 +53,8 @@ public class PlayerJoinQuitListener implements Listener {
 
         if (gameManager.getGameState().equals(GState.PLAYING)) {
             if (playerManager.getGPlayerByUUID(player.getUniqueId()) == null){
+                playerManager.createPlayerGPlayer(player);
                 player.setGameMode(GameMode.SPECTATOR);
-                return;
             }
             if (playerManager.getGPlayerByUUID(player.getUniqueId()).haveLeaved()) {
                 player.sendMessage("§cDue to your leave, you have been be kicked");
@@ -63,6 +64,7 @@ public class PlayerJoinQuitListener implements Listener {
                 playerManager.getGPlayerByUUID(player.getUniqueId()).getLeaveRunnable().cancel();
                 playerManager.getGPlayerByUUID(player.getUniqueId()).setLeaveRunnable(null);
             }
+
             gameManager.getGameModeInstance().refreshScoreboard();
             gameManager.getGameModeInstance().onPlayerJoin(event);
             gameManager.getActivatedScenariosInstance().stream()
@@ -81,6 +83,7 @@ public class PlayerJoinQuitListener implements Listener {
         if (board != null) {
             board.delete();
         }
+
         if (gameManager.getGameState().equals(GState.WAITING)){
             if (gameManager.getWaitingList().contains(player.getUniqueId())){
                 gameManager.removeWaitingList(player.getUniqueId());
