@@ -55,6 +55,7 @@ public final class Main extends JavaPlugin {
         getCommand("skill").setExecutor(new SkillCommand());
         getCommand("team").setExecutor(new TeamCommand());
         getCommand("join").setExecutor(new JoinCommand());
+        getCommand("remove").setExecutor(new RemoveCommand());
     }
     public void registerListeners(){
         Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(gameManager, scoreBoardManager, gameSettingManager, playerManager), this);
