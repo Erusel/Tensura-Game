@@ -31,6 +31,7 @@ public class TensuraTabCompleter extends GameElement implements TabCompleter {
                 list.add("sethost");
                 if (getGameManager().playerIsHost(p)){
                     list.add("config");
+                    list.add("remove");
                     list.add("start");
                     list.add("pregen");
                     list.add("broadcast");
