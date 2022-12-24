@@ -10,6 +10,7 @@ import fr.erusel.tensura.skills.passive.unique.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.function.Supplier;
 
 public enum Skills {
@@ -96,15 +97,18 @@ public enum Skills {
     public SkillTier getSkillTier(){
         return skillTier;
     }
-
     public static List<Skills> getAllSkillByTier(SkillTier skillTier){
         List<Skills> list = new ArrayList<>();
         for (Skills skills : Skills.values()) if (skills.getSkillTier().equals(skillTier)) list.add(skills);
         return list;
     }
-
+    public static Skills getRandomSkillByTier(SkillTier skillTier){
+        List<Skills> skills = getAllSkillByTier(skillTier);
+        return skills.get(new Random().nextInt(skills.size()));
+    }
     public Skill createInstance(){
         return skillSupplier.get();
     }
+
 
 }

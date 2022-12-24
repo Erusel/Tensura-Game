@@ -1,6 +1,8 @@
 package fr.erusel.tensura.threads;
 
 import fr.erusel.tensura.enums.Prefixes;
+import fr.erusel.tensura.enums.SkillTier;
+import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.Race;
 import fr.erusel.tensura.objects.Skill;
@@ -14,10 +16,17 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
 
     Player player;
     GPlayer gPlayer;
+
     Skill skillEvolve;
     Skill sacrificeSkill;
     Skill ultimateSkill;
     Race evolvedRace;
+    Skills resistance1;
+    Skills resistance2 ;
+    Skills resistance3;
+    Skills extraSkill1;
+    Skills extraSkill2;
+    Skills extraSkill3;
 
     public HarvestFestivalRunnable(Player player, GPlayer gPlayer, Skill skillEvolve, Skill sacrificeSkill) {
         this.player = player;
@@ -26,7 +35,29 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
         this.sacrificeSkill = sacrificeSkill;
         evolvedRace = gPlayer.getRaces().getEvolution().createInstance();
         ultimateSkill = skillEvolve.getUltimateSkill().createInstance();
+
+        resistance1 = Skills.getRandomSkillByTier(SkillTier.RESISTANCE);
+        resistance2 = Skills.getRandomSkillByTier(SkillTier.RESISTANCE);
+        while (resistance2 == resistance1){
+            resistance2 = Skills.getRandomSkillByTier(SkillTier.RESISTANCE);
+        }
+        resistance3 = Skills.getRandomSkillByTier(SkillTier.RESISTANCE);
+        while (resistance3 == resistance2 && resistance3 == resistance1){
+            resistance3 = Skills.getRandomSkillByTier(SkillTier.RESISTANCE);
+        }
+
+        extraSkill1 = Skills.getRandomSkillByTier(SkillTier.EXTRA);
+        extraSkill2 = Skills.getRandomSkillByTier(SkillTier.EXTRA);
+        while (extraSkill2 == extraSkill1){
+            extraSkill2 = Skills.getRandomSkillByTier(SkillTier.EXTRA);
+        }
+        extraSkill3 = Skills.getRandomSkillByTier(SkillTier.EXTRA);
+        while (extraSkill3 == extraSkill2 && resistance3 != extraSkill1){
+            extraSkill3 = Skills.getRandomSkillByTier(SkillTier.EXTRA);
+        }
+
     }
+
 
     int second = 0;
 
@@ -35,43 +66,63 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
 
         if (second == 0) {
             Bukkit.broadcastMessage(Prefixes.VOICE_OF_THE_WORLD + "§d『NOTICE』 §3The Harvest Festival has begun.");
-            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 9999, 255));
+            player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 999999, 255));
         }
         if (second == 3) {
             Bukkit.broadcastMessage(Prefixes.VOICE_OF_THE_WORLD + "The indiviual's physical constitution will be rebuilt, and he will evolve into a new race.");
         }
-        if (second == 26) {
+        if (second == 8) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Confirmed");
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Super evolving from §6" + gPlayer.getRace().getName() + " §3to §6" + evolvedRace.getName());
         }
-        if (second == 29) {
+        if (second == 12) {
+            gPlayer.setRace(evolvedRace);
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§2Successful.");
         }
-        if (second == 32) {
+        if (second == 17) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "All Physical abilities have significantly improved.");
         }
-        if (second == 35) {
+        if (second == 19) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Next");
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "all skills and resistances already acquired by the old form will be re-acquired.");
         }
-        if (second == 38) {
+        if (second == 25) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§2Successful");
         }
-        if (second == 42) {
-            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "New Intrisic skills :");
-            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cCome later");
+        if (second == 27) {
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "New Extra skills :");
         }
-        if (second == 45) {
+        if (second == 30) {
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6" + extraSkill1.getSkillName());
+        }
+        if (second == 31) {
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6" + extraSkill2.getSkillName());
+        }
+        if (second == 32) {
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6" + extraSkill3.getSkillName());
+        }
+        if (second == 35) {
+            gPlayer.addSkill(extraSkill1.createInstance());
+            gPlayer.addSkill(extraSkill2.createInstance());
+            gPlayer.addSkill(extraSkill3.createInstance());
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Acquisition §3successful.");
+        }
+        if (second == 40) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "New Resistances :");
         }
-        if (second == 48) {
-            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6Resistance 1");
+        if (second == 43) {
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6" + resistance1.getSkillName());
+        }
+        if (second == 44) {
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6" + resistance2.getSkillName());
+        }
+        if (second == 45) {
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6" + resistance3.getSkillName());
         }
         if (second == 50) {
-            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6Resistance 2");
-        }
-        if (second == 53) {
-            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§6Resistance 3");
+            gPlayer.addSkill(resistance1.createInstance());
+            gPlayer.addSkill(resistance2.createInstance());
+            gPlayer.addSkill(resistance3.createInstance());
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Acquisition §3successful.");
         }
         if (second == 56) {
@@ -93,11 +144,15 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cFailed.");
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Repeating attempt.");
         }
-        if (second == 70) {
+        if (second == 69) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cFailed.");
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Repeating attempt.");
         }
-        if (second == 73) {
+        if (second == 72) {
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cFailed.");
+            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Repeating attempt.");
+        }
+        if (second == 74) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cFailed.");
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Repeating attempt.");
         }
@@ -105,36 +160,29 @@ public class HarvestFestivalRunnable extends BukkitRunnable {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cFailed.");
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Repeating attempt.");
         }
-        if (second == 79) {
+        if (second == 78) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cFailed.");
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Repeating attempt.");
         }
-        if (second == 82) {
+        if (second == 80) {
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cFailed.");
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Repeating attempt.");
         }
-        if (second == 85) {
-            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§cFailed.");
-            player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Repeating attempt.");
-        }
-        if (second == 88) {
+        if (second == 84) {
             if (sacrificeSkill != null){
                 player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Unique skill §6" + skillEvolve.getName() + " §3will sacrifice §6" + sacrificeSkill.getName() + " §3to receive the Harvest Festival gift and attempt evolution");
+                gPlayer.removeSkill(sacrificeSkill);
             }else {
                 player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "§2Success");
             }
+            gPlayer.removeSkill(skillEvolve);
+            gPlayer.addSkill(ultimateSkill);
         }
         if (second == 91){
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "Unique skill §6" + skillEvolve.getName() + " §3has evolved into Ultimate skill §6§n§l" + ultimateSkill.getName());
         }
 
         if (second == 94){
-            gPlayer.setRace(evolvedRace);
-            gPlayer.removeSkill(sacrificeSkill);
-            gPlayer.removeSkill(skillEvolve);
-            gPlayer.addSkill(ultimateSkill);
-
-
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD + "The Harvest Festival is now finished");
             gPlayer.setInHarvestFestival(false);
             player.removePotionEffect(PotionEffectType.BLINDNESS);
