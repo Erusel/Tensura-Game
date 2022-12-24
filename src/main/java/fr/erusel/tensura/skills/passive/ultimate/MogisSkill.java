@@ -14,7 +14,8 @@ public class MogisSkill extends Skill implements PassiveSkill, Eventable {
 
 
     public MogisSkill() {
-        super("Mogis, Lord of Berserk", "Each kill give you Strength 2", Skills.MOGIS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 0, null);
+        super("Mogis, Lord of Berserk", Skills.MOGIS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 0, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

@@ -10,7 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class LavaResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public LavaResistantSkill() { super("Lava Resistant", "Cancel Lava Damage", Skills.LAVARESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public LavaResistantSkill() {
+        super("Lava Resistant", Skills.LAVARESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {

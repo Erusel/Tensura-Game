@@ -49,7 +49,6 @@ public enum Skills {
     REFLECTOR("Reflector", SkillTier.UNIQUE, ReflectorSkill::new),
 
     // Extra Skills
-    FIREBALL("Fireball", SkillTier.EXTRA, FireballSkill::new),
     FLETCHER("Fletcher", SkillTier.EXTRA, FletcherSkill::new),
     SENSEHEAT("Sense Heat", SkillTier.EXTRA, SenseHeatSourceSkill::new),
     BLACKLIGHTNING("Black Lightning", SkillTier.EXTRA, BlackLightningSkill::new),
@@ -57,7 +56,6 @@ public enum Skills {
     ICEMANIPULATION("Ice Manipulation", SkillTier.EXTRA, IceManipulationSkill::new),
     SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill::new),
     ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill::new),
-    GRAVITY("Gravity Manipulation", SkillTier.EXTRA, GravityManipulationSkill::new),
     FIREMANIPULATION("Fire Manipulation", SkillTier.EXTRA, FireManipulationSkill::new),
 
 

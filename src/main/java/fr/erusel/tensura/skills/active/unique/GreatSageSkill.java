@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 public class GreatSageSkill extends Skill implements ActiveSkill {
 
     public GreatSageSkill() {
-        super("Great Sage", "Use for display all entities around", Skills.GREATSAGE, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.RAPHAEL);
+        super("Great Sage", Skills.GREATSAGE, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.RAPHAEL);
+        super.addLore("Lore TODO");
     }
 
     @Override

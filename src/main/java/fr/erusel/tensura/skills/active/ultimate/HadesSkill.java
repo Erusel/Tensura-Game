@@ -15,7 +15,8 @@ public class HadesSkill extends Skill implements ActiveSkill {
 
 
     public HadesSkill() {
-        super("Hades, Lord of Invisibility", "Grant you invisibility for 30sec and knockback near players", Skills.HADES, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1000, null);
+        super("Hades, Lord of Invisibility",  Skills.HADES, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1000, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

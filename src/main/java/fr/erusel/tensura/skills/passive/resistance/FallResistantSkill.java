@@ -10,7 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class FallResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public FallResistantSkill() { super("Fall Resistant", "Cancel Fall Damage", Skills.FALLRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public FallResistantSkill() {
+        super("Fall Resistant", Skills.FALLRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {

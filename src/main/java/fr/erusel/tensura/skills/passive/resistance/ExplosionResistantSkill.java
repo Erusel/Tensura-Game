@@ -10,7 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class ExplosionResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public ExplosionResistantSkill() { super("Explosion-Resistant", "Cancel Explosion Damage", Skills.EXPLOSIONRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public ExplosionResistantSkill() {
+        super("Explosion-Resistant", Skills.EXPLOSIONRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
 
     @Override

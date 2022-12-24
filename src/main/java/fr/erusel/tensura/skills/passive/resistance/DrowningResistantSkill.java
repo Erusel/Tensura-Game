@@ -10,7 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class DrowningResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public DrowningResistantSkill() { super("Drowning Resistant", "Cancel Drowning Damage", Skills.DROWNINGRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public DrowningResistantSkill() {
+        super("Drowning Resistant", Skills.DROWNINGRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {

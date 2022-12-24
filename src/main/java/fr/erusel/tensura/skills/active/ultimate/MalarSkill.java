@@ -14,7 +14,8 @@ import org.bukkit.potion.PotionEffectType;
 public class MalarSkill extends Skill implements ActiveSkill {
 
     public MalarSkill() {
-        super("Malar, Lord of Tracking", "Track your last enemy and give him glowing effect", Skills.MALAR, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 600, null);
+        super("Malar, Lord of Tracking",  Skills.MALAR, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 600, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

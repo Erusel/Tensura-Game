@@ -12,7 +12,11 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class ArrowResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public ArrowResistantSkill() { super("Arrow Resistant", "Cancel Arrow Damage", Skills.ARROWRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public ArrowResistantSkill() {
+        super("Arrow Resistant", Skills.ARROWRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+
+    }
 
     @Override
     public void eachSecond(Player player) {

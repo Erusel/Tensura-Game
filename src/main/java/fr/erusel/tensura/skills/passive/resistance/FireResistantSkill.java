@@ -10,7 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class FireResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public FireResistantSkill() { super("Fire Resistant", "Cancel Fire Damage", Skills.FIRERESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public FireResistantSkill() {
+        super("Fire Resistant", Skills.FIRERESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {

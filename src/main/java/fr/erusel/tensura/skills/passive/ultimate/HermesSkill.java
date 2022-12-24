@@ -13,7 +13,8 @@ public class HermesSkill extends Skill implements PassiveSkill {
 
 
     public HermesSkill() {
-        super("Hermes, Lord of Haste", "Grant you haste 3", Skills.HERMES, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 0, null);
+        super("Hermes, Lord of Haste", Skills.HERMES, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 0, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

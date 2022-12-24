@@ -12,7 +12,8 @@ public class InvestigatorSkill extends Skill implements ActiveSkill {
 
 
     public InvestigatorSkill() {
-        super("Investigator", "See the inventory of a Player", Skills.INVESTIGATOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.FAUST);
+        super("Investigator", Skills.INVESTIGATOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.FAUST);
+        super.addLore("Lore TODO");
     }
 
     @Override

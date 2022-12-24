@@ -4,10 +4,12 @@ import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 
+import java.util.ArrayList;
+
 public abstract class Skill extends GameElement {
 
     private final String name;
-    private final String lore;
+    private final ArrayList<String> lore = new ArrayList<>();
     private final SkillTier skillTier;
     private final Skills skill;
     private final SkillScope skillScope;
@@ -15,9 +17,8 @@ public abstract class Skill extends GameElement {
     private int currentCooldown = 0;
     private final Skills ultimateSkill;
 
-    public Skill(String name, String lore,Skills skill, SkillScope skillScope, SkillTier skillTier, int cooldown, Skills ultimateSkill) {
+    public Skill(String name, Skills skill, SkillScope skillScope, SkillTier skillTier, int cooldown, Skills ultimateSkill) {
         this.name = name;
-        this.lore = lore;
         this.skill = skill;
         this.skillScope = skillScope;
         this.skillTier = skillTier;
@@ -28,7 +29,7 @@ public abstract class Skill extends GameElement {
     public String getName(){
         return name;
     }
-    public String getLore(){
+    public ArrayList<String> getLore(){
         return lore;
     }
     public SkillTier getSkillTier(){
@@ -57,5 +58,8 @@ public abstract class Skill extends GameElement {
     }
     public boolean isSkill(Skills skill){
         return this.skill == skill;
+    }
+    public void addLore(String lore){
+        this.lore.add(lore);
     }
 }

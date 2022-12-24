@@ -11,7 +11,8 @@ import org.bukkit.entity.Player;
 public class OsirisSkill extends Skill implements ActiveSkill {
 
     public OsirisSkill() {
-        super("Osiris, Lord of resurrection", "Resurrect any dead players and give you second life", Skills.OSIRIS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 2000, null);
+        super("Osiris, Lord of resurrection", Skills.OSIRIS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 2000, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

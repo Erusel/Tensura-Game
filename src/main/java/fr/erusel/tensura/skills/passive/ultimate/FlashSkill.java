@@ -13,7 +13,8 @@ public class FlashSkill extends Skill implements PassiveSkill {
 
 
     public FlashSkill() {
-        super("Flash, Lord of Speed", "Grant you speed 3", Skills.FLASH, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 0, null);
+        super("Flash, Lord of Speed",  Skills.FLASH, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 0, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

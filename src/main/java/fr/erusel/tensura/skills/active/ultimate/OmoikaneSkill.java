@@ -13,7 +13,8 @@ public class OmoikaneSkill extends Skill implements ActiveSkill {
 
 
     public OmoikaneSkill() {
-        super("Omoikane, Lord of Reflection", "Reflect melee damage & cancel arrow damage for 30s", Skills.OMOIKANE, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1100, null);
+        super("Omoikane, Lord of Reflection", Skills.OMOIKANE, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1100, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

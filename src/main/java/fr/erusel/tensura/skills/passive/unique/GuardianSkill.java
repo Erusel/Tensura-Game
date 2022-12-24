@@ -12,7 +12,8 @@ import org.bukkit.potion.PotionEffectType;
 public class GuardianSkill extends Skill implements PassiveSkill {
 
     public GuardianSkill() {
-        super("Guardian", "Grant you resistance", Skills.GUARDIAN, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.HECATE);
+        super("Guardian",  Skills.GUARDIAN, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.HECATE);
+        super.addLore("Lore TODO");
     }
 
     @Override
