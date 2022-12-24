@@ -16,7 +16,8 @@ public class RangaSkill extends Skill implements ActiveSkill {
 
 
     public RangaSkill() {
-        super("Ranga, Lord of the toutous", "Summon powerfuls wolf for you", Skills.RANGA, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 900, null);
+        super("Ranga, Lord of the toutous", Skills.RANGA, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 900, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

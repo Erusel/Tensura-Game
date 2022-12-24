@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 public class TrackerSkill extends Skill implements ActiveSkill {
 
     public TrackerSkill() {
-        super("Tracker", "Track your last enemy",Skills.TRACKER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.TRACKER);
+        super("Tracker",Skills.TRACKER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.TRACKER);
+        super.addLore("Lore TODO");
     }
 
     @Override

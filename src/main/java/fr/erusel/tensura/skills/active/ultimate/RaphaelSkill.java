@@ -13,7 +13,8 @@ import org.bukkit.entity.Player;
 public class RaphaelSkill extends Skill implements ActiveSkill {
 
     public RaphaelSkill() {
-        super("Raphael, Lord of Wisdom", "Use for display all entities around", Skills.RAPHAEL, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 800, null);
+        super("Raphael, Lord of Wisdom", Skills.RAPHAEL, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 800, null);
+        super.addLore("Lore TODO");
     }
 
     @Override

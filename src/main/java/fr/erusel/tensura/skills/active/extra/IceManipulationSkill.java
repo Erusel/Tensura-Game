@@ -3,7 +3,7 @@ package fr.erusel.tensura.skills.active.extra;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
-import fr.erusel.tensura.objects.ActiveSkill;
+import fr.erusel.tensura.objects.ExtraSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -11,15 +11,21 @@ import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class IceManipulationSkill extends Skill implements ActiveSkill {
+public class IceManipulationSkill extends Skill implements ExtraSkill {
 
 
     public IceManipulationSkill() {
-        super("Ice Manipulation", "Transform near blocks into ice and grant slowness to players", Skills.ICEMANIPULATION, SkillScope.UNOBTAINABLE, SkillTier.EXTRA, 800, null);
+        super("Ice Manipulation", Skills.ICEMANIPULATION, SkillScope.UNOBTAINABLE, SkillTier.EXTRA, 800, null);
+        super.addLore("Lore TODO");
     }
 
     @Override
-    public void onUse(Player player) {
+    public String getRightClickSkillLore() {
+        return "Bring the Ice Age";
+    }
+
+    @Override
+    public void onRightClick(Player player) {
         // transform blocks in a radius of 10 blocks into packed ice
         for (int x = -10; x < 10; x++) {
             for (int y = -5; y < 10; y++) {
@@ -42,5 +48,10 @@ public class IceManipulationSkill extends Skill implements ActiveSkill {
             }
         }
         activateCooldown();
+    }
+
+    @Override
+    public void onLeftClick(Player player) {
+
     }
 }

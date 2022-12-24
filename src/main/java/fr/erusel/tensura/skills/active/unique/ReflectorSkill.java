@@ -13,7 +13,8 @@ public class ReflectorSkill extends Skill implements ActiveSkill {
 
 
     public ReflectorSkill() {
-        super("Reflector", "Reflect melee attack for 10 s", Skills.REFLECTOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, Skills.OMOIKANE);
+        super("Reflector", Skills.REFLECTOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, Skills.OMOIKANE);
+        super.addLore("Lore TODO");
     }
 
     @Override

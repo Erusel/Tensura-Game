@@ -10,7 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class WitherResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public WitherResistantSkill() { super("Wither Resistant", "Cancel Wither Damage", Skills.WITHERRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public WitherResistantSkill() {
+        super("Wither Resistant", Skills.WITHERRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {

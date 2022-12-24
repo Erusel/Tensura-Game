@@ -10,7 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class PoisonResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public PoisonResistantSkill() { super("Poison Resistant", "Cancel Poison Damage", Skills.POISONRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public PoisonResistantSkill() {
+        super("Poison Resistant", Skills.POISONRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {

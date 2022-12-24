@@ -11,7 +11,8 @@ import org.bukkit.entity.Player;
 public class LustSkill extends Skill implements ActiveSkill {
 
     public LustSkill() {
-        super("Lust", "Resurrect any dead players", Skills.LUST, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 2000, Skills.OSIRIS);
+        super("Lust", Skills.LUST, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 2000, Skills.OSIRIS);
+        super.addLore("Lore TODO");
     }
 
     @Override

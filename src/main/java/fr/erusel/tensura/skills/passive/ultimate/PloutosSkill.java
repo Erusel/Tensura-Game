@@ -16,7 +16,8 @@ import java.util.Arrays;
 public class PloutosSkill extends Skill implements PassiveSkill, Eventable {
 
     public PloutosSkill() {
-        super("Ploutos, Lord of Wealth", "Triple mined ores", Skills.PLOUTOS, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, null);
+        super("Ploutos, Lord of Wealth", Skills.PLOUTOS, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, null);
+        super.addLore("Lore TODO");
     }
 
     Material[] ores = {Material.IRON_ORE, Material.COAL_ORE, Material.LAPIS_ORE, Material.REDSTONE_ORE, Material.EMERALD_ORE, Material.DIAMOND_ORE, Material.GOLD_ORE};

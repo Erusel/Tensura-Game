@@ -8,6 +8,9 @@ import fr.erusel.tensura.objects.Skill;
 
 public class InvestigatorResistantSkill extends Skill implements PassiveSkill {
 
-    public InvestigatorResistantSkill() { super("Investigator Resistant", "Investigator skill cant see your inventory", Skills.INVESTIGATOR, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public InvestigatorResistantSkill() {
+        super("Investigator Resistant", Skills.INVESTIGATOR, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
 }

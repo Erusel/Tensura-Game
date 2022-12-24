@@ -14,7 +14,8 @@ public class ImperceptibleSkill extends Skill implements ActiveSkill {
 
 
     public ImperceptibleSkill() {
-        super("Imperceptible", "Become invisible for 30 seconds but you can't attack", Skills.IMPERCEPTIBLE, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.HADES);
+        super("Imperceptible", Skills.IMPERCEPTIBLE, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.HADES);
+        super.addLore("Lore TODO");
     }
 
     @Override

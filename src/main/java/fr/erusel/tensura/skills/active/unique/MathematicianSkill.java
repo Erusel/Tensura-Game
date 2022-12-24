@@ -12,7 +12,8 @@ public class MathematicianSkill extends Skill implements ActiveSkill {
     private final int DODGE = 3;
 
     public MathematicianSkill() {
-        super("Mathematician", "Ignore the next 3 damage", Skills.MATHEMATICIAN, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1000, Skills.ALBERT);
+        super("Mathematician", Skills.MATHEMATICIAN, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1000, Skills.ALBERT);
+        super.addLore("Lore TODO");
     }
 
     @Override

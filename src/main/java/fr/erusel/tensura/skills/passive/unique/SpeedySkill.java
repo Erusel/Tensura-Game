@@ -13,7 +13,8 @@ public class SpeedySkill extends Skill implements PassiveSkill {
 
 
     public SpeedySkill() {
-        super("Speedy", "Grant you speed 2", Skills.SPEEDY, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.FLASH);
+        super("Speedy", Skills.SPEEDY, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.FLASH);
+        super.addLore("Lore TODO");
     }
 
     @Override

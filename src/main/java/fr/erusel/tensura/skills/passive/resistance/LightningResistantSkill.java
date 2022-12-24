@@ -10,7 +10,10 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 public class LightningResistantSkill extends Skill implements PassiveSkill, Eventable {
 
-    public LightningResistantSkill() { super("Lightning Resistant", "Cancel Lightning Bolt Damage", Skills.LIGHTNINGRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);}
+    public LightningResistantSkill() {
+        super("Lightning Resistant", Skills.LIGHTNINGRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
+        super.addLore("Lore TODO");
+    }
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {

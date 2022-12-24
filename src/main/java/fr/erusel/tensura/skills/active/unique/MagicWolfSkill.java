@@ -15,7 +15,8 @@ import org.bukkit.entity.Wolf;
 public class MagicWolfSkill extends Skill implements ActiveSkill {
 
     public MagicWolfSkill() {
-        super("Magic Wolf", "Summon a powerful wolf for you", Skills.MAGICWOLF, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 2000, Skills.RANGA);
+        super("Magic Wolf", Skills.MAGICWOLF, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 2000, Skills.RANGA);
+        super.addLore("Lore TODO");
     }
 
     @Override
