@@ -4,7 +4,6 @@ import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
-import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Bukkit;
@@ -40,7 +39,6 @@ public class GameLoopRunnable extends BukkitRunnable {
                     .filter(p -> gameManager.getPlayerList().contains(p.getUniqueId()))
                     .forEach(p -> playerManager.getGPlayerByUUID(p.getUniqueId()).getPlayerSkills().stream()
                             .filter(Skill::inCooldown)
-                            .filter(skill -> skill instanceof ActiveSkill)
                             .forEach(skill -> skill.setCurrentCooldown(skill.getCurrentCooldown() - 1)));
         }
     }
