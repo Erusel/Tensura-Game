@@ -7,6 +7,8 @@ import fr.erusel.tensura.objects.ExtraSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -16,7 +18,7 @@ public class IceManipulationSkill extends Skill implements ExtraSkill {
 
     public IceManipulationSkill() {
         super("Ice Manipulation", Skills.ICEMANIPULATION, SkillScope.UNOBTAINABLE, SkillTier.EXTRA, 800, null);
-        super.addLore("Lore TODO");
+        super.addLore("Use the power of the Ice");
     }
 
     @Override
@@ -40,18 +42,23 @@ public class IceManipulationSkill extends Skill implements ExtraSkill {
             }
         }
         // apply slowness effect to players in a radius of 10 blocks
-        for (Player p : player.getWorld().getPlayers()) {
-            if (p.getLocation().distance(player.getLocation()) < 10) {
-                if (!(p == player)) {
-                    p.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 0));
-                }
+        for (Entity entity : player.getWorld().getNearbyEntities(player.getLocation(), 10, 10, 10)) {
+            if (entity instanceof LivingEntity livingEntity) {
+                livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 0));
             }
         }
         activateCooldown();
     }
 
     @Override
-    public void onLeftClick(Player player) {
+    public String getLeftClickSkillLore() {
+        return "Freeze the next opponent you hit";
+    }
 
+    @Override
+    public void onLeftClick(Player player) {
+        // the next entity that the player will hit will be frozen (slowness 4 effect)
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFrozenHit(true);
+        activateCooldown();
     }
 }

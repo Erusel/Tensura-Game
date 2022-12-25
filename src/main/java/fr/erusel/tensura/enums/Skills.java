@@ -51,7 +51,7 @@ public enum Skills {
     // Extra Skills
     FLETCHER("Fletcher", SkillTier.EXTRA, FletcherSkill::new),
     SENSEHEAT("Sense Heat", SkillTier.EXTRA, SenseHeatSourceSkill::new),
-    BLACKLIGHTNING("Black Lightning", SkillTier.EXTRA, BlackLightningSkill::new),
+    LIGHTNING("Lightning Manipulation", SkillTier.EXTRA, LightningManipulationSkill::new),
     WINDMANIPULATION("Wind Manipulation", SkillTier.EXTRA, WindManipulationSkill::new),
     ICEMANIPULATION("Ice Manipulation", SkillTier.EXTRA, IceManipulationSkill::new),
     SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill::new),

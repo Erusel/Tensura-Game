@@ -43,6 +43,6 @@ public class FletcherSkill extends Skill implements ExtraSkill {
 
     @Override
     public void onLeftClick(Player player) {
-
+        // TODO
     }
 }

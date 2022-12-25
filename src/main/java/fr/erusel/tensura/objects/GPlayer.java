@@ -43,6 +43,7 @@ public class GPlayer extends GameElement{
     private Inventory stomachInventory;
     private Inventory pandoraInventory;
     private PotionEffectType fletcherEffect;
+    private boolean frozenHit;
 
     public GPlayer(UUID playerUUID) {
         this.playerUUID = playerUUID;
@@ -177,11 +178,17 @@ public class GPlayer extends GameElement{
     }
     public void setImperceptible(boolean b) { imperceptibleActivated = b;}
     public void setReflector(boolean b) { ReflectorActivated = b;}
+    public void setFrozenHit(boolean b) {
+        frozenHit = b;
+    }
     public boolean isOppressorActivated(){
         return oppressorActivated;
     }
     public boolean isImperceptibleActivated() { return imperceptibleActivated;}
     public boolean isReflectorActivated() { return ReflectorActivated;}
+    public boolean isFrozenHitActivated() {
+        return frozenHit;
+    }
     public void setMathematicianDodgeLeft(int i){
         mathematicianDodgeLeft = i;
     }
