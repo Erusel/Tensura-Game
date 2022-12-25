@@ -8,6 +8,7 @@ import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Fireball;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
@@ -19,7 +20,7 @@ public class FireManipulationSkill extends Skill implements ExtraSkill {
 
     public FireManipulationSkill() {
         super("Fire Manipulation", Skills.FIREMANIPULATION, SkillScope.UNOBTAINABLE, SkillTier.EXTRA, 800, null);
-        super.addLore("Lore TODO");
+        super.addLore("Use the power of the Fire");
     }
 
     @Override
@@ -58,7 +59,8 @@ public class FireManipulationSkill extends Skill implements ExtraSkill {
     @Override
     public void onLeftClick(Player player) {
         Location location = player.getLocation().add(0,1,0);
-        player.getWorld().spawnEntity(location, EntityType.FIREBALL);
+        Fireball fb = (Fireball) player.getWorld().spawnEntity(location, EntityType.FIREBALL);
+        fb.setYield(2f);
         activateCooldown();
     }
 }
