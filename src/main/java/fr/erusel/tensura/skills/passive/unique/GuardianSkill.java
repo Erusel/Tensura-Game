@@ -13,7 +13,7 @@ public class GuardianSkill extends Skill implements PassiveSkill {
 
     public GuardianSkill() {
         super("Guardian",  Skills.GUARDIAN, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.HECATE);
-        super.addLore("Lore TODO");
+        super.addLore("Gain Resistance I");
     }
 
     @Override

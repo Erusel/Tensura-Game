@@ -12,7 +12,7 @@ public class LavaResistantSkill extends Skill implements PassiveSkill, Eventable
 
     public LavaResistantSkill() {
         super("Lava Resistant", Skills.LAVARESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
-        super.addLore("Lore TODO");
+        super.addLore("Ignore Lava damage");
     }
 
     @Override

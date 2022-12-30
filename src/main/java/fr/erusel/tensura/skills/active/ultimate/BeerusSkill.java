@@ -16,7 +16,7 @@ public class BeerusSkill extends Skill implements ActiveSkill {
 
     public BeerusSkill() {
         super("Beerus, Lord of Death", Skills.BEERUS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1000, null);
-        super.addLore("Lore TODO");
+        super.addLore("Kill near entities under 2 hearts or give them nausea if not");
     }
 
     @Override

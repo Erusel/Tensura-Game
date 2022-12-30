@@ -15,7 +15,7 @@ public class BerserkerSkill extends Skill implements PassiveSkill, Eventable {
 
     public BerserkerSkill() {
         super("Berserker", Skills.BERSERKER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.MOGIS);
-        super.addLore("Lore TODO");
+        super.addLore("Gain Strength I for 20 seconds if you killed a player");
     }
 
     @Override

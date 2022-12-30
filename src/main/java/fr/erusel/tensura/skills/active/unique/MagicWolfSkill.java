@@ -16,7 +16,7 @@ public class MagicWolfSkill extends Skill implements ActiveSkill {
 
     public MagicWolfSkill() {
         super("Magic Wolf", Skills.MAGICWOLF, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 2000, Skills.RANGA);
-        super.addLore("Lore TODO");
+        super.addLore("Spawn a wolf with more life to fight with you");
     }
 
     @Override

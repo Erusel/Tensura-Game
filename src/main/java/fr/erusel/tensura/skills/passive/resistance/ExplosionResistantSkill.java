@@ -12,7 +12,7 @@ public class ExplosionResistantSkill extends Skill implements PassiveSkill, Even
 
     public ExplosionResistantSkill() {
         super("Explosion-Resistant", Skills.EXPLOSIONRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
-        super.addLore("Lore TODO");
+        super.addLore("Ignore Explosion damage");
     }
 
 

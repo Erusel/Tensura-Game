@@ -14,7 +14,7 @@ public class HastySkill extends Skill implements PassiveSkill {
 
     public HastySkill() {
         super("Hasty", Skills.HASTY, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.HERMES);
-        super.addLore("Lore TODO");
+        super.addLore("Gain Haste II");
     }
 
     @Override

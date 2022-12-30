@@ -12,7 +12,7 @@ public class BeelzebuthSkill extends Skill implements ActiveSkill {
 
     public BeelzebuthSkill() {
         super("Beelzebuth, Lord of Gluttony", Skills.BEELZEBUTH, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1200, null);
-        super.addLore("Lore TODO");
+        super.addLore("Steal 2 skills from a killed player");
     }
 
     @Override

@@ -13,7 +13,7 @@ public class OppressorSkill extends Skill implements ActiveSkill {
 
     public OppressorSkill() {
         super("Oppressor", Skills.OPPRESSOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, Skills.JANUS);
-        super.addLore("Lore TODO");
+        super.addLore("Knockback away entities for 30 seconds");
     }
 
     @Override

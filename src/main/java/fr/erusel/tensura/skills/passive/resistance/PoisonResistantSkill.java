@@ -12,7 +12,7 @@ public class PoisonResistantSkill extends Skill implements PassiveSkill, Eventab
 
     public PoisonResistantSkill() {
         super("Poison Resistant", Skills.POISONRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
-        super.addLore("Lore TODO");
+        super.addLore("Ignore Poison damage");
     }
 
     @Override

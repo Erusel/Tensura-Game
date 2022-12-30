@@ -12,7 +12,7 @@ public class LustSkill extends Skill implements ActiveSkill {
 
     public LustSkill() {
         super("Lust", Skills.LUST, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 2000, Skills.OSIRIS);
-        super.addLore("Lore TODO");
+        super.addLore("Resurrect a player");
     }
 
     @Override

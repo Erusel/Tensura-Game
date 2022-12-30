@@ -14,17 +14,17 @@ public class WindManipulationSkill extends Skill implements ExtraSkill {
 
     public WindManipulationSkill() {
         super("Wind Manipulation",  Skills.WINDMANIPULATION, SkillScope.UNOBTAINABLE,  SkillTier.EXTRA, 800, null);
-        super.addLore("Lore TODO");
+        super.addLore("Use the power of the Wind");
     }
 
     @Override
     public String getRightClickSkillLore() {
-        return "Flight away";
+        return "Fly away temporarily";
     }
 
     @Override
     public String getLeftClickSkillLore() {
-        return "Knockback around players";
+        return "Knockback away around players";
     }
 
     @Override
@@ -32,6 +32,7 @@ public class WindManipulationSkill extends Skill implements ExtraSkill {
         player.getAllowFlight();
         player.setAllowFlight(true);
         player.setFlying(true);
+        player.sendMessage("§6You are now able to fly for 10 seconds");
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setGravity(true);
         new GravityManipulationRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 10)
                 .runTaskTimer(getMain(), 0, 20);

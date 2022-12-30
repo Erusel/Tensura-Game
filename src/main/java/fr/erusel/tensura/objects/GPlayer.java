@@ -43,6 +43,7 @@ public class GPlayer extends GameElement{
     private Inventory stomachInventory;
     private Inventory pandoraInventory;
     private PotionEffectType fletcherEffect;
+    private boolean fletcherBurst;
     private boolean frozenHit;
 
     public GPlayer(UUID playerUUID) {
@@ -207,6 +208,12 @@ public class GPlayer extends GameElement{
     }
     public void setFletcherEffect(PotionEffectType fletcherEffect) {
         this.fletcherEffect = fletcherEffect;
+    }
+    public boolean isFletcherBurst() {
+        return fletcherBurst;
+    }
+    public void setFletcherBurst(boolean fletcherBurst) {
+        this.fletcherBurst = fletcherBurst;
     }
 
     public List<Skill> getPlayerUniqueSkills(){

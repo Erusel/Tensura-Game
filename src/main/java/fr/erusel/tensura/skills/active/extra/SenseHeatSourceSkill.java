@@ -14,12 +14,12 @@ public class SenseHeatSourceSkill extends Skill implements ExtraSkill {
 
     public SenseHeatSourceSkill() {
         super("Sense Heat Source", Skills.SENSEHEAT, SkillScope.UNOBTAINABLE,  SkillTier.EXTRA, 800, null);
-        super.addLore("Lore TODO");
+        super.addLore("Boost your senses to find heat sources");
     }
 
     @Override
     public String getRightClickSkillLore() {
-        return "Sense player heat";
+        return "Sense near player heat";
     }
 
     @Override
