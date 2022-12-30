@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
@@ -65,6 +66,10 @@ public interface Eventable {
     }
 
     default void onAdvancement(PlayerAdvancementDoneEvent event) {
+
+    }
+
+    default void onEntityShootBow(EntityShootBowEvent event) {
 
     }
 

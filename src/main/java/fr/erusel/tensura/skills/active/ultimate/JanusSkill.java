@@ -13,7 +13,7 @@ public class JanusSkill extends Skill implements ActiveSkill {
 
     public JanusSkill() {
         super("Janus, Lord of Gravity",  Skills.JANUS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1100, null);
-        super.addLore("Lore TODO");
+        super.addLore("Knockback away the players you hit");
     }
 
     @Override

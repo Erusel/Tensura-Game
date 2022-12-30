@@ -14,7 +14,7 @@ public class OmoikaneSkill extends Skill implements ActiveSkill {
 
     public OmoikaneSkill() {
         super("Omoikane, Lord of Reflection", Skills.OMOIKANE, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1100, null);
-        super.addLore("Lore TODO");
+        super.addLore("Return the damage you take to the attacker for 30 seconds");
     }
 
     @Override

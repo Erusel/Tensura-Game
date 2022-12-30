@@ -17,7 +17,8 @@ public class AmbroisieSkill extends Skill implements ActiveSkill {
 
     public AmbroisieSkill() {
         super("Ambroisie, Lord of Alchemy", Skills.AMBROISIE, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 1200, null);
-        super.addLore("Lore TODO");
+        super.addLore("Grant you a random buff potion effect and a random debuff potion effect");
+        super.addLore("for players around you");
     }
 
     @Override

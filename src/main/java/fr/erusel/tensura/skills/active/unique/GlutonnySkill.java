@@ -12,7 +12,7 @@ public class GlutonnySkill extends Skill implements ActiveSkill {
 
     public GlutonnySkill() {
         super("Glutonny", Skills.GLUTONNY, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1200, Skills.BEELZEBUTH);
-        super.addLore("Lore TODO");
+        super.addLore("Steal 1 skill from a killed player");
     }
 
     @Override

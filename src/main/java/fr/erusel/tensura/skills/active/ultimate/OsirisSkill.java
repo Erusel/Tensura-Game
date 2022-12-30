@@ -12,7 +12,7 @@ public class OsirisSkill extends Skill implements ActiveSkill {
 
     public OsirisSkill() {
         super("Osiris, Lord of resurrection", Skills.OSIRIS, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 2000, null);
-        super.addLore("Lore TODO");
+        super.addLore("Resurrect a player OR yourself if you die");
     }
 
     @Override

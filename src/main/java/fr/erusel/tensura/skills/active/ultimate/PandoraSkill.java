@@ -13,7 +13,7 @@ public class PandoraSkill extends Skill implements ActiveSkill {
 
     public PandoraSkill() {
         super("Pandora, Lord of Gift", Skills.PANDORA, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 20, null);
-        super.addLore("Lore TODO");
+        super.addLore("Open you a personal double chest");
     }
 
     @Override

@@ -12,7 +12,7 @@ public class WitherResistantSkill extends Skill implements PassiveSkill, Eventab
 
     public WitherResistantSkill() {
         super("Wither Resistant", Skills.WITHERRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
-        super.addLore("Lore TODO");
+        super.addLore("Ignore Wither effect damage");
     }
 
     @Override

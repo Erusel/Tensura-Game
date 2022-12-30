@@ -7,6 +7,7 @@ import fr.erusel.tensura.threads.GameLoopRunnable;
 import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastinv.FastInvManager;
 import org.bukkit.Bukkit;
+import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {
@@ -71,5 +72,6 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerSendChatListener(gameManager), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(gameManager, playerManager), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteractionListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(gameManager,playerManager), this);
     }
 }

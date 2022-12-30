@@ -12,7 +12,7 @@ public class FireResistantSkill extends Skill implements PassiveSkill, Eventable
 
     public FireResistantSkill() {
         super("Fire Resistant", Skills.FIRERESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
-        super.addLore("Lore TODO");
+        super.addLore("Ignore Fire damage");
     }
 
     @Override

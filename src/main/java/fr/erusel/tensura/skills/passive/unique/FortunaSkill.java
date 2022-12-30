@@ -17,7 +17,7 @@ public class FortunaSkill extends Skill implements PassiveSkill, Eventable {
 
     public FortunaSkill() {
         super("Fortuna", Skills.FORTUNA, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 0, Skills.PLOUTOS);
-        super.addLore("Lore TODO");
+        super.addLore("Double the drops from ores");
     }
 
     Material[] ores = {Material.IRON_ORE, Material.COAL_ORE, Material.LAPIS_ORE, Material.REDSTONE_ORE, Material.EMERALD_ORE, Material.DIAMOND_ORE, Material.GOLD_ORE};

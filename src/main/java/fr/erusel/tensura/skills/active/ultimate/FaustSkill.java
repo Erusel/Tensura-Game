@@ -13,7 +13,7 @@ public class FaustSkill extends Skill implements ActiveSkill {
 
     public FaustSkill() {
         super("Faust, Lord of Investigation", Skills.FAUST, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 900, null);
-        super.addLore("Lore TODO");
+        super.addLore("Know the stuff OR the skills of a player");
     }
 
     @Override

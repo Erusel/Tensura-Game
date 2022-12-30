@@ -12,7 +12,7 @@ public class LightningResistantSkill extends Skill implements PassiveSkill, Even
 
     public LightningResistantSkill() {
         super("Lightning Resistant", Skills.LIGHTNINGRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
-        super.addLore("Lore TODO");
+        super.addLore("Ignore Lightning damage");
     }
 
     @Override

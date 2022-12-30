@@ -13,7 +13,7 @@ public class AlbertSkill extends Skill implements ActiveSkill {
 
     public AlbertSkill() {
         super("Albert, Lord of Algebria",  Skills.ALBERT, SkillScope.OBTAINABLE, SkillTier.ULTIMATE, 1000, null);
-        super.addLore("Lore TODO");
+        super.addLore("Dodge 5 attacks");
     }
 
     @Override

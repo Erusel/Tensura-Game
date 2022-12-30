@@ -14,7 +14,7 @@ public class HecateSkill extends Skill implements PassiveSkill {
 
     public HecateSkill() {
         super("Hecate, Lord of Protection", Skills.HECATE, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 900, null);
-        super.addLore("Lore TODO");
+        super.addLore("Gain Resistance II");
     }
 
     @Override
