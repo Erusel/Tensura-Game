@@ -24,9 +24,10 @@ public class ArrowResistantSkill extends Skill implements PassiveSkill, Eventabl
 
     @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        System.out.println("dégats par entité");
         if (event.getDamager() instanceof Arrow){
+            System.out.println("flèche");
             event.setCancelled(true);
         }
     }
-
 }

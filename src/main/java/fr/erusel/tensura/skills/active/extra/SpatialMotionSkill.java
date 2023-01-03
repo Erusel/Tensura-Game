@@ -5,8 +5,6 @@ import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ExtraSkill;
 import fr.erusel.tensura.objects.Skill;
-import org.bukkit.Location;
-import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 
 public class SpatialMotionSkill extends Skill implements ExtraSkill {
