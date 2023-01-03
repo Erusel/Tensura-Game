@@ -47,6 +47,7 @@ public enum Skills {
     MAGICWOLF("Magic Wolf", SkillTier.UNIQUE, MagicWolfSkill::new),
     POTIONMASTER("Potion Master", SkillTier.UNIQUE, PotionMasterSkill::new),
     REFLECTOR("Reflector", SkillTier.UNIQUE, ReflectorSkill::new),
+    VAMPIRISM("Vampirism", SkillTier.UNIQUE, VampirismSkill::new),
 
     // Extra Skills
     FLETCHER("Fletcher", SkillTier.EXTRA, FletcherSkill::new),
@@ -77,7 +78,8 @@ public enum Skills {
     PLOUTOS("Ploutos, Lord of Wealth", SkillTier.ULTIMATE, PloutosSkill::new),
     RANGA("Ranga, Lord of the toutous", SkillTier.ULTIMATE, RangaSkill::new),
     AMBROISIE("Ambroisie, Lord of Alchemy", SkillTier.ULTIMATE, AmbroisieSkill::new),
-    OMOIKANE("Omoikane, Lord of Reflection", SkillTier.ULTIMATE, OmoikaneSkill::new);
+    OMOIKANE("Omoikane, Lord of Reflection", SkillTier.ULTIMATE, OmoikaneSkill::new),
+    DRACULA("Dracula, Lord of Vampirism", SkillTier.ULTIMATE, DraculaSkill::new);
 
     private final String name;
     private final SkillTier skillTier;

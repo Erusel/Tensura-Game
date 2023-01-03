@@ -7,7 +7,6 @@ import fr.erusel.tensura.threads.GameLoopRunnable;
 import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastinv.FastInvManager;
 import org.bukkit.Bukkit;
-import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Main extends JavaPlugin {

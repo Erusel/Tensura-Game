@@ -1,13 +1,12 @@
 package fr.erusel.tensura.skills.active.extra;
 
+import fr.erusel.tensura.Main;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.ExtraSkill;
 import fr.erusel.tensura.objects.Skill;
-import fr.erusel.tensura.threads.skills.FletcherBurstRunnable;
-import fr.erusel.tensura.threads.skills.ImperceptibleRunnable;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -16,6 +15,8 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.scheduler.BukkitRunnable;
+import org.bukkit.util.Vector;
 
 import java.util.Random;
 
@@ -52,7 +53,7 @@ public class FletcherSkill extends Skill implements ExtraSkill, Eventable {
 
     @Override
     public String getLeftClickSkillLore() {
-        return "Shoot 3 arrows in succession";
+        return "Throw 3 more arrows when you shoot";
     }
 
 
@@ -80,18 +81,27 @@ public class FletcherSkill extends Skill implements ExtraSkill, Eventable {
 
     @Override
     public void onEntityShootBow(EntityShootBowEvent event) {
-        //TODO: Add a cooldown beetwen each arrow shot (1s)
         if (event.getEntity() instanceof Player player) {
             if (getPlayerManager().getGPlayerByUUID(player.getUniqueId()).isFletcherBurst()) {
-                new FletcherBurstRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 3)
-                        .runTaskTimer(getMain(), 0, 20);
-                for (int i = 0; i < 3; i++) {
-                    double x = event.getProjectile().getVelocity().getX();
-                    double y = event.getProjectile().getVelocity().getY();
-                    double z = event.getProjectile().getVelocity().getZ();
-                    player.launchProjectile(Arrow.class, player.getLocation().getDirection()).setVelocity(event.getProjectile().getVelocity().setX(x).setY(y).setZ(z));
+                new BukkitRunnable() {
+                        int k=0;
+                        @Override
+                        public void run() {
+                            if (k == 3) {
+                                getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFletcherBurst(false);
+                                cancel();
+                            }
+                            if (k != 0) {
+                                Vector direction = player.getLocation().getDirection();
+                                player.playSound(player.getLocation(), "minecraft:entity.arrow.shoot", 1, 1);
+                                Arrow shootedArrow = player.launchProjectile(Arrow.class);
+                                shootedArrow.setPickupStatus(Arrow.PickupStatus.DISALLOWED);
+                                shootedArrow.setVelocity(new Vector(direction.getX(), direction.getY(), direction.getZ()).normalize().multiply(3));
+                            }
+                            k++;
+                        }
+                    }.runTaskTimer(Main.getInstance(), 0L, 10L);
                 }
             }
         }
-    }
 }
