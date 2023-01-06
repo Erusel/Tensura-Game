@@ -56,14 +56,12 @@ public class EntityDamageByEntityListener implements Listener {
         if (!(damaged instanceof Player player)) {
             return;
         }
+
         GPlayer damagedGPlayer = playerManager.getGPlayerByUUID(player.getUniqueId());
         damagedGPlayer.getPlayerSkills().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(s -> ((Eventable) s).onEntityDamageByEntity(event));
-        if (damagedGPlayer.getMathematicianDodgeLeft() >= 1) {
-            event.setCancelled(true);
-            damagedGPlayer.setMathematicianDodgeLeft(damagedGPlayer.getMathematicianDodgeLeft() - 1);
-        }
+
         if (damager instanceof Player player2) {
             GPlayer damagerGPlayer = playerManager.getGPlayerByUUID(player2.getUniqueId());
             damagerGPlayer.getPlayerSkills().stream()
@@ -82,16 +80,7 @@ public class EntityDamageByEntityListener implements Listener {
                     }
                 }
             }
-            event.setCancelled(damagedGPlayer.isImperceptibleActivated());
             damagerGPlayer.setTrackingPlayer(player.getUniqueId());
-            if (damagerGPlayer.isOppressorActivated()) {
-                damaged.setVelocity(player2.getLocation().getDirection().setY(0).normalize().multiply(2));
-            }
-            if (player2.getAllowFlight()) {
-                if (!((Player) damager).getGameMode().equals(GameMode.CREATIVE)) {
-                    event.setCancelled(true);
-                }
-            }
             return;
         }
         if (!(damager instanceof Arrow projectile)) {
@@ -103,16 +92,6 @@ public class EntityDamageByEntityListener implements Listener {
                 player.damage(event.getDamage() * 1.2);
                 shooter.sendMessage("§6x1.2 damage !");
             }
-        }
-
-        if (playerManager.getGPlayerByUUID(shooter.getUniqueId()).getFletcherEffect() != null) {
-            damagedPlayer.addPotionEffect(new PotionEffect(playerManager.getGPlayerByUUID(shooter.getUniqueId()).getFletcherEffect(), 200, 0));
-            }
-        }
-        if (damagedGPlayer.isReflectorActivated()) {
-            shooter.damage(event.getDamage());
-            ((LivingEntity) damager).damage(event.getDamage());
-            event.setCancelled(true);
         }
     }
 }
