@@ -66,14 +66,15 @@ public class GameManager {
             return;
 
         }
-
         setGameState(GState.STARTING);
-
         gameModeInstance = gameMode.createInstance();
 
 
         // Creating Scenarios Instances
-        getActivatedScenarios().forEach(scenarios -> getActivatedScenariosInstance().add(scenarios.createInstance()));
+        getActivatedScenarios().
+                forEach(scenarios -> {
+                    getActivatedScenariosInstance().add(scenarios.createInstance());
+                });
 
         // Creating UniqueSkills Instances
         Skills.getAllSkillByTier(SkillTier.UNIQUE).forEach(

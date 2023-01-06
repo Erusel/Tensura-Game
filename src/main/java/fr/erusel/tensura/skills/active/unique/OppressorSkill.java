@@ -4,11 +4,13 @@ import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.threads.skills.OppressorRunnable;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class OppressorSkill extends Skill implements ActiveSkill {
+public class OppressorSkill extends Skill implements ActiveSkill, Eventable {
 
 
     public OppressorSkill() {
@@ -22,5 +24,15 @@ public class OppressorSkill extends Skill implements ActiveSkill {
         new OppressorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 30)
                 .runTaskTimer(getMain(), 0, 20);
         activateCooldown();
+    }
+
+    @Override
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Player damager)){
+            return;
+        }
+        if (getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).isOppressorActivated()){
+            event.getEntity().setVelocity(damager.getLocation().getDirection().setY(0).normalize().multiply(2));
+        }
     }
 }

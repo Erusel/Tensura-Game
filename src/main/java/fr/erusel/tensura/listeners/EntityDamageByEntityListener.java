@@ -6,7 +6,6 @@ import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.GPlayer;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
@@ -32,19 +31,20 @@ public class EntityDamageByEntityListener implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-
+    
         if (!gameManager.getGameState().equals(GState.PLAYING)) {
             event.setCancelled(true);
             return;
         }
 
+        Entity damager = event.getDamager();
+        Entity damaged = event.getEntity();
+
         gameManager.getGameModeInstance().onEntityDamageByEntity(event);
         gameManager.getActivatedScenariosInstance().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(s -> ((Eventable) s).onEntityDamageByEntity(event));
-
-        Entity damager = event.getDamager();
-        Entity damaged = event.getEntity();
+               
 
         if (damager instanceof Player p) {
             GPlayer pGPlayer = playerManager.getGPlayerByUUID(p.getUniqueId());
@@ -102,6 +102,11 @@ public class EntityDamageByEntityListener implements Listener {
             if (random.nextInt(100) <= 19) {
                 player.damage(event.getDamage() * 1.2);
                 shooter.sendMessage("§6x1.2 damage !");
+            }
+        }
+
+        if (playerManager.getGPlayerByUUID(shooter.getUniqueId()).getFletcherEffect() != null) {
+            damagedPlayer.addPotionEffect(new PotionEffect(playerManager.getGPlayerByUUID(shooter.getUniqueId()).getFletcherEffect(), 200, 0));
             }
         }
         if (damagedGPlayer.isReflectorActivated()) {

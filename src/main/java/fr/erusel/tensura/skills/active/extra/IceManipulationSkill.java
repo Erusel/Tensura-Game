@@ -67,13 +67,11 @@ public class IceManipulationSkill extends Skill implements ExtraSkill, Eventable
 
     @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (event.getDamager() instanceof Player player) {
-            if (getPlayerManager().getGPlayerByUUID(player.getUniqueId()).isFrozenHitActivated()) {
-                if (event.getEntity() instanceof LivingEntity livingEntity) {
-                    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 200, 5));
-                    getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFrozenHit(false);
-                }
-            }
+        if (!(event.getEntity() instanceof LivingEntity livingEntity)){
+            return;
+        }
+        if (getPlayerManager().getGPlayerByUUID(event.getDamager().getUniqueId()).isFrozenHitActivated()) {
+            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 160, 3));
         }
     }
 }

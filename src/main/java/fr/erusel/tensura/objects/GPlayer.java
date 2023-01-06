@@ -19,7 +19,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
-public class GPlayer extends GameElement{
+public class GPlayer extends GameElement {
+
+    Random random = new Random();
+
 
     // Player Info
     private final UUID playerUUID;
@@ -133,7 +136,7 @@ public class GPlayer extends GameElement{
         Player player = Bukkit.getPlayer(playerUUID);
 
         if (!haveHarvestFestivalPrerequisite()){
-            player.sendMessage("§cVous n'avez pas les prérequis");
+            player.sendMessage("§cYou don't have the prerequisite");
             return;
         }
 
@@ -142,19 +145,19 @@ public class GPlayer extends GameElement{
 
         Skill skill;
         Skill sacrificeSkill = null;
-        int i = new Random().nextInt(getPlayerSkills().size());
+        int i = random.nextInt(getPlayerSkills().size());
         skill = getPlayerSkills().get(i);
 
         while (!skill.getSkillTier().equals(SkillTier.UNIQUE)){
-            i = new Random().nextInt(getPlayerSkills().size());
+            i = random.nextInt(getPlayerSkills().size());
             skill = getPlayerSkills().get(i);
         }
 
         if (getPlayerSkills().size() > 1){
-            int u = new Random().nextInt(getPlayerSkills().size());
+            int u = random.nextInt(getPlayerSkills().size());
             sacrificeSkill = getPlayerSkills().get(u);
             while (sacrificeSkill.getName().equals(skill.getName())){
-                u = new Random().nextInt(getPlayerSkills().size());
+                u = random.nextInt(getPlayerSkills().size());
                 sacrificeSkill = getPlayerSkills().get(u);
             }
         }

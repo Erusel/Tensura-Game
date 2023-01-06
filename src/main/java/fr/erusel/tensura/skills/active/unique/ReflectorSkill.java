@@ -4,12 +4,16 @@ import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.GPlayer;
 import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.threads.skills.ReflectorRunnable;
+import org.bukkit.entity.Arrow;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class ReflectorSkill extends Skill implements ActiveSkill {
+public class ReflectorSkill extends Skill implements ActiveSkill, Eventable {
 
 
     public ReflectorSkill() {
@@ -24,5 +28,21 @@ public class ReflectorSkill extends Skill implements ActiveSkill {
         new ReflectorRunnable(gPlayer, 10)
                 .runTaskTimer(getMain(), 0, 20);
         activateCooldown();
+    }
+
+    @Override
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (!(event.getDamager() instanceof Arrow projectile)) {
+            return;
+        }
+        if (!(event.getEntity() instanceof Player damaged)){
+            return;
+        }
+
+        LivingEntity shooter = (LivingEntity) projectile.getShooter();
+        if (getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).isReflectorActivated()) {
+            shooter.damage(event.getDamage());
+            event.setCancelled(true);
+        }
     }
 }
