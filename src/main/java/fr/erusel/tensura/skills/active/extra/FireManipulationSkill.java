@@ -17,6 +17,7 @@ import java.util.Random;
 
 public class FireManipulationSkill extends Skill implements ExtraSkill {
 
+    Random rdm = new Random();
 
     public FireManipulationSkill() {
         super("Fire Manipulation", Skills.FIREMANIPULATION, SkillScope.UNOBTAINABLE, SkillTier.EXTRA, 800, null);
@@ -42,7 +43,7 @@ public class FireManipulationSkill extends Skill implements ExtraSkill {
                     Location location = player.getLocation().add(x, y, z);
                     if (location.getBlock().getType().isSolid()) {
                         if (!(location.getBlock().getType() == Material.BEDROCK)) {
-                            int random = new Random().nextInt(8);
+                            int random = rdm.nextInt(8);
                             location.getBlock().setType(Material.NETHERRACK);
                             if (random == 0) {
                                 location.add(0, 1, 0).getBlock().setType(Material.FIRE);

@@ -1,8 +1,6 @@
 package fr.erusel.tensura.managers;
 
-import fr.erusel.tensura.items.charybdis.CharybdisPartOneItem;
-import fr.erusel.tensura.items.charybdis.CharybdisPartThreeItem;
-import fr.erusel.tensura.items.charybdis.CharybdisPartTwoItem;
+import fr.erusel.tensura.enums.GItems;
 import fr.erusel.tensura.objects.GItem;
 import org.bukkit.inventory.ItemStack;
 
@@ -17,12 +15,13 @@ public class GItemManager {
 
     public GItemManager() {
         instance = this;
+        registerItems();
     }
 
     public void registerItems(){
-        registeredGItems.add(new CharybdisPartOneItem());
-        registeredGItems.add(new CharybdisPartTwoItem());
-        registeredGItems.add(new CharybdisPartThreeItem());
+        for (GItems gItems : GItems.values()){
+            registeredGItems.add(gItems.createInstance());
+        }
     }
     public boolean isGItem(ItemStack itemStack){
         return registeredGItems.stream().anyMatch(gitem -> itemStack.isSimilar(gitem.getItemstack()));

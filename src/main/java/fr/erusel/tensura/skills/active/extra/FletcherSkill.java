@@ -12,6 +12,7 @@ import java.util.Random;
 
 public class FletcherSkill extends Skill implements ExtraSkill {
 
+    Random random = new Random();
 
     public FletcherSkill() {
         super("Fletcher", Skills.FLETCHER, SkillScope.UNOBTAINABLE,  SkillTier.EXTRA, 800, null);
@@ -35,7 +36,7 @@ public class FletcherSkill extends Skill implements ExtraSkill {
                 PotionEffectType.CONFUSION,
                 PotionEffectType.HUNGER,
         };
-        int i = new Random().nextInt(potionsDebuff.length);
+        int i = random.nextInt(potionsDebuff.length);
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFletcherEffect(potionsDebuff[i]);
         player.sendMessage("§6Your next arrow will inflict " + potionsDebuff[i].getName());
         activateCooldown();

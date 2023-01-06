@@ -1,5 +1,6 @@
 package fr.erusel.tensura.commands;
 
+import fr.erusel.tensura.enums.GItems;
 import fr.erusel.tensura.enums.Prefixes;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
@@ -132,10 +133,28 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             }
             StringBuilder message = new StringBuilder();
             List<String> t = new ArrayList<>();
-            for (String text : args) t.add(text + " ");
+            for (String text : args) {
+                t.add(text + " ");
+            }
             t.remove(0);
-            for (String i : t) message.append(i);
+            for (String i : t) {
+                message.append(i);
+            }
             Utils.VoiceOfTheWorldBroadcast(message.toString());
+        }
+        if (args[0].equalsIgnoreCase("giveitem")){
+            if (args[1] == null){
+                return false;
+            }
+            for (GItems gItems : GItems.values()){
+                if (gItems.name().equalsIgnoreCase(args[1])){
+                    player.getInventory().addItem(gItems.createInstance().getItemstack());
+                    player.sendMessage("§7Item sucessfully given !");
+                    return true;
+                }
+            }
+            player.sendMessage("§cItem not found !");
+
         }
         return true;
     }

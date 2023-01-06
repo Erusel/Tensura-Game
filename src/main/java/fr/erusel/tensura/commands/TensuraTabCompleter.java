@@ -1,5 +1,6 @@
 package fr.erusel.tensura.commands;
 
+import fr.erusel.tensura.enums.GItems;
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.enums.Skills;
@@ -45,6 +46,7 @@ public class TensuraTabCompleter extends GameElement implements TabCompleter {
                     list.add("harvestfestival");
                     list.add("resetcooldown");
                     list.add("broadcast");
+                    list.add("giveitem");
                 }
             }
         }
@@ -55,6 +57,11 @@ public class TensuraTabCompleter extends GameElement implements TabCompleter {
             }
             if (args[0].equalsIgnoreCase("giveskill")){
                 Bukkit.getOnlinePlayers().forEach(player -> list.add(player.getName()));
+            }
+            if (args[0].equalsIgnoreCase("giveitem")){
+                for (GItems gItems : GItems.values()){
+                    list.add(gItems.name());
+                }
             }
             if (args[0].equalsIgnoreCase("setrace")) {
                 Bukkit.getOnlinePlayers().forEach(player -> list.add(player.getName()));

@@ -3,6 +3,7 @@ package fr.erusel.tensura.skills.active.extra;
 import fr.erusel.tensura.enums.SkillScope;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.ExtraSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.Location;
@@ -10,10 +11,11 @@ import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-public class IceManipulationSkill extends Skill implements ExtraSkill {
+public class IceManipulationSkill extends Skill implements ExtraSkill, Eventable {
 
 
     public IceManipulationSkill() {
@@ -60,5 +62,15 @@ public class IceManipulationSkill extends Skill implements ExtraSkill {
         // the next entity that the player will hit will be frozen (slowness 4 effect)
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFrozenHit(true);
         activateCooldown();
+    }
+
+    @Override
+    public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        if (!(event.getEntity() instanceof LivingEntity livingEntity)){
+            return;
+        }
+        if (getPlayerManager().getGPlayerByUUID(event.getDamager().getUniqueId()).isFrozenHitActivated()) {
+            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 160, 3));
+        }
     }
 }

@@ -23,7 +23,7 @@ public final class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         main = this;
-
+        saveDefaultConfig();
         worldManager = new WorldManager();
         playerManager = new PlayerManager();
         gameSettingManager = new GameSettingManager();
@@ -33,7 +33,6 @@ public final class Main extends JavaPlugin {
         scoreBoardManager = new ScoreBoardManager(gameManager, gameSettingManager, teamManager);
 
         FastInvManager.register(this);
-        saveDefaultConfig();
         registerCommands();
         registerListeners();
 
@@ -42,7 +41,8 @@ public final class Main extends JavaPlugin {
             Utils.resetPlayer(player);
         });
 
-        new GameLoopRunnable(gameManager, playerManager, scoreBoardManager).runTaskTimer(this, 0, 20);
+        new GameLoopRunnable(gameManager, playerManager, scoreBoardManager)
+                .runTaskTimer(this, 0, 20);
 
     }
 

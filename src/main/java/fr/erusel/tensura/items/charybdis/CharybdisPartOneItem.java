@@ -6,7 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class CharybdisPartOneItem extends GItem {
+public class CharybdisPartOneItem implements GItem {
 
     @Override
     public void onUse(PlayerInteractEvent event) {
