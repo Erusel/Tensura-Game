@@ -15,7 +15,7 @@ public class MalarSkill extends Skill implements ActiveSkill {
 
     public MalarSkill() {
         super("Malar, Lord of Tracking",  Skills.MALAR, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 600, null);
-        super.addLore("Lore TODO");
+        super.addLore("Track the last player hit");
     }
 
     @Override

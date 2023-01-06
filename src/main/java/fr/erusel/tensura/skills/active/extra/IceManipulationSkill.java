@@ -59,8 +59,9 @@ public class IceManipulationSkill extends Skill implements ExtraSkill, Eventable
 
     @Override
     public void onLeftClick(Player player) {
-        // the next entity that the player will hit will be frozen (slowness 4 effect)
+        // the next entity that the player will hit will be frozen (slowness 6 effect)
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFrozenHit(true);
+        player.sendMessage("§6The next entity you hit will be frozen");
         activateCooldown();
     }
 

@@ -15,7 +15,7 @@ public class MathematicianSkill extends Skill implements ActiveSkill, Eventable 
 
     public MathematicianSkill() {
         super("Mathematician", Skills.MATHEMATICIAN, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1000, Skills.ALBERT);
-        super.addLore("Lore TODO");
+        super.addLore("Dodge 3 attacks");
     }
 
     @Override

@@ -31,7 +31,8 @@ public class EntityDamageByEntityListener implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (!gameManager.getGameState().equals(GState.PLAYING)){
+    
+        if (!gameManager.getGameState().equals(GState.PLAYING)) {
             event.setCancelled(true);
             return;
         }
@@ -43,51 +44,75 @@ public class EntityDamageByEntityListener implements Listener {
         gameManager.getActivatedScenariosInstance().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(s -> ((Eventable) s).onEntityDamageByEntity(event));
+               
 
-        if (!(damaged instanceof Player damagedPlayer)){
+        if (damager instanceof Player p) {
+            GPlayer pGPlayer = playerManager.getGPlayerByUUID(p.getUniqueId());
+
+            pGPlayer.getPlayerSkills().stream()
+                    .filter(s -> s instanceof Eventable)
+                    .forEach(s -> ((Eventable) s).onEntityDamageByEntity(event));
+        }
+        if (!(damaged instanceof Player player)) {
             return;
         }
-
-        GPlayer damagedGPlayer = playerManager.getGPlayerByUUID(damagedPlayer.getUniqueId());
-
+        GPlayer damagedGPlayer = playerManager.getGPlayerByUUID(player.getUniqueId());
         damagedGPlayer.getPlayerSkills().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(s -> ((Eventable) s).onEntityDamageByEntity(event));
-
-        if (damager instanceof Player damagerPlayer){
-            GPlayer damagerGPlayer = playerManager.getGPlayerByUUID(damagerPlayer.getUniqueId());
-
-            switch (damagerGPlayer.getRaces()){
+        if (damagedGPlayer.getMathematicianDodgeLeft() >= 1) {
+            event.setCancelled(true);
+            damagedGPlayer.setMathematicianDodgeLeft(damagedGPlayer.getMathematicianDodgeLeft() - 1);
+        }
+        if (damager instanceof Player player2) {
+            GPlayer damagerGPlayer = playerManager.getGPlayerByUUID(player2.getUniqueId());
+            damagerGPlayer.getPlayerSkills().stream()
+                    .filter(s -> s instanceof Eventable)
+                    .forEach(s -> ((Eventable) s).onEntityDamageByEntity(event));
+            switch (damagerGPlayer.getRaces()) {
                 case DEMON -> {
-                    if (random.nextInt(100)<=5) {
+                    if (random.nextInt(100) <= 5) {
                         damaged.setFireTicks(200);
                     }
                 }
-                case DWARF -> damagedPlayer.damage(event.getDamage()*0.8);
+                case DWARF -> player.damage(event.getDamage() * 0.8);
                 case MAJIN -> {
-                    if (random.nextInt(100)<=5) {
-                        damagedPlayer.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 300,0));
+                    if (random.nextInt(100) <= 5) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 300, 0));
                     }
                 }
             }
-
+            event.setCancelled(damagedGPlayer.isImperceptibleActivated());
+            damagerGPlayer.setTrackingPlayer(player.getUniqueId());
+            if (damagerGPlayer.isOppressorActivated()) {
+                damaged.setVelocity(player2.getLocation().getDirection().setY(0).normalize().multiply(2));
+            }
+            if (player2.getAllowFlight()) {
+                if (!((Player) damager).getGameMode().equals(GameMode.CREATIVE)) {
+                    event.setCancelled(true);
+                }
+            }
             return;
         }
-
         if (!(damager instanceof Arrow projectile)) {
             return;
         }
-
         LivingEntity shooter = (LivingEntity) projectile.getShooter();
         if (damagedGPlayer.isRace(Races.ELF)) {
             if (random.nextInt(100) <= 19) {
-                damagedPlayer.damage(event.getDamage()*1.2);
+                player.damage(event.getDamage() * 1.2);
                 shooter.sendMessage("§6x1.2 damage !");
             }
         }
 
         if (playerManager.getGPlayerByUUID(shooter.getUniqueId()).getFletcherEffect() != null) {
             damagedPlayer.addPotionEffect(new PotionEffect(playerManager.getGPlayerByUUID(shooter.getUniqueId()).getFletcherEffect(), 200, 0));
+            }
+        }
+        if (damagedGPlayer.isReflectorActivated()) {
+            shooter.damage(event.getDamage());
+            ((LivingEntity) damager).damage(event.getDamage());
+            event.setCancelled(true);
         }
     }
 }

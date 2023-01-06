@@ -18,7 +18,7 @@ public class ReflectorSkill extends Skill implements ActiveSkill, Eventable {
 
     public ReflectorSkill() {
         super("Reflector", Skills.REFLECTOR, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, Skills.OMOIKANE);
-        super.addLore("Lore TODO");
+        super.addLore("Return damage to the attacker for 10 seconds");
     }
 
     @Override

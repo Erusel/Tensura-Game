@@ -46,7 +46,9 @@ public class GPlayer extends GameElement {
     private Inventory stomachInventory;
     private Inventory pandoraInventory;
     private PotionEffectType fletcherEffect;
+    private boolean fletcherBurst;
     private boolean frozenHit;
+    private boolean vampirism;
 
     public GPlayer(UUID playerUUID) {
         this.playerUUID = playerUUID;
@@ -198,6 +200,12 @@ public class GPlayer extends GameElement {
     public int getMathematicianDodgeLeft(){
         return mathematicianDodgeLeft;
     }
+    public void setVampirism(boolean b) {
+        vampirism = b;
+    }
+    public boolean isVampirism() {
+        return vampirism;
+    }
 
     public void setTrackingPlayer(UUID uuid){
         trackingPlayer = uuid;
@@ -210,6 +218,12 @@ public class GPlayer extends GameElement {
     }
     public void setFletcherEffect(PotionEffectType fletcherEffect) {
         this.fletcherEffect = fletcherEffect;
+    }
+    public boolean isFletcherBurst() {
+        return fletcherBurst;
+    }
+    public void setFletcherBurst(boolean fletcherBurst) {
+        this.fletcherBurst = fletcherBurst;
     }
 
     public List<Skill> getPlayerUniqueSkills(){

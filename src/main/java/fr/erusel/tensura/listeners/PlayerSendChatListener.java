@@ -16,7 +16,7 @@ public class PlayerSendChatListener implements Listener {
     }
 
     @EventHandler
-    public void onChat(AsyncPlayerChatEvent event){
+    public void onChat(AsyncPlayerChatEvent event) {
         event.setCancelled(true);
         Bukkit.broadcastMessage("§8" + event.getPlayer().getName() + " §6> §7" + event.getMessage());
         if (!gameManager.getGameState().equals(GState.PLAYING)){

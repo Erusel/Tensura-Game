@@ -13,7 +13,7 @@ public class GreatSageSkill extends Skill implements ActiveSkill {
 
     public GreatSageSkill() {
         super("Great Sage", Skills.GREATSAGE, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 600, Skills.RAPHAEL);
-        super.addLore("Lore TODO");
+        super.addLore("Find entities around you");
     }
 
     @Override

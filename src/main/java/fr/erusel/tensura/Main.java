@@ -71,5 +71,6 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerSendChatListener(gameManager), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(gameManager, playerManager), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteractionListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(gameManager,playerManager), this);
     }
 }

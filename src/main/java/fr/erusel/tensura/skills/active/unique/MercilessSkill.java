@@ -15,7 +15,7 @@ public class MercilessSkill extends Skill implements ActiveSkill {
 
     public MercilessSkill() {
         super("Merciless", Skills.MERCILESS, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1000, Skills.BEERUS);
-        super.addLore("Lore TODO");
+        super.addLore("Kill near entities under 2 hearts");
     }
 
     @Override

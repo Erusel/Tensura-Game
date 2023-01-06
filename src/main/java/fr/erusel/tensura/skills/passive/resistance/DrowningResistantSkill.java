@@ -12,7 +12,7 @@ public class DrowningResistantSkill extends Skill implements PassiveSkill, Event
 
     public DrowningResistantSkill() {
         super("Drowning Resistant", Skills.DROWNINGRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
-        super.addLore("Lore TODO");
+        super.addLore("Ignore Drowning damage");
     }
 
     @Override

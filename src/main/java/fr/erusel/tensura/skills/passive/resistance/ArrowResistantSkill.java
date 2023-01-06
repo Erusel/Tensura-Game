@@ -14,7 +14,7 @@ public class ArrowResistantSkill extends Skill implements PassiveSkill, Eventabl
 
     public ArrowResistantSkill() {
         super("Arrow Resistant", Skills.ARROWRESISTANT, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
-        super.addLore("Lore TODO");
+        super.addLore("Ignore Arrow damage");
 
     }
 
@@ -24,9 +24,10 @@ public class ArrowResistantSkill extends Skill implements PassiveSkill, Eventabl
 
     @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+        System.out.println("dégats par entité");
         if (event.getDamager() instanceof Arrow){
+            System.out.println("flèche");
             event.setCancelled(true);
         }
     }
-
 }

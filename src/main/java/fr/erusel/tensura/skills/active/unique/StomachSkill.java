@@ -13,7 +13,7 @@ public class StomachSkill extends Skill implements ActiveSkill {
 
     public StomachSkill() {
         super("Stomach", Skills.STOMACH, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 20, Skills.PANDORA);
-        super.addLore("Lore TODO");
+        super.addLore("Open you a personal chest");
     }
     @Override
     public void onUse(Player player) {

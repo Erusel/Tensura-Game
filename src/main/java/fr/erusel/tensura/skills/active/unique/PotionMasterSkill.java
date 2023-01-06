@@ -16,7 +16,7 @@ public class PotionMasterSkill extends Skill implements ActiveSkill {
 
     public PotionMasterSkill() {
         super("Potion Master", Skills.POTIONMASTER, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 800, Skills.AMBROISIE);
-        super.addLore("Lore TODO");
+        super.addLore("Grant you a random buff potion effect");
     }
 
     @Override

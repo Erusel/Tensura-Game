@@ -14,7 +14,7 @@ public class RaphaelSkill extends Skill implements ActiveSkill {
 
     public RaphaelSkill() {
         super("Raphael, Lord of Wisdom", Skills.RAPHAEL, SkillScope.OBTAINABLE,  SkillTier.ULTIMATE, 800, null);
-        super.addLore("Lore TODO");
+        super.addLore("Find all the entities around you and get informations about them");
     }
 
     @Override
