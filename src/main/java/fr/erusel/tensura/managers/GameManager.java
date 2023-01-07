@@ -72,9 +72,7 @@ public class GameManager {
 
         // Creating Scenarios Instances
         getActivatedScenarios().
-                forEach(scenarios -> {
-                    getActivatedScenariosInstance().add(scenarios.createInstance());
-                });
+                forEach(scenarios -> getActivatedScenariosInstance().add(scenarios.createInstance()));
 
         // Creating UniqueSkills Instances
         Skills.getAllSkillByTier(SkillTier.UNIQUE).forEach(
@@ -88,6 +86,7 @@ public class GameManager {
         getActivatedScenariosInstance().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(scenario -> ((Eventable) scenario).onStart());
+
         setGameState(GState.PLAYING);
     }
 
