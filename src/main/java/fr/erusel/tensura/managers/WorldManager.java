@@ -11,7 +11,7 @@ import java.util.Random;
 public class WorldManager {
 
     private final GameManager gameManager;
-    private final GameSettingManager gameSettingManager;
+    private final GameSettingsManager gameSettingManager;
 
     private static WorldManager instance;
 
@@ -19,7 +19,7 @@ public class WorldManager {
     private World map = null;
     private final Random random = new Random();
 
-    public WorldManager(GameManager gameManager, GameSettingManager gameSettingManager) {
+    public WorldManager(GameManager gameManager, GameSettingsManager gameSettingManager) {
         instance = this;
         this.map = Bukkit.getWorld(MAP_NAME);
         this.gameManager = gameManager;

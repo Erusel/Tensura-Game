@@ -49,7 +49,6 @@ public class MsgCommand implements CommandExecutor {
             t.add(text + " ");
         }
         t.remove(0);
-        t.remove(1);
         for (String i : t) {
             message.append(i);
         }
