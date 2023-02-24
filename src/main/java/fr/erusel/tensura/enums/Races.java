@@ -82,14 +82,12 @@ public enum Races {
         Races races = getRandomRace();
         while (!races.getRaceStages().equals(stages)){
             races = getRandomRace();
-            System.out.println(races.getName());
         }
         return races;
     }
     public static Races getRandomRace() {
         Random random = new Random();
         Races r = values()[random.nextInt(values().length)];
-        System.out.println(r.getName());
         return r;
     }
 

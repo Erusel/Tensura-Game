@@ -2,10 +2,13 @@ package fr.erusel.tensura.objects;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.enchantment.PrepareItemEnchantEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.inventory.PrepareAnvilEvent;
+import org.bukkit.event.inventory.PrepareItemCraftEvent;
 import org.bukkit.event.player.*;
 
 public interface Eventable {
@@ -70,6 +73,34 @@ public interface Eventable {
     }
 
     default void onEntityShootBow(EntityShootBowEvent event) {
+
+    }
+
+    default void onPlayerEnchant(PrepareItemEnchantEvent event) {
+
+    }
+
+    default void onPlayerUseAnvil(PrepareAnvilEvent event) {
+
+    }
+
+    default void onCraftItem(PrepareItemCraftEvent event) {
+
+    }
+
+    default void onPlayerInteract(PlayerInteractEvent event) {
+
+    }
+
+    default void onPlayerFish(PlayerFishEvent event) {
+
+    }
+
+    default void onPlayerEat(PlayerItemConsumeEvent event) {
+
+    }
+
+    default void onPlayerSneak(PlayerToggleSneakEvent event) {
 
     }
 

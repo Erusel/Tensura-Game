@@ -1,6 +1,7 @@
 package fr.erusel.tensura.listeners;
 
 import fr.erusel.tensura.managers.GameManager;
+import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Material;
@@ -26,6 +27,9 @@ public class PlayerInteractionListener implements Listener {
 
     @EventHandler
     public void onPlayerInteractListener(PlayerInteractEvent event) {
+        gameManager.getActivatedScenariosInstance().stream()
+                .filter(s -> s instanceof Eventable)
+                .forEach(s -> ((Eventable) s).onPlayerInteract(event));
         if (event.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
             Block block = event.getClickedBlock();
             if (block.getType().equals(Material.CHEST)) {

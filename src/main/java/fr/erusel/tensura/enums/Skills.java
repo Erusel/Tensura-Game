@@ -48,6 +48,7 @@ public enum Skills {
     POTIONMASTER("Potion Master", SkillTier.UNIQUE, PotionMasterSkill::new),
     REFLECTOR("Reflector", SkillTier.UNIQUE, ReflectorSkill::new),
     VAMPIRISM("Vampirism", SkillTier.UNIQUE, VampirismSkill::new),
+    PERSONALDIM("Personal Dimension", SkillTier.UNIQUE, PersonalDimensionSkill::new),
 
     // Extra Skills
     FLETCHER("Fletcher", SkillTier.EXTRA, FletcherSkill::new),
@@ -58,7 +59,6 @@ public enum Skills {
     SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill::new),
     ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill::new),
     FIREMANIPULATION("Fire Manipulation", SkillTier.EXTRA, FireManipulationSkill::new),
-
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill::new),

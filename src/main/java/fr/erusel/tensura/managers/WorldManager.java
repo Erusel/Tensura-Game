@@ -1,20 +1,29 @@
 package fr.erusel.tensura.managers;
 
+import fr.erusel.tensura.chunkgenerators.EmptyChunkGenerator;
 import org.bukkit.*;
+import org.bukkit.block.Chest;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.Random;
 
 public class WorldManager {
+
+    private final GameManager gameManager;
+    private final GameSettingManager gameSettingManager;
 
     private static WorldManager instance;
 
     private final String MAP_NAME = "map";
     private World map = null;
+    private final Random random = new Random();
 
-    public WorldManager() {
+    public WorldManager(GameManager gameManager, GameSettingManager gameSettingManager) {
         instance = this;
         this.map = Bukkit.getWorld(MAP_NAME);
+        this.gameManager = gameManager;
+        this.gameSettingManager = gameSettingManager;
     }
     public boolean isPlayingMapExist() {
         return this.map != null;
@@ -30,6 +39,28 @@ public class WorldManager {
         map.setGameRule(GameRule.DO_INSOMNIA, false);
         map.setGameRule(GameRule.DO_PATROL_SPAWNING, false);
         map.setGameRule(GameRule.DO_IMMEDIATE_RESPAWN, true);
+        // Désactivé sinon NPE car gameManager.getGameMode() est null
+        //if (gameManager.getGameMode().equals(Modes.BATTLE_ROYAL)) {
+        //    Utils.VoiceOfTheWorldBroadcast("Placing lootcrates...");
+        //    placeChestBattleRoyal();
+        //}
+    }
+    public void createPersonalDimension() {
+        WorldCreator worldCreator = new WorldCreator("personal_dimension");
+        worldCreator.generator(new EmptyChunkGenerator());
+        worldCreator.type(WorldType.FLAT);
+        worldCreator.generateStructures(false);
+        worldCreator.createWorld();
+    }
+    public void placeChestBattleRoyal() {
+        for (int i = 0; i < gameSettingManager.getAmountCrates(); i++) {
+            int x = random.nextInt(gameSettingManager.getBorderRadius())-500;
+            int z = random.nextInt(gameSettingManager.getBorderRadius())-500;
+            Location loc = this.getMap().getHighestBlockAt(x, z).getLocation();
+            this.getMap().getBlockAt(loc).setType(Material.CHEST);
+            Chest chest = (Chest) loc.getBlock().getState();
+            gameManager.addCrateLocation(chest.getLocation());
+        }
     }
     public void deletePlayingWorld(){
         if (Bukkit.getWorld(MAP_NAME) != null){
