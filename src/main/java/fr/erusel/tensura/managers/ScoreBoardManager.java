@@ -11,12 +11,12 @@ public class ScoreBoardManager {
 
     private static ScoreBoardManager instance;
     private final GameManager gameManager;
-    private final GameSettingManager gameSettingManager;
+    private final GameSettingsManager gameSettingManager;
     private final TeamManager teamManager;
 
     public final HashMap<UUID, FastBoard> scoreboard = new HashMap<>();
 
-    public ScoreBoardManager(GameManager gameManager, GameSettingManager gameSettingManager, TeamManager teamManager) {
+    public ScoreBoardManager(GameManager gameManager, GameSettingsManager gameSettingManager, TeamManager teamManager) {
         instance = this;
         this.gameManager = gameManager;
         this.gameSettingManager = gameSettingManager;

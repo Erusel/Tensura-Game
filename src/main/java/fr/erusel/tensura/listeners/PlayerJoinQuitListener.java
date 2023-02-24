@@ -2,7 +2,7 @@ package fr.erusel.tensura.listeners;
 
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.GameSettingManager;
+import fr.erusel.tensura.managers.GameSettingsManager;
 import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.managers.ScoreBoardManager;
 import fr.erusel.tensura.objects.Eventable;
@@ -20,10 +20,10 @@ public class PlayerJoinQuitListener implements Listener {
 
     private final GameManager gameManager;
     private final ScoreBoardManager scoreBoardManager;
-    private final GameSettingManager gameSettingManager;
+    private final GameSettingsManager gameSettingManager;
     private final PlayerManager playerManager;
 
-    public PlayerJoinQuitListener(GameManager gameManager, ScoreBoardManager scoreBoardManager, GameSettingManager gameSettingManager, PlayerManager playerManager) {
+    public PlayerJoinQuitListener(GameManager gameManager, ScoreBoardManager scoreBoardManager, GameSettingsManager gameSettingManager, PlayerManager playerManager) {
         this.gameManager = gameManager;
         this.scoreBoardManager = scoreBoardManager;
         this.gameSettingManager = gameSettingManager;

@@ -12,9 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class GameManager {
 
@@ -35,8 +33,8 @@ public class GameManager {
     private final List<Scenarios> activatedScenarios = new ArrayList<>();
     private final List<Scenario> activatedScenariosInstance = new ArrayList<>();
     public int gameStartTime;
-    private final List<UUID> playerList = new ArrayList<>();
-    private final List<UUID> deadPlayers = new ArrayList<>();
+    private final Set<UUID> playerList = new HashSet<>();
+    private final Set<UUID> deadPlayers = new HashSet<>();
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
     private final List<Location> crateLocations = new ArrayList<>();
 
@@ -89,7 +87,6 @@ public class GameManager {
 
         setGameState(GState.PLAYING);
     }
-
     public void finishGame(UUID uuid){
         Player winner = Bukkit.getPlayer(uuid);
         setGameState(GState.FINISHING);
@@ -102,7 +99,7 @@ public class GameManager {
         teamManager.clearTeams();
         Bukkit.broadcastMessage("The winner is " +  winner.getName());
     }
-    public List<UUID> getPlayerList(){
+    public Set<UUID> getPlayerList(){
         return playerList;
     }
     public Modes getGameMode(){
@@ -152,7 +149,7 @@ public class GameManager {
     }
 
     // Dead Players
-    public List<UUID> getDeadPlayers(){
+    public Set<UUID> getDeadPlayers(){
         return deadPlayers;
     }
     public void addDeadPlayer(UUID uuid){
