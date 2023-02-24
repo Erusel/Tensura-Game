@@ -43,6 +43,7 @@ public class MsgCommand implements CommandExecutor {
             player.sendMessage("§cPlayer not found");
             return true;
         }
+
         StringBuilder message = new StringBuilder();
         List<String> t = new ArrayList<>();
         for (String text : args) {
@@ -52,7 +53,9 @@ public class MsgCommand implements CommandExecutor {
         for (String i : t) {
             message.append(i);
         }
-        Bukkit.getPlayer(args[0]).sendMessage(message.toString());
+
+        player.sendMessage("§6" + player.getName() + "§8>§7 " + message);
+        Bukkit.getPlayer(args[0]).sendMessage("§6" + player.getName() + "§8>§7 " + message);
 
         return true;
     }
