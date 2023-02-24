@@ -47,6 +47,9 @@ public class PlayerDeathListener implements Listener {
             GPlayer gKiller = playerManager.getGPlayerByUUID(killer.getUniqueId());
             gKiller.addKill(1);
             event.setDeathMessage("");
+            gameManager.getActivatedScenariosInstance().stream()
+                    .filter(s -> s instanceof Eventable)
+                    .forEach(s -> ((Eventable) s).onPlayerKill(killer, player));
             gKiller.getPlayerSkills().stream()
                     .filter(skill -> skill instanceof Eventable)
                     .forEach(skill -> ((Eventable) skill).onPlayerKill(killer, player));

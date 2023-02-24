@@ -24,7 +24,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         main = this;
         saveDefaultConfig();
-        worldManager = new WorldManager();
+        worldManager = new WorldManager(gameManager, gameSettingManager);
         playerManager = new PlayerManager();
         gameSettingManager = new GameSettingManager();
         GItemManager = new GItemManager();
@@ -43,7 +43,6 @@ public final class Main extends JavaPlugin {
 
         new GameLoopRunnable(gameManager, playerManager, scoreBoardManager)
                 .runTaskTimer(this, 0, 20);
-
     }
 
     public static Main getInstance(){
@@ -72,5 +71,11 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(gameManager, playerManager), this);
         Bukkit.getPluginManager().registerEvents(new PlayerInteractionListener(gameManager), this);
         Bukkit.getPluginManager().registerEvents(new EntityShootBowListener(gameManager,playerManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerEnchantListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerUseAnvilListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerCraftItemListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerFishingListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerConsumeListener(gameManager), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerToggleSneakListener(gameManager), this);
     }
 }

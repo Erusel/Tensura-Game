@@ -73,6 +73,9 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
             Utils.VoiceOfTheWorldBroadcast("Creating world...");
             getWorldManager().createPlayingWorld();
             Utils.VoiceOfTheWorldBroadcast("Successful");
+            Utils.VoiceOfTheWorldBroadcast("Creating personal dimension...");
+            getWorldManager().createPersonalDimension();
+            Utils.VoiceOfTheWorldBroadcast("Successful");
             return true;
         }
 

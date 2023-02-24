@@ -9,6 +9,7 @@ import fr.erusel.tensura.scoreboards.BattleRoyalScoreboard;
 import fr.erusel.tensura.utils.Utils;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -31,13 +32,16 @@ public class BattleRoyalMode extends Mode {
 
     @Override
     public void teleportPlayers() {
-        for (Player player : Bukkit.getOnlinePlayers()){
-            //spawn player at random location in the map
-            int x = random.nextInt(getGameSettingManager().getBorderRadius())-500;
-            int z = random.nextInt(getGameSettingManager().getBorderRadius())-500;
-            player.teleport(getWorldManager().getMap().getHighestBlockAt(x, z).getLocation());
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            if (!getGameManager().getPlayerList().contains(player.getUniqueId())){
+                player.setGameMode(GameMode.SPECTATOR);
+            }else {
+                player.setGameMode(GameMode.SURVIVAL);
+            }
+            getPlayerManager().createPlayerGPlayer(player);
+            player.teleport(getWorldManager().getMap().getSpawnLocation());
             onPlayerSpawn(player);
-        }
+        });
     }
 
     @Override
@@ -124,9 +128,7 @@ public class BattleRoyalMode extends Mode {
                 ItemStack itemStack = Utils.items[randomItem];
                 itemStack.setAmount(randomAmountStuff);
                 chest.getInventory().setItem(randomSlot, itemStack);
-
             }
-
         }
     }
 }

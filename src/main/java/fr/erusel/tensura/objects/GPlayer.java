@@ -49,6 +49,7 @@ public class GPlayer extends GameElement {
     private boolean fletcherBurst;
     private boolean frozenHit;
     private boolean vampirism;
+    private boolean explosion;
 
     public GPlayer(UUID playerUUID) {
         this.playerUUID = playerUUID;
@@ -224,6 +225,12 @@ public class GPlayer extends GameElement {
     }
     public void setFletcherBurst(boolean fletcherBurst) {
         this.fletcherBurst = fletcherBurst;
+    }
+    public void setExplosion(boolean b) {
+        explosion = b;
+    }
+    public boolean isExplosion() {
+        return explosion;
     }
 
     public List<Skill> getPlayerUniqueSkills(){

@@ -31,20 +31,16 @@ public class DraculaSkill extends Skill implements ActiveSkill, Eventable {
 
     @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        System.out.println("damage");
         if (!(event.getDamager() instanceof Player player)) {
             return;
         }
         if (event.getEntity() instanceof Player) {
-            System.out.println("player");
             double damage = event.getDamage();
             player.setHealth(player.getHealth() + damage);
         } else {
-            System.out.println("entity");
             double damage = event.getDamage();
             player.setHealth(player.getHealth() + damage/2);
         }
-        System.out.println("end");
     }
 
     @Override

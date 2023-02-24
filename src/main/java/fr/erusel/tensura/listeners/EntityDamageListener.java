@@ -29,7 +29,6 @@ public class EntityDamageListener implements Listener {
             return;
         }
 
-
         gameManager.getActivatedScenariosInstance().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(s -> ((Eventable) s).onEntityDamage(event));

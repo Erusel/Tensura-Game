@@ -30,7 +30,7 @@ public class FortunaSkill extends Skill implements PassiveSkill, Eventable {
             for (ItemStack item: block.getDrops()) {
                 item.setAmount(item.getAmount()*2);
                 block.getWorld().dropItemNaturally(block.getLocation(), item);
-                }
             }
         }
     }
+}
