@@ -5,6 +5,7 @@ import fr.erusel.tensura.enums.RaceStages;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.objects.Mode;
 import fr.erusel.tensura.objects.Race;
+import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.scoreboards.DebugScoreboard;
 import fr.erusel.tensura.threads.PlayerLeaveRunnable;
 import org.bukkit.Bukkit;
@@ -54,7 +55,16 @@ public class DebugMode extends Mode {
         Race race = Races.getRandomRaceByStage(RaceStages.FIRSTSTAGE).createInstance();
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setRace(race);
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getRace().onGive(player);
-        player.sendMessage("§aYou have been resurrected as a " + race.getName());
+
+        player.sendMessage("§8-------------------------------");
+        player.sendMessage("§7You have been resurrected in : §6§l" + race.getName());
+        player.sendMessage("§7Objective :§r Find all the parts of §3Charybdis§r and bring him back to life!");
+        player.sendMessage("  ");
+        player.sendMessage("§7Your skills are :");
+        for (Skill skill : getPlayerManager ().getGPlayerByUUID(player.getUniqueId()).getPlayerSkills()){
+            player.sendMessage("§7-§8 " + skill.getName());
+        }
+        player.sendMessage("§8-------------------------------");
     }
 
     @Override
