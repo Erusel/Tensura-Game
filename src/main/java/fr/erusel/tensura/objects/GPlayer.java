@@ -23,7 +23,6 @@ public class GPlayer extends GameElement {
 
     Random random = new Random();
 
-
     // Player Info
     private final UUID playerUUID;
     private int playerKill;
@@ -82,12 +81,6 @@ public class GPlayer extends GameElement {
     }
 
 
-    /**
-     * It checks if the player has a certain skill.
-     *
-     * @param skills The skill you want to check if the player has.
-     * @return A boolean value.
-     */
     public boolean haveSkill(Skills skills){
         return getPlayerSkills().stream().anyMatch(skill -> skill.getSkill() == skills);
     }

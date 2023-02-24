@@ -3,9 +3,9 @@ package fr.erusel.tensura.managers;
 import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 
-public class GameSettingManager {
+public class GameSettingsManager {
 
-    private static GameSettingManager instance;
+    private static GameSettingsManager instance;
 
     private int skillOnStart = 1;
     private int borderRadius = 1000;
@@ -15,7 +15,7 @@ public class GameSettingManager {
     private boolean skillDrop = true;
     private int amountLootCrate = 20;
 
-    public GameSettingManager() {
+    public GameSettingsManager() {
         instance = this;
     }
 
@@ -66,7 +66,7 @@ public class GameSettingManager {
         this.amountLootCrate = amountLootCrate;
     }
 
-    public static GameSettingManager getInstance() {
+    public static GameSettingsManager getInstance() {
         return instance;
     }
 

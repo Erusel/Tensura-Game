@@ -6,7 +6,7 @@ import fr.erusel.tensura.managers.*;
 public abstract class GameElement {
     GameManager gameManager = GameManager.getInstance();
     PlayerManager playerManager = PlayerManager.getInstance();
-    GameSettingManager gameSettingManager = GameSettingManager.getInstance();
+    GameSettingsManager gameSettingManager = GameSettingsManager.getInstance();
     WorldManager worldManager = WorldManager.getInstance();
     ScoreBoardManager scoreBoardManager = ScoreBoardManager.getInstance();
     TeamManager teamManager = TeamManager.getInstance();
@@ -24,7 +24,7 @@ public abstract class GameElement {
     public WorldManager getWorldManager() {
         return worldManager;
     }
-    public GameSettingManager getGameSettingManager() {
+    public GameSettingsManager getGameSettingManager() {
         return gameSettingManager;
     }
     public ScoreBoardManager getScoreBoardManager() {

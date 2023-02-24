@@ -3,7 +3,7 @@ package fr.erusel.tensura.listeners;
 import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Races;
 import fr.erusel.tensura.managers.GameManager;
-import fr.erusel.tensura.managers.GameSettingManager;
+import fr.erusel.tensura.managers.GameSettingsManager;
 import fr.erusel.tensura.managers.PlayerManager;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,9 +14,9 @@ public class LevelFoodChangeListener implements Listener {
 
     private final GameManager gameManager;
     private final PlayerManager playerManager;
-    private final GameSettingManager gameSettingManager;
+    private final GameSettingsManager gameSettingManager;
 
-    public LevelFoodChangeListener(GameManager gameManager, PlayerManager playerManager, GameSettingManager gameSettingManager) {
+    public LevelFoodChangeListener(GameManager gameManager, PlayerManager playerManager, GameSettingsManager gameSettingManager) {
         this.gameManager = gameManager;
         this.playerManager = playerManager;
         this.gameSettingManager = gameSettingManager;

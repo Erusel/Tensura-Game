@@ -4,6 +4,7 @@ import fr.erusel.tensura.objects.Skill;
 import fr.erusel.tensura.skills.active.extra.*;
 import fr.erusel.tensura.skills.active.ultimate.*;
 import fr.erusel.tensura.skills.active.unique.*;
+import fr.erusel.tensura.skills.passive.extra.TelekinesisSkill;
 import fr.erusel.tensura.skills.passive.resistance.*;
 import fr.erusel.tensura.skills.passive.ultimate.*;
 import fr.erusel.tensura.skills.passive.unique.*;
@@ -59,6 +60,7 @@ public enum Skills {
     SPATIALMOTION("Spatial Motion", SkillTier.EXTRA, SpatialMotionSkill::new),
     ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill::new),
     FIREMANIPULATION("Fire Manipulation", SkillTier.EXTRA, FireManipulationSkill::new),
+    TELEKINESIS("Telekinesis", SkillTier.EXTRA, TelekinesisSkill::new),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill::new),

@@ -13,7 +13,7 @@ public final class Main extends JavaPlugin {
 
     private static Main main;
     private GameManager gameManager;
-    private GameSettingManager gameSettingManager;
+    private GameSettingsManager gameSettingManager;
     private WorldManager worldManager;
     private PlayerManager playerManager;
     private ScoreBoardManager scoreBoardManager;
@@ -26,7 +26,7 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
         worldManager = new WorldManager(gameManager, gameSettingManager);
         playerManager = new PlayerManager();
-        gameSettingManager = new GameSettingManager();
+        gameSettingManager = new GameSettingsManager();
         GItemManager = new GItemManager();
         teamManager = new TeamManager();
         gameManager = new GameManager(playerManager, worldManager, teamManager);
@@ -57,6 +57,7 @@ public final class Main extends JavaPlugin {
         getCommand("team").setExecutor(new TeamCommand());
         getCommand("join").setExecutor(new JoinCommand());
         getCommand("remove").setExecutor(new RemoveCommand());
+        getCommand("msg").setExecutor(new MsgCommand(gameManager, playerManager));
     }
     public void registerListeners(){
         Bukkit.getPluginManager().registerEvents(new PlayerJoinQuitListener(gameManager, scoreBoardManager, gameSettingManager, playerManager), this);
