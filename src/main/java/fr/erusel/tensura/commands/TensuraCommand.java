@@ -99,10 +99,14 @@ public class TensuraCommand extends GameElement implements CommandExecutor {
                 player.sendMessage("§cPlayer not found");
                 return true;
             }
-            Utils.resetPlayer(Bukkit.getPlayer(args[1]));
+            if (getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getRace().getName().equalsIgnoreCase(args[2])) {
+                player.sendMessage("§c" + args[1] + " est déjà " + args[2]);
+                return true;
+            }
             getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).setRace(Races.valueOf(args[2]).createInstance());
             player.sendMessage(Prefixes.VOICE_OF_THE_WORLD.getText() + "Successfully given " + Races.valueOf(args[2]).getName() + " to " + Bukkit.getPlayer(args[1]).getName());
             getPlayerManager().getGPlayerByUUID(Bukkit.getPlayer(args[1]).getUniqueId()).getRace().onGive(Bukkit.getPlayer(args[1]));
+            Utils.resetPlayer(Bukkit.getPlayer(args[1]), getGameManager());
             return true;
         }
         if (args[0].equalsIgnoreCase("resetcooldown")){

@@ -67,7 +67,6 @@ public class GameManager {
         setGameState(GState.STARTING);
         gameModeInstance = gameMode.createInstance();
 
-
         // Creating Scenarios Instances
         getActivatedScenarios().
                 forEach(scenarios -> getActivatedScenariosInstance().add(scenarios.createInstance()));
@@ -85,6 +84,10 @@ public class GameManager {
                 .filter(s -> s instanceof Eventable)
                 .forEach(scenario -> ((Eventable) scenario).onStart());
 
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            Utils.resetPlayer(player, this);
+        });
+
         setGameState(GState.PLAYING);
     }
     public void finishGame(UUID uuid){
@@ -94,7 +97,7 @@ public class GameManager {
             playerManager.removePlayerGPlayer(player);
             player.setGameMode(GameMode.SURVIVAL);
             player.teleport(Bukkit.getWorld("World").getSpawnLocation());
-            Utils.resetPlayer(player);
+            Utils.resetPlayer(player, this);
         });
         teamManager.clearTeams();
         Bukkit.broadcastMessage("The winner is " +  winner.getName());

@@ -17,6 +17,6 @@ public class OrcRace extends Race {
     @Override
     public void onGive(Player player) {
         // More Life
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(24);
+        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue() + 4);
     }
 }

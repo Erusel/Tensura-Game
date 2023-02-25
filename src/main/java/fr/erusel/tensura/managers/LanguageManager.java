@@ -2,7 +2,7 @@ package fr.erusel.tensura.managers;
 
 import fr.erusel.tensura.Main;
 
-public class LanguageManager{
+public class LanguageManager {
 
     Main main;
     public String currentLanguage = "en";
