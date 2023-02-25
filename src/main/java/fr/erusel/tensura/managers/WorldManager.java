@@ -16,17 +16,17 @@ public class WorldManager {
     private static WorldManager instance;
 
     private final String MAP_NAME = "map";
-    private World map = null;
+    private static World map = null;
     private final Random random = new Random();
 
     public WorldManager(GameManager gameManager, GameSettingsManager gameSettingManager) {
         instance = this;
-        this.map = Bukkit.getWorld(MAP_NAME);
+        map = Bukkit.getWorld(MAP_NAME);
         this.gameManager = gameManager;
         this.gameSettingManager = gameSettingManager;
     }
-    public boolean isPlayingMapExist() {
-        return this.map != null;
+    public static boolean isPlayingMapExist() {
+        return map != null;
     }
     public void createPlayingWorld(){
         WorldCreator worldCreator = new WorldCreator(MAP_NAME);

@@ -1,5 +1,6 @@
 package fr.erusel.tensura.managers;
 
+import fr.erusel.tensura.enums.Teams;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -20,20 +21,20 @@ public class TeamManager {
         instance = this;
     }
 
-    public String getPlayerTeam(UUID uuid){
+    public Teams getPlayerTeam(UUID uuid){
         if (redTeamPlayers.contains(uuid)) {
-            return "Red";
+            return Teams.RED;
         }
         if (blueTeamPlayers.contains(uuid)) {
-            return "Blue";
+            return Teams.BLUE;
         }
         if (greenTeamPlayers.contains(uuid)) {
-            return "Green";
+            return Teams.GREEN;
         }
         if (yellowTeamPlayers.contains(uuid)) {
-            return "Yellow";
+            return Teams.YELLOW;
         }
-        return "None";
+        return Teams.NONE;
     }
 
 

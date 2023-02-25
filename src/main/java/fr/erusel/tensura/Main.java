@@ -24,11 +24,11 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         main = this;
         saveDefaultConfig();
-        worldManager = new WorldManager(gameManager, gameSettingManager);
         playerManager = new PlayerManager();
         gameSettingManager = new GameSettingsManager();
         teamManager = new TeamManager();
-        gameManager = new GameManager(playerManager, worldManager, teamManager);
+        gameManager = new GameManager(playerManager, teamManager);
+        worldManager = new WorldManager(gameManager, gameSettingManager);
         scoreBoardManager = new ScoreBoardManager(gameManager, gameSettingManager, teamManager);
 
         FastInvManager.register(this);
@@ -83,7 +83,7 @@ public final class Main extends JavaPlugin {
     public void registerRecipes(){
         for (GRecipes gRecipe : GRecipes.values()){
             getServer().addRecipe(gRecipe.createInstance().getShapedRecipe());
-            getServer().addRecipe(gRecipe.createInstance().getShapedRecipe());
+            getServer().addRecipe(gRecipe.createInstance().getShapelessRecipe());
         }
     }
 }

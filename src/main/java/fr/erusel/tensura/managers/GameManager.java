@@ -18,7 +18,6 @@ public class GameManager {
 
     private static GameManager instance;
     private final PlayerManager playerManager;
-    private final WorldManager worldManager;
     private final TeamManager teamManager;
 
     // Server
@@ -38,10 +37,9 @@ public class GameManager {
     private final List<Skill> uniqueSkillAvailable = new ArrayList<>();
     private final List<Location> crateLocations = new ArrayList<>();
 
-    public GameManager(PlayerManager playerManager, WorldManager worldManager, TeamManager teamManager) {
+    public GameManager(PlayerManager playerManager, TeamManager teamManager) {
         instance = this;
         this.playerManager = playerManager;
-        this.worldManager = worldManager;
         this.teamManager = teamManager;
     }
 
@@ -59,11 +57,11 @@ public class GameManager {
             p.sendMessage("§cPlease choose a gamemode !");
             return;
         }
-        if (!worldManager.isPlayingMapExist()){
+        if (!WorldManager.isPlayingMapExist()){
             p.sendMessage("§cMap not found, pregen one with /tensura pregen");
             return;
-
         }
+
         setGameState(GState.STARTING);
         gameModeInstance = gameMode.createInstance();
 
@@ -101,6 +99,20 @@ public class GameManager {
         });
         teamManager.clearTeams();
         Bukkit.broadcastMessage("The winner is " +  winner.getName());
+    }
+    public void finishGame(Teams team){
+        setGameState(GState.FINISHING);
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            playerManager.removePlayerGPlayer(player);
+            player.setGameMode(GameMode.SURVIVAL);
+            player.teleport(Bukkit.getWorld("World").getSpawnLocation());
+            Utils.resetPlayer(player, this);
+        });
+        teamManager.clearTeams();
+        setGameState(GState.FINISHED);
+        Bukkit.broadcastMessage("The winner is " +  team.getDisplayText());
+        setGameState(GState.WAITING);
+
     }
     public Set<UUID> getPlayerList(){
         return playerList;

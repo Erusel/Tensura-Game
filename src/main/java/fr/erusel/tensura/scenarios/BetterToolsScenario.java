@@ -16,7 +16,9 @@ public class BetterToolsScenario extends Scenario implements Eventable {
     public void onCraftItem(PrepareItemCraftEvent event) {
         ItemStack tool = event.getInventory().getResult();
 
-        if (tool == null) return;
+        if (tool == null) {
+            return;
+        }
 
         if (tool.getType().toString().contains("PICKAXE") || tool.toString().contains("AXE") || tool.toString().contains("SHOVEL")) {
             tool.addEnchantment(Enchantment.DIG_SPEED, 3);

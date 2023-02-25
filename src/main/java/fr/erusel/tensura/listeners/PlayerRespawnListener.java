@@ -1,11 +1,9 @@
 package fr.erusel.tensura.listeners;
 
 import fr.erusel.tensura.enums.GState;
-import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
 import fr.erusel.tensura.objects.GPlayer;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -29,12 +27,6 @@ public class PlayerRespawnListener implements Listener {
         Player player = event.getPlayer();
         GPlayer gPlayer = playerManager.getGPlayerByUUID(player.getUniqueId());
         gameManager.getGameModeInstance().onPlayerRespawn(event);
-        player.setGameMode(GameMode.SPECTATOR);
-        gameManager.addDeadPlayer(player.getUniqueId());
-        if (gPlayer.canRessurect() && gPlayer.haveSkill(Skills.OSIRIS)){
-            gPlayer.ressurect();
-            gPlayer.setCanResurrect(false);
-        }
 
     }
 }
