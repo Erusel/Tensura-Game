@@ -5,6 +5,7 @@ import fr.erusel.tensura.enums.SkillTier;
 import fr.erusel.tensura.enums.Skills;
 import fr.erusel.tensura.objects.ActiveSkill;
 import fr.erusel.tensura.objects.Skill;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class PersonalDimensionSkill extends Skill implements ActiveSkill {
@@ -17,7 +18,7 @@ public class PersonalDimensionSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-
+        player.teleport(Bukkit.getWorld("personal_dimension").getSpawnLocation());
         activateCooldown();
     }
 }

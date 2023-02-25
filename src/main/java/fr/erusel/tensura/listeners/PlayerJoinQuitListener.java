@@ -46,7 +46,7 @@ public class PlayerJoinQuitListener implements Listener {
                 player.sendMessage("§cToo many players, added in waiting list !");
             }
             player.teleport(Bukkit.getWorld("world").getSpawnLocation());
-            Utils.resetPlayer(player);
+            Utils.resetPlayer(player, gameManager);
             scoreBoardManager.refreshWaitingScoreboard();
             return;
         }

@@ -38,7 +38,7 @@ public final class Main extends JavaPlugin {
 
         Bukkit.getOnlinePlayers().forEach(player -> {
             scoreBoardManager.initializeScoreboard(player);
-            Utils.resetPlayer(player);
+            Utils.resetPlayer(player, gameManager);
         });
 
         new GameLoopRunnable(gameManager, playerManager, scoreBoardManager)

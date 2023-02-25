@@ -1,12 +1,16 @@
 package fr.erusel.tensura.utils;
 
+import fr.erusel.tensura.enums.GState;
 import fr.erusel.tensura.enums.Prefixes;
+import fr.erusel.tensura.managers.GameManager;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class Utils {
 
@@ -28,14 +32,21 @@ public class Utils {
             new ItemBuilder(Material.CAKE).name("§eThe lie").build(),
     };
 
-    public static void resetPlayer(Player player){
+    public static void resetPlayer(Player player, GameManager gameManager){
+
+        // Set attribute depending on GState
+        if (gameManager.getGameState().equals(GState.WAITING)) {
+            player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(2);
+            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(20);
+            player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(0.1f);
+        } else if (gameManager.getGameState().equals(GState.PLAYING)) {
+            player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue());
+            player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
+            player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue());
+        }
+
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         player.setFoodLevel(20);
-
-        // Set attribute
-        player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(player.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue());
-        player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
-        player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(player.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue());
 
         // reset Inventory
         player.getInventory().clear();
