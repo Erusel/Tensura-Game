@@ -61,6 +61,7 @@ public enum Skills {
     ULTRASPEEDREGEN("Ultra Speed Regen", SkillTier.EXTRA, UltraSpeedRegenSkill::new),
     FIREMANIPULATION("Fire Manipulation", SkillTier.EXTRA, FireManipulationSkill::new),
     TELEKINESIS("Telekinesis", SkillTier.EXTRA, TelekinesisSkill::new),
+    MINERALFINDER("Mineral Finder", SkillTier.EXTRA, MineralFinderSkill::new),
 
     // Ultimate Skills
     RAPHAEL("Raphael, Lord of Wisdom", SkillTier.ULTIMATE, RaphaelSkill::new),
