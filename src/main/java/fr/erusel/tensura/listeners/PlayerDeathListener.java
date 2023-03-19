@@ -35,6 +35,7 @@ public class PlayerDeathListener implements Listener {
         GPlayer gPlayer = playerManager.getGPlayerByUUID(player.getUniqueId());
 
         gameManager.getGameModeInstance().onPlayerDeath(event);
+
         gameManager.getActivatedScenariosInstance().stream()
                 .filter(s -> s instanceof Eventable)
                 .forEach(s -> ((Eventable) s).onPlayerDeath(event));
@@ -47,12 +48,15 @@ public class PlayerDeathListener implements Listener {
             GPlayer gKiller = playerManager.getGPlayerByUUID(killer.getUniqueId());
             gKiller.addKill(1);
             event.setDeathMessage("");
+
             gameManager.getActivatedScenariosInstance().stream()
                     .filter(s -> s instanceof Eventable)
                     .forEach(s -> ((Eventable) s).onPlayerKill(killer, player));
+
             gKiller.getPlayerSkills().stream()
                     .filter(skill -> skill instanceof Eventable)
                     .forEach(skill -> ((Eventable) skill).onPlayerKill(killer, player));
+
             if (gKiller.isGlutonnyActivated()){
                 int i = new Random().nextInt(gPlayer.getPlayerSkills().size()-1);
                 Skill skill = gPlayer.getPlayerSkills().get(i);

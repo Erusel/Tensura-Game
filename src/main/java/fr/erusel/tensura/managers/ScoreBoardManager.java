@@ -44,7 +44,7 @@ public class ScoreBoardManager {
             board.updateLine(3, "§7Host : §6" + gameManager.getHostName());
             board.updateLine(4, "§7Mode : §6" + gameManager.getGameMode().getModeName());
             if (gameManager.getGameMode().haveTeam()){
-                board.updateLine(5, "§7Team : §6" + teamManager.getPlayerTeam(board.getPlayer().getUniqueId()));
+                board.updateLine(5, "§7Team : §6" + teamManager.getPlayerTeam(board.getPlayer().getUniqueId()).getDisplayText());
                 board.updateLine(6,"§7§m------------------");
                 board.updateLine(7, "§3By Erusel");
             } else {

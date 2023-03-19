@@ -20,7 +20,7 @@ public class TeamCommand extends GameElement implements CommandExecutor {
             return true;
         }
 
-        if (getGameManager().getGameMode().haveTeam()) {
+        if (!getGameManager().getGameMode().haveTeam()) {
             player.sendMessage("This gamemode have no teams");
             return true;
         }

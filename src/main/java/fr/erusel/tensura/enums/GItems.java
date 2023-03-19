@@ -1,5 +1,6 @@
 package fr.erusel.tensura.enums;
 
+import fr.erusel.tensura.items.charybdis.CharybdisCoreItem;
 import fr.erusel.tensura.items.charybdis.CharybdisPartOneItem;
 import fr.erusel.tensura.items.charybdis.CharybdisPartThreeItem;
 import fr.erusel.tensura.items.charybdis.CharybdisPartTwoItem;
@@ -12,7 +13,8 @@ public enum GItems {
 
     CHARYBDIS_PART_ONE(CharybdisPartOneItem::new),
     CHARYBDIS_PART_TWO(CharybdisPartTwoItem::new),
-    CHARYBDIS_PART_THREE(CharybdisPartThreeItem::new);
+    CHARYBDIS_PART_THREE(CharybdisPartThreeItem::new),
+    CHARYBDIS_CORE(CharybdisCoreItem::new);
 
 
     private final Supplier<GItem> supplier;

@@ -1,6 +1,7 @@
 package fr.erusel.tensura;
 
 import fr.erusel.tensura.commands.*;
+import fr.erusel.tensura.enums.GRecipes;
 import fr.erusel.tensura.listeners.*;
 import fr.erusel.tensura.managers.*;
 import fr.erusel.tensura.threads.GameLoopRunnable;
@@ -18,23 +19,22 @@ public final class Main extends JavaPlugin {
     private PlayerManager playerManager;
     private ScoreBoardManager scoreBoardManager;
     private TeamManager teamManager;
-    private GItemManager GItemManager;
 
     @Override
     public void onEnable() {
         main = this;
         saveDefaultConfig();
-        worldManager = new WorldManager(gameManager, gameSettingManager);
         playerManager = new PlayerManager();
         gameSettingManager = new GameSettingsManager();
-        GItemManager = new GItemManager();
         teamManager = new TeamManager();
-        gameManager = new GameManager(playerManager, worldManager, teamManager);
+        gameManager = new GameManager(playerManager, teamManager);
+        worldManager = new WorldManager(gameManager, gameSettingManager);
         scoreBoardManager = new ScoreBoardManager(gameManager, gameSettingManager, teamManager);
 
         FastInvManager.register(this);
         registerCommands();
         registerListeners();
+        registerRecipes();
 
         Bukkit.getOnlinePlayers().forEach(player -> {
             scoreBoardManager.initializeScoreboard(player);
@@ -78,5 +78,12 @@ public final class Main extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new PlayerFishingListener(gameManager), this);
         Bukkit.getPluginManager().registerEvents(new PlayerConsumeListener(gameManager), this);
         Bukkit.getPluginManager().registerEvents(new PlayerToggleSneakListener(gameManager), this);
+    }
+
+    public void registerRecipes(){
+        for (GRecipes gRecipe : GRecipes.values()){
+            getServer().addRecipe(gRecipe.createInstance().getShapedRecipe());
+            getServer().addRecipe(gRecipe.createInstance().getShapelessRecipe());
+        }
     }
 }

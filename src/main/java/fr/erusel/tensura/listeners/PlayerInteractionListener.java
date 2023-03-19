@@ -12,6 +12,7 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
@@ -67,6 +68,13 @@ public class PlayerInteractionListener implements Listener {
         }
         if (GItems.getGItem(event.getItem()) != null){
             GItems.getGItem(event.getItem()).createInstance().onUse(event);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteractOnEntity(PlayerInteractAtEntityEvent event){
+        if (GItems.getGItem(event.getPlayer().getInventory().getItemInMainHand()) != null){
+            GItems.getGItem(event.getPlayer().getInventory().getItemInMainHand()).createInstance().onUseAtEntity(event);
         }
     }
 }

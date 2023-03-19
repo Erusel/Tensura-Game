@@ -50,6 +50,9 @@ public class GPlayer extends GameElement {
     private boolean vampirism;
     private boolean explosion;
 
+    // Modes
+    private boolean isCharibdised = false;
+
     public GPlayer(UUID playerUUID) {
         this.playerUUID = playerUUID;
     }
@@ -292,6 +295,22 @@ public class GPlayer extends GameElement {
     public boolean isDead(){
         return getGameManager().getDeadPlayers().contains(playerUUID);
     }
+    public void setDead(boolean b){
+        if (b){
+            getGameManager().getDeadPlayers().add(playerUUID);
+            return;
+        }
+        getGameManager().getDeadPlayers().remove(playerUUID);
+    }
+
+    // Modes
 
 
+    public boolean isCharibdised() {
+        return isCharibdised;
+    }
+
+    public void setCharibdised(boolean charibdised) {
+        isCharibdised = charibdised;
+    }
 }

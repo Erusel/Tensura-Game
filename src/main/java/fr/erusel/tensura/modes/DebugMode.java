@@ -12,6 +12,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.GameRule;
 import org.bukkit.entity.Player;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Random;
@@ -79,5 +80,10 @@ public class DebugMode extends Mode {
     public void onPlayerLeave(PlayerQuitEvent event) {
         getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()).setLeaveRunnable(new PlayerLeaveRunnable(event.getPlayer(), getGameManager(), getPlayerManager().getGPlayerByUUID(event.getPlayer().getUniqueId()))
                 .runTaskTimer(getMain(), 0, 20));
+    }
+
+    @Override
+    public void onPlayerDeath(PlayerDeathEvent event) {
+        getPlayerManager().getGPlayerByUUID(event.getEntity().getUniqueId()).setDead(true);
     }
 }
