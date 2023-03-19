@@ -1,6 +1,7 @@
 package fr.erusel.tensura.utils;
 
 import fr.erusel.tensura.enums.Prefixes;
+import fr.erusel.tensura.managers.GameManager;
 import fr.mrmicky.fastinv.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -28,7 +29,7 @@ public class Utils {
             new ItemBuilder(Material.CAKE).name("§eThe lie").build(),
     };
 
-    public static void resetPlayer(Player player){
+    public static void resetPlayer(Player player, GameManager gameManager){
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         player.setFoodLevel(20);
 
