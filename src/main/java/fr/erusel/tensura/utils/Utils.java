@@ -48,7 +48,7 @@ public class Utils {
         player.setHealth(player.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         player.setFoodLevel(20);
 
-        // reset Inventory
+        // reset Inventory & Potion Effects
         player.getInventory().clear();
         if (player.getInventory().getBoots() != null) {
             player.getInventory().getBoots().setType(Material.AIR);
@@ -61,6 +61,12 @@ public class Utils {
         }
         if (player.getInventory().getHelmet() != null) {
             player.getInventory().getHelmet().setType(Material.AIR);
+        }
+        if (player.getActivePotionEffects().isEmpty()) {
+            return;
+        }
+        for (PotionEffect effect : player.getActivePotionEffects()) {
+            player.removePotionEffect(effect.getType());
         }
     }
 
