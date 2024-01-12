@@ -4,6 +4,7 @@ import fr.erusel.tensura.enums.Teams;
 import fr.erusel.tensura.managers.GameManager;
 import fr.erusel.tensura.managers.PlayerManager;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -27,7 +28,8 @@ public class CharybdisationRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (time >= 10){
+
+        if (time >= 10) {
             gameManager.finishGame(teams);
             this.cancel();
         }
@@ -35,12 +37,16 @@ public class CharybdisationRunnable extends BukkitRunnable {
             this.cancel();
             Bukkit.broadcastMessage("§cThe receptacle is dead");
         }
-        try {
-            Bukkit.getPlayer(victim).addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 20, false));
-            Bukkit.getPlayer(victim).addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20, 9999, false));
-        } catch (NullPointerException e){
-            e.getMessage();
+
+        Player player = Bukkit.getPlayer(victim);
+
+        if (player == null) {
+            return;
         }
+
+        player.addPotionEffect(new PotionEffect(PotionEffectType.BLINDNESS, 20, 20, false));
+        player.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20, 9999, false));
+
         time++;
     }
 

@@ -19,13 +19,23 @@ public class RaphaelSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        StringBuilder stringBuilder = new StringBuilder(Prefixes.RAPAHEL.getText() + "§aHere are the entity around you: \n");
-        for (Entity entity : player.getNearbyEntities(50, 50, 50)){
+
+        StringBuilder stringBuilder = new StringBuilder(Prefixes.RAPAHEL.getText() + "§aHere are the entities around you: \n");
+
+        for (Entity entity : player.getNearbyEntities(50, 50, 50)) {
+
             if (entity instanceof LivingEntity) {
-                if (entity instanceof Player) stringBuilder.append(((Player) entity).getDisplayName()).append(" Life : ").append(((LivingEntity) entity).getHealth()).append("\n");
-                else stringBuilder.append(entity.getName()).append(" Life : ").append(((LivingEntity) entity).getHealth()).append("\n");
+                if (entity instanceof Player players) {
+                    stringBuilder.append(players.getName()).append(" Life : ").append(players.getHealth()).append("\n");
+                }
+                else {
+                    LivingEntity livingEntity = (LivingEntity) entity;
+                    stringBuilder.append(entity.getName()).append(" Life : ").append(livingEntity.getHealth()).append("\n");
+                }
             }
-            else stringBuilder.append(entity.getName()).append("\n");
+            else {
+                stringBuilder.append(entity.getName()).append("\n");
+            }
         }
         player.sendMessage(stringBuilder.toString());
         activateCooldown();

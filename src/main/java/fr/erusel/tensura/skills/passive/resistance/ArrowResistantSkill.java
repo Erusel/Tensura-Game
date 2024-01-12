@@ -7,7 +7,6 @@ import fr.erusel.tensura.objects.Eventable;
 import fr.erusel.tensura.objects.PassiveSkill;
 import fr.erusel.tensura.objects.Skill;
 import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class ArrowResistantSkill extends Skill implements PassiveSkill, Eventable {
@@ -19,15 +18,11 @@ public class ArrowResistantSkill extends Skill implements PassiveSkill, Eventabl
     }
 
     @Override
-    public void eachSecond(Player player) {
-    }
-
-    @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        System.out.println("dégats par entité");
-        if (event.getDamager() instanceof Arrow){
-            System.out.println("flèche");
-            event.setCancelled(true);
+
+        if (!(event.getDamager() instanceof Arrow)) {
+            return;
         }
+        event.setCancelled(true);
     }
 }

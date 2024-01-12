@@ -19,12 +19,16 @@ public class EnchantlessScenario extends Scenario implements Eventable {
 
     @Override
     public void onPlayerUseAnvil(PrepareAnvilEvent event) {
-        ItemStack item1 = event.getInventory().getItem(1);
 
-        if (item1 == null) return;
+        ItemStack item = event.getInventory().getItem(1);
 
-        if (item1.getType().equals(Material.ENCHANTED_BOOK)) {
-            event.setResult(null);
+        if (item == null) {
+            return;
         }
+
+        if (!item.getType().equals(Material.ENCHANTED_BOOK)) {
+            return;
+        }
+        event.setResult(null);
     }
 }

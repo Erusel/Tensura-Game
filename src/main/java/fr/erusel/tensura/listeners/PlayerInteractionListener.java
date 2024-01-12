@@ -20,8 +20,8 @@ import java.util.Random;
 
 public class PlayerInteractionListener implements Listener {
 
-    GameManager gameManager;
-    Random random = new Random();
+    private final GameManager gameManager;
+    private final Random random = new Random();
 
     public PlayerInteractionListener(GameManager gameManager) {
         this.gameManager = gameManager;

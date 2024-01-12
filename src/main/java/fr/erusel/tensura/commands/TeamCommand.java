@@ -14,7 +14,9 @@ public class TeamCommand extends GameElement implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        Player player = (Player) sender;
+        if (!(sender instanceof Player player)) {
+            return false;
+        }
 
         if (!getGameManager().getGameState().equals(GState.WAITING)) {
             return true;

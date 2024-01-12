@@ -8,9 +8,9 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PlayerLeaveRunnable extends BukkitRunnable {
 
-    GameManager gameManager;
-    Player player;
-    GPlayer gPlayer;
+    private final GameManager gameManager;
+    private final Player player;
+    private final GPlayer gPlayer;
 
     public PlayerLeaveRunnable(Player player, GameManager gameManager, GPlayer gPlayer) {
         this.gPlayer = gPlayer;

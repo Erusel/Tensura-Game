@@ -11,8 +11,12 @@ public class FirelessScenario extends Scenario implements Eventable {
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.FIRE) || event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
-            event.setCancelled(true);
+
+        EntityDamageEvent.DamageCause cause = event.getCause();
+
+        if (!cause.equals(EntityDamageEvent.DamageCause.FIRE) && !cause.equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
+            return;
         }
+        event.setCancelled(true);
     }
 }

@@ -21,11 +21,11 @@ public class MercilessSkill extends Skill implements ActiveSkill {
     @Override
     public void onUse(Player player) {
         for (Entity entity : player.getNearbyEntities(30, 30, 30)){
-            if (entity instanceof LivingEntity){
-                LivingEntity livingEntity = (LivingEntity) entity;
-                if (livingEntity.getHealth() <= 4){
-                    livingEntity.setHealth(0);
-                }
+            if (!(entity instanceof LivingEntity livingEntity)) {
+                continue;
+            }
+            if (livingEntity.getHealth() <= 4){
+                livingEntity.setHealth(0);
             }
         }
         activateCooldown();

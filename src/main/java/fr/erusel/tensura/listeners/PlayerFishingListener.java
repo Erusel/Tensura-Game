@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerFishEvent;
 
 public class PlayerFishingListener implements Listener {
 
-    GameManager gameManager;
+    private final GameManager gameManager;
 
     public PlayerFishingListener(GameManager gameManager) {
         this.gameManager = gameManager;

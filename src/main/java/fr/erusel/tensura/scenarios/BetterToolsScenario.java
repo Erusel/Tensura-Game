@@ -20,7 +20,9 @@ public class BetterToolsScenario extends Scenario implements Eventable {
             return;
         }
 
-        if (tool.getType().toString().contains("PICKAXE") || tool.toString().contains("AXE") || tool.toString().contains("SHOVEL")) {
+        String toolName = tool.getType().toString();
+
+        if (toolName.contains("PICKAXE") || toolName.contains("AXE") || toolName.contains("SHOVEL")) {
             tool.addEnchantment(Enchantment.DIG_SPEED, 3);
         }
     }

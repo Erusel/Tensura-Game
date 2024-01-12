@@ -17,12 +17,17 @@ public class GravityManipulationRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        if (time<=0){
-            gPlayer.setGravity(false);
+        if (time<=0) {
+
             Player player = Bukkit.getPlayer(gPlayer.getUUID());
-            player.getAllowFlight();
-            player.setAllowFlight(false);
-            player.setFlying(false);
+
+            gPlayer.setGravity(false);
+
+            if (player != null) {
+                player.getAllowFlight();
+                player.setAllowFlight(false);
+                player.setFlying(false);
+            }
             this.cancel();
         }
         time--;

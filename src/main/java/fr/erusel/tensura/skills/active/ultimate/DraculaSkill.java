@@ -39,14 +39,15 @@ public class DraculaSkill extends Skill implements ActiveSkill, Eventable {
             player.setHealth(player.getHealth() + damage);
         } else {
             double damage = event.getDamage();
-            player.setHealth(player.getHealth() + damage/2);
+            player.setHealth(player.getHealth() + damage/3);
         }
     }
 
     @Override
     public void onPlayerKill(Player killer, Player deadPlayer) {
-        if (getPlayerManager().getGPlayerByUUID(killer.getUniqueId()).isVampirism()) {
-            killer.setHealth(killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
+        if (!getPlayerManager().getGPlayerByUUID(killer.getUniqueId()).isVampirism()) {
+            return;
         }
+        killer.setHealth(killer.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue());
     }
 }

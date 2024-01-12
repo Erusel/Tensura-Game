@@ -8,10 +8,11 @@ import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffectType;
 
 public class Utils {
 
-    public static ItemStack[] items = {
+    public final static ItemStack[] items = {
             new ItemBuilder(Material.DIAMOND).build(),
             new ItemBuilder(Material.IRON_INGOT).build(),
             new ItemBuilder(Material.GOLD_INGOT).build(),
@@ -27,6 +28,37 @@ public class Utils {
             new ItemBuilder(Material.WATER_BUCKET).build(),
             new ItemBuilder(Material.LAVA_BUCKET).build(),
             new ItemBuilder(Material.CAKE).name("§eThe lie").build(),
+    };
+
+    public final static PotionEffectType[] potionsBuff = {
+            PotionEffectType.INVISIBILITY,
+            PotionEffectType.JUMP,
+            PotionEffectType.FIRE_RESISTANCE,
+            PotionEffectType.SPEED,
+            PotionEffectType.WATER_BREATHING,
+            PotionEffectType.SLOW_FALLING,
+            PotionEffectType.HEAL,
+            PotionEffectType.REGENERATION,
+            PotionEffectType.INCREASE_DAMAGE,
+    };
+    public final static PotionEffectType[] potionsDebuff = {
+            PotionEffectType.SLOW,
+            PotionEffectType.POISON,
+            PotionEffectType.WEAKNESS,
+            PotionEffectType.SLOW_DIGGING,
+            PotionEffectType.BLINDNESS,
+            PotionEffectType.CONFUSION,
+            PotionEffectType.HUNGER,
+    };
+
+    public final static Material[] ores = {
+            Material.IRON_ORE,
+            Material.COAL_ORE,
+            Material.LAPIS_ORE,
+            Material.REDSTONE_ORE,
+            Material.EMERALD_ORE,
+            Material.DIAMOND_ORE,
+            Material.GOLD_ORE,
     };
 
     public static void resetPlayer(Player player, GameManager gameManager){

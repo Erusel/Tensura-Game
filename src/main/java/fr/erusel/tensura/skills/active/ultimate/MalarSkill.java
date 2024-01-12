@@ -25,7 +25,10 @@ public class MalarSkill extends Skill implements ActiveSkill {
             player.sendMessage("§cYou hit nobody");
             return;
         }
-        if (Bukkit.getPlayer(gPlayer.getTrackingPlayer()) == null){
+
+        Player trackedPlayer = Bukkit.getPlayer(gPlayer.getTrackingPlayer());
+
+        if (trackedPlayer == null){
             player.sendMessage("§cPlayer not found");
             return;
         }
@@ -33,12 +36,12 @@ public class MalarSkill extends Skill implements ActiveSkill {
             player.sendMessage("§cPlayer is dead.");
             return;
         }
-        Player trackedPlayer = Bukkit.getPlayer(gPlayer.getTrackingPlayer());
         long x = Math.round(trackedPlayer.getLocation().getX());
         long y = Math.round(trackedPlayer.getLocation().getY());
         long z = Math.round(trackedPlayer.getLocation().getZ());
-        player.sendMessage(trackedPlayer.getName() + "'s coordinate is x: " + x + " y: " + y + " z: " + z);
-        trackedPlayer.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 600, 1));
+        PotionEffect glowing = new PotionEffect(PotionEffectType.GLOWING, 600, 1);
+        player.sendMessage(trackedPlayer.getName() + "'s position is at x: " + x + " y: " + y + " z: " + z);
+        trackedPlayer.addPotionEffect(glowing);
         activateCooldown();
     }
 }

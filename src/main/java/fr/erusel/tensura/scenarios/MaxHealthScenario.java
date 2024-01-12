@@ -18,10 +18,10 @@ public class MaxHealthScenario extends Scenario implements Eventable {
 
     @Override
     public void onStart() {
+
         for (Player player : Bukkit.getOnlinePlayers()) {
             player.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(40);
             player.addPotionEffect(PotionEffectType.REGENERATION.createEffect(10, 10));
         }
     }
-
 }

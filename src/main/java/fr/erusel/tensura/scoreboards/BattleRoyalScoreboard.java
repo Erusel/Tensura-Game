@@ -34,7 +34,7 @@ public class BattleRoyalScoreboard extends GScoreboard {
                 board.updateLine(9, "§7Race : §a" + gPlayer.getRace().getName());
                 board.updateLine(10, "§7§m------------------");
             } else {
-            board.updateLine(9, "§3By Erusel");
+                board.updateLine(9, "§3By Erusel");
             }
 
         }

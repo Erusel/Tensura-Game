@@ -15,12 +15,19 @@ public class EnderpearlLessScenario extends Scenario implements Eventable {
 
     @Override
     public void onPlayerInteract(PlayerInteractEvent event) {
+
         ItemStack item = event.getItem();
         Action action = event.getAction();
-        if (action.equals(Action.RIGHT_CLICK_AIR) || action.equals(Action.RIGHT_CLICK_BLOCK)) {
-            if (item != null && item.getType().equals(Material.ENDER_PEARL)) {
-                event.setCancelled(true);
-            }
+
+        if (!action.equals(Action.RIGHT_CLICK_AIR) && !action.equals(Action.RIGHT_CLICK_BLOCK)) {
+            return;
         }
+        if (item == null) {
+            return;
+        }
+        if (!item.getType().equals(Material.ENDER_PEARL)) {
+            return;
+        }
+        event.setCancelled(true);
     }
 }

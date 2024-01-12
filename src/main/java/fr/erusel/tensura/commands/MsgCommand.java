@@ -15,8 +15,8 @@ import java.util.List;
 
 public class MsgCommand implements CommandExecutor {
 
-    GameManager gameManager;
-    PlayerManager playerManager;
+    private final GameManager gameManager;
+    private final PlayerManager playerManager;
 
     public MsgCommand(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;

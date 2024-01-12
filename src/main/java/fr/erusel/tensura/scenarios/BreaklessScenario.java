@@ -14,16 +14,34 @@ public class BreaklessScenario extends Scenario implements Eventable {
 
     @Override
     public void onCraftItem(PrepareItemCraftEvent event) {
+
         ItemStack tool = event.getInventory().getResult();
 
-        if (tool == null) return;
-        ItemMeta meta = tool.getItemMeta();
-        if (meta == null) return;
-
-        if (tool.getType().toString().contains("PICKAXE") || tool.getType().toString().contains("AXE") || tool.getType().toString().contains("SHOVEL") || tool.getType().toString().contains("HOE") || tool.getType().toString().contains("SWORD")) {
-            meta.setUnbreakable(true);
-            tool.setItemMeta(meta);
+        if (tool == null) {
+            return;
         }
+
+        ItemMeta meta = tool.getItemMeta();
+
+        if (meta == null) {
+            return;
+        }
+
+        String toolName = tool.getType().toString();
+
+        if (!isTool(toolName)) {
+            return;
+        }
+        meta.setUnbreakable(true);
+        tool.setItemMeta(meta);
+    }
+
+    private boolean isTool(String toolName) {
+        return toolName.contains("PICKAXE")
+                || toolName.contains("AXE")
+                || toolName.contains("SHOVEL")
+                || toolName.contains("HOE")
+                || toolName.contains("SWORD");
     }
 
 }

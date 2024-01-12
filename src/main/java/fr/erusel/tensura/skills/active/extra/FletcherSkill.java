@@ -68,41 +68,47 @@ public class FletcherSkill extends Skill implements ExtraSkill, Eventable {
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         Entity entity = event.getEntity();
         Entity damager = event.getDamager();
-        if (damager instanceof Arrow arrow) {
-            if (arrow.getShooter() instanceof Player player) {
-                if (getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getFletcherEffect() != null) {
-                    if (entity instanceof LivingEntity livingEntity) {
-                        livingEntity.addPotionEffect(new PotionEffect(getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getFletcherEffect(), 200, 0));
-                        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFletcherEffect(null);
-                    }
-                }
-            }
+        if (!(damager instanceof Arrow arrow)) {
+              return;
         }
+        if (!(arrow.getShooter() instanceof Player player)) {
+            return;
+        }
+        if (getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getFletcherEffect() == null) {
+            return;
+        }
+        if (!(entity instanceof LivingEntity livingEntity)) {
+            return;
+        }
+        livingEntity.addPotionEffect(new PotionEffect(getPlayerManager().getGPlayerByUUID(player.getUniqueId()).getFletcherEffect(), 200, 0));
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFletcherEffect(null);
     }
 
     @Override
     public void onEntityShootBow(EntityShootBowEvent event) {
-        if (event.getEntity() instanceof Player player) {
-            if (getPlayerManager().getGPlayerByUUID(player.getUniqueId()).isFletcherBurst()) {
-                new BukkitRunnable() {
-                        int k=0;
-                        @Override
-                        public void run() {
-                            if (k == 3) {
-                                getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFletcherBurst(false);
-                                cancel();
-                            }
-                            if (k != 0) {
-                                Vector direction = player.getLocation().getDirection();
-                                player.playSound(player.getLocation(), "minecraft:entity.arrow.shoot", 1, 1);
-                                Arrow shootedArrow = player.launchProjectile(Arrow.class);
-                                shootedArrow.setPickupStatus(Arrow.PickupStatus.DISALLOWED);
-                                shootedArrow.setVelocity(new Vector(direction.getX(), direction.getY(), direction.getZ()).normalize().multiply(3));
-                            }
-                            k++;
-                        }
-                    }.runTaskTimer(Main.getInstance(), 0L, 10L);
-                }
-            }
+        if (!(event.getEntity() instanceof Player player)) {
+            return;
         }
+        if (!getPlayerManager().getGPlayerByUUID(player.getUniqueId()).isFletcherBurst()) {
+            return;
+        }
+        new BukkitRunnable() {
+            int k=0;
+            @Override
+            public void run() {
+                if (k == 3) {
+                    getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setFletcherBurst(false);
+                    cancel();
+                }
+                if (k != 0) {
+                    Vector direction = player.getLocation().getDirection();
+                    player.playSound(player.getLocation(), "minecraft:entity.arrow.shoot", 1, 1);
+                    Arrow shootedArrow = player.launchProjectile(Arrow.class);
+                    shootedArrow.setPickupStatus(Arrow.PickupStatus.DISALLOWED);
+                    shootedArrow.setVelocity(new Vector(direction.getX(), direction.getY(), direction.getZ()).normalize().multiply(3));
+                }
+                k++;
+            }
+        }.runTaskTimer(Main.getInstance(), 0L, 10L);
+    }
 }

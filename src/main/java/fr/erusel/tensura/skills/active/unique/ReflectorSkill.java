@@ -32,6 +32,7 @@ public class ReflectorSkill extends Skill implements ActiveSkill, Eventable {
 
     @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+
         if (!(event.getDamager() instanceof Arrow projectile)) {
             return;
         }
@@ -40,9 +41,15 @@ public class ReflectorSkill extends Skill implements ActiveSkill, Eventable {
         }
 
         LivingEntity shooter = (LivingEntity) projectile.getShooter();
-        if (getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).isReflectorActivated()) {
-            shooter.damage(event.getDamage());
-            event.setCancelled(true);
+
+        if (shooter == null) {
+            return;
         }
+
+        if (!getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).isReflectorActivated()) {
+            return;
+        }
+        shooter.damage(event.getDamage());
+        event.setCancelled(true);
     }
 }

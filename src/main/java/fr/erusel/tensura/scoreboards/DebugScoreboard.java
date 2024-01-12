@@ -38,7 +38,7 @@ public class DebugScoreboard extends GScoreboard {
                 board.updateLine(9, "§7Race : §a" + raceName);
                 board.updateLine(10, "§7§m------------------");
                 board.updateLine(11, "§3By Erusel");
-            }else {
+            } else {
                 board.updateLine(9, "§3By Erusel");
             }
 
