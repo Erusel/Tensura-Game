@@ -17,9 +17,13 @@ public class FireResistantSkill extends Skill implements PassiveSkill, Eventable
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.FIRE) || event.getCause().equals(EntityDamageEvent.DamageCause.FIRE_TICK)) {
-            event.setCancelled(true);
-        }
-    }
 
+        EntityDamageEvent.DamageCause fire = EntityDamageEvent.DamageCause.FIRE;
+        EntityDamageEvent.DamageCause fireTick = EntityDamageEvent.DamageCause.FIRE_TICK;
+
+        if (!event.getCause().equals(fire) && !event.getCause().equals(fireTick)) {
+            return;
+        }
+        event.setCancelled(true);
+    }
 }

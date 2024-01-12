@@ -32,9 +32,9 @@ public class WindManipulationSkill extends Skill implements ExtraSkill {
         player.getAllowFlight();
         player.setAllowFlight(true);
         player.setFlying(true);
-        player.sendMessage("§6You are now able to fly for 10 seconds");
+        player.sendMessage("§6You are now able to fly for 5 seconds");
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setGravity(true);
-        new GravityManipulationRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 10)
+        new GravityManipulationRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 5)
                 .runTaskTimer(getMain(), 0, 20);
         activateCooldown();
     }

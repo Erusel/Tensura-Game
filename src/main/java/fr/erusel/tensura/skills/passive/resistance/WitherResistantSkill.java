@@ -17,10 +17,9 @@ public class WitherResistantSkill extends Skill implements PassiveSkill, Eventab
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.WITHER)) {
-            event.setCancelled(true);
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.WITHER)) {
+            return;
         }
+        event.setCancelled(true);
     }
-
-
 }

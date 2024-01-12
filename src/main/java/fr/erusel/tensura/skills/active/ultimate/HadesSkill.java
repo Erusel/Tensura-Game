@@ -21,7 +21,11 @@ public class HadesSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 600, 0, false, true));
+
+        PotionEffect invisibility = new PotionEffect(PotionEffectType.INVISIBILITY, 600, 0, false, false);
+
+        player.addPotionEffect(invisibility);
+
         for(Entity entity: player.getNearbyEntities(20,20,20)) {
             entity.setVelocity(entity.getLocation().getDirection().setY(0).normalize().multiply(3));
         }

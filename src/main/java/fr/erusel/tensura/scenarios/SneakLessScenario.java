@@ -19,14 +19,15 @@ public class SneakLessScenario extends Scenario implements Eventable {
     @Override
     public void onPlayerSneak(PlayerToggleSneakEvent event) {
         Player player = event.getPlayer();
-        if (event.isSneaking()) {
-            sneakTask = Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
-                if (player.isSneaking()) {
-                    player.damage(1);
-                } else {
-                    sneakTask.cancel();
-                }
-            }, 0, 40);
+        if (!event.isSneaking()) {
+            return;
         }
+        sneakTask = Bukkit.getScheduler().runTaskTimer(Main.getInstance(), () -> {
+            if (player.isSneaking()) {
+                player.damage(1);
+            } else {
+                sneakTask.cancel();
+            }
+        }, 0, 40);
     }
 }

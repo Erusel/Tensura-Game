@@ -17,10 +17,9 @@ public class LightningResistantSkill extends Skill implements PassiveSkill, Even
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.LIGHTNING)) {
-            event.setCancelled(true);
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.LIGHTNING)) {
+            return;
         }
+        event.setCancelled(true);
     }
-
-
 }

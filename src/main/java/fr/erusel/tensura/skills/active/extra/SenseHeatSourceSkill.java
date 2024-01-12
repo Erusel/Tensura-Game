@@ -27,7 +27,7 @@ public class SenseHeatSourceSkill extends Skill implements ExtraSkill {
         //apply glowing effect to player in a radius of 30 blocks if they're not sneaking
         for (Player p : player.getWorld().getPlayers()) {
             if (p.getLocation().distance(player.getLocation()) <= 30 && !p.isSneaking()) {
-                p.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 100, 1));
+                p.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 100, 1, false, false,true));
             }
         }
         activateCooldown();

@@ -11,8 +11,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class MathematicianSkill extends Skill implements ActiveSkill, Eventable {
 
-    private final int DODGE = 3;
-
     public MathematicianSkill() {
         super("Mathematician", Skills.MATHEMATICIAN, SkillScope.OBTAINABLE,  SkillTier.UNIQUE, 1000, Skills.ALBERT);
         super.addLore("Dodge 3 attacks");
@@ -20,16 +18,17 @@ public class MathematicianSkill extends Skill implements ActiveSkill, Eventable 
 
     @Override
     public void onUse(Player player) {
-        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setMathematicianDodgeLeft(DODGE);
+        final int dodgeNum = 3;
+        getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setMathematicianDodgeLeft(dodgeNum);
         activateCooldown();
     }
 
     @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
-        if (!(event.getEntity() instanceof Player damaged)){
+        if (!(event.getEntity() instanceof Player damaged)) {
             return;
         }
-        if (getPlayerManager().getGPlayerByUUID(event.getDamager().getUniqueId()).getMathematicianDodgeLeft() >=1){
+        if (getPlayerManager().getGPlayerByUUID(event.getDamager().getUniqueId()).getMathematicianDodgeLeft() >= 1){
             event.setCancelled(true);
             getPlayerManager().getGPlayerByUUID(damaged.getUniqueId())
                     .setMathematicianDodgeLeft(getPlayerManager().getGPlayerByUUID(damaged.getUniqueId()).getMathematicianDodgeLeft()-1);

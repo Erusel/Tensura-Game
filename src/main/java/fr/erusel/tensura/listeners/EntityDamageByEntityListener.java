@@ -22,7 +22,7 @@ public class EntityDamageByEntityListener implements Listener {
 
     private final GameManager gameManager;
     private final PlayerManager playerManager;
-    Random random = new Random();
+    private final Random random = new Random();
 
     public EntityDamageByEntityListener(GameManager gameManager, PlayerManager playerManager) {
         this.gameManager = gameManager;

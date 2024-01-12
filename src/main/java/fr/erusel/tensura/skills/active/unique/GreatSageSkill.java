@@ -18,7 +18,9 @@ public class GreatSageSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
+
         StringBuilder stringBuilder = new StringBuilder(Prefixes.GREAT_SAGE.getText() + "§aHere are the entity around you: \n");
+
         for (Entity entity : player.getNearbyEntities(25, 25, 25)){
             stringBuilder.append(entity.getName()).append("\n");
         }

@@ -11,8 +11,10 @@ public class LavaLessScenario extends Scenario implements Eventable {
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.LAVA)) {
-            event.setCancelled(true);
+
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.LAVA)) {
+            return;
         }
+        event.setCancelled(true);
     }
 }

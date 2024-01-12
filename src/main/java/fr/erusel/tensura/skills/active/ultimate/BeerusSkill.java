@@ -21,11 +21,19 @@ public class BeerusSkill extends Skill implements ActiveSkill {
 
     @Override
     public void onUse(Player player) {
-        for (Entity entity : player.getNearbyEntities(50, 50, 50)){
-            if (entity instanceof LivingEntity){
-                LivingEntity livingEntity = (LivingEntity) entity;
-                if (livingEntity.getHealth() <= 4) livingEntity.setHealth(0);
-                else if (livingEntity.getHealth() <= 12) livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.CONFUSION, 400, 1));
+
+        PotionEffect nausea = new PotionEffect(PotionEffectType.CONFUSION, 400, 1);
+
+        for (Entity entity : player.getNearbyEntities(50, 50, 50)) {
+
+            if (!(entity instanceof LivingEntity livingEntity)) {
+                continue;
+            }
+            if (livingEntity.getHealth() <= 4) {
+                livingEntity.setHealth(0);
+            }
+            else if (livingEntity.getHealth() <= 12) {
+                livingEntity.addPotionEffect(nausea);
             }
         }
         activateCooldown();

@@ -17,10 +17,10 @@ public class FallResistantSkill extends Skill implements PassiveSkill, Eventable
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
-            event.setCancelled(true);
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
+            return;
         }
+        event.setCancelled(true);
     }
-
 }
 

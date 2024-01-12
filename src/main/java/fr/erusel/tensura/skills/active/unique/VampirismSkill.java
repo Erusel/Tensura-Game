@@ -30,14 +30,16 @@ public class VampirismSkill extends Skill implements ActiveSkill, Eventable {
 
     @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+
         if (!(event.getDamager() instanceof Player player)) {
             return;
         }
         if (!(event.getEntity() instanceof Player)){
             return;
         }
-        if (getPlayerManager().getGPlayerByUUID(player.getUniqueId()).isVampirism()) {
-            player.setHealth(player.getHealth() + event.getDamage()/2);
+        if (!getPlayerManager().getGPlayerByUUID(player.getUniqueId()).isVampirism()) {
+            return;
         }
+        player.setHealth(player.getHealth() + event.getDamage()/2);
     }
 }

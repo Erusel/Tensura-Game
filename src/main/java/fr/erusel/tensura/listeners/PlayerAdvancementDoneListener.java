@@ -12,7 +12,7 @@ import java.util.Random;
 public class PlayerAdvancementDoneListener implements Listener {
 
     private final GameManager gameManager;
-    Random random = new Random();
+    private final Random random = new Random();
 
     public PlayerAdvancementDoneListener(GameManager gameManager) {
         this.gameManager = gameManager;

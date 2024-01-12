@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerToggleSneakEvent;
 
 public class PlayerToggleSneakListener implements Listener {
 
-    GameManager gameManager;
+    private final GameManager gameManager;
 
     public PlayerToggleSneakListener(GameManager gameManager) {
         this.gameManager = gameManager;

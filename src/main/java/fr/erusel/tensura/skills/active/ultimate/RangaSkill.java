@@ -27,9 +27,9 @@ public class RangaSkill extends Skill implements ActiveSkill {
         LivingEntity entity = (LivingEntity) player.getWorld().spawnEntity(location, EntityType.WOLF);
         ((Wolf)entity).setOwner(player);
         ((Wolf)entity).setTamed(true);
-        ((Wolf)entity).setCustomName("§cRanga");
-        ((Wolf)entity).setCustomNameVisible(true);
         ((Wolf)entity).setBreed(false);
+        entity.setCustomName("§cRanga");
+        entity.setCustomNameVisible(true);
         entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*3);
         entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getBaseValue()*2);
         entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).setBaseValue(entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED).getBaseValue()*1.5);

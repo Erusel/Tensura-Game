@@ -8,7 +8,7 @@ import org.bukkit.event.inventory.PrepareItemCraftEvent;
 
 public class PlayerCraftItemListener implements Listener {
 
-    GameManager gameManager;
+    private final GameManager gameManager;
 
     public PlayerCraftItemListener(GameManager gameManager) {
         this.gameManager = gameManager;

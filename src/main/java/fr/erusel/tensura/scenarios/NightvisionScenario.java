@@ -15,8 +15,11 @@ public class NightvisionScenario extends Scenario implements Eventable {
 
     @Override
     public void onStart() {
+
+        PotionEffect nightVision = new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false);
+
         for (Player player : Bukkit.getOnlinePlayers()) {
-            player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, Integer.MAX_VALUE, 0, false, false));
+            player.addPotionEffect(nightVision);
         }
     }
 }

@@ -5,7 +5,6 @@ import fr.erusel.tensura.objects.Scenario;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
-import org.bukkit.inventory.ItemStack;
 
 public class GappleCooldownScenario extends Scenario implements Eventable {
 
@@ -17,10 +16,13 @@ public class GappleCooldownScenario extends Scenario implements Eventable {
 
     @Override
     public void onPlayerEat(PlayerItemConsumeEvent event) {
-        ItemStack item = event.getItem();
+
+        Material item = event.getItem().getType();
         Player player = event.getPlayer();
-        if (item.getType().equals(Material.GOLDEN_APPLE) || item.getType().equals(Material.ENCHANTED_GOLDEN_APPLE)) {
-            player.setCooldown(item.getType(), 2400);
+
+        if (!item.equals(Material.GOLDEN_APPLE) && !item.equals(Material.ENCHANTED_GOLDEN_APPLE)) {
+            return;
         }
+        player.setCooldown(item, 2400);
     }
 }

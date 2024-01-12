@@ -20,6 +20,7 @@ public class OppressorSkill extends Skill implements ActiveSkill, Eventable {
 
     @Override
     public void onUse(Player player) {
+
         getPlayerManager().getGPlayerByUUID(player.getUniqueId()).setOppressor(true);
         new OppressorRunnable(getPlayerManager().getGPlayerByUUID(player.getUniqueId()), 30)
                 .runTaskTimer(getMain(), 0, 20);
@@ -28,11 +29,13 @@ public class OppressorSkill extends Skill implements ActiveSkill, Eventable {
 
     @Override
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
+
         if (!(event.getDamager() instanceof Player damager)){
             return;
         }
-        if (getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).isOppressorActivated()){
-            event.getEntity().setVelocity(damager.getLocation().getDirection().setY(0).normalize().multiply(2));
+        if (!getPlayerManager().getGPlayerByUUID(damager.getUniqueId()).isOppressorActivated()){
+            return;
         }
+        event.getEntity().setVelocity(damager.getLocation().getDirection().setY(0).normalize().multiply(2));
     }
 }

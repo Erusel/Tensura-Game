@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 
 public class PlayerConsumeListener implements Listener {
 
-    GameManager gameManager;
+    private final GameManager gameManager;
 
     public PlayerConsumeListener(GameManager gameManager) {
         this.gameManager = gameManager;

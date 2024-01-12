@@ -17,10 +17,9 @@ public class PoisonResistantSkill extends Skill implements PassiveSkill, Eventab
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.POISON)) {
-            event.setCancelled(true);
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.POISON)) {
+            return;
         }
+        event.setCancelled(true);
     }
-
-
 }

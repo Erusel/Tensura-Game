@@ -18,10 +18,13 @@ public class ExplosionResistantSkill extends Skill implements PassiveSkill, Even
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.BLOCK_EXPLOSION) || event.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_EXPLOSION)) {
-            event.setCancelled(true);
+
+        EntityDamageEvent.DamageCause blockExplosion = EntityDamageEvent.DamageCause.BLOCK_EXPLOSION;
+        EntityDamageEvent.DamageCause entityExplosion = EntityDamageEvent.DamageCause.ENTITY_EXPLOSION;
+
+        if (!event.getCause().equals(blockExplosion) && !event.getCause().equals(entityExplosion)) {
+            return;
         }
+        event.setCancelled(true);
     }
-
-
 }

@@ -23,7 +23,6 @@ public class PlayerDeathListener implements Listener {
         this.playerManager = playerManager;
     }
 
-
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
 

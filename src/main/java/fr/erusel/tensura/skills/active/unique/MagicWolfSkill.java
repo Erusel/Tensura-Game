@@ -25,9 +25,9 @@ public class MagicWolfSkill extends Skill implements ActiveSkill {
         LivingEntity entity = (LivingEntity) player.getWorld().spawnEntity(location, EntityType.WOLF);
         ((Wolf)entity).setOwner(player);
         ((Wolf)entity).setTamed(true);
-        ((Wolf)entity).setCustomName("§cRanga");
-        ((Wolf)entity).setCustomNameVisible(true);
         ((Wolf)entity).setBreed(false);
+        entity.setCustomName("§cRanga");
+        entity.setCustomNameVisible(true);
         entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue()*3);
         entity.setHealth(entity.getAttribute(Attribute.GENERIC_MAX_HEALTH).getBaseValue());
         activateCooldown();

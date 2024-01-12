@@ -14,19 +14,19 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class HarvestFestivalRunnable extends BukkitRunnable {
 
-    Player player;
-    GPlayer gPlayer;
+    private final Player player;
+    private final GPlayer gPlayer;
 
-    Skill skillEvolve;
-    Skill sacrificeSkill;
-    Skill ultimateSkill;
-    Race evolvedRace;
-    Skills resistance1;
-    Skills resistance2 ;
-    Skills resistance3;
-    Skills extraSkill1;
-    Skills extraSkill2;
-    Skills extraSkill3;
+    private final Skill skillEvolve;
+    private final Skill sacrificeSkill;
+    private final Skill ultimateSkill;
+    private final Race evolvedRace;
+    private final Skills resistance1;
+    private Skills resistance2 ;
+    private Skills resistance3;
+    private final Skills extraSkill1;
+    private Skills extraSkill2;
+    private Skills extraSkill3;
 
     public HarvestFestivalRunnable(Player player, GPlayer gPlayer, Skill skillEvolve, Skill sacrificeSkill) {
         this.player = player;

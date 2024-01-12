@@ -12,5 +12,4 @@ public class InvestigatorResistantSkill extends Skill implements PassiveSkill {
         super("Investigator Resistant", Skills.INVESTIGATOR, SkillScope.OBTAINABLE,  SkillTier.RESISTANCE, 0, null);
         super.addLore("Investigator can't see your stuff or skills");
     }
-
 }

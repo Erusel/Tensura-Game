@@ -17,9 +17,9 @@ public class DrowningResistantSkill extends Skill implements PassiveSkill, Event
 
     @Override
     public void onEntityDamage(EntityDamageEvent event) {
-        if (event.getCause().equals(EntityDamageEvent.DamageCause.DROWNING)) {
-            event.setCancelled(true);
+        if (!event.getCause().equals(EntityDamageEvent.DamageCause.DROWNING)) {
+            return;
         }
+        event.setCancelled(true);
     }
-
 }
